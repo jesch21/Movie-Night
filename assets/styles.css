@@ -1,3 +1,7 @@
+html, body {
+    overflow-x: hidden;
+}
+
 header {
     display: flex;
     background-color: #423e3b;
@@ -43,8 +47,6 @@ h1 {
     display: flex;
     border-radius: .25vw;
     padding: 10px;
-    padding-left: 12vw;
-    padding-right: 12vw;
 }
 
 .page {
@@ -54,27 +56,77 @@ h1 {
     margin: 1.5vw;
     margin-left: 0;
     margin-right: 0;
-    font-size: 1vw;
+    font-size: 20px;
     font-weight: bold;
-    transition: color .3s ease, font-size .3s ease;
+    position: relative;
 }
 
-.page:hover {
+#tier, #letter, #unseen {
+    transition: color .3s ease, font-size .3s ease;
+    padding: 1vh;
+    padding-left: 12vw;
+    padding-right: 12vw;
+}
+
+#tier:hover, #letter:hover, #unseen:hover {
     color: #623CEA;
-    font-size: 1.1vw;
+    font-size: 22px;
 }
 
 #tier {
     border-right: 2px solid black;
     border-left: 2px solid black;
-    margin-left: 12vw;
-    margin-right: 12vw;
-    padding-left: 12vw;
-    padding-right: 12vw;
 }
 
 .slides {
     display: block;
     width: 100%;
     height: auto;
+}
+
+/* Slideshow container */
+#slideshow {
+    position: relative;
+    overflow: hidden; /* Hide any overflow content */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Slides container */
+.slides-container {
+    display: flex;
+    width: 100%; /* Ensure container width covers the viewport */
+    height: 100%; /* Ensure container height covers the viewport */
+    transition: transform 1s ease-in-out; /* Smooth transition for sliding effect */
+}
+
+/* Individual slides */
+.slide {
+    min-width: 100%; /* Ensure each slide takes up the full width of the container */
+    height: 100%; /* Ensure each slide takes up the full height of the container */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+}
+
+/* Arrow styling */
+#dleft, #dright {
+    position: absolute;
+    width: 10vw;
+    opacity: 60%;
+    cursor: pointer;
+}
+
+#dleft:hover, #dright:hover {
+    opacity: 100%;
+}
+
+#dleft {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+#dright {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
