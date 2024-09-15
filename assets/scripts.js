@@ -31,6 +31,130 @@ const videos = [
     {
         src: 'assets/videos/possession-trailer.mp4',
         title: 'The Possession'
+    },
+    {
+        src: 'assets/videos/mid90s-trailer.mp4',
+        title: 'Mid 90s'
+    },
+    {
+        src: 'assets/videos/fmj-trailer.mp4',
+        title: 'Full Metal Jacket'
+    },
+    {
+        src: 'assets/videos/high-and-low-trailer.mp4',
+        title: 'High and Low'
+    },
+    {
+        src: 'assets/videos/wick-trailer.mp4',
+        title: 'John Wick'
+    },
+    {
+        src: 'assets/videos/gladiator-trailer.mp4',
+        title: 'Gladiator'
+    },
+    {
+        src: 'assets/videos/henry-trailer.mp4',
+        title: 'Hardcore Henry'
+    },
+    {
+        src: 'assets/videos/suicide-trailer.mp4',
+        title: 'The Suicide Squad Trailer'
+    },
+    {
+        src: 'assets/videos/gems-trailer.mp4',
+        title: 'Uncut Gems'
+    },
+    {
+        src: 'assets/videos/commander-trailer.mp4',
+        title: 'Master and Commander: The Far Side of the World'
+    },
+    {
+        src: 'assets/videos/mad-max-trailer.mp4',
+        title: 'Mad Max: Fury Road'
+    },
+    {
+        src: 'assets/videos/jarhead-trailer.mp4',
+        title: 'Jarhead'
+    },
+    {
+        src: 'assets/videos/kill-bill-trailer.mp4',
+        title: 'Kill Bill Vol. 1'
+    },
+    {
+        src: 'assets/videos/midsommar-trailer.mp4',
+        title: 'Midsommar'
+    },
+    {
+        src: 'assets/videos/leben-trailer.mp4',
+        title: 'Das Leben der Anderan'
+    },
+    {
+        src: 'assets/videos/fight-club-trailer.mp4',
+        title: 'Fight Club'
+    },
+    {
+        src: 'assets/videos/beautiful-mind-trailer.mp4',
+        title: 'A Beautiful Mind'
+    },
+    {
+        src: 'assets/videos/sanjuro-trailer.mp4',
+        title: 'Sanjuro'
+    },
+    {
+        src: 'assets/videos/aot-trailer.mp4',
+        title: 'Attack on Titan: The Final Chapter Part 1'
+    },
+    {
+        src: 'assets/videos/click-trailer.mp4',
+        title: 'Click'
+    },
+    {
+        src: 'assets/videos/raiders-trailer.mp4',
+        title: 'Indiana Jones: Raiders of the Lost Ark'
+    },
+    {
+        src: 'assets/videos/se7en-trailer.mp4',
+        title: 'Se7en'
+    },
+    {
+        src: 'assets/videos/mononoke-trailer.mp4',
+        title: 'Princess Mononoke'
+    },
+    {
+        src: 'assets/videos/yojimbo-trailer.mp4',
+        title: 'Yojimbo'
+    },
+    {
+        src: 'assets/videos/platform-trailer.mp4',
+        title: 'The Platform'
+    },
+    {
+        src: 'assets/videos/cloverfield-trailer.mp4',
+        title: 'Cloverfield'
+    },
+    {
+        src: 'assets/videos/silent-trailer.mp4',
+        title: 'A Silent Voice'
+    },
+    {
+        src: 'assets/videos/batman-trailer.mp4',
+        title: 'The Batman'
+    },
+    {
+        src: 'assets/videos/angels-trailer.mp4',
+        title: 'Fallen Angels'
+    },
+    {
+        src: 'assets/videos/terminator-trailer.mp4',
+        title: 'The Terminator'
+    },
+    {
+        src: 'assets/videos/matrix-trailer.mp4',
+        title: 'The Matrix'
+    },
+    {
+        src: 'assets/videos/truman-trailer.mp4',
+        title: 'The Truman Show'
     }
 ];
 const videoSlidesContainer = document.querySelector('.video-slides-container');
