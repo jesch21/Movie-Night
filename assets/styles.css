@@ -51,7 +51,7 @@ h2 {
     background-color: #f2f5ea;
     list-style: none;
     display: flex;
-    border-radius: .25vw;
+    border-radius: 10px;
     padding: 10px;
 }
 

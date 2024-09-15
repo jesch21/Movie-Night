@@ -19,6 +19,18 @@ const videos = [
     {
         src: 'assets/videos/9-trailer.mp4',
         title: '9'
+    },
+    {
+        src: 'assets/videos/western-front-trailer.mp4',
+        title: 'All Quiet on the Western Front'
+    },
+    {
+        src: 'assets/videos/pancreas-trailer.mp4',
+        title: 'I Want To Eat Your Pancreas'
+    },
+    {
+        src: 'assets/videos/possession-trailer.mp4',
+        title: 'The Possession'
     }
 ];
 const videoSlidesContainer = document.querySelector('.video-slides-container');
