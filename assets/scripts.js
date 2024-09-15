@@ -1,8 +1,18 @@
+// Slideshow variables
 let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 const slideInterval = 30000; // 30 seconds
 let autoSlide;
+
+// Video variables
+let currentVideoIndex = 0;
+const videos = [
+    'assets/videos/first.mp4',
+    'assets/videos/collateral-trailer.mp4',
+    'assets/videos/9-trailer.mp4'
+];
+const videoSlidesContainer = document.querySelector('.video-slides-container');
 
 // Function to show a specific slide
 function showSlide(index) {
@@ -38,9 +48,42 @@ function resetSlideInterval() {
 // Start the slideshow automatically
 startSlideInterval();
 
-// Arrow navigation
-document.getElementById('dright').addEventListener('click', nextSlide);
-document.getElementById('dleft').addEventListener('click', prevSlide);
+// Arrow navigation for slideshow
+document.getElementById('lright').addEventListener('click', nextSlide);
+document.getElementById('lleft').addEventListener('click', prevSlide);
 
-// Initial setup
+// Initial setup for slideshow
 showSlide(currentIndex);
+
+// Function to show a specific video
+function showVideo(index) {
+    const video = document.createElement('video');
+    video.src = videos[index];
+    video.controls = true;
+    video.style.width = '100%';
+    video.style.height = 'auto';
+    video.style.maxHeight = '80vh';
+    video.style.objectFit = 'cover';
+    videoSlidesContainer.innerHTML = ''; // Clear previous videos
+    videoSlidesContainer.appendChild(video);
+    video.load(); // Load the new video
+}
+
+// Function to go to the next video
+function nextVideo() {
+    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+    showVideo(currentVideoIndex);
+}
+
+// Function to go to the previous video
+function prevVideo() {
+    currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+    showVideo(currentVideoIndex);
+}
+
+// Arrow navigation for videos
+document.getElementById('dright').addEventListener('click', nextVideo);
+document.getElementById('dleft').addEventListener('click', prevVideo);
+
+// Initial setup for video
+showVideo(currentVideoIndex);

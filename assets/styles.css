@@ -1,5 +1,6 @@
 html, body {
     overflow-x: hidden;
+    margin: 0;
 }
 
 header {
@@ -20,10 +21,6 @@ header {
     border-radius: 1.25vw;
 }
 
-body {
-    margin: 0px;
-}
-
 #header {
     display: flex;
     flex-direction: column;
@@ -33,12 +30,21 @@ body {
 }
 
 h1 {
-    font-family:monospace;
-    font-size: 2vw;
-    color: #FF0000;
-    text-shadow: 3px 3px 0px black;
+    font-size: 50px;
+    text-shadow: 3px 3px 1px black;
     margin-top: 5px;
     margin-bottom: 0px;
+}
+
+h1, h2 {
+    font-family: monospace;
+    color: #FF0000;
+    text-align: center;
+}
+
+h2 {
+    font-size: 35px;
+    text-shadow: 1.5px 1.5px 1px black;
 }
 
 #menu {
@@ -84,35 +90,108 @@ h1 {
     height: auto;
 }
 
-/* Slideshow container */
 #slideshow {
     position: relative;
-    overflow: hidden; /* Hide any overflow content */
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+    width: 100vw; 
+    height: 100vh;
+    border-bottom: 5px solid black; 
 }
 
-/* Slides container */
 .slides-container {
     display: flex;
-    width: 100%; /* Ensure container width covers the viewport */
-    height: 100%; /* Ensure container height covers the viewport */
-    transition: transform 1s ease-in-out; /* Smooth transition for sliding effect */
+    width: 100%;
+    height: 100%; 
+    transition: transform 1s ease-in-out; 
 }
 
-/* Individual slides */
 .slide {
-    min-width: 100%; /* Ensure each slide takes up the full width of the container */
-    height: 100%; /* Ensure each slide takes up the full height of the container */
-    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    min-width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
 }
 
-/* Arrow styling */
-#dleft, #dright {
+#lleft, #lright {
     position: absolute;
     width: 10vw;
     opacity: 60%;
     cursor: pointer;
+    transition: opacity .2s;
+}
+
+#lleft:hover, #lright:hover {
+    opacity: 100%;
+}
+
+#lleft {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+#lright {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#bottom-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    background-color: #9d8ca1;
+}
+
+#main-dump {
+    padding-left: 6vw;
+    padding-right: 6vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: #F2F5EA;
+    line-height: 30px;
+    margin-bottom: 0;
+}
+
+#video-container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    margin-left: -9vw;
+    margin-right: -9vw;
+}
+
+.video-slides-container {
+    display: flex;
+    width: 75%;
+    height: 100%;
+    transition: transform 1s ease-in-out;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+#trailer-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 50px;
+}
+
+#dleft, #dright {
+    width: 10vw;
+    opacity: 60%;
+    cursor: pointer;
+    transition: opacity .2s;
+    margin-top: 50px;
 }
 
 #dleft:hover, #dright:hover {
@@ -120,13 +199,9 @@ h1 {
 }
 
 #dleft {
-    left: 0;
-    top: 50%;
     transform: translateY(-50%) rotate(180deg);
 }
 
 #dright {
-    right: 0;
-    top: 50%;
     transform: translateY(-50%);
 }
