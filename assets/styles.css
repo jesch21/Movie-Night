@@ -183,7 +183,7 @@ video {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 50px;
+    margin: 10px;
 }
 
 #dleft, #dright {
@@ -204,4 +204,75 @@ video {
 
 #dright {
     transform: translateY(-50%);
+}
+
+#video-info {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 40px;
+}
+
+#movie-night-title {
+    font-family: monospace;
+    font-size: 20px;
+    color: #FF0000;
+    text-shadow: 1px 1px 1px black;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #423e3b;
+    border-top: 5px solid black;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#copyright {
+    color: #F2F5EA;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 0;
+}
+
+.stream {
+    border-radius: .5vw;
+    max-height: 7vh;
+    margin: 20px;
+    margin-left: 20px;
+    margin-right: 40px;
+    transition: max-height .3s;
+}
+
+.stream:hover {
+    max-height: 7.5vh;
+}
+
+#streaming {
+    margin-left: 25px;
+}
+
+#right-tag {
+    position: absolute;
+    right: 40px;
+    bottom: 15px;
+}
+
+#references {
+    background-color: #F2F5EA;
+    border-radius: .5vw;
+    text-decoration: none;
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    padding: 5px;
+    position: absolute;
+    right: 140px;
+    bottom: 35px;
+    transition: border-radius .2s, color .2s;
+}
+
+#references:hover {
+    border-radius: .75vw;
+    color: #623CEA;
 }

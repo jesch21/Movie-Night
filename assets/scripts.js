@@ -8,11 +8,21 @@ let autoSlide;
 // Video variables
 let currentVideoIndex = 0;
 const videos = [
-    'assets/videos/first.mp4',
-    'assets/videos/collateral-trailer.mp4',
-    'assets/videos/9-trailer.mp4'
+    {
+        src: 'assets/videos/budapest-trailer.mp4',
+        title: 'The Grand Budapest Hotel'
+    },
+    {
+        src: 'assets/videos/collateral-trailer.mp4',
+        title: 'Collateral'
+    },
+    {
+        src: 'assets/videos/9-trailer.mp4',
+        title: '9'
+    }
 ];
 const videoSlidesContainer = document.querySelector('.video-slides-container');
+const movieNightTitle = document.getElementById('movie-night-title');
 
 // Function to show a specific slide
 function showSlide(index) {
@@ -58,7 +68,7 @@ showSlide(currentIndex);
 // Function to show a specific video
 function showVideo(index) {
     const video = document.createElement('video');
-    video.src = videos[index];
+    video.src = videos[index].src;
     video.controls = true;
     video.style.width = '100%';
     video.style.height = 'auto';
@@ -67,6 +77,9 @@ function showVideo(index) {
     videoSlidesContainer.innerHTML = ''; // Clear previous videos
     videoSlidesContainer.appendChild(video);
     video.load(); // Load the new video
+
+    // Update the subtitle
+    movieNightTitle.textContent = `Movie Night: ${videos[index].title}`;
 }
 
 // Function to go to the next video
