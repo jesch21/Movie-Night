@@ -34,17 +34,19 @@ h1 {
     text-shadow: 3px 3px 1px black;
     margin-top: 5px;
     margin-bottom: 0px;
+    text-align: center;
 }
 
 h1, h2 {
     font-family: monospace;
     color: #FF0000;
-    text-align: center;
 }
 
 h2 {
     font-size: 35px;
     text-shadow: 1.5px 1.5px 1px black;
+    text-align: left;
+    margin-left: 15px;
 }
 
 #menu {
