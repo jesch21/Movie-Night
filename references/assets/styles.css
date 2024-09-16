@@ -3,6 +3,18 @@ html, body {
     margin: 0;
 }
 
+.citation {
+    line-height: 2;
+    margin-left: 4em;
+    margin-right: 4em;
+    margin-bottom: 4em;
+    text-indent:-2em;
+}
+
+.csl-entry {
+    margin-top: .5em;
+}
+
 header {
     display: flex;
     background-color: #423e3b;
@@ -332,6 +344,11 @@ footer {
 
     #right-tag {
         right: 0px;
+    }
+
+    .citation {
+        line-height: 2;
+        font-size: .75em;
     }
   }
 
