@@ -236,3 +236,13 @@ document.getElementById('dleft').addEventListener('click', prevVideo);
 
 // Initial setup for video
 showVideo(currentVideoIndex);
+
+document.getElementById('streaming-button').addEventListener('click', function() {
+    const streamLinks = document.getElementById('stream-links');
+    
+    if (streamLinks.style.display === 'none' || streamLinks.style.display === '') {
+        streamLinks.style.display = 'flex';  // Show the links in a row
+    } else {
+        streamLinks.style.display = 'none';  // Hide the links
+    }
+});
