@@ -477,3 +477,77 @@ footer {
         right: 0px;
     }
   }
+
+  @media only screen and (max-width: 450px) {
+    #streaming-button {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    #references {
+        font-size: 12px;
+        padding: 5px;
+        right: 125px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .page {
+        font-size: 12px;
+        margin: 0px;
+    }
+
+    #logo {
+        width: 55px;
+        border-radius: 2.25vw;
+    }
+
+    #movie-night-title {
+        font-size: 17px;
+        margin: 10px;
+    }
+
+    #main-dump {
+        font-size: 12px;
+        line-height: 25px;
+    }
+
+    #copyright {
+        font-size: 12px;
+    }
+
+    #right-tag {
+        max-width: 125px;
+        margin-right: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    #streaming-button {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    #references {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .page {
+        font-size: 10px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 17px;
+    }
+  }
