@@ -213,6 +213,20 @@ const spinBtn = document.getElementById('spinBtn');
 const numSegments = spinnerMovies.length;
 const anglePerSegment = 2 * Math.PI / numSegments;
 
+// Function to adjust font size based on screen width
+function getFontSize() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 600) {
+        return '24px Arial';  // Larger font size for smaller screens
+    } else if (screenWidth < 900) {
+        return '20px Arial';  // Medium font size for mid-range screens
+    } else {
+        return '16px Arial';  // Default font size for larger screens
+    }
+}
+
+
 // Function to draw the wheel with colored segments
 function drawWheel(rotation = 0) {
     const centerX = canvas.width / 2;
@@ -230,19 +244,22 @@ function drawWheel(rotation = 0) {
         ctx.fillStyle = randomColor;
         ctx.fill();
 
+        // Set font size dynamically based on screen width
+        ctx.font = getFontSize();  // Dynamically set font size
+        ctx.fillStyle = '#000';  // Text color
+
         // Draw the movie title text
         ctx.save();
         ctx.translate(centerX, centerY);
         ctx.rotate(currentAngle + anglePerSegment / 2);
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#000';  // Text color
-        ctx.font = '16px Arial';
         ctx.fillText(spinnerMovies[i], radius - 10, 10);  // Text positioning
         ctx.restore();
 
         currentAngle += anglePerSegment;
     }
 }
+
 
 // Function to draw the black triangle pointer on the right side
 function drawTriangle() {
@@ -285,3 +302,9 @@ drawTriangle(); // Draw triangle on initial wheel
 
 // Attach spin button event
 spinBtn.addEventListener('click', spinWheel);
+// Redraw the wheel when the window is resized
+window.addEventListener('resize', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+    drawWheel();  // Redraw the wheel with updated font size
+    drawTriangle(); // Redraw the triangle
+});

@@ -21,6 +21,19 @@ canvas {
     padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
+    background-color: #F2F5EA;
+    border-radius: 15px;
+    border: 2px solid black;
+    transition: padding .5s, color .3s;
+}
+
+#spinBtn:hover {
+    padding: 15px 25px;
+    color: #623CEA;
+}
+
+#wheel {
+    width: 500px;
 }
 
 
@@ -336,6 +349,35 @@ footer {
   }
 
   @media only screen and (max-width: 1400px) {
+    #main-list {
+        margin-left: 10px;
+        max-width: 50vw;
+    }
+
+    #unseen-list {
+        margin-right: 10px;
+        max-width: 32vw;
+    }
+
+    #wheel {
+        width: 450px;
+    }
+
+    th, td, #unseenTable th, #unseenTable td {
+        padding: 5px;
+        font-size: 13px;
+    }
+
+    #movieTable th:nth-child(2), 
+#movieTable td:nth-child(2) {
+    width: 125px;
+    }
+
+    #unseenTable th:nth-child(1), 
+#unseenTable td:nth-child(1) {
+        width: 125px;
+    }
+    
     #tier, #letter, #unseen {
         padding-left: 6vw;
         padding-right: 6vw;
@@ -371,7 +413,65 @@ footer {
     }
   }
 
+  @media only screen and (max-width: 1200px) {
+    #main-list {
+        max-width: 65vw;
+    }
+
+    #unseen-list {
+        max-width: 30vw;
+    }
+
+    #wheel {
+        width: 350px;
+    }
+
+    #unseenSelect, #yearSelect {
+        height: 25px;
+        margin-left: 15px;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    label, #unseen-list label {
+        text-shadow: 2px 2px 1px black;
+        font-size: 25px;
+    }
+
+    th, td, #unseenTable th, #unseenTable td {
+        padding: 5px;
+        font-size: 13px;
+    }
+
+    #movieTable th:nth-child(2), 
+#movieTable td:nth-child(2) {
+    width: 125px;
+    }
+
+    #unseenTable th:nth-child(1), 
+#unseenTable td:nth-child(1) {
+        width: 125px;
+    }
+  }
+
   @media only screen and (max-width: 1100px) {
+    #list-container {
+        flex-direction: column;
+    }
+
+    #main-list {
+        max-width: 100vw;
+        width: 90vw;
+        margin-bottom: 25px;
+    }
+
+    #unseen-list {
+        max-width: 100vw;
+        width: 90vw;
+        margin-left: 10px;
+        text-align: left;
+    }
+    
     #streaming-button {
         display: block;
         margin: 25px;
@@ -423,6 +523,30 @@ footer {
 }
 
   @media only screen and (max-width: 850px) {
+    #movieTable th:nth-child(2), 
+#movieTable td:nth-child(2) {
+    width: 100px;
+    }
+
+    #unseenTable th:nth-child(1), 
+#unseenTable td:nth-child(1) {
+        width: 125px;
+    }
+    
+    th, td, #unseenTable th, #unseenTable td {
+        padding: 4px;
+        font-size: 12px;
+    }
+    
+    #spinBtn {
+        padding: 5px 15px;
+        font-size: 13px;
+    }
+
+    #spinBtn:hover {
+        padding: 10px 20px;
+    }
+    
     #tier, #letter, #unseen {
         padding-left: 3vw;
         padding-right: 3vw;
@@ -477,6 +601,20 @@ footer {
   }
 
   @media only screen and (max-width: 550px) {
+    #main-list, #unseen-list {
+        margin-left: 0;
+        margin-right: 0;
+        width: 95vw;
+    }
+
+    #list-container {
+        margin-left: -5px;
+    }
+    
+    #wheel {
+        width: 250px;
+    }
+
     h1 {
         font-size: 35px;
     }
@@ -509,6 +647,23 @@ footer {
   }
 
   @media only screen and (max-width: 450px) {
+    td, th {
+    font-size: 10px;
+    }
+
+    #movieTable th:nth-child(2), 
+#movieTable td:nth-child(2) {
+    width: 75px;
+    }
+
+    #movieTable, #unseenTable {
+        width: 93vw;
+    }
+
+    #yearSelect {
+        margin-left: -5px;
+    }
+    
     #streaming-button {
         font-size: 12px;
         padding: 5px;
@@ -569,5 +724,9 @@ footer {
 
     h2 {
         font-size: 17px;
+    }
+
+    #movieTable, #unseenTable {
+        width: 92vw;
     }
   }
