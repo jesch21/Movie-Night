@@ -21,7 +21,26 @@
     </section>
 </header>
 <main>
+    <section id="main-list">
+        <label for="yearSelect">Main Movie List:</label>
+        <select id="yearSelect" onchange="loadTable()">
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+        </select>
 
+        <table id="movieTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Who's Movie</th>
+                    <th>What Movie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Movie rows will be injected here -->
+            </tbody>
+        </table>
+    </section>
 </main>
 <footer>
     <section id="streaming">
@@ -40,5 +59,7 @@
         <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
     </section>
 </footer>
+
+<script src="assets/scripts.js"></script> 
 </body>
 </html>
