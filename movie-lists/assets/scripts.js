@@ -127,3 +127,79 @@ function loadTable() {
 
 // Load 2024 table on page load
 window.onload = loadTable;
+
+const unseenMovieData = {
+    "unseen": [
+        {"chosenBy": ["John"], "title": "Animal House"},
+        {"chosenBy": ["Trevor", " Ayub"], "title": "The Matrix Reloaded"},
+        {"chosenBy": ["Joe", " Ayub", " Trevor"], "title": "Akira"},
+        {"chosenBy": ["Joe", " Ayub", " Trevor"], "title": "Blade"},
+        {"chosenBy": ["John"], "title": "Dunkirk"},
+        {"chosenBy": ["John"], "title": "Baby Driver"},
+        {"chosenBy": ["John"], "title": "Whiplash"},
+        {"chosenBy": ["John"], "title": "300"},
+        {"chosenBy": ["John"], "title": "Forest Gump"},
+        {"chosenBy": ["John"], "title": "Tropic Thunder"},
+        {"chosenBy": ["Trevor"], "title": "Across the Spiderverse"},
+        {"chosenBy": ["Trevor"], "title": "A Quiet Place"},
+        {"chosenBy": ["Ayub", " Trevor"], "title": "Interstellar"},
+        {"chosenBy": ["Joe"], "title": "Bone Tomahawk"},
+        {"chosenBy": ["Ayub"], "title": "The Social Network"},
+        {"chosenBy": ["Ayub"], "title": "Fantastic Mr. Fox"},
+        {"chosenBy": ["Ayub"], "title": "The Lighthouse"},
+        {"chosenBy": ["Ayub"], "title": "The Northman"},
+        {"chosenBy": ["Ayub"], "title": "Blade Runner 2049"},
+        {"chosenBy": ["Ayub", " Trevor"], "title": "Knock at the Cabin"},
+        {"chosenBy": ["Joe"], "title": "Who Framed Roger Rabbit"},
+        {"chosenBy": ["John"], "title": "Saving Private Ryan"},
+        {"chosenBy": ["Garrett"], "title": "Requiem for a Dream"},
+        {"chosenBy": ["Garrett"], "title": "Magnolia"},
+        {"chosenBy": ["Garrett"], "title": "The Hunted"},
+        {"chosenBy": ["John"], "title": "The Wolf of Wall Street"},
+        {"chosenBy": ["John"], "title": "The Karate Kid"},
+        {"chosenBy": ["John"], "title": "The Godfather"},
+        {"chosenBy": ["John"], "title": "The Good, The Bad, and The Ugly"},
+        {"chosenBy": ["John"], "title": "First Blood"},
+        {"chosenBy": ["John"], "title": "Back to the Future"},
+        {"chosenBy": ["Joe"], "title": "Crank"},
+        {"chosenBy": ["John"], "title": "Rango"},
+        {"chosenBy": ["John"], "title": "Sherlock Holmes"},
+        {"chosenBy": ["Trevor"], "title": "Robots"},
+        {"chosenBy": ["Trevor"], "title": "Inside Out 2"},
+        {"chosenBy": ["Ayub"], "title": "Wall-E"},
+        {"chosenBy": ["John"], "title": "Shrek"},
+        {"chosenBy": ["Ayub"], "title": "Drive"},
+        {"chosenBy": ["John"], "title": "Taken"},
+        {"chosenBy": ["Joe"], "title": "Coraline"},
+        {"chosenBy": ["John"], "title": "MIB"},
+        {"chosenBy": ["John"], "title": "Scary Movie 3"},
+        {"chosenBy": ["Joe"], "title": "The Babadook"},
+        {"chosenBy": ["Joe"], "title": "10 Cloverfield Lane"},
+        {"chosenBy": ["Alex"], "title": "The VVitch"},
+        {"chosenBy": ["John"], "title": "Django Unchained"},
+        {"chosenBy": ["John"], "title": "Mission Impossible"},
+        {"chosenBy": ["John"], "title": "Top Gun"}
+    ],
+    "seen": [
+        {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
+    ]
+};
+
+function loadUnseenTable() {
+    const status = document.getElementById('unseenSelect').value;
+    const tableBody = document.getElementById('unseenTable').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = ''; // Clear current table rows
+
+    // Populate the table with unseen/seen data
+    unseenMovieData[status].forEach(movie => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${movie.chosenBy}</td><td>${movie.title}</td>`;
+        tableBody.appendChild(row);
+    });
+}
+
+// Load unseen table on page load
+window.onload = () => {
+    loadTable(); // Main Movie List
+    loadUnseenTable(); // Unseen List
+};

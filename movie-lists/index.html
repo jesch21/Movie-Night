@@ -20,7 +20,8 @@
         </nav>
     </section>
 </header>
-<main>
+<main id="list-container">
+    <!-- Existing Main Movie List Section -->
     <section id="main-list">
         <label for="yearSelect">Main Movie List:</label>
         <select id="yearSelect" onchange="loadTable()">
@@ -41,7 +42,29 @@
             </tbody>
         </table>
     </section>
+
+    <!-- New Unseen List Section -->
+    <section id="unseen-list">
+        <label for="unseenSelect">Unseen List:</label>
+        <select id="unseenSelect" onchange="loadUnseenTable()">
+            <option value="unseen">Unseen</option>
+            <option value="seen">Seen</option>
+        </select>
+
+        <table id="unseenTable">
+            <thead>
+                <tr>
+                    <th>Who's Movie</th>
+                    <th>What Movie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Unseen movie rows will be injected here -->
+            </tbody>
+        </table>
+    </section>
 </main>
+
 <footer>
     <section id="streaming">
         <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
