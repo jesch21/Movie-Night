@@ -203,3 +203,85 @@ window.onload = () => {
     loadTable(); // Main Movie List
     loadUnseenTable(); // Unseen List
 };
+
+// Separate movie list for the spinner
+const spinnerMovies = ["Choose", "2", "Movies", "Each"];
+
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+const spinBtn = document.getElementById('spinBtn');
+const numSegments = spinnerMovies.length;
+const anglePerSegment = 2 * Math.PI / numSegments;
+
+// Function to draw the wheel with colored segments
+function drawWheel(rotation = 0) {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = canvas.width / 2;
+    let currentAngle = -Math.PI / 2 + rotation;  // Start angle
+
+    for (let i = 0; i < numSegments; i++) {
+        // Pick a random color for each segment
+        const randomColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + anglePerSegment);
+        ctx.fillStyle = randomColor;
+        ctx.fill();
+
+        // Draw the movie title text
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(currentAngle + anglePerSegment / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#000';  // Text color
+        ctx.font = '16px Arial';
+        ctx.fillText(spinnerMovies[i], radius - 10, 10);  // Text positioning
+        ctx.restore();
+
+        currentAngle += anglePerSegment;
+    }
+}
+
+// Function to draw the black triangle pointer on the right side
+function drawTriangle() {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const triangleSize = 20;
+
+    ctx.beginPath();
+    ctx.moveTo(canvas.width - 30, centerY - triangleSize / 2);   // Left point of the triangle
+    ctx.lineTo(canvas.width - 30 - triangleSize, centerY);        // Right point of the triangle
+    ctx.lineTo(canvas.width - 30, centerY + triangleSize / 2);    // Bottom point of the triangle
+    ctx.closePath();
+    ctx.fillStyle = 'black';
+    ctx.fill();
+}
+
+// Spin the wheel
+function spinWheel() {
+    const randomSpin = Math.floor(Math.random() * 360) + 720; // Ensure at least 2 full rotations
+    let currentRotation = 0;
+    const spinInterval = setInterval(() => {
+        currentRotation += 10;
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas for the next frame
+        drawWheel(currentRotation * Math.PI / 180); // Draw the wheel with current rotation
+        drawTriangle(); // Draw the triangle
+
+        if (currentRotation >= randomSpin) {
+            clearInterval(spinInterval);
+            const finalRotation = (currentRotation % 360) - 90; // Adjust for the triangle position
+            const winningIndex = Math.floor((360 - (finalRotation % 360)) / (360 / numSegments)) % numSegments;
+            const selectedMovie = spinnerMovies[winningIndex];
+            setTimeout(() => alert(`You got: ${selectedMovie}`), 500);
+        }
+    }, 20); // Rotate every 20ms for a smooth animation
+}
+
+// Initial draw
+drawWheel();
+drawTriangle(); // Draw triangle on initial wheel
+
+// Attach spin button event
+spinBtn.addEventListener('click', spinWheel);

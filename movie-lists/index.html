@@ -20,48 +20,55 @@
         </nav>
     </section>
 </header>
-<main id="list-container">
-    <!-- Existing Main Movie List Section -->
-    <section id="main-list">
-        <label for="yearSelect">Main Movie List:</label>
-        <select id="yearSelect" onchange="loadTable()">
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-        </select>
-
-        <table id="movieTable">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Who's Movie</th>
-                    <th>What Movie</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Movie rows will be injected here -->
-            </tbody>
-        </table>
+<main>
+    <section id="list-container">
+        <!-- Existing Main Movie List Section -->
+        <section id="main-list">
+            <label for="yearSelect">Main Movie List:</label>
+            <select id="yearSelect" onchange="loadTable()">
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+            </select>
+    
+            <table id="movieTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Who's Movie</th>
+                        <th>What Movie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Movie rows will be injected here -->
+                </tbody>
+            </table>
+        </section>
+    
+        <!-- New Unseen List Section -->
+        <section id="unseen-list">
+            <label for="unseenSelect">Unseen List:</label>
+            <select id="unseenSelect" onchange="loadUnseenTable()">
+                <option value="unseen">Unseen</option>
+                <option value="seen">Seen</option>
+            </select>
+    
+            <table id="unseenTable">
+                <thead>
+                    <tr>
+                        <th>Who's Movie</th>
+                        <th>What Movie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Unseen movie rows will be injected here -->
+                </tbody>
+            </table>
+        </section>
     </section>
 
-    <!-- New Unseen List Section -->
-    <section id="unseen-list">
-        <label for="unseenSelect">Unseen List:</label>
-        <select id="unseenSelect" onchange="loadUnseenTable()">
-            <option value="unseen">Unseen</option>
-            <option value="seen">Seen</option>
-        </select>
-
-        <table id="unseenTable">
-            <thead>
-                <tr>
-                    <th>Who's Movie</th>
-                    <th>What Movie</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Unseen movie rows will be injected here -->
-            </tbody>
-        </table>
+    <section id="spinner-container">
+        <canvas id="wheel" width="500" height="500"></canvas>
+        <button id="spinBtn">Spin the Wheel!</button>
     </section>
 </main>
 
