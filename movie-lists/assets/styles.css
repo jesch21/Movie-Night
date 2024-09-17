@@ -2,6 +2,15 @@ body {
     background-color: #9d8ca1;
 }
 
+#movie-label {
+    margin-bottom: 10px;
+}
+
+#updateWheelBtn {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
 #spinner-container {
     display: flex;
     flex-direction: column;
@@ -433,7 +442,7 @@ footer {
         margin-left: 5px;
     }
 
-    label, #unseen-list label {
+    label, #unseen-list label, #movie-label {
         text-shadow: 2px 2px 1px black;
         font-size: 25px;
     }
@@ -531,6 +540,10 @@ footer {
     #unseenTable th:nth-child(1), 
 #unseenTable td:nth-child(1) {
         width: 125px;
+    }
+
+    #movie-label {
+        font-size: 20px;
     }
     
     th, td, #unseenTable th, #unseenTable td {
@@ -701,6 +714,10 @@ footer {
         max-width: 125px;
         margin-right: 10px;
     }
+
+    #movieInput {
+        font-size: 12px;
+    }
   }
 
   @media only screen and (max-width: 400px) {
@@ -728,5 +745,9 @@ footer {
 
     #movieTable, #unseenTable {
         width: 92vw;
+    }
+
+    #movie-label {
+        font-size: 15px;
     }
   }

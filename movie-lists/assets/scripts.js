@@ -204,19 +204,20 @@ window.onload = () => {
     loadUnseenTable(); // Unseen List
 };
 
-// Separate movie list for the spinner
-const spinnerMovies = ["Choose", "2", "Movies", "Each"];
-
+// Default movie list
+let spinnerMovies = ["Choose", "2", "Movies", "Each"];
 const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
 const spinBtn = document.getElementById('spinBtn');
-const numSegments = spinnerMovies.length;
-const anglePerSegment = 2 * Math.PI / numSegments;
+const updateWheelBtn = document.getElementById('updateWheelBtn');
+const movieInput = document.getElementById('movieInput');
+let numSegments = spinnerMovies.length;
+const anglePerSegment = () => 2 * Math.PI / numSegments;
 
 // Function to adjust font size based on screen width
 function getFontSize() {
     const screenWidth = window.innerWidth;
-
+    
     if (screenWidth < 600) {
         return '24px Arial';  // Larger font size for smaller screens
     } else if (screenWidth < 900) {
@@ -225,7 +226,6 @@ function getFontSize() {
         return '16px Arial';  // Default font size for larger screens
     }
 }
-
 
 // Function to draw the wheel with colored segments
 function drawWheel(rotation = 0) {
@@ -240,7 +240,7 @@ function drawWheel(rotation = 0) {
 
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + anglePerSegment);
+        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + anglePerSegment());
         ctx.fillStyle = randomColor;
         ctx.fill();
 
@@ -251,15 +251,14 @@ function drawWheel(rotation = 0) {
         // Draw the movie title text
         ctx.save();
         ctx.translate(centerX, centerY);
-        ctx.rotate(currentAngle + anglePerSegment / 2);
+        ctx.rotate(currentAngle + anglePerSegment() / 2);
         ctx.textAlign = 'right';
         ctx.fillText(spinnerMovies[i], radius - 10, 10);  // Text positioning
         ctx.restore();
 
-        currentAngle += anglePerSegment;
+        currentAngle += anglePerSegment();
     }
 }
-
 
 // Function to draw the black triangle pointer on the right side
 function drawTriangle() {
@@ -276,7 +275,7 @@ function drawTriangle() {
     ctx.fill();
 }
 
-// Spin the wheel
+// Function to spin the wheel
 function spinWheel() {
     const randomSpin = Math.floor(Math.random() * 360) + 720; // Ensure at least 2 full rotations
     let currentRotation = 0;
@@ -296,12 +295,29 @@ function spinWheel() {
     }, 20); // Rotate every 20ms for a smooth animation
 }
 
-// Initial draw
+// Event listener for updating the wheel based on text input
+updateWheelBtn.addEventListener('click', () => {
+    const userInput = movieInput.value;
+    
+    if (userInput.trim()) {
+        // Split user input by // and trim whitespace
+        spinnerMovies = userInput.split('//').map(movie => movie.trim());
+        numSegments = spinnerMovies.length; // Update the number of segments
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+        drawWheel();  // Redraw the wheel with updated movies
+        drawTriangle(); // Redraw the triangle
+    } else {
+        alert('Please enter movie names.');
+    }
+});
+
+// Initial draw of the wheel
 drawWheel();
 drawTriangle(); // Draw triangle on initial wheel
 
 // Attach spin button event
 spinBtn.addEventListener('click', spinWheel);
+
 // Redraw the wheel when the window is resized
 window.addEventListener('resize', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
