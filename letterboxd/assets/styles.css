@@ -1,6 +1,7 @@
 html, body {
     overflow-x: hidden;
     margin: 0;
+    background-color: #9d8ca1;
 }
 
 header {
@@ -45,6 +46,87 @@ h1, h2 {
 h2 {
     font-size: 35px;
     text-shadow: 1.5px 1.5px 1px black;
+}
+
+.letterboxd-table th, 
+.letterboxd-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.letterboxd-table td:nth-child(1), .letterboxd-table th:nth-child(1),
+.letterboxd-table td:nth-child(3), .letterboxd-table th:nth-child(3) {
+    text-align: center;
+    width: 40px;
+}
+
+.letterboxd-table td:nth-child(4), .letterboxd-table th:nth-child(4) {
+    text-align: center;
+    width: 80px;
+}
+
+.letterboxd-table td:nth-child(2), .letterboxd-table th:nth-child(2) {
+    width: 400px;
+}
+
+.letterboxd-table td:nth-child(5) {
+    font-size: 15px;
+}
+
+.letterboxd-table {
+    width: 93vw;
+    border-collapse: collapse;
+    margin-top: 15px;
+    border: 3px solid black;
+}
+
+.letterboxd-table th {
+    background-color: #f2f5ea;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 20px;
+    border-bottom: 3px solid black;
+}
+
+.letterboxd-table td {
+    background-color: #ffffff;
+}
+
+.letterboxd {
+    text-align: left;
+    font-size: 30px;
+}
+
+#letterboxd-list {
+    list-style: none;
+}
+
+.letterbox-header {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.letter-link {
+    text-decoration: none;
+    color: black;
+    background-color: #F2F5EA;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 20px;
+    transition: padding .2s, color .2s;
+    border: 1px dotted #423e3b;
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    margin: 15px;
+}
+
+.letter-link:hover {
+    padding: 12px;
+    color: #623CEA;
 }
 
 #menu {
