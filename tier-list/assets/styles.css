@@ -84,6 +84,44 @@ h2 {
     border-left: 2px solid black;
 }
 
+#tables {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+#best-movie-picks {
+    width: 45%;
+    text-align: left;
+}
+
+#average-tier-list {
+    width: 45%;
+    text-align: right;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+td {
+    background-color: #fff;
+}
+
+
 footer {
     background-color: #423e3b;
     border-top: 5px solid black;

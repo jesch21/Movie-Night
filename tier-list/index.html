@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corona Cinema | Tier List </title>
-    <link rel="stylesheet" href="../tier-list/assets/styles.css">
+    <title>Corona Cinema | Tier List</title>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <header>
@@ -20,12 +20,47 @@
         </nav>
     </section>
 </header>
-<main>
 
+<main>
+    <section id="tables">
+        <!-- Best Movie Picks Table -->
+        <div id="best-movie-picks">
+            <h2>Best Movie Picks</h2>
+            <table id="best-movie-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Chosen By</th>
+                        <th>Stars</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Average Tier List Table (currently placeholder) -->
+        <div id="average-tier-list">
+            <h2>Average Tier List</h2>
+            <table id="tier-list-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Average Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated via JavaScript in future -->
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
+
 <footer>
     <section id="streaming">
-        <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
+        <button id="streaming-button">Streaming</button>
         <div id="stream-links">
             <a href="https://ww4.fmovies.co/24/"><img src="../assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
             <a href="https://himovies.sx/"><img src="../assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
@@ -40,5 +75,11 @@
         <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
     </section>
 </footer>
+
+<!-- Include external JavaScript files for dynamic data -->
+<script src="../movie-lists/assets/scripts.js"></script>
+<script src="../letterboxd/assets/scripts.js"></script>
+<script src="assets/scripts.js"></script>
+
 </body>
 </html>
