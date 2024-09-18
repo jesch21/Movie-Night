@@ -109,6 +109,10 @@ h2 {
     position: relative;
 }
 
+#trevor {
+    margin-bottom: 40px;
+}
+
 .letter-link {
     text-decoration: none;
     color: black;
@@ -260,6 +264,10 @@ footer {
   }
 
   @media only screen and (max-width: 1400px) {
+    .letterboxd-table td:nth-child(2), .letterboxd-table th:nth-child(2) {
+        width: 250px;
+    }
+
     #tier, #letter, #unseen {
         padding-left: 6vw;
         padding-right: 6vw;
@@ -296,6 +304,7 @@ footer {
   }
 
   @media only screen and (max-width: 1100px) {
+    
     #streaming-button {
         display: block;
         margin: 25px;
@@ -347,6 +356,14 @@ footer {
 }
 
   @media only screen and (max-width: 850px) {
+    .letterboxd-table td:nth-child(2), .letterboxd-table th:nth-child(2) {
+        width: 150px;
+    }
+
+    .letterboxd-table td:nth-child(5), .letterboxd-table th:nth-child(5) {
+        font-size: 14px;
+    }
+
     #tier, #letter, #unseen {
         padding-left: 3vw;
         padding-right: 3vw;
@@ -358,6 +375,22 @@ footer {
   }
 
   @media only screen and (max-width: 700px) {
+    .letterboxd-table td, .letterboxd-table th {
+        padding: 3px;
+    }
+    
+    #letterboxd-list {
+        margin-left: -30px;
+    }
+
+    .letterboxd-table td:nth-child(5), .letterboxd-table th:nth-child(5) {
+        width: 400px;
+    }
+
+    #letterboxd-list {
+        margin-right: -40px;
+    }
+
     h1 {
         font-size: 40px;
     }
@@ -383,6 +416,14 @@ footer {
 
     h2 {
         font-size: 30px;
+    }
+
+    .letterboxd {
+        font-size: 25px;
+    }
+
+    .hide-button, .letter-link {
+        font-size: 10px;
     }
 
     #references {
@@ -429,6 +470,37 @@ footer {
 
     #right-tag {
         right: 0px;
+    }
+
+    .letterboxd {
+        font-size: 25px;
+        width: 50px;
+    }
+
+    .letterboxd-entry {
+        margin-bottom: 30px;
+    }
+
+    .hide-button, .letter-link {
+        padding: 7px;
+    }
+
+    .letter-link {
+        right: 35px;
+    }
+
+    .letterboxd-table td, .letterboxd-table th {
+        font-size: 13px;
+        padding: 2px;
+    }
+
+    .letterboxd-table td:nth-child(2), .letterboxd-table th:nth-child(2) {
+        width: 50px;
+    }
+
+    .letterboxd-table td:nth-child(1), .letterboxd-table th:nth-child(1),
+    .letterboxd-table td:nth-child(3), .letterboxd-table th:nth-child(3) {
+        width: 25px;
     }
   }
 

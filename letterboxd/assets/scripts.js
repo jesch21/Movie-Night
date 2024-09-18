@@ -79,14 +79,6 @@ const ayubList = [
     { "movie": "9", "stars": "0.5/5", "liked": "Not Liked", "rating": "" },
 ];
 
-const garrettList = [
-   
-];
-
-const jaydenList = [
-    
-];
-
 const joeList = [
     { "movie": "Mad Max: Fury Road", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Matrix", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -291,8 +283,6 @@ function toggleTable(tableId) {
 window.onload = function() {
     populateTable('alex-table', alexList);
     populateTable('ayub-table', ayubList);
-    populateTable('garrett-table', garrettList);
-    populateTable('jayden-table', jaydenList);
     populateTable('joe-table', joeList);
     populateTable('john-table', johnList);
     populateTable('trevor-table', trevorList);
