@@ -132,11 +132,18 @@ h2 {
 
 .hide-button {
     position: absolute;
-    bottom: -7px;
+    bottom: -15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: #F2F5EA;
     padding: 5px;
     border-radius: 5px;
+    transition: .2s color, .2s padding;
+}
+
+.hide-button:hover {
+    color:#623CEA;
+    padding: 7px;
+    cursor: pointer
 }
 
 #menu {
