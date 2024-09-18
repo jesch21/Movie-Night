@@ -277,16 +277,14 @@ function populateTable(tableId, data) {
     });
 }
 
-// Populate all tables on page load
-window.onload = function() {
-    populateTable('alex-table', alexList);
-    populateTable('ayub-table', ayubList);
-    populateTable('garrett-table', garrettList);
-    populateTable('jayden-table', jaydenList);
-    populateTable('joe-table', joeList);
-    populateTable('john-table', johnList);
-    populateTable('trevor-table', trevorList);
-};
+function toggleTable(tableId) {
+    const table = document.getElementById(tableId);
+    if (table.style.display === "none" || table.style.display === "") {
+        table.style.display = "table";
+    } else {
+        table.style.display = "none";
+    }
+}
 
 
 // Populate all tables on page load
