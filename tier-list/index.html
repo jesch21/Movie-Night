@@ -22,41 +22,41 @@
 </header>
 
 <main>
-    <section id="tables">
-        <!-- Best Movie Picks Table -->
-        <div id="best-movie-picks">
-            <h2>Best Movie Picks</h2>
-            <table id="best-movie-table">
+    <div class="tables-container">
+        <div class="table-wrapper">
+            <h2>Best Picks</h2>
+            <table id="bestPicksTable">
                 <thead>
                     <tr>
+                        <th>Ranking</th>
+                        <th>Name</th>
+                        <th>Average Pick Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically generated here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrapper">
+            <h2>The Tier List</h2>
+            <table id="movieTable">
+                <thead>
+                    <tr>
+                        <th>Ranking</th>
                         <th>Title</th>
                         <th>Chosen By</th>
-                        <th>Stars</th>
+                        <th>Average Star Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Rows will be populated via JavaScript -->
+                    <!-- Rows will be dynamically generated here -->
                 </tbody>
             </table>
         </div>
-
-        <!-- Average Tier List Table (currently placeholder) -->
-        <div id="average-tier-list">
-            <h2>Average Tier List</h2>
-            <table id="tier-list-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Average Rating</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Rows will be populated via JavaScript in future -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+    </div>
 </main>
+
 
 <footer>
     <section id="streaming">
@@ -75,10 +75,6 @@
         <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
     </section>
 </footer>
-
-<!-- Include external JavaScript files for dynamic data -->
-<script src="../movie-lists/assets/scripts.js"></script>
-<script src="../letterboxd/assets/scripts.js"></script>
 <script src="assets/scripts.js"></script>
 
 </body>

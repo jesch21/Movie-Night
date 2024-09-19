@@ -1,3 +1,4 @@
+//letterboxd
 
 const alexList = [
     { "movie": "Master and Commander: The Far Side of the World", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -15,7 +16,7 @@ const alexList = [
     { "movie": "Jarhead", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Truman Show", "stars": "3.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Platform", "stars": "3/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "Hardcore Hentry", "stars": "3/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Hardcore Henry", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "mid90s", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Collateral", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Click", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
@@ -47,7 +48,8 @@ const ayubList = [
     { "movie": "Full Metal Jacket", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Batman", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Se7en", "stars": "5/5", "liked": "Liked", "rating": "" },
-    { "movie": "Collateral", "stars": "4.5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Collateral", "stars": "4.5/5", "liked": "Liked", 
+        "rating": "The state between being grounded and abstract this movie exists in feels like being half-awake watching cars swoosh by on the street. At the same time being kept strikingly lucid by the cool air. At its core this movie is about two insignificant point of views brushing against each other in an uncaring city let alone an uncaring universe. A modern interface to an eternal problem. Vincent submits to the machine he's become while Max unknowingly preserves himself at every end. Vincent had died long before the movie started, becoming a roaming specter deep down wishing to be resurrected. The baffled look on his face when he saw the coyotes trudging along in an environment not built for them. Natures answer to the absurd is persistence. Which is embodied by Max however still exists in Vincent as he dodges death until the very end." },
     { "movie": "Fallen Angels", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "mid90s", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "4.5/5", "liked": "Liked", "rating": "" },
@@ -109,14 +111,14 @@ const joeList = [
     { "movie": "All Quiet on the Western Front (2022)", "stars": "2.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Platform", "stars": "2/5", "liked": "Liked", "rating": "" },
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "The Lives of Others", "stars": "2/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "The Suicide Squad", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "The Suicide Squad", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", "rating": "" },
     { "movie": "A Silent Voice", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
     { "movie": "Attack on Titan: The Final Chapter Part 1", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
+    { "movie": "Hardcore Henry", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
 ];
 
 const johnList = [
@@ -130,9 +132,12 @@ const johnList = [
         "rating": "This movie pleasantly surprised me with it's comedy. This was my first Wes Anderson film, and if the others are anything like this I an excited to see more. The comedy was perfectly written and timed, Gustave was played excellently (very strange to hear Voldemort again). The style of shorts and effects was reminiscent of 2000's Christmas movies, which gave me a nice nostalgic feeling. Overall, truly awesome movie." },
     { "movie": "Se7en", "stars": "5/5", "liked": "Liked", 
         "rating": "This was one of those movies I had on the list of 'need to watch' for a very long time. I went into it having already had the ending spoiled from a Film Theory video 2 years prior. But nonetheless I absolutely adored it. The performances were incredible, the mystery was setup beautifully, and the writing was awesome. I had heard that Matt Reeves had used Se7en for inspiration when writing the story around his Riddler, and I can see that all throughout this film, which definitely adds to my opinion on it." },
-    { "movie": "Fight Club", "stars": "4.5/5", "liked": "Liked", "rating": "" },
-    { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "4.5/5", "liked": "Liked", "rating": "" },
-    { "movie": "John Wick", "stars": "4/5", "liked": "Liked", "rating": "" },
+    { "movie": "Fight Club", "stars": "4.5/5", "liked": "Liked", 
+        "rating": "When I went into watching this movie I, like most, knew the meme. My dad quotes it damn near hundreds of times a year. He ironically talked quite a bit about how one does not talk about Fight Club. So what did I know about this movie? That there was a fight club. Probably some underground fighting ring. I was expecting something like that fighting arena in Shang Chi, and was expecting this movie to be more action-based. Almost like a rated M Karate Kid. But boy was I wrong. Turns out the fight club of Fight Club is just the step stool you use to reach your mom's stash of the good shit in the back of the medicine cabinet. Because that's what it felt like watching this movie. It's been a while since a plot twist got me as well as this one's did, and I found myself genuinely engaged in everything and everyone. The way the story was told, with the usage of self narration and the slow yet subtle hints to the truth of the matter makes finding out what happened so much more appealing, because it was right in front of you the entire time. Overall, I promise I won't talk about it." },
+    { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "4.5/5", "liked": "Liked", 
+        "rating": "Indiana Jones is one of those movies you first see on a VHS tape back when you're too young to know anything other than 'haha han solo punched that guy', then it randomly scars you with a horrifically gruesome scene of a guy melting like a wax candle under a broiler. Then it turns out when you watch it even more on CD, then online, it ages like fine wine sealed with the wax of that melted Nazi. This movie is genuinely just iconic to me, it's almost perfect in every general way. Honestly I'd say this movie became a sort of archetype to what I like out of movies: enticing action, mystery, and spliced-in comedy. Because who doesn't like talking about how Harrison Ford actually had food poisoning in that one scene, creating one of the most riff-able and iconic standoff scenes I've ever seen. Overall, I do not fuck with snakes." },
+    { "movie": "John Wick", "stars": "4/5", "liked": "Liked", 
+        "rating": "I'm a big fan of action movies. All sorts of them. Marvel, star wars, Indiana jones, gladiator, a whole bunch. But John Wick tickles a very particle fancy of mine that I didn't know existed until I saw it: realistic action. The fact that Keanu Reeves received and proceed to excel in real military training for this role, then proceeded to show throughout this movie so many realistic moments of gunplay made me so happy throughout this movie. Not to mention, John Wick being in Fortnite indirectly created a massive series of skits and short films I'd later make until a Spanish or German John Wick was damn near my persona. Overall, yea, I'm thinking he's back." },
     { "movie": "Gladiator", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Collateral", "stars": "4/5", "liked": "Liked", 
         "rating": "This movie did a great job filling the downtime with useful characterization. The conversations between Max and Vincent were so well done, and the payoff of using their previous talking points for Max's future decisions was great. I also love that Max didn't end up joining Vincent or becoming a criminal as well. I expected it would as it seems to be typical, but it was refreshing to see that his encounter with Vincent  only seemed to bring out the stronger side of Max's personality." },

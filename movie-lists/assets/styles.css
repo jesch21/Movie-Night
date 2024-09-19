@@ -178,6 +178,10 @@ label {
     transition: border-radius .3s, color .2s;
 }
 
+td, #unseenTable td {
+    background-color: white;
+}
+
 #unseenSelect:hover {
     color: #623CEA;
     border-radius: 15px;

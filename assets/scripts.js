@@ -9,6 +9,10 @@ let autoSlide;
 let currentVideoIndex = 0;
 const videos = [
     {
+        src: 'assets/videos/asteroid-trailer.mp4',
+        title: 'Asteroid City'
+    },
+    {
         src: 'assets/videos/budapest-trailer.mp4',
         title: 'The Grand Budapest Hotel'
     },
