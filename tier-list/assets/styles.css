@@ -84,20 +84,15 @@ h2 {
     border-left: 2px solid black;
 }
 
-#tables {
-    display: flex;
+.tables-container {
+    display: flex; /* Use flex to position tables side-by-side */
     justify-content: space-between;
+    gap: 20px; /* Space between tables */
     margin: 20px;
 }
 
-#best-movie-picks {
-    width: 45%;
-    text-align: left;
-}
-
-#average-tier-list {
-    width: 45%;
-    text-align: right;
+.table-wrapper {
+    width: 48%; /* Adjust as necessary to fit your design */
 }
 
 table {
@@ -120,6 +115,7 @@ th {
 td {
     background-color: #fff;
 }
+
 
 
 footer {

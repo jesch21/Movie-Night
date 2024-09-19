@@ -1,3 +1,4 @@
+//letterboxd
 
 const alexList = [
     { "movie": "Master and Commander: The Far Side of the World", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -15,7 +16,7 @@ const alexList = [
     { "movie": "Jarhead", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Truman Show", "stars": "3.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Platform", "stars": "3/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "Hardcore Hentry", "stars": "3/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Hardcore Henry", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "mid90s", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Collateral", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Click", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
@@ -109,14 +110,14 @@ const joeList = [
     { "movie": "All Quiet on the Western Front (2022)", "stars": "2.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Platform", "stars": "2/5", "liked": "Liked", "rating": "" },
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "The Lives of Others", "stars": "2/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "The Suicide Squad", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "The Suicide Squad", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", "rating": "" },
     { "movie": "A Silent Voice", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
     { "movie": "Attack on Titan: The Final Chapter Part 1", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
+    { "movie": "Hardcore Henry", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
 ];
 
 const johnList = [
