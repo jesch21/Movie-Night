@@ -53,7 +53,7 @@ const movieData = {
         {"date": "11/29/2024", "chosenBy": "Alex", "title": "Rango/LEGO/Black Pearl/Ep 4/Gump"},
         {"date": "12/6/2024", "chosenBy": "Trevor", "title": "Transformers"},
         {"date": "12/13/2024", "chosenBy": "Joe", "title": "Goodfellas"},
-        {"date": "12/20/2024", "chosenBy": "Ayub", "title": ""},
+        {"date": "12/20/2024", "chosenBy": "Ayub", "title": "The Matrix Reloaded"},
         {"date": "12/27/2024", "chosenBy": "Garrett", "title": "The Hateful Eight: Extended Edition"}
   ],
     "2025": [
@@ -63,7 +63,7 @@ const movieData = {
         {"date": "1/24/2025", "chosenBy": "Alex", "title": ""},
         {"date": "1/31/2025", "chosenBy": "Trevor", "title": "Transformers 2"},
         {"date": "2/7/2025", "chosenBy": "Joe", "title": ""},
-        {"date": "2/14/2025", "chosenBy": "Ayub", "title": ""},
+        {"date": "2/14/2025", "chosenBy": "Ayub", "title": "The Matrix Revolutions"},
         {"date": "2/21/2025", "chosenBy": "Garrett", "title": ""},
         {"date": "2/28/2025", "chosenBy": "Roulette", "title": ""},
         {"date": "3/7/2025", "chosenBy": "John", "title": "Princess Bride"},
