@@ -131,7 +131,6 @@ window.onload = loadTable;
 const unseenMovieData = {
     "unseen": [
         {"chosenBy": ["John"], "title": "Animal House"},
-        {"chosenBy": ["Trevor", " Ayub"], "title": "The Matrix Reloaded"},
         {"chosenBy": ["Joe", " Ayub", " Trevor"], "title": "Akira"},
         {"chosenBy": ["Joe", " Ayub", " Trevor"], "title": "Blade"},
         {"chosenBy": ["John"], "title": "Dunkirk"},

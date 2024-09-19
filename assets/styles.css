@@ -9,6 +9,11 @@ header {
     border-bottom: 5px solid black;
 }
 
+main {
+    padding-top: 25px;
+    background-color: #9d8ca1;
+}
+
 #logo {
     width: 125px;
     height: auto;
@@ -93,9 +98,13 @@ h2 {
 #slideshow {
     position: relative;
     overflow: hidden;
-    width: 100vw; 
+    width: 700px; 
     height: auto;
     border-bottom: 5px solid black; 
+    border: 3px solid black;
+    border-radius: 25px;
+    margin-bottom: 25px;
+    margin: 0 auto;
 }
 
 .slides-container {
@@ -384,6 +393,10 @@ footer {
 }
 
   @media only screen and (max-width: 850px) {
+    #slideshow {
+        width: 500px;
+    }
+    
     #tier, #letter, #unseen {
         padding-left: 3vw;
         padding-right: 3vw;
@@ -399,6 +412,9 @@ footer {
   }
 
   @media only screen and (max-width: 700px) {
+    #slideshow {
+        width: 400px;
+    }
     h1 {
         font-size: 40px;
     }
@@ -479,6 +495,9 @@ footer {
   }
 
   @media only screen and (max-width: 450px) {
+    #slideshow {
+        width: 300px;
+    }
     #streaming-button {
         font-size: 12px;
         padding: 5px;
@@ -529,6 +548,9 @@ footer {
   }
 
   @media only screen and (max-width: 400px) {
+    #slideshow {
+        width: 250px;
+    }
     #streaming-button {
         font-size: 12px;
         padding: 5px;
