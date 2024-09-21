@@ -9,8 +9,8 @@ let autoSlide;
 let currentVideoIndex = 0;
 const videos = [
     {
-        src: 'assets/videos/asteroid-trailer.mp4',
-        title: 'Asteroid City'
+        src: 'assets/videos/sherlock-trailer.mp4',
+        title: 'Sherlock Holmes (2009)'
     },
     {
         src: 'assets/videos/budapest-trailer.mp4',

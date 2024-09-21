@@ -22,22 +22,6 @@ const alexList = [
     { "movie": "Click", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "The Matrix", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "The Terminator", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Fallen Angels", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "The Batman", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "A Silent Voice", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Cloverfield", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Princess Mononoke", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Attack on Titan: The Final Chapter Part 1", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Sanjuro", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "A Beautiful Mind", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Fight Club", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Das Leben der Anderan", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Midsommar", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "John Wick", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "I Want To Eat Your Pancreas", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Yojimbo", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
 ];
 
 const ayubList = [
@@ -116,9 +100,6 @@ const joeList = [
     { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "A Silent Voice", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Attack on Titan: The Final Chapter Part 1", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Hardcore Henry", "stars": "N/A", "liked": "N/A", "rating": "DID NOT SEE THIS MOVIE" },
 ];
 
 const johnList = [
@@ -174,6 +155,18 @@ const johnList = [
         "rating": "This movie is a massive pile of dogshit, but god it was funny to watch in person with other peeps. There's basically nothing to redeem this movie honestly. I know it's a trope in horror movies but I absolutely hate when characters act horrifically stupid in movies. Honestly the only thing that made me not give this 1/2 star was a bunch of jokes we made while we watched." },
     { "movie": "9", "stars": "0.5/5", "liked": "Not Liked", 
         "rating": "Holy shit this movie was horrible. The story was incredibly dull, the animation is pretty poor and lacking in detail, which is disappointing since the art style had potential. The characters were shallow and bland, and the villain was basically nothing at all. Overall, would not watch this again." },
+];
+
+const landonList = [
+    { "movie": "The Batman", "stars": "5/5", "liked": "Liked", "rating": "This film took me 3 day to watch, but by the end I was standing on all fours hootin AND hollering. Best non-animated Batman film to date." },
+    { "movie": "A Silent Voice", "stars": "5/5", "liked": "Not Liked", "rating": "i watched bits and pieces but this piece of media is the single most tear streaming, jaw dropping, heart sinking bundle of emotion. I cried and went through 3 pairs of jeans." },
+    { "movie": "Fallen Angels", "stars": "5/5", "liked": "Liked", "rating": "I've got nothing to say. I want to go to sleep." },
+    { "movie": "Collateral", "stars": "4.5/5", "liked": "Liked", "rating": "good job tom cruise" },
+    { "movie": "The Suicide Squad", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "The Truman Show", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Cloverfield", "stars": "4/5", "liked": "Not Liked", "rating": "classic found footage. cheap, trashy otherworldly horrors. I would cry" },
+    { "movie": "The Platform", "stars": "4/5", "liked": "NotLiked", "rating": "" },
+    { "movie": "Possession", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
 ];
 
 const trevorList = [
@@ -243,14 +236,6 @@ const trevorList = [
         "rating": "Looks like it smells bad, a lot of mesh gross scenes. Very boring and feels super pointless. Just a longeval slice of life movie that I wasn't very into. I liked the parts with the dad it was wholesome, the girl masturbating was unnecessary and gross. The music was nice had a creepy song though. Overall I did not like it. Snack was a family sized bag of pretzels." },
     { "movie": "Das Leben der Aderan", "stars": "1/5", "liked": "Not Liked", 
         "rating": "My snack was Doritos cool ranch. Anyway I found this movie to be very boring. A few funny moments but that's not the point of the movie anyway. I found the plot to be boring and same with the characters, I liked the Irishman more and that's not saying much. Overall I do not have much to say and I did not like it." },
-    { "movie": "High and Low", "stars": "N/A", "liked": "N/A", 
-        "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Full Metal Jacket", "stars": "N/A", "liked": "N/A", 
-        "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "Attack on Titan: The Final Chapter Part 1", "stars": "N/A", "liked": "N/A", 
-        "rating": "DID NOT SEE THIS MOVIE" },
-    { "movie": "I Want to Eat Your Pancreas", "stars": "N/A", "liked": "N/A", 
-        "rating": "DID NOT SEE THIS MOVIE" },
 ];
 
 // Function to populate a table with data
@@ -290,5 +275,6 @@ window.onload = function() {
     populateTable('ayub-table', ayubList);
     populateTable('joe-table', joeList);
     populateTable('john-table', johnList);
+    populateTable('landon-table', landonList);
     populateTable('trevor-table', trevorList);
 };

@@ -40,7 +40,7 @@ const movieData = {
         {"date": "8/30/2024", "chosenBy": "Trevor", "title": "9"},
         {"date": "9/6/2024", "chosenBy": "Joe", "title": "Collateral"},
         {"date": "9/13/2024", "chosenBy": "Ayub", "title": "The Grand Budapest Hotel"},
-        {"date": "9/20/2024", "chosenBy": "Garrett", "title": "Asteroid City"},
+        {"date": "9/20/2024", "chosenBy": "Unseen Roulette", "title": "Sherlock Holmes (2009)"},
         {"date": "9/27/2024", "chosenBy": "John", "title": "Godzilla Minus One"},
         {"date": "10/4/2024", "chosenBy": "Jayden", "title": "Ernest Scared Stupid"},
         {"date": "10/11/2024", "chosenBy": "Alex", "title": "The Thing"},
@@ -162,7 +162,6 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Back to the Future"},
         {"chosenBy": ["Joe"], "title": "Crank"},
         {"chosenBy": ["John"], "title": "Rango"},
-        {"chosenBy": ["John"], "title": "Sherlock Holmes"},
         {"chosenBy": ["Trevor"], "title": "Robots"},
         {"chosenBy": ["Trevor"], "title": "Inside Out 2"},
         {"chosenBy": ["Ayub"], "title": "Wall-E"},
@@ -177,10 +176,12 @@ const unseenMovieData = {
         {"chosenBy": ["Alex"], "title": "The VVitch"},
         {"chosenBy": ["John"], "title": "Django Unchained"},
         {"chosenBy": ["John"], "title": "Mission Impossible"},
-        {"chosenBy": ["John"], "title": "Top Gun"}
+        {"chosenBy": ["John"], "title": "Top Gun"},
+        {"chosenBy": ["Landon"], "title": "Hairspray"}
     ],
     "seen": [
         {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
+        {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
     ]
 };
 

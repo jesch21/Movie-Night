@@ -1,8 +1,13 @@
 const movieData = [
     { 
+      "title": "Sherlock Holmes", 
+      "chosenBy": ["Unseen Roulette"], 
+      "star-ratings": [] 
+    },
+    { 
       "title": "The Truman Show", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": ["3.5/5", "4/5", "3.5/5", "3.5/5", "3.5/5"] 
+      "star-ratings": ["3.5/5", "4/5", "3.5/5", "3.5/5", "3.5/5", "4.5/5"] 
     },
     { 
       "title": "The Matrix", 
@@ -17,27 +22,27 @@ const movieData = [
     { 
       "title": "Fallen Angels", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": ["4.5/5", "4/5", "2/5", "1.5/5"] 
+      "star-ratings": ["4.5/5", "4/5", "2/5", "1.5/5", "5/5"] 
     },
     { 
       "title": "The Batman", 
       "chosenBy": ["John"], 
-      "star-ratings": ["5/5", "4/5", "5/5", "3.5/5"] 
+      "star-ratings": ["5/5", "4/5", "5/5", "3.5/5", "5/5"] 
     },
     { 
       "title": "A Silent Voice", 
       "chosenBy": ["Jayden"], 
-      "star-ratings": ["3.5/5", "5/5", "4.5/5"] 
+      "star-ratings": ["3.5/5", "5/5", "4.5/5", "5/5"] 
     },
     { 
       "title": "Cloverfield", 
       "chosenBy": ["Landon"], 
-      "star-ratings": ["2.5/5", "3.5/5", "2.5/5", "3.5/5"] 
+      "star-ratings": ["2.5/5", "3.5/5", "2.5/5", "3.5/5", "4/5"] 
     },
     { 
       "title": "The Platform", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": ["3/5", "2.5/5", "2/5", "2/5", "3.5/5"] 
+      "star-ratings": ["3/5", "2.5/5", "2/5", "2/5", "3.5/5", "4/5"] 
     },
     { 
       "title": "Yojimbo", 
@@ -122,7 +127,7 @@ const movieData = [
     { 
       "title": "The Suicide Squad", 
       "chosenBy": ["John"], 
-      "star-ratings": ["4/5", "4/5", "4/5", "1.5/5", "5/5"] 
+      "star-ratings": ["4/5", "4/5", "4/5", "1.5/5", "5/5", "4.5/5"] 
     },
     { 
       "title": "Hardcore Henry", 
@@ -157,7 +162,7 @@ const movieData = [
     { 
       "title": "The Possession", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": ["1/5", "2/5", "1/5", "2/5", "2/5"] 
+      "star-ratings": ["1/5", "2/5", "1/5", "2/5", "2/5", "2.5/5"] 
     },
     { 
       "title": "I Want To Eat Your Pancreas", 
@@ -177,7 +182,7 @@ const movieData = [
     { 
         "title": "Collateral", 
         "chosenBy": ["Joe"], 
-        "star-ratings": ["3/5", "4.5/5", "5/5", "4/5", "4/5"] 
+        "star-ratings": ["3/5", "4.5/5", "5/5", "4/5", "4/5", "4.5/5"] 
       },
       { 
         "title": "The Grand Budapest Hotel", 
@@ -187,7 +192,7 @@ const movieData = [
     ]
 
 // List of all people
-const people = ["Ayub", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Unseen Roulette"];
+const people = ["Ayub", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Unseen Roulette", "Landon"];
 
 /**
  * Function to convert star ratings from string format "X/Y" to numeric format and calculate the average.
