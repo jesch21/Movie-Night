@@ -2,7 +2,7 @@ const movieData = [
     { 
       "title": "Sherlock Holmes", 
       "chosenBy": ["Unseen Roulette"], 
-      "star-ratings": [] 
+      "star-ratings": ["3.5", "3.5", "3.5", "4"] 
     },
     { 
       "title": "The Truman Show", 
@@ -177,7 +177,7 @@ const movieData = [
     { 
       "title": "9", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": ["2/5", "0.5/5", "2/5", "0.5/5", "3/5"] 
+      "star-ratings": ["2/5", "1/5", "2/5", "0.5/5", "3/5"] 
     },
     { 
         "title": "Collateral", 

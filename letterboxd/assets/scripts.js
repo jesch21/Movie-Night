@@ -14,6 +14,7 @@ const alexList = [
     { "movie": "The Suicide Squad", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Kill Bill: Vol. 1", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Jarhead", "stars": "4/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Sherlock Holmes (2009)", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Truman Show", "stars": "3.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Platform", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Hardcore Henry", "stars": "3/5", "liked": "Not Liked", "rating": "" },
@@ -46,6 +47,7 @@ const ayubList = [
     { "movie": "Fight Club", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "The Suicide Squad", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "John Wick", "stars": "4/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Sherlock Holmes (2009)", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "A Silent Voice", "stars": "3.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "High and Low", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "The Truman Show", "stars": "4/5", "liked": "Liked", "rating": "" },
@@ -62,7 +64,7 @@ const ayubList = [
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "9", "stars": "0.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "9", "stars": "1/5", "liked": "Not Liked", "rating": "" },
 ];
 
 const joeList = [
@@ -87,6 +89,7 @@ const joeList = [
     { "movie": "Midsommar", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "John Wick", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Cloverfield", "stars": "3.5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Sherlock Holmes (2009)", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Truman Show", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Gladiator", "stars": "3/5", "liked": "Liked", "rating": "" },
     { "movie": "Click", "stars": "3/5", "liked": "Liked", "rating": "" },
@@ -124,6 +127,8 @@ const johnList = [
         "rating": "This movie did a great job filling the downtime with useful characterization. The conversations between Max and Vincent were so well done, and the payoff of using their previous talking points for Max's future decisions was great. I also love that Max didn't end up joining Vincent or becoming a criminal as well. I expected it would as it seems to be typical, but it was refreshing to see that his encounter with Vincent  only seemed to bring out the stronger side of Max's personality." },
     { "movie": "Yojimbo", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Attack on Titan: The Final Chapter Part 1", "stars": "4/5", "liked": "Liked", "rating": "" },
+    { "movie": "Sherlock Holmes (2009)", "stars": "4/5", "liked": "Liked", 
+        "rating": "After having read 'A Study in Scarlet', I was very pleasantly surprised to see Guy Richtie make this feel so much like it. RDJ provides an all-around enjoyable performance, and the humor is very fun to watch. I'm a sucker for super-smart characters, and I love that the movie properly gave Sherlock his times to narrate everything he's found out. I also quite liked that all the supernatural was, in fact, natural. Overall, discombobulate." },
     { "movie": "The Matrix", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "3.5/5", "liked": "Liked", 
         "rating": "This movie I found compelling almost entirely due to the characters. The overall story itself I wasn't very fond of, and I didn't find it particularly unique, but I was very intrigued to see how these two different personalities interacted and changed each other. The ending also made me quite sad, although not as sad as A Silent Voice." },
