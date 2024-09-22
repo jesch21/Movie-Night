@@ -1,7 +1,7 @@
 const movieData = [
     { 
       "title": "Sherlock Holmes", 
-      "chosenBy": ["Unseen Roulette"], 
+      "chosenBy": ["John"], 
       "star-ratings": ["3.5", "3.5", "3.5", "4"] 
     },
     { 
@@ -136,7 +136,7 @@ const movieData = [
     },
     { 
       "title": "Gladiator", 
-      "chosenBy": ["Unseen Roulette"], 
+      "chosenBy": ["John"], 
       "star-ratings": ["4.5/5", "4/5", "3/5", "4/5", "5/5"] 
     },
     { 
@@ -192,7 +192,7 @@ const movieData = [
     ]
 
 // List of all people
-const people = ["Ayub", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Unseen Roulette", "Landon"];
+const people = ["Ayub", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Landon"];
 
 /**
  * Function to convert star ratings from string format "X/Y" to numeric format and calculate the average.
