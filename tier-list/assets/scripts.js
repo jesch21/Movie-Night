@@ -1,6 +1,6 @@
 const movieData = [
     { 
-      "title": "Sherlock Holmes", 
+      "title": "Sherlock Holmes (2009)", 
       "chosenBy": ["John"], 
       "star-ratings": ["3.5", "3.5", "3.5", "4"] 
     },
@@ -72,7 +72,7 @@ const movieData = [
     { 
       "title": "Attack on Titan The Final Chapter Part 1", 
       "chosenBy": ["Ayub", "John"], 
-      "star-ratings": ["4.5/5", "4/5"] 
+      "star-ratings": ["4.5/5", "3/5"] 
     },
     { 
       "title": "Sanjuro", 
