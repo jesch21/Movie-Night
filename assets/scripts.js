@@ -9,6 +9,10 @@ let autoSlide;
 let currentVideoIndex = 0;
 const videos = [
     {
+        src: 'assets/videos/godzilla-trailer.mp4',
+        title: 'Godzilla Minus One'
+    },
+    {
         src: 'assets/videos/sherlock-trailer.mp4',
         title: 'Sherlock Holmes (2009)'
     },
