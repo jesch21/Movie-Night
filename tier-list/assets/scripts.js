@@ -1,8 +1,13 @@
 const movieData = [
     { 
+      "title": "Godzilla: Minus One", 
+      "chosenBy": ["John"], 
+      "star-ratings": ["5/5", "2.5/5", "4/5", "4/5", "4/5"] 
+    },
+    { 
       "title": "Sherlock Holmes (2009)", 
       "chosenBy": ["John"], 
-      "star-ratings": ["3.5", "3.5", "3.5", "4"] 
+      "star-ratings": ["3.5/5", "3.5/5", "3.5/5", "4/5"] 
     },
     { 
       "title": "The Truman Show", 
