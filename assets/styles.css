@@ -168,8 +168,8 @@ h2 {
     justify-content: center;
     width: 80%;
     margin: 0 auto;
-    margin-left: -9vw;
-    margin-right: -9vw;
+    margin-left: -100px;
+    margin-right: -100px;
 }
 
 .video-slides-container {
@@ -196,7 +196,7 @@ video {
 }
 
 #dleft, #dright {
-    width: 10vw;
+    width: 150px;
     opacity: 60%;
     cursor: pointer;
     transition: opacity .2s;
@@ -393,6 +393,11 @@ footer {
 }
 
   @media only screen and (max-width: 850px) {
+    #video-container {
+        margin-left: -60px;
+        margin-right: -60px;
+    }
+
     #slideshow {
         width: 500px;
     }
@@ -460,9 +465,15 @@ footer {
         border-radius: 10px;
         margin-left: 0px;
     }
+    #dleft, #dright {
+        width: 125px;
+    }
   }
 
   @media only screen and (max-width: 550px) {
+    #dleft, #dright {
+        width: 100px;
+    }
     h1 {
         font-size: 35px;
     }
