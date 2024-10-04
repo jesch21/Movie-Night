@@ -50,7 +50,7 @@ const movieData = {
         {"date": "11/8/2024", "chosenBy": "Garrett", "title": ""},
         {"date": "11/15/2024", "chosenBy": "John", "title": "Indiana Jones: The Last Crusade"},
         {"date": "11/22/2024", "chosenBy": "Jayden", "title": ""},
-        {"date": "11/29/2024", "chosenBy": "Alex", "title": "Rango/LEGO/Black Pearl/Ep 4/Gump"},
+        {"date": "11/29/2024", "chosenBy": "Alex", "title": "Pirates of the Caribbean: The Curse of the Black Pearl"},
         {"date": "12/6/2024", "chosenBy": "Trevor", "title": "Transformers"},
         {"date": "12/13/2024", "chosenBy": "Joe", "title": "Goodfellas"},
         {"date": "12/20/2024", "chosenBy": "Ayub", "title": "The Matrix Reloaded"},
