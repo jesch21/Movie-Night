@@ -9,8 +9,8 @@ let autoSlide;
 let currentVideoIndex = 0;
 const videos = [
     {
-        src: 'assets/videos/vanishing-trailer.mp4',
-        title: 'The Vanishing (1988)'
+        src: 'assets/videos/ernest-trailer.mp4',
+        title: 'Ernest Scared Stupid'
     },
     {
         src: 'assets/videos/godzilla-trailer.mp4',

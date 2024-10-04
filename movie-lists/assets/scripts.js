@@ -42,7 +42,7 @@ const movieData = {
         {"date": "9/13/2024", "chosenBy": "Ayub", "title": "The Grand Budapest Hotel"},
         {"date": "9/20/2024", "chosenBy": "Unseen Roulette", "title": "Sherlock Holmes (2009)"},
         {"date": "9/27/2024", "chosenBy": "John", "title": "Godzilla Minus One"},
-        {"date": "10/4/2024", "chosenBy": "Jayden", "title": "The Vanishing (1988)"},
+        {"date": "10/4/2024", "chosenBy": "Jayden", "title": "Ernest Scared Stupid"},
         {"date": "10/11/2024", "chosenBy": "Alex", "title": "The Thing"},
         {"date": "10/18/2024", "chosenBy": "Trevor", "title": "The Conjuring"},
         {"date": "10/25/2024", "chosenBy": "Joe", "title": "The Lighthouse"},
