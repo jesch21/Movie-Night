@@ -9,6 +9,10 @@ let autoSlide;
 let currentVideoIndex = 0;
 const videos = [
     {
+        src: 'assets/videos/thing-trailer.mp4',
+        title: 'The Thing'
+    },
+    {
         src: 'assets/videos/ernest-trailer.mp4',
         title: 'Ernest Scared Stupid'
     },
