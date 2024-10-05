@@ -99,6 +99,7 @@ const joeList = [
     { "movie": "Master and Commander: The Far Side of the World", "stars": "3/5", "liked": "Liked", "rating": "" },
     { "movie": "Jarhead", "stars": "2.5/5", "liked": "Liked", "rating": "" },
     { "movie": "All Quiet on the Western Front (2022)", "stars": "2.5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Ernest Scared Stupid", "stars": "2.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Platform", "stars": "2/5", "liked": "Liked", "rating": "" },
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Suicide Squad", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
@@ -249,6 +250,8 @@ const trevorList = [
         "rating": "bad movie but fun movie" },
     { "movie": "Fallen Angels", "stars": "1.5/5", "liked": "Not Liked", 
         "rating": "Looks like it smells bad, a lot of mesh gross scenes. Very boring and feels super pointless. Just a longeval slice of life movie that I wasn't very into. I liked the parts with the dad it was wholesome, the girl masturbating was unnecessary and gross. The music was nice had a creepy song though. Overall I did not like it. Snack was a family sized bag of pretzels." },
+    { "movie": "Ernest Scared Stupid", "stars": "1/5", "liked": "Not Liked", 
+        "rating": "REALLY did not like this movie. The only thing I liked in this movie was how wholesome Ernest is, and Rimshot. Other than that I really disliked it. I did not have a snack for this movie. Overall not a fan." },
     { "movie": "Das Leben der Aderan", "stars": "1/5", "liked": "Not Liked", 
         "rating": "My snack was Doritos cool ranch. Anyway I found this movie to be very boring. A few funny moments but that's not the point of the movie anyway. I found the plot to be boring and same with the characters, I liked the Irishman more and that's not saying much. Overall I do not have much to say and I did not like it." },
 ];
