@@ -120,6 +120,11 @@ h2 {
     object-fit: cover; 
 }
 
+#slideshow-title {
+    transition: opacity 0.5s ease;  /* Smooth fade effect */
+    opacity: 1;  /* Fully visible by default */
+}
+
 #lleft, #lright {
     position: absolute;
     width: 10vw;
@@ -215,13 +220,17 @@ video {
     transform: translateY(-50%);
 }
 
-#video-info {
+.info {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 40px;
 }
 
-#movie-night-title {
+#slide-info {
+    margin-top: 0px;
+}
+
+.movie-night-title {
     font-family: monospace;
     font-size: 20px;
     color: #FF0000;

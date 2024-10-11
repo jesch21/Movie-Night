@@ -4,6 +4,7 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 const slideInterval = 30000; // 30 seconds
 let autoSlide;
+let isInitialLoad = true;
 
 // Video variables
 let currentVideoIndex = 0;
@@ -173,14 +174,36 @@ const videos = [
         title: 'The Truman Show'
     }
 ];
-const videoSlidesContainer = document.querySelector('.video-slides-container');
-const movieNightTitle = document.getElementById('movie-night-title');
 
-// Function to show a specific slide
+const videoSlidesContainer = document.querySelector('.video-slides-container');
+
+// Getting the elements for both the slideshow title and the video title
+const slideshowTitle = document.getElementById('slideshow-title');
+const videoTitle = document.getElementById('video-title');
+
 function showSlide(index) {
     const slidesContainer = document.querySelector('.slides-container');
     slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+
+    // If it's the initial load, update the title immediately without fade
+    if (isInitialLoad) {
+        slideshowTitle.textContent = `Movie Night: ${videos[index].title}`;
+        isInitialLoad = false;
+    } else {
+        // Fade out the title before changing it
+        slideshowTitle.style.opacity = 0;
+
+        // Wait for 0.5 seconds (fade-out duration) before changing the title
+        setTimeout(function() {
+            slideshowTitle.textContent = `Movie Night: ${videos[index].title}`;
+
+            // Fade the title back in after it's updated
+            slideshowTitle.style.opacity = 1;
+        }, 500);  // Delay for 0.5 seconds
+    }
 }
+
+
 
 // Function to go to the next slide
 function nextSlide() {
@@ -230,8 +253,8 @@ function showVideo(index) {
     videoSlidesContainer.appendChild(video);
     video.load(); // Load the new video
 
-    // Update the subtitle
-    movieNightTitle.textContent = `Movie Night: ${videos[index].title}`;
+    // Update the video title only
+    videoTitle.textContent = `Movie Night: ${videos[index].title}`;
 }
 
 // Function to go to the next video
