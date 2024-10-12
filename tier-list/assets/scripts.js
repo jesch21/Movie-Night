@@ -7,7 +7,7 @@ const movieData = [
     { 
       "title": "Ernest Scared Stupid", 
       "chosenBy": ["Jayden"], 
-      "star-ratings": ["2.5/5", "1/5", "2.5/5", "2.5/5"] 
+      "star-ratings": ["2.5/5", "1/5", "2.5/5", "2.5/5", "1.5/5"] 
     },
     { 
       "title": "Godzilla: Minus One", 

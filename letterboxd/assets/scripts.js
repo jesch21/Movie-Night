@@ -172,6 +172,8 @@ const johnList = [
     { "movie": "Full Metal Jacket", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Fallen Angels", "stars": "2/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Ernest Scared Stupid", "stars": "1.5/5", "liked": "Not Liked", 
+        "rating": "This movie has a certain charm to it, like the kind you'd expect from that super-niche holiday movie you saw when you were 12, then keep seeing one or two random clips of on TikTok. However, I think I can safely say this movie doesn't do much for me quality-wise. The only aspect of this movie that stood out to me was Ernest's acting, especially in the scenes where he cut between multiple different personalities. Outside of this however, the movie was obviously one made for children that unfortunately doesn't do much to cater towards anyone else. Overall, I still think I'm on the Ottoman's side here." },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", 
         "rating": "This movie is a massive pile of dogshit, but god it was funny to watch in person with other peeps. There's basically nothing to redeem this movie honestly. I know it's a trope in horror movies but I absolutely hate when characters act horrifically stupid in movies. Honestly the only thing that made me not give this 1/2 star was a bunch of jokes we made while we watched. Overall, who the fuck thinks its normal to sleep with a box." },
     { "movie": "9", "stars": "0.5/5", "liked": "Not Liked", 
