@@ -2,6 +2,7 @@
 
 const alexList = [
     { "movie": "Master and Commander: The Far Side of the World", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Thing (1982)", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Grand Budapest Hotel", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Gladiator", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Full Metal Jacket", "stars": "4.5/5", "liked": "Liked", "rating": "" },
@@ -50,6 +51,7 @@ const ayubList = [
     { "movie": "The Suicide Squad", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "John Wick", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Godzilla: Minus One", "stars": "4/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Thing (1982)", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Sherlock Holmes (2009)", "stars": "3.5/5", "liked": "Liked", "rating": "" },
     { "movie": "A Silent Voice", "stars": "3.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "High and Low", "stars": "4/5", "liked": "Liked", "rating": "" },
@@ -74,6 +76,7 @@ const ayubList = [
 const joeList = [
     { "movie": "Mad Max: Fury Road", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Matrix", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Thing (1982)", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Collateral", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Uncut Gems", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Yojimbo", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -138,6 +141,7 @@ const johnList = [
     { "movie": "Sherlock Holmes (2009)", "stars": "4/5", "liked": "Liked", 
         "rating": "After having read 'A Study in Scarlet', I was very pleasantly surprised to see Guy Richtie make this feel so much like it. RDJ provides an all-around enjoyable performance, and the humor is very fun to watch. I'm a sucker for super-smart characters, and I love that the movie properly gave Sherlock his times to narrate everything he's found out. I also quite liked that all the supernatural was, in fact, natural. Overall, discombobulate." },
     { "movie": "The Matrix", "stars": "4/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Thing (1982)", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "3.5/5", "liked": "Liked", 
         "rating": "This movie I found compelling almost entirely due to the characters. The overall story itself I wasn't very fond of, and I didn't find it particularly unique, but I was very intrigued to see how these two different personalities interacted and changed each other. The ending also made me quite sad, although not as sad as A Silent Voice. Overall, I still do not want to eat your pancreas." },
     { "movie": "Hardcore Henry", "stars": "3.5/5", "liked": "Liked", 
@@ -230,6 +234,7 @@ const trevorList = [
         "rating": "pretty good movie. The main character was very entertaining. All the characters were all pretty cool. Music was a little un-noticable though. The ending made me furious and it was sad. Like most of the movie, the deaths were really sad. My food for the movie was a calzone and a half of another one, which was 3 cheese. Overall a pretty good movie." },
     { "movie": "The Grand Budapest Hotel", "stars": "3.5/5", "liked": "Not Liked", 
         "rating": "Alright movie. The effects were really bad but thats the only real major flaw about the movie. And even then I can see it being intentional. The music was really good at times it did nice to add to the movie. The plot was alright but were the movie really shines is the humor and characters. The characters are very colorful and the jokes are relatively good. My snack for this movie was half a cup of xtra cheddar goldfish. Overall I liked the movie however somethings a little off-putting. I can't say why. But the movie was nice." },
+    { "movie": "The Thing (1982)", "stars": "3/5", "liked": "Not Liked", "rating": "A few things to say about this movie. The music was very mid, the sound effects sound very muffled and not clean at all even if old. The practical effects are good but very gross; very wet. I do not think the whole man vs unknown was executed alright, however not to my liking. Didn't like how it was executed. The characters were both good and bad. Blair was cool but annoying in some parts, Childs was very cool, but Mac is the star of the show. Watching this the second time was definitely better than the first time, has my attention span has gotten way better than it was my first time watching it. My snack was a few pretzels and overall the movie was alright. I found the first hour to be very entertaining but the last 40 min were a little boring to me. The characters were especially stupid in the end of the movie with splitting up constantly and not communicating, was just wack. Overall (Again) I say this movie is alright." },
     { "movie": "Kill Bill: Vol. 1", "stars": "3/5", "liked": "Not Liked", 
         "rating": "Movie felt like a short anime. The music was on point besides the final fight music. The fight vs the girl with the mace was the best fight scene. Didn't like the feet shots and rape is a no no. Ion like it. Animation scenes were hype although they were cluttered with lines amongst the ridges. The fact people got away with so much murder is wack. The fight scene with the 40thousand people was just way too long and it was ridiculous how dumb the men were acting. Two or three at a time then quitting. My snack was literally just 3 or 4 nacho cheese doritos. Overall better than the terminator, and a decent movie." },
     { "movie": "John Wick", "stars": "3/5", "liked": "Not Liked", 
