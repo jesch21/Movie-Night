@@ -2,6 +2,10 @@ body {
     background-color: #131313;
 }
 
+main {
+    position: relative;
+}
+
 #movie-label {
     margin-bottom: 10px;
 }
@@ -207,6 +211,23 @@ header {
     display: flex;
     background-color: #423e3b;
     border-bottom: 5px solid black;
+}
+
+#white-top, #white-bottom {
+    position: absolute;
+    width: 100%;
+    max-height: 650px;
+    overflow: hidden;
+    opacity: 20%;
+    filter: blur(9em);
+}
+
+#white-top {
+    top: 3px;
+}
+
+#white-bottom {
+    bottom: 3px;
 }
 
 #logo {
