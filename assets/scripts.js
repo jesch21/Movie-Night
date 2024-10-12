@@ -10,8 +10,12 @@ let isInitialLoad = true;
 let currentVideoIndex = 0;
 const videos = [
     {
+        src: 'assets/videos/conjuring-trailer.mp4',
+        title: 'The Conjuring'
+    },
+    {
         src: 'assets/videos/thing-trailer.mp4',
-        title: 'The Thing'
+        title: 'The Thing (1982)'
     },
     {
         src: 'assets/videos/ernest-trailer.mp4',
@@ -175,11 +179,21 @@ const videos = [
     }
 ];
 
+let spookyMovies = [
+    'Ernest Scared Stupid',
+    'The Thing (1982)',
+    'The Conjuring',
+]
+
 const videoSlidesContainer = document.querySelector('.video-slides-container');
 
 // Getting the elements for both the slideshow title and the video title
 const slideshowTitle = document.getElementById('slideshow-title');
 const videoTitle = document.getElementById('video-title');
+
+function isSpooky(title) {
+    return spookyMovies.includes(title);
+  }
 
 function showSlide(index) {
     const slidesContainer = document.querySelector('.slides-container');
@@ -201,6 +215,17 @@ function showSlide(index) {
             slideshowTitle.style.opacity = 1;
         }, 500);  // Delay for 0.5 seconds
     }
+
+    if (isSpooky(videos[index].title)) {
+        slideshowTitle.style.fontFamily = "Nosifer";
+        slideshowTitle.style.letterSpacing = "3px";
+        slideshowTitle.style.fontWeight = "lighter";
+      } else {
+        // Reset to default font styles if not spooky
+        slideshowTitle.style.fontFamily = "";
+        slideshowTitle.style.letterSpacing = "";
+        slideshowTitle.style.fontWeight = "";
+      }
 }
 
 
@@ -254,7 +279,19 @@ function showVideo(index) {
     video.load(); // Load the new video
 
     // Update the video title only
-    videoTitle.textContent = `Movie Night: ${videos[index].title}`;
+    videoTitle.textContent = `${videos[index].title}`;
+
+    // Check if the title is in the spookyMovies list
+  if (isSpooky(videos[index].title)) {
+    videoTitle.style.fontFamily = "Nosifer";
+    videoTitle.style.letterSpacing = "3px";
+    videoTitle.style.fontWeight = "lighter";
+  } else {
+    // Reset to default font styles if not spooky
+    videoTitle.style.fontFamily = "";
+    videoTitle.style.letterSpacing = "";
+    videoTitle.style.fontWeight = "";
+  }
 }
 
 // Function to go to the next video

@@ -123,6 +123,7 @@ h2 {
 #slideshow-title {
     transition: opacity 0.5s ease;  /* Smooth fade effect */
     opacity: 1;  /* Fully visible by default */
+    font-size: 25px;
 }
 
 #lleft, #lright {
