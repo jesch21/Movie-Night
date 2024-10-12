@@ -78,7 +78,7 @@ h2 {
     width: 93vw;
     border-collapse: collapse;
     margin-top: 25px;
-    border: 3px solid black;
+    border: 3px solid rgb(143, 143, 143);;
     display: none;
 }
 

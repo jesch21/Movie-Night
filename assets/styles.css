@@ -103,7 +103,7 @@ h2 {
     width: 700px; 
     height: auto;
     border-bottom: 5px solid black; 
-    border: 3px solid black;
+    border: 2px solid rgb(143, 143, 143);
     border-radius: 25px;
     margin-bottom: 25px;
     margin: 0 auto;
@@ -193,6 +193,7 @@ video {
     max-height: 80vh;
     object-fit: cover;
     border-radius: 25px;
+    border: 2px solid rgb(143, 143, 143);
 }
 
 #trailer-section {
