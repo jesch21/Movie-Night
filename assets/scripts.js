@@ -187,7 +187,7 @@ function showSlide(index) {
 
     // If it's the initial load, update the title immediately without fade
     if (isInitialLoad) {
-        slideshowTitle.textContent = `Movie Night: ${videos[index].title}`;
+        slideshowTitle.textContent = `${videos[index].title}`;
         isInitialLoad = false;
     } else {
         // Fade out the title before changing it
@@ -195,7 +195,7 @@ function showSlide(index) {
 
         // Wait for 0.5 seconds (fade-out duration) before changing the title
         setTimeout(function() {
-            slideshowTitle.textContent = `Movie Night: ${videos[index].title}`;
+            slideshowTitle.textContent = `${videos[index].title}`;
 
             // Fade the title back in after it's updated
             slideshowTitle.style.opacity = 1;

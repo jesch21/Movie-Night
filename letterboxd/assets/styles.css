@@ -1,7 +1,7 @@
 html, body {
     overflow-x: hidden;
     margin: 0;
-    background-color: #9d8ca1;
+    background-color: #131313;
 }
 
 header {
@@ -185,6 +185,22 @@ h2 {
 #tier {
     border-right: 2px solid black;
     border-left: 2px solid black;
+}
+
+#clapper {
+    width: 500px;
+    margin: 15px;
+    border-radius: 15px;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+#img-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 footer {
@@ -375,6 +391,9 @@ footer {
   }
 
   @media only screen and (max-width: 700px) {
+    #clapper {
+        width: 300px;
+    }
     .letterboxd-table td, .letterboxd-table th {
         padding: 3px;
     }
@@ -442,6 +461,9 @@ footer {
   }
 
   @media only screen and (max-width: 550px) {
+    #clapper {
+        width: 250px;
+    }
     h1 {
         font-size: 35px;
     }

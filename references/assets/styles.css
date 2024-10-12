@@ -1,6 +1,7 @@
 html, body {
     overflow-x: hidden;
     margin: 0;
+    background-color: #131313;
 }
 
 .citation {

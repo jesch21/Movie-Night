@@ -46,7 +46,7 @@ const movieData = {
         {"date": "10/11/2024", "chosenBy": "Alex", "title": "The Thing (1982)"},
         {"date": "10/18/2024", "chosenBy": "Trevor", "title": "The Conjuring"},
         {"date": "10/25/2024", "chosenBy": "Joe", "title": "The Lighthouse"},
-        {"date": "11/1/2024", "chosenBy": "Ayub", "title": "Coraline"},
+        {"date": "11/1/2024", "chosenBy": "Ayub", "title": "Bram Stoker's Dracula"},
         {"date": "11/8/2024", "chosenBy": "Garrett", "title": ""},
         {"date": "11/15/2024", "chosenBy": "John", "title": "Indiana Jones: The Last Crusade"},
         {"date": "11/22/2024", "chosenBy": "Jayden", "title": ""},
