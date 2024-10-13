@@ -429,6 +429,10 @@ footer {
         font-size: 30px;
     }
 
+    h3 {
+        font-size: 17px;
+    }
+
     #references {
         bottom: 10px;
         right: 175px;
@@ -456,6 +460,10 @@ footer {
 
     h2 {
         font-size: 27px;
+    }
+
+    h3 {
+        font-size: 15px;
     }
 
     .page {
@@ -501,6 +509,10 @@ footer {
         font-size: 20px;
     }
 
+    h3 {
+        font-size: 12px;
+    }
+
     .page {
         font-size: 12px;
         margin: 0px;
@@ -542,5 +554,9 @@ footer {
 
     h2 {
         font-size: 17px;
+    }
+
+    h3 {
+        font-size: 11px;
     }
   }
