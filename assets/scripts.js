@@ -79,7 +79,7 @@ const videos = [
     },
     {
         src: 'assets/videos/suicide-trailer.mp4',
-        title: 'The Suicide Squad Trailer'
+        title: 'The Suicide Squad'
     },
     {
         src: 'assets/videos/gems-trailer.mp4',
