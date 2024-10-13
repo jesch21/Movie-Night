@@ -323,6 +323,16 @@ footer {
     display: none;
 }
 
+#rabbit {
+    position: absolute;
+    width: 13px;
+    opacity: 7%;
+    right: 5px;
+    bottom: 5px;
+    transform: rotate(315deg);
+    cursor: default;
+}
+
 
 @media only screen and (max-width: 1900px) {
     #tier, #letter, #unseen {
