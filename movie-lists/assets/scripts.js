@@ -1,8 +1,11 @@
 //movie-lists
+const firstTable = 2024;  // Set this to the default year you want to load
 
 const movieData = {
-    "2024": [
+    "2023": [
         {"date": "12/29/2023", "chosenBy": "Trevor", "title": "The Truman Show"},
+  ],
+    "2024": [
         {"date": "1/5/2024", "chosenBy": "Ayub/Joe/Garrett", "title": "The Matrix"},
         {"date": "1/12/2024", "chosenBy": "Ayub", "title": "The Terminator"},
         {"date": "1/19/2024", "chosenBy": "Garrett", "title": "Fallen Angels"},
@@ -12,7 +15,7 @@ const movieData = {
         {"date": "2/16/2024", "chosenBy": "Trevor", "title": "The Platform"},
         {"date": "2/23/2024", "chosenBy": "Joe", "title": "Yojimbo"},
         {"date": "3/1/2024", "chosenBy": "Ayub", "title": "Princess Mononoke"},
-        {"date": "3/8/2024", "chosenBy": "Garrett", "title": "Seven"},
+        {"date": "3/8/2024", "chosenBy": "Garrett", "title": "Se7en"},
         {"date": "3/15/2024", "chosenBy": "John", "title": "Indiana Jones: Raiders of the Lost Ark"},
         {"date": "3/22/2024", "chosenBy": "Jayden", "title": "Click"},
         {"date": "3/29/2024", "chosenBy": "Ayub/John", "title": "Attack on Titan: The Final Chapter Part 1"},
@@ -113,10 +116,9 @@ const movieData = {
 };
 
 function loadTable() {
-    const year = document.getElementById('yearSelect').value;
+    const year = document.getElementById('yearSelect') ? document.getElementById('yearSelect').value : firstTable.toString();
     const tableBody = document.getElementById('movieTable').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = ''; // Clear current table rows
-
     // Populate the table with data from the selected year
     movieData[year].forEach(movie => {
         const row = document.createElement('tr');
@@ -124,6 +126,10 @@ function loadTable() {
         tableBody.appendChild(row);
     });
 }
+
+// Add event listener for year selection
+document.getElementById('yearSelect').addEventListener('change', loadTable);
+
 
 // Load 2024 table on page load
 window.onload = loadTable;
@@ -198,11 +204,13 @@ function loadUnseenTable() {
     });
 }
 
-// Load unseen table on page load
+// Load table on page load using firstTable
 window.onload = () => {
+    document.getElementById('yearSelect').value = firstTable; // Set the select menu to the default year
     loadTable(); // Main Movie List
     loadUnseenTable(); // Unseen List
 };
+
 
 // Default movie list
 let spinnerMovies = ["Choose", "2", "Movies", "Each"];
