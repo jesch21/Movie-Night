@@ -367,9 +367,6 @@ let counts23 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0,
 let jan24 = 0, feb24 = 0, mar24 = 0, apr24 = 0, may24 = 0, jun24 = 0, jul24 = 0, aug24 = 0, sep24 = 0, oct24 = 0, nov24 = 0, dec24 = 0;
 let counts24 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0 };
 
-let jan25 = 0, feb25 = 0, mar25 = 0, apr25 = 0, may25 = 0, jun25 = 0, jul25 = 0, aug25 = 0, sep25 = 0, oct25 = 0, nov25 = 0, dec25 = 0;
-let counts25 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0 };
-
 /**
  * Function to calculate average ratings per month for the years 2023, 2024, and 2025.
  */
@@ -480,58 +477,7 @@ function calculateMonthlyAverages() {
                   counts24.dec++;
                   break;
           }
-        } else if (year === 2025) {
-            switch(month) {
-                case 1:
-                    jan25 += averageRating;
-                    counts25.jan++;
-                    break;
-                case 2:
-                    feb25 += averageRating;
-                    counts25.feb++;
-                    break;
-                case 3:
-                    mar25 += averageRating;
-                    counts25.mar++;
-                    break;
-                case 4:
-                    apr25 += averageRating;
-                    counts25.apr++;
-                    break;
-                case 5:
-                    may25 += averageRating;
-                    counts25.may++;
-                    break;
-                case 6:
-                    jun25 += averageRating;
-                    counts25.jun++;
-                    break;
-                case 7:
-                    jul25 += averageRating;
-                    counts25.jul++;
-                    break;
-                case 8:
-                    aug25 += averageRating;
-                    counts25.aug++;
-                    break;
-                case 9:
-                    sep25 += averageRating;
-                    counts25.sep++;
-                    break;
-                case 10:
-                    oct25 += averageRating;
-                    counts25.oct++;
-                    break;
-                case 11:
-                    nov25 += averageRating;
-                    counts25.nov++;
-                    break;
-                case 12:
-                    dec25 += averageRating;
-                    counts25.dec++;
-                    break;
-            }
-        }
+        } 
     });
 
     // Calculate the final averages for each year
@@ -560,19 +506,6 @@ function calculateMonthlyAverages() {
     oct24 = counts24.oct === 0 ? 0 : (oct24 / counts24.oct).toFixed(2);
     nov24 = counts24.nov === 0 ? 0 : (nov24 / counts24.nov).toFixed(2);
     dec24 = counts24.dec === 0 ? 0 : (dec24 / counts24.dec).toFixed(2);
-
-    jan25 = counts25.jan === 0 ? 0 : (jan25 / counts25.jan).toFixed(2);
-    feb25 = counts25.feb === 0 ? 0 : (feb25 / counts25.feb).toFixed(2);
-    mar25 = counts25.mar === 0 ? 0 : (mar25 / counts25.mar).toFixed(2);
-    apr25 = counts25.apr === 0 ? 0 : (apr25 / counts25.apr).toFixed(2);
-    may25 = counts25.may === 0 ? 0 : (may25 / counts25.may).toFixed(2);
-    jun25 = counts25.jun === 0 ? 0 : (jun25 / counts25.jun).toFixed(2);
-    jul25 = counts25.jul === 0 ? 0 : (jul25 / counts25.jul).toFixed(2);
-    aug25 = counts25.aug === 0 ? 0 : (aug25 / counts25.aug).toFixed(2);
-    sep25 = counts25.sep === 0 ? 0 : (sep25 / counts25.sep).toFixed(2);
-    oct25 = counts25.oct === 0 ? 0 : (oct25 / counts25.oct).toFixed(2);
-    nov25 = counts25.nov === 0 ? 0 : (nov25 / counts25.nov).toFixed(2);
-    dec25 = counts25.dec === 0 ? 0 : (dec25 / counts25.dec).toFixed(2);
 }
 
 // Calculate monthly averages
@@ -581,7 +514,6 @@ calculateMonthlyAverages();
 // List for chart data
 let avg23 = [null, null, null, null, null, null, null, null, null, null, null, dec23]; // Only December has a value
 let avg24 = [jan24, feb24, mar24, apr24, may24, jun24, jul24, aug24, sep24, oct24, nov24, dec24];
-let avg25 = [jan25, feb25, mar25, apr25, may25, jun25, jul25, aug25, sep25, oct25, nov25, dec25];
 
 const ctx = document.getElementById('myLineChart').getContext('2d');
 const myLineChart = new Chart(ctx, {
@@ -606,14 +538,6 @@ const myLineChart = new Chart(ctx, {
               fill: false,
               tension: 0.2
           },
-          {
-              label: '2025',
-              data: avg25,
-              borderColor: 'green',
-              borderWidth: 2,
-              fill: false,
-              tension: 0.2
-          }
       ]
   },
   options: {
@@ -652,18 +576,6 @@ function getBestMonth() {
       { month: 'October', value: oct24, year: 2024 },
       { month: 'November', value: nov24, year: 2024 },
       { month: 'December', value: dec24, year: 2024 },
-      { month: 'January', value: jan25, year: 2025 },
-      { month: 'February', value: feb25, year: 2025 },
-      { month: 'March', value: mar25, year: 2025 },
-      { month: 'April', value: apr25, year: 2025 },
-      { month: 'May', value: may25, year: 2025 },
-      { month: 'June', value: jun25, year: 2025 },
-      { month: 'July', value: jul25, year: 2025 },
-      { month: 'August', value: aug25, year: 2025 },
-      { month: 'September', value: sep25, year: 2025 },
-      { month: 'October', value: oct25, year: 2025 },
-      { month: 'November', value: nov25, year: 2025 },
-      { month: 'December', value: dec25, year: 2025 },
   ];
 
   const bestMonth = avgMonths.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
