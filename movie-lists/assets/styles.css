@@ -220,6 +220,7 @@ header {
     overflow: hidden;
     opacity: 20%;
     filter: blur(9em);
+    z-index: -1;
 }
 
 #white-top {
