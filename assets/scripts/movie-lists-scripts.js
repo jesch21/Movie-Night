@@ -4,7 +4,7 @@ const firstTable = 2024;  // Set this to the default year you want to load
 const movieData = {
     "2023": [
         {"date": "12/29/2023", "chosenBy": "Trevor", "title": "The Truman Show"},
-  ],
+],
     "2024": [
         {"date": "1/5/2024", "chosenBy": "Ayub/Joe/Garrett", "title": "The Matrix"},
         {"date": "1/12/2024", "chosenBy": "Ayub", "title": "The Terminator"},
@@ -59,7 +59,7 @@ const movieData = {
         {"date": "12/13/2024", "chosenBy": "Joe", "title": "Goodfellas"},
         {"date": "12/20/2024", "chosenBy": "Ayub", "title": "The Matrix Reloaded"},
         {"date": "12/27/2024", "chosenBy": "Garrett", "title": "The Hateful Eight: Extended Edition"}
-  ],
+],
     "2025": [
         {"date": "1/3/2025", "chosenBy": "Roulette", "title": ""},
         {"date": "1/10/2025", "chosenBy": "John", "title": "The Ministry of Ungentlemanly Warfare"},

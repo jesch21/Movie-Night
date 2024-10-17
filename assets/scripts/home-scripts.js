@@ -198,7 +198,7 @@ const videoTitle = document.getElementById('video-title');
 
 function isSpooky(title) {
     return spookyMovies.includes(title);
-  }
+}
 
 function showSlide(index) {
     const slidesContainer = document.querySelector('.slides-container');
@@ -225,12 +225,12 @@ function showSlide(index) {
         slideshowTitle.style.fontFamily = "Nosifer";
         slideshowTitle.style.letterSpacing = "3px";
         slideshowTitle.style.fontWeight = "lighter";
-      } else {
+    } else {
         // Reset to default font styles if not spooky
         slideshowTitle.style.fontFamily = "";
         slideshowTitle.style.letterSpacing = "";
         slideshowTitle.style.fontWeight = "";
-      }
+    }
 }
 
 
@@ -287,16 +287,16 @@ function showVideo(index) {
     videoTitle.textContent = `${videos[index].title}`;
 
     // Check if the title is in the spookyMovies list
-  if (isSpooky(videos[index].title)) {
+if (isSpooky(videos[index].title)) {
     videoTitle.style.fontFamily = "Nosifer";
     videoTitle.style.letterSpacing = "3px";
     videoTitle.style.fontWeight = "lighter";
-  } else {
+} else {
     // Reset to default font styles if not spooky
     videoTitle.style.fontFamily = "";
     videoTitle.style.letterSpacing = "";
     videoTitle.style.fontWeight = "";
-  }
+}
 }
 
 // Function to go to the next video
