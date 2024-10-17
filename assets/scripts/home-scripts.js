@@ -11,6 +11,92 @@ let currentVideoIndex = 0;
 const videos = [
     /*
     {
+        src: 'assets/videos/lampoon-trailer.mp4',
+        title: 'National Lampoon's Christmas Vacation'
+    },
+            jayden
+    {
+        src: 'assets/videos/violent-trailer.mp4',
+        title: 'Violent Night'
+    },
+            roulette
+            garrett
+            ayub
+            joe
+            trevor
+            alex
+            jayden
+    {
+        src: 'assets/videos/scary-movie-trailer.mp4',
+        title: 'Scary Movie (2000)'
+    },
+            roulette
+            garrett
+            ayub
+            joe
+            trevor
+            alex
+            jayden
+    {
+        src: 'assets/videos/guardians3-trailer.mp4',
+        title: 'Guardians of the Galaxy Vol. 3'
+    },
+            roulette
+            garrett
+            ayub
+            joe
+            trevor
+            alex
+            jayden
+    {
+        src: 'assets/videos/deadpool3-trailer.mp4',
+        title: 'Deadpool and Wolverine'
+    },
+            roulette
+            garrett
+            ayub
+            joe
+            trevor
+            alex
+            jayden
+    {
+        src: 'assets/videos/logan-trailer.mp4',
+        title: 'Logan'
+    },
+            roulette
+            garrett
+            ayub
+            joe
+    {
+        src: 'assets/videos/transformers3-trailer.mp4',
+        title: 'Transformers 3'
+    },
+            alex
+            jayden
+    {
+        src: 'assets/videos/princess-trailer.mp4',
+        title: 'The Princess Bride'
+    },
+            Roulette
+            Garrett
+    {
+        src: 'assets/videos/matrix-revolutions-trailer.mp4',
+        title: 'The Matrix Revolutions'
+    },
+            joe
+    {
+        src: 'assets/videos/transformers2-trailer.mp4',
+        title: 'Transformers 2'
+    },
+            alex
+            jayden
+    {
+        src: 'assets/videos/ministry-trailer.mp4',
+        title: 'The Ministry of Ungentlemenly Warfare'
+    },
+            Roulette
+
+    {
         src: 'assets/videos/hateful-trailer.mp4',
         title: 'The Hateful Eight - Extended Version'
     },
@@ -226,6 +312,7 @@ let spookyMovies = [
     'The Conjuring',
     'The Lighthouse',
     "Bram Stoker's Dracula",
+    "Scary Movie (2000)",
 ]
 
 const videoSlidesContainer = document.querySelector('.video-slides-container');
