@@ -453,7 +453,7 @@ footer {
         width: 100px;
     }
 
-    #movie-night-title {
+    #movie-night-title, #slideshow-title {
         font-size: 20px;
     }
   }
@@ -580,8 +580,8 @@ footer {
         border-radius: 2.25vw;
     }
 
-    #movie-night-title {
-        font-size: 17px;
+    #movie-night-title, #slideshow-title {
+        font-size: 15px;
         margin: 10px;
     }
 
