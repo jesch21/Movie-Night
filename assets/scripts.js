@@ -9,10 +9,10 @@ let isInitialLoad = true;
 // Video variables
 let currentVideoIndex = 0;
 const videos = [
-    {
-        src: 'assets/videos/conjuring-trailer.mp4',
-        title: 'The Conjuring'
-    },
+    //{
+    //    src: 'assets/videos/conjuring-trailer.mp4',
+    //    title: 'The Conjuring'
+    //},
     {
         src: 'assets/videos/chainsaw-trailer.mp4',
         title: 'The Texas Chainsaw Massacre'
