@@ -70,7 +70,7 @@ const movieData = [
     ayub
     joe
     { 
-      "title": "Transformers 3", 
+      "title": "Transformers: Dark of the Moon", 
       "chosenBy": ["Trevors"], 
       "star-ratings": [],
       "date": "3-2025"
@@ -93,7 +93,7 @@ const movieData = [
     },
     joe
     { 
-      "title": "Transformers 2", 
+      "title": "Transformers: Revenge of the Fallen", 
       "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "1-2025"

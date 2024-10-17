@@ -69,7 +69,7 @@ const videos = [
             joe
     {
         src: 'assets/videos/transformers3-trailer.mp4',
-        title: 'Transformers 3'
+        title: 'Transformers: Dark of the Moon'
     },
             alex
             jayden
@@ -86,7 +86,7 @@ const videos = [
             joe
     {
         src: 'assets/videos/transformers2-trailer.mp4',
-        title: 'Transformers 2'
+        title: 'Transformers: Revenge of the Fallen'
     },
             alex
             jayden
