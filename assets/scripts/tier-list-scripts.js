@@ -1,4 +1,68 @@
 const movieData = [
+    /*
+    { 
+      "title": "The Hateful Eight - Extended Version", 
+      "chosenBy": ["Garrett"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
+      "title": "The Matrix Reloaded", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
+      "title": "Goodfellas", 
+      "chosenBy": ["Joe"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
+      "title": "Transformers", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
+      "title": "Pirates of the Caribbean: The Curse of the Black Pearl", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
+    Jayden's movie
+    { 
+      "title": "Indiana Jones and The Last Crusade", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
+    Garrett's movie
+    { 
+      "title": "Bram Stoker's Dracula", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
+    { 
+      "title": "The Lighthouse", 
+      "chosenBy": ["Joe"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    { 
+      "title": "The Conjuring", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    { 
+      "title": "Texas Chainsaw Massacre", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    */
     { 
       "title": "The Thing (1982)", 
       "chosenBy": ["Alex"], 

@@ -9,10 +9,46 @@ let isInitialLoad = true;
 // Video variables
 let currentVideoIndex = 0;
 const videos = [
-    //{
-    //    src: 'assets/videos/conjuring-trailer.mp4',
-    //    title: 'The Conjuring'
-    //},
+    /*
+    {
+        src: 'assets/videos/hateful-trailer.mp4',
+        title: 'The Hateful Eight - Extended Version'
+    },
+    {
+        src: 'assets/videos/matrix-reloaded-trailer.mp4',
+        title: 'The Matrix Reloaded'
+    },
+    {
+        src: 'assets/videos/goodfellas-trailer.mp4',
+        title: 'Goodfellas'
+    },
+    {
+        src: 'assets/videos/transformers-trailer.mp4',
+        title: 'Transformers'
+    },
+    {
+        src: 'assets/videos/pearl-trailer.mp4',
+        title: 'Pirates of the Caribbean: The Curse of the Black Pearl'
+    },
+    Jayden's movie
+    {
+        src: 'assets/videos/crusade-trailer.mp4',
+        title: 'Indiana Jones and The Last Crusade'
+    },
+    Garrett's movie
+    {
+        src: 'assets/videos/dracula-trailer.mp4',
+        title: 'Bram Stoker's Dracula'
+    },
+    {
+        src: 'assets/videos/lighthouse-trailer.mp4',
+        title: 'The Lighthouse'
+    },
+    {
+        src: 'assets/videos/conjuring-trailer.mp4',
+        title: 'The Conjuring'
+    },
+    */
     {
         src: 'assets/videos/chainsaw-trailer.mp4',
         title: 'The Texas Chainsaw Massacre'
@@ -188,6 +224,8 @@ let spookyMovies = [
     'The Thing (1982)',
     'The Texas Chainsaw Massacre',
     'The Conjuring',
+    'The Lighthouse',
+    "Bram Stoker's Dracula",
 ]
 
 const videoSlidesContainer = document.querySelector('.video-slides-container');
