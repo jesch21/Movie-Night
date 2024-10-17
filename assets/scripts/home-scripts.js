@@ -315,6 +315,11 @@ let spookyMovies = [
     "Scary Movie (2000)",
 ]
 
+let merryMovies = [
+    'Violent Night',
+    "National Lampoon's Christmas Vacation",
+]
+
 const videoSlidesContainer = document.querySelector('.video-slides-container');
 
 // Getting the elements for both the slideshow title and the video title
@@ -323,6 +328,10 @@ const videoTitle = document.getElementById('video-title');
 
 function isSpooky(title) {
     return spookyMovies.includes(title);
+}
+
+function isMerry(title) {
+    return merryMovies.includes(title);
 }
 
 function showSlide(index) {
@@ -350,8 +359,14 @@ function showSlide(index) {
         slideshowTitle.style.fontFamily = "Nosifer";
         slideshowTitle.style.letterSpacing = "3px";
         slideshowTitle.style.fontWeight = "lighter";
-    } else {
-        // Reset to default font styles if not spooky
+    } else if(isMerry(videos[index].title)) {
+        slideshowTitle.style.fontFamily = "Mountains of Christmas";
+        slideshowTitle.style.letterSpacing = "3px";
+        slideshowTitle.style.fontWeight = "bold";
+        slideshowTitle.style.fontSize = "35px";
+    }
+    else {
+        // Reset to default font styles if not spooky or merry
         slideshowTitle.style.fontFamily = "";
         slideshowTitle.style.letterSpacing = "";
         slideshowTitle.style.fontWeight = "";
@@ -411,17 +426,22 @@ function showVideo(index) {
     // Update the video title only
     videoTitle.textContent = `${videos[index].title}`;
 
-    // Check if the title is in the spookyMovies list
-if (isSpooky(videos[index].title)) {
-    videoTitle.style.fontFamily = "Nosifer";
-    videoTitle.style.letterSpacing = "3px";
-    videoTitle.style.fontWeight = "lighter";
-} else {
-    // Reset to default font styles if not spooky
-    videoTitle.style.fontFamily = "";
-    videoTitle.style.letterSpacing = "";
-    videoTitle.style.fontWeight = "";
-}
+    if (isSpooky(videos[index].title)) {
+        slideshowTitle.style.fontFamily = "Nosifer";
+        slideshowTitle.style.letterSpacing = "3px";
+        slideshowTitle.style.fontWeight = "lighter";
+    } else if(isMerry(videos[index].title)) {
+        slideshowTitle.style.fontFamily = "Mountains of Christmas";
+        slideshowTitle.style.letterSpacing = "3px";
+        slideshowTitle.style.fontWeight = "bold";
+        slideshowTitle.style.fontSize = "35px";
+    }
+    else {
+        // Reset to default font styles if not spooky or merry
+        slideshowTitle.style.fontFamily = "";
+        slideshowTitle.style.letterSpacing = "";
+        slideshowTitle.style.fontWeight = "";
+    }
 }
 
 // Function to go to the next video
