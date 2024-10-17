@@ -14,6 +14,10 @@ const videos = [
         title: 'The Conjuring'
     },
     {
+        src: 'assets/videos/chainsaw-trailer.mp4',
+        title: 'The Texas Chainsaw Massacre'
+    },
+    {
         src: 'assets/videos/thing-trailer.mp4',
         title: 'The Thing (1982)'
     },
@@ -182,6 +186,7 @@ const videos = [
 let spookyMovies = [
     'Ernest Scared Stupid',
     'The Thing (1982)',
+    'The Texas Chainsaw Massacre',
     'The Conjuring',
 ]
 

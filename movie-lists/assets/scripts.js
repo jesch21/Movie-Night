@@ -47,6 +47,7 @@ const movieData = {
         {"date": "9/27/2024", "chosenBy": "John", "title": "Godzilla Minus One"},
         {"date": "10/4/2024", "chosenBy": "Jayden", "title": "Ernest Scared Stupid"},
         {"date": "10/11/2024", "chosenBy": "Alex", "title": "The Thing (1982)"},
+        {"date": "10/17/2024", "chosenBy": "Bonus Movie: Ayub", "title": "The Texas Chainsaw Massacre"},
         {"date": "10/18/2024", "chosenBy": "Trevor", "title": "The Conjuring"},
         {"date": "10/25/2024", "chosenBy": "Joe", "title": "The Lighthouse"},
         {"date": "11/1/2024", "chosenBy": "Ayub", "title": "Bram Stoker's Dracula"},
@@ -188,6 +189,9 @@ const unseenMovieData = {
     "seen": [
         {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
         {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
+    ],
+    "bonus": [
+        {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},
     ]
 };
 
