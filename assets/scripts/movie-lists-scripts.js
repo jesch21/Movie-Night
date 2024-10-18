@@ -194,7 +194,7 @@ const unseenMovieData = {
     ],
     "bonus": [
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},
-        {"chosenBy": ["Trevor"], "title": "Platform 2"},
+        {"chosenBy": ["Trevor"], "title": "The Platform 2"},
         {"chosenBy": ["John"], "title": "Scream"},
     ]
 };
