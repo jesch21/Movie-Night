@@ -165,7 +165,7 @@ const movieData = [
       "date": "10-2024"
     },
     { 
-      "title": "Platform 2", 
+      "title": "The Platform 2", 
       "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "10-2024"
