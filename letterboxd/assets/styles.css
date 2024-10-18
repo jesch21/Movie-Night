@@ -132,6 +132,7 @@ h2 {
 
 #trevor {
     margin-bottom: 40px;
+    border-bottom: 5px dashed black;
 }
 
 .letter-link {
@@ -153,6 +154,14 @@ h2 {
 .letter-link:hover {
     padding: 12px;
     color: #623CEA;
+}
+
+.letterboxd-entry {
+    border-top: 5px dashed black;
+}
+
+#alex {
+    border-top: none;
 }
 
 .hide-button {
