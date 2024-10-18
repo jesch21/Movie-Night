@@ -165,6 +165,12 @@ const movieData = [
       "date": "10-2024"
     },
     { 
+      "title": "Platform 2", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    { 
       "title": "The Conjuring", 
       "chosenBy": ["Trevor"], 
       "star-ratings": [],
