@@ -159,18 +159,24 @@ const movieData = [
       "date": "10-2024"
     },
     { 
+      "title": "Scream", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    { 
       "title": "The Conjuring", 
       "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "10-2024"
     },
+    */
     { 
       "title": "Texas Chainsaw Massacre", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "5/5", "4/5", "2.5/5"],
       "date": "10-2024"
     },
-    */
     { 
       "title": "The Thing (1982)", 
       "chosenBy": ["Alex"], 

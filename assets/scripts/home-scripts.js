@@ -131,10 +131,14 @@ const videos = [
         title: 'The Lighthouse'
     },
     {
+        src: 'assets/videos/scream-trailer.mp4',
+        title: 'Scream'
+    },
+    */
+    {
         src: 'assets/videos/conjuring-trailer.mp4',
         title: 'The Conjuring'
     },
-    */
     {
         src: 'assets/videos/chainsaw-trailer.mp4',
         title: 'The Texas Chainsaw Massacre'
@@ -310,6 +314,7 @@ let spookyMovies = [
     'The Thing (1982)',
     'The Texas Chainsaw Massacre',
     'The Conjuring',
+    'Scream',
     'The Lighthouse',
     "Bram Stoker's Dracula",
     "Scary Movie (2000)",
