@@ -228,7 +228,7 @@ const movieData = [
     { 
       "title": "Fallen Angels", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": ["4.5/5", "4/5", "2/5", "1.5/5", "5/5"],
+      "star-ratings": ["4.5/5", "4/5", "1/5", "1.5/5", "5/5"],
       "date": "1-2024"
     },
     { 
