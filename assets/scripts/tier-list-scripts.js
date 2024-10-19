@@ -170,13 +170,13 @@ const movieData = [
       "star-ratings": [],
       "date": "10-2024"
     },
+    */
     { 
       "title": "The Conjuring", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": [],
+      "star-ratings": ["4.5/5", "4.5/5", "4.5/5", "4/5", "3/5"],
       "date": "10-2024"
     },
-    */
     { 
       "title": "Texas Chainsaw Massacre", 
       "chosenBy": ["Ayub"], 
