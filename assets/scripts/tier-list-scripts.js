@@ -178,9 +178,9 @@ const movieData = [
       "date": "10-2024"
     },
     { 
-      "title": "Texas Chainsaw Massacre", 
+      "title": "The Texas Chainsaw Massacre", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": ["4/5", "5/5", "4/5", "2.5/5"],
+      "star-ratings": ["4/5", "5/5", "4/5", "2.5/5", "4/5"],
       "date": "10-2024"
     },
     { 

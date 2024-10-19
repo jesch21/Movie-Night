@@ -9,6 +9,7 @@ const alexList = [
     { "movie": "Mad Max: Fury Road", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "All Quiet on the Western Front (2022)", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Se7en", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "The Texas Chainsaw Massacre", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "High and Low", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Conjuring", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "4/5", "liked": "Not Liked", "rating": "" },
