@@ -381,6 +381,23 @@ function showSlide(index) {
         slideshowTitle.style.letterSpacing = "";
         slideshowTitle.style.fontWeight = "";
     }
+
+    if (isSpooky(videos[index].title)) {
+        videoTitle.style.fontFamily = "Nosifer";
+        videoTitle.style.letterSpacing = "3px";
+        videoTitle.style.fontWeight = "lighter";
+    } else if(isMerry(videos[index].title)) {
+        videoTitle.style.fontFamily = "Mountains of Christmas";
+        videoTitle.style.letterSpacing = "3px";
+        videoTitle.style.fontWeight = "bold";
+        videoTitle.style.fontSize = "35px";
+    }
+    else {
+        // Reset to default font styles if not spooky or merry
+        videoTitle.style.fontFamily = "";
+        videoTitle.style.letterSpacing = "";
+        videoTitle.style.fontWeight = "";
+    }
 }
 
 
@@ -451,6 +468,23 @@ function showVideo(index) {
         slideshowTitle.style.fontFamily = "";
         slideshowTitle.style.letterSpacing = "";
         slideshowTitle.style.fontWeight = "";
+    }
+
+    if (isSpooky(videos[index].title)) {
+        videoTitle.style.fontFamily = "Nosifer";
+        videoTitle.style.letterSpacing = "3px";
+        videoTitle.style.fontWeight = "lighter";
+    } else if(isMerry(videos[index].title)) {
+        videoTitle.style.fontFamily = "Mountains of Christmas";
+        videoTitle.style.letterSpacing = "3px";
+        videoTitle.style.fontWeight = "bold";
+        videoTitle.style.fontSize = "35px";
+    }
+    else {
+        // Reset to default font styles if not spooky or merry
+        videoTitle.style.fontFamily = "";
+        videoTitle.style.letterSpacing = "";
+        videoTitle.style.fontWeight = "";
     }
 }
 
