@@ -153,6 +153,12 @@ const movieData = [
       "date": "11-2024"
     },
     { 
+      "title": "Friday the 13th", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    { 
       "title": "The Lighthouse", 
       "chosenBy": ["Joe"], 
       "star-ratings": [],
