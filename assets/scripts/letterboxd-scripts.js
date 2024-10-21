@@ -73,6 +73,7 @@ const ayubList = [
     { "movie": "Ernest Scared Stupid", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "2/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "The Platform 2", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "9", "stars": "1/5", "liked": "Not Liked", "rating": "" },
 ];
@@ -114,6 +115,7 @@ const joeList = [
     { "movie": "The Platform", "stars": "2/5", "liked": "Liked", "rating": "" },
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Suicide Squad", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "The Platform 2", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
@@ -197,6 +199,8 @@ const johnList = [
         "rating": "My primary issue with this movie is I don't know what this movie is. I genuinely don't know what I watched, to the point where I can hardly put into words my criticisms. I liked some shots, but there were many shots I felt were held for far too long, included the sex scene that I think felt very dragged out. Overall, ice cream guy was cool." },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", 
         "rating": "This movie is a massive pile of dogshit, but god it was funny to watch in person with other peeps. There's basically nothing to redeem this movie honestly. I know it's a trope in horror movies but I absolutely hate when characters act horrifically stupid in movies. Honestly the only thing that made me not give this 1/2 star was a bunch of jokes we made while we watched. Overall, who the fuck thinks its normal to sleep with a box." },
+    { "movie": "The Platform 2", "stars": "1/5", "liked": "Not Liked", 
+        "rating": "This movie is the embodiment of 'I'm 14 and this is deep'. If you forced me to sit down, tied to a chair, with my eyes taped open, and I had to watch this movie on repeat the rest of my life I still couldn't tell you what this movie is about, or what it's trying to say. This feels like if someone watched the first movie, and decided to make a fan film of it off of it just to show they know how to use a camera. Full of unnecessary gore and cryptic messages, and still never resolving any questions or mysteries from the first one. Overall, nothing about this movie is obvio." },
     { "movie": "9", "stars": "0.5/5", "liked": "Not Liked", 
         "rating": "Holy shit this movie was horrible. The story was incredibly dull, the animation is pretty poor and lacking in detail, which is disappointing since the art style had potential. The characters were shallow and bland, and the villain was basically nothing at all. Overall, I'd give it a 9... out of 9,000." },
 ];
@@ -283,6 +287,8 @@ const trevorList = [
         "rating": "Haven't seen the entire movie as I had to leave. But this movie was pretty good for a sequel. For what it is at least. It's a sequel in a sense mario 3 is a sequel to super mario bros. Same format, same actors, just a different plot. My snack was lays salt and vinegar chips with helluva french onion dip. Anyway this movies wasn't too bad for what I have seen. Although I must admit I have not really like the first movie so much." },
     { "movie": "The Possession", "stars": "2/5", "liked": "Not Liked", 
         "rating": "bad movie but fun movie" },
+    { "movie": "The Platform 2", "stars": "1.5/5", "liked": "Not Liked", 
+        "rating": "Movie was mid as fuck. Didn't make sense. Apparently it was a prequel? The only thing I got out of it is that the girl was gorengs ex I think? The music was fantastic though, was a vibe in that department. I didn't have a snack for this movie, too gross visually. Overall this movie just felt like a retelling and worse at that in my opinion, the movie was just mid." },
     { "movie": "Fallen Angels", "stars": "1.5/5", "liked": "Not Liked", 
         "rating": "Looks like it smells bad, a lot of mesh gross scenes. Very boring and feels super pointless. Just a longeval slice of life movie that I wasn't very into. I liked the parts with the dad it was wholesome, the girl masturbating was unnecessary and gross. The music was nice had a creepy song though. Overall I did not like it. Snack was a family sized bag of pretzels." },
     { "movie": "Ernest Scared Stupid", "stars": "1/5", "liked": "Not Liked", 
