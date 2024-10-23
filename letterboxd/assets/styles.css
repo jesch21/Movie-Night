@@ -251,7 +251,7 @@ footer {
 
 .stream {
     border-radius: .5vw;
-    max-height: 7vh;
+    max-height: 6vh;
     margin: 20px;
     margin-left: 20px;
     margin-right: 40px;
@@ -260,7 +260,7 @@ footer {
 }
 
 .stream:hover {
-    max-height: 7.25vh;
+    max-height: 6.25vh;
 }
 
 #streaming {
