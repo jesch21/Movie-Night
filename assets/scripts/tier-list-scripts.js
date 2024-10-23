@@ -159,6 +159,12 @@ const movieData = [
       "date": "10-2024"
     },
     { 
+      "title": "28 Days Later", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "10-2024"
+    },
+    { 
       "title": "The Lighthouse", 
       "chosenBy": ["Joe"], 
       "star-ratings": [],
