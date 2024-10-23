@@ -198,6 +198,7 @@ const unseenMovieData = {
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},
         {"chosenBy": ["Trevor"], "title": "The Platform 2"},
         {"chosenBy": ["John"], "title": "Scream"},
+        {"chosenBy": ["Trevor"], "title": "28 Days Later"},
         {"chosenBy": ["John"], "title": "Friday the 13th"},
     ]
 };
