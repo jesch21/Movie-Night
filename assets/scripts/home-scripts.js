@@ -346,6 +346,16 @@ const videoSlidesContainer = document.querySelector('.video-slides-container');
 const slideshowTitle = document.getElementById('slideshow-title');
 const videoTitle = document.getElementById('video-title');
 
+function revealArrows() {
+    document.getElementById('lleft').style.opacity = '60%';
+    document.getElementById('lright').style.opacity = '60%';
+}
+
+function hideArrows() {
+    document.getElementById('lleft').style.opacity = '0%';
+    document.getElementById('lright').style.opacity = '0%';
+}
+
 function isSpooky(title) {
     return spookyMovies.includes(title);
 }
