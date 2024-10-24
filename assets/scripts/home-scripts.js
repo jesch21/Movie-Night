@@ -134,14 +134,10 @@ const videos = [
         src: 'assets/videos/28-trailer.mp4',
         title: '28 Days Later'
     },
+    */
     {
         src: 'assets/videos/lighthouse-trailer.mp4',
         title: 'The Lighthouse'
-    },
-    */
-    {
-        src: 'assets/videos/scream-trailer.mp4',
-        title: 'Scream'
     },
     {
         src: 'assets/videos/platform2-trailer.mp4',
@@ -327,7 +323,6 @@ let spookyMovies = [
     'The Texas Chainsaw Massacre',
     'The Conjuring',
     'The Platform 2',
-    'Scream',
     'The Lighthouse',
     '28 Days Later',
     'Friday the 13th',

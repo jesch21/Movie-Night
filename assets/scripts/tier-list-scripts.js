@@ -170,12 +170,6 @@ const movieData = [
       "star-ratings": [],
       "date": "10-2024"
     },
-    { 
-      "title": "Scream", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "10-2024"
-    },
     */
     { 
       "title": "The Platform 2", 

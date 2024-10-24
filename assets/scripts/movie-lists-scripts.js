@@ -50,7 +50,6 @@ const movieData = {
         {"date": "10/17/2024", "chosenBy": "Bonus Movie: Ayub", "title": "The Texas Chainsaw Massacre"},
         {"date": "10/18/2024", "chosenBy": "Trevor", "title": "The Conjuring"},
         {"date": "10/20/2024", "chosenBy": "Bonus Movie: Trevor", "title": "The Platform 2"},
-        {"date": "10/24/2024", "chosenBy": "Bonus Movie: John", "title": "Scream"},
         {"date": "10/25/2024", "chosenBy": "Joe", "title": "The Lighthouse"},
         {"date": "10/27/2024", "chosenBy": "Bonus Movie: Trevor", "title": "28 Days Later"},
         {"date": "10/31/2024", "chosenBy": "Bonus Movie: John", "title": "Friday the 13th"},
@@ -197,7 +196,6 @@ const unseenMovieData = {
     "bonus": [
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},
         {"chosenBy": ["Trevor"], "title": "The Platform 2"},
-        {"chosenBy": ["John"], "title": "Scream"},
         {"chosenBy": ["Trevor"], "title": "28 Days Later"},
         {"chosenBy": ["John"], "title": "Friday the 13th"},
     ]
