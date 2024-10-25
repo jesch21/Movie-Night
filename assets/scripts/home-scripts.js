@@ -127,8 +127,8 @@ const videos = [
         title: 'Bram Stoker's Dracula'
     },
     {
-        src: 'assets/videos/friday-trailer.mp4',
-        title: 'Friday the 13th'
+        src: 'assets/videos/scream-trailer.mp4',
+        title: 'Scream'
     },
     {
         src: 'assets/videos/28-trailer.mp4',
@@ -325,7 +325,7 @@ let spookyMovies = [
     'The Platform 2',
     'The Lighthouse',
     '28 Days Later',
-    'Friday the 13th',
+    'Scream',
     "Bram Stoker's Dracula",
     "Scary Movie (2000)",
 ]

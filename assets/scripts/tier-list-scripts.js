@@ -153,7 +153,7 @@ const movieData = [
       "date": "11-2024"
     },
     { 
-      "title": "Friday the 13th", 
+      "title": "Scream", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "10-2024"
