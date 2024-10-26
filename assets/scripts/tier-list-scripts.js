@@ -164,13 +164,13 @@ const movieData = [
       "star-ratings": [],
       "date": "10-2024"
     },
+    */
     { 
       "title": "The Lighthouse", 
       "chosenBy": ["Joe"], 
-      "star-ratings": [],
+      "star-ratings": ["4.5/5", "4.5/5", "4.5/5", "4.5/5", "4.5/5"],
       "date": "10-2024"
     },
-    */
     { 
       "title": "The Platform 2", 
       "chosenBy": ["Trevor"], 
