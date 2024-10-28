@@ -126,11 +126,11 @@ const videos = [
         src: 'assets/videos/dracula-trailer.mp4',
         title: 'Bram Stoker's Dracula'
     },
+    */
     {
         src: 'assets/videos/scream-trailer.mp4',
         title: 'Scream'
     },
-    */
     {
         src: 'assets/videos/28-trailer.mp4',
         title: '28 Days Later'
