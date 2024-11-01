@@ -122,11 +122,11 @@ const videos = [
         title: 'Indiana Jones and The Last Crusade'
     },
     Garrett's movie
+    */
     {
         src: 'assets/videos/dracula-trailer.mp4',
-        title: 'Bram Stoker's Dracula'
+        title: "Bram Stoker's Dracula"
     },
-    */
     {
         src: 'assets/videos/scream-trailer.mp4',
         title: 'Scream'

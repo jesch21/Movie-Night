@@ -152,13 +152,13 @@ const movieData = [
       "star-ratings": [],
       "date": "11-2024"
     },
+    */
     { 
       "title": "Scream", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["4.5/5", "4.5/5", "5/5"],
       "date": "10-2024"
     },
-    */
     { 
       "title": "28 Days Later", 
       "chosenBy": ["Trevor"], 
@@ -318,7 +318,7 @@ const movieData = [
     { 
       "title": "Das Leben der Anderan", 
       "chosenBy": ["John"], 
-      "star-ratings": ["1.5/5", "2/5", "2/5", "1/5"],
+      "star-ratings": ["1/5", "2/5", "2/5", "1/5"],
       "date": "5-2024"
     },
     { 
