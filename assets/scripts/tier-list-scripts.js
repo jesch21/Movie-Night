@@ -146,13 +146,13 @@ const movieData = [
       "date": "11-2024"
     },
     Garrett's movie
+    */
     { 
       "title": "Bram Stoker's Dracula", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["4.5/5", "1.5/5", "5/5", "5/5", "1.5/5"],
       "date": "11-2024"
     },
-    */
     { 
       "title": "Scream", 
       "chosenBy": ["John"], 
@@ -318,7 +318,7 @@ const movieData = [
     { 
       "title": "Das Leben der Anderan", 
       "chosenBy": ["John"], 
-      "star-ratings": ["1/5", "2/5", "2/5", "1/5"],
+      "star-ratings": ["1/5", "0.5/5", "2/5", "1/5"],
       "date": "5-2024"
     },
     { 
