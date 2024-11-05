@@ -105,7 +105,7 @@ const movieData = {
         {"date": "9/26/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "10/3/2025", "chosenBy": "Garrett", "title": ""},
         {"date": "10/10/2025", "chosenBy": "Roulette", "title": ""},
-        {"date": "10/17/2025", "chosenBy": "John", "title": "Scary Movie (2000)"},
+        {"date": "10/17/2025", "chosenBy": "John", "title": "Jaws"},
         {"date": "10/24/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "10/31/2025", "chosenBy": "Alex", "title": ""},
         {"date": "11/7/2025", "chosenBy": "Trevor", "title": ""},
