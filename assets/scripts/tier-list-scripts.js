@@ -106,8 +106,26 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    { 
+      "title": "Star Wars: The Rise of Skywalker", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
     Roulette
+    { 
+      "title": "Star Wars: The Last Jedi", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
 
+    { 
+      "title": "Star Wars: The Force Awakens", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
     { 
       "title": "The Hateful Eight - Extended Version", 
       "chosenBy": ["Garrett"], 
@@ -121,8 +139,20 @@ const movieData = [
       "date": "12-2024"
     },
     { 
+      "title": "Rogue One: A Star Wars Story", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
       "title": "Goodfellas", 
       "chosenBy": ["Joe"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
+      "title": "Star Wars: Revenge of the Sith", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2024"
     },
@@ -133,12 +163,30 @@ const movieData = [
       "date": "12-2024"
     },
     { 
+      "title": "Star Wars: Attack of the Clones", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    { 
+      "title": "Star Wars: The Phatom Menace", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
+    Jayden's Movie
+    { 
       "title": "Pirates of the Caribbean: The Curse of the Black Pearl", 
       "chosenBy": ["Alex"], 
       "star-ratings": [],
       "date": "11-2024"
     },
-    Jayden's movie
+    { 
+      "title": "Star Wars: Return of the Jedi", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
     { 
       "title": "Indiana Jones and The Last Crusade", 
       "chosenBy": ["John"], 
@@ -146,8 +194,20 @@ const movieData = [
       "date": "11-2024"
     },
     { 
+      "title": "Star Wars: The Empire Strikes Back", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
+    { 
       "title": "Burn After Reading", 
       "chosenBy": ["Garrett"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
+    { 
+      "title": "Star Wars: A New Hope", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "11-2024"
     },
