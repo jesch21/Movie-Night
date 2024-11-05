@@ -145,7 +145,12 @@ const movieData = [
       "star-ratings": [],
       "date": "11-2024"
     },
-    Garrett's movie
+    { 
+      "title": "Burn After Reading", 
+      "chosenBy": ["Garrett"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
     */
     { 
       "title": "Bram Stoker's Dracula", 

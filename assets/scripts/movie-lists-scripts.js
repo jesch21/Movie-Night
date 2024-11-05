@@ -54,7 +54,7 @@ const movieData = {
         {"date": "10/27/2024", "chosenBy": "Bonus Movie: Trevor", "title": "28 Days Later"},
         {"date": "10/31/2024", "chosenBy": "Bonus Movie: John", "title": "Scream"},
         {"date": "11/1/2024", "chosenBy": "Ayub", "title": "Bram Stoker's Dracula"},
-        {"date": "11/8/2024", "chosenBy": "Garrett", "title": ""},
+        {"date": "11/8/2024", "chosenBy": "Garrett", "title": "Burn After Reading"},
         {"date": "11/15/2024", "chosenBy": "John", "title": "Indiana Jones and The Last Crusade"},
         {"date": "11/22/2024", "chosenBy": "Alex", "title": "Pirates of the Caribbean: The Curse of the Black Pearl"},
         {"date": "11/29/2024", "chosenBy": "Jayden", "title": ""},

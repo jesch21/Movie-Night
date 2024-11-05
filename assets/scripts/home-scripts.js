@@ -123,8 +123,8 @@ const videos = [
     },
     */
     {
-        src: 'assets/videos/garrett-trailer.mp4',
-        title: "Garrett"
+        src: 'assets/videos/burn-trailer.mkv',
+        title: "Burn After Reading"
     },
     {
         src: 'assets/videos/dracula-trailer.mp4',
