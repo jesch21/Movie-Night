@@ -94,20 +94,8 @@ const videos = [
         src: 'assets/videos/ministry-trailer.mp4',
         title: 'The Ministry of Ungentlemenly Warfare'
     },
-    {
-        src: 'assets/videos/skywalker-trailer.mp4',
-        title: "Star Wars: The Rise of Skywalker"
-    },
             Roulette
-    {
-        src: 'assets/videos/last-trailer.mp4',
-        title: "Star Wars: The Last Jedi"
-    },
 
-    {
-        src: 'assets/videos/awakens-trailer.mp4',
-        title: "Star Wars: The Force Awakens"
-    },
     {
         src: 'assets/videos/hateful-trailer.mp4',
         title: 'The Hateful Eight - Extended Version'
@@ -117,28 +105,12 @@ const videos = [
         title: 'The Matrix Reloaded'
     },
     {
-        src: 'assets/videos/rogue-trailer.mp4',
-        title: "Rogue One: A Star Wars Story"
-    },
-    {
         src: 'assets/videos/goodfellas-trailer.mp4',
         title: 'Goodfellas'
     },
     {
-        src: 'assets/videos/revenge-trailer.mp4',
-        title: "Star Wars: Revenge of the Sith"
-    },
-    {
         src: 'assets/videos/transformers-trailer.mp4',
         title: 'Transformers'
-    },
-    {
-        src: 'assets/videos/clones-trailer.mp4',
-        title: "Star Wars: Attack of the Clones"
-    },
-    {
-        src: 'assets/videos/phantom-trailer.mp4',
-        title: "Star Wars: The Phantom Menace"
     },
     Jayden's Movie
     {
@@ -146,25 +118,13 @@ const videos = [
         title: 'Pirates of the Caribbean: The Curse of the Black Pearl'
     },
     {
-        src: 'assets/videos/return-trailer.mp4',
-        title: "Star Wars: Return of the Jedi"
-    },
-    {
         src: 'assets/videos/crusade-trailer.mp4',
         title: 'Indiana Jones and The Last Crusade'
     },
-    {
-        src: 'assets/videos/empire-trailer.mp4',
-        title: "Star Wars: The Empire Strikes Back"
-    },
+    */
     {
         src: 'assets/videos/burn-trailer.mp4',
         title: "Burn After Reading"
-    },
-    */
-    {
-        src: 'assets/videos/hope-trailer.mp4',
-        title: "Star Wars: A New Hope"
     },
     {
         src: 'assets/videos/dracula-trailer.mp4',
