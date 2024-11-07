@@ -27,25 +27,29 @@
     <img src="../assets/images/white-top.png" id="white-top" alt="White Top Effect">
     <img src="../assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
     <div class="tables-container">
-        <div class="table-wrapper">
-            <h2>Best Picks</h2>
-            <table id="bestPicksTable">
-                <thead>
-                    <tr>
-                        <th>Ranking</th>
-                        <th>Name</th>
-                        <th>Average Pick Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Rows will be dynamically generated here -->
-                </tbody>
-            </table>
+        <div id="stats">
+            <div class="table-wrapper">
+                <h2>Best Picks</h2>
+                <table id="bestPicksTable">
+                    <thead>
+                        <tr>
+                            <th>Ranking</th>
+                            <th>Name</th>
+                            <th>Average Pick Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be dynamically generated here -->
+                    </tbody>
+                </table>
+            </div>
 
-            <h2>Movie Night Ratings Trends</h2>
-            <h3 id="bestMonthLabel">Best Month: </h3>
-            <div id="chartContainer">
-                <canvas id="myLineChart"></canvas>
+            <div class="table-wrapper">
+                <h2>Movie Night Ratings Trends</h2>
+                <h3 id="bestMonthLabel">Best Month: </h3>
+                <div id="chartContainer">
+                    <canvas id="myLineChart"></canvas>
+                </div>
             </div>
         </div>
         <div class="table-wrapper">

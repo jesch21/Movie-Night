@@ -234,6 +234,18 @@ function loadUnseenTable() {
     });
 }
 
+function toggleWheel() {
+    const wheel = document.getElementById("spinner-container");
+    const button = document.getElementById("spin-button");
+    if (wheel.style.display === "none" || wheel.style.display === "") {
+        wheel.style.display = "flex";
+        button.style.top = "-40px";
+    } else {
+        wheel.style.display = "none";
+        button.style.top = "-25px";
+    }
+}
+
 // Load table on page load using firstTable
 window.onload = () => {
     document.getElementById('yearSelect').value = firstTable; // Set the select menu to the default year
