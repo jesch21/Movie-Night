@@ -157,11 +157,11 @@ const videos = [
         src: 'assets/videos/pearl-trailer.mp4',
         title: 'Pirates of the Caribbean: The Curse of the Black Pearl'
     },
+    */
     {
         src: 'assets/videos/crusade-trailer.mp4',
         title: 'Indiana Jones and The Last Crusade'
     },
-    */
     {
         src: 'assets/videos/burn-trailer.mp4',
         title: "Burn After Reading"

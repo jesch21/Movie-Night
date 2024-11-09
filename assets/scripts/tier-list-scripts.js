@@ -205,13 +205,13 @@ const movieData = [
       "star-ratings": [],
       "date": "11-2024"
     },
+    */
     { 
       "title": "Burn After Reading", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "4.5/5", "4.5/5", "4/5", "4.5/5"],
       "date": "11-2024"
     },
-    */
     { 
       "title": "Bram Stoker's Dracula", 
       "chosenBy": ["Ayub"], 
