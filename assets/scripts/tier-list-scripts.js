@@ -931,7 +931,7 @@ function getBestMonth() {
 
   const bestMonth = avgMonths.reduce((prev, curr) => (prev.value > curr.value ? prev : curr));
 
-  document.getElementById('bestMonthLabel').innerText = `Best Month: ${bestMonth.month} of ${bestMonth.year}`;
+  document.getElementById('bestMonthLabel').innerText = `Best Month: ${bestMonth.month} of ${bestMonth.year} with a ${bestMonth.value}`;
 }
 
 // Call the function to update the label
