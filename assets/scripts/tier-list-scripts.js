@@ -192,7 +192,12 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
-    Jayden's Movie
+    { 
+      "title": "Eight Crazy Nights", 
+      "chosenBy": ["Jayden"], 
+      "star-ratings": [],
+      "date": "11-2024"
+    },
     { 
       "title": "Pirates of the Caribbean: The Curse of the Black Pearl", 
       "chosenBy": ["Alex"], 

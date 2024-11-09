@@ -152,7 +152,10 @@ const videos = [
         src: 'assets/videos/transformers-trailer.mp4',
         title: 'Transformers'
     },
-    Jayden's Movie
+    {
+        src: 'assets/videos/eight-trailer.mp4',
+        title: 'Eight Crazy Nights'
+    },
     {
         src: 'assets/videos/pearl-trailer.mp4',
         title: 'Pirates of the Caribbean: The Curse of the Black Pearl'
