@@ -204,13 +204,13 @@ const movieData = [
       "star-ratings": [],
       "date": "11-2024"
     },
+    */
     { 
       "title": "Indiana Jones and The Last Crusade", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "4.5/5", "3.5/5", "4/5"],
       "date": "11-2024"
     },
-    */
     { 
       "title": "Burn After Reading", 
       "chosenBy": ["Garrett"], 
