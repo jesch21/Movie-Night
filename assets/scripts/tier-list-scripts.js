@@ -21,12 +21,24 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Scary Movie (2000)", 
+      "title": "Smile 2", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    { 
+      "title": "Smile", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "10-2025"
     },
     roulette
+    { 
+      "title": "Jaws", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "10-2025"
+    },
     garrett
     ayub
     joe

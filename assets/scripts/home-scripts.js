@@ -27,10 +27,18 @@ const videos = [
             alex
             jayden
     {
-        src: 'assets/videos/scary-movie-trailer.mp4',
-        title: 'Scary Movie (2000)'
+        src: 'assets/videos/smile2-trailer.mp4',
+        title: 'Smile 2'
+    },
+    {
+        src: 'assets/videos/smile-trailer.mp4',
+        title: 'Smile'
     },
             roulette
+    {
+        src: 'assets/videos/jaws-trailer.mp4',
+        title: 'Jaws'
+    },
             garrett
             ayub
             joe
@@ -374,6 +382,8 @@ let spookyMovies = [
     'Scream',
     "Bram Stoker's Dracula",
     "Jaws",
+    "Smile",
+    "Smile 2",
 ]
 
 let merryMovies = [
