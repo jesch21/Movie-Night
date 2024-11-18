@@ -46,6 +46,18 @@ const movieData = [
       "star-ratings": [],
       "date": "10-2025"
     },
+    { 
+      "title": "Alien: Romulus", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    { 
+      "title": "Alien", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "9-2025"
+    },
     ayub
     joe
     trevor
@@ -57,7 +69,19 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
+    { 
+      "title": "Guardians of the Galaxy Vol. 2", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "8-2025"
+    },
     roulette
+    { 
+      "title": "Guardians of the Galaxy", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "8-2025"
+    },
     garrett
     ayub
     joe
@@ -70,7 +94,19 @@ const movieData = [
       "star-ratings": [],
       "date": "6-2025"
     },
+    { 
+      "title": "Deadpool 2", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "6-2025"
+    },
     roulette
+    { 
+      "title": "Deadpool", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "6-2025"
+    },
     garrett
     ayub
     joe

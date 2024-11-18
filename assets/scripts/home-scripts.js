@@ -44,6 +44,10 @@ const videos = [
         src: 'assets/videos/romulus-trailer.mp4',
         title: 'Alien: Romulus'
     },
+    {
+        src: 'assets/videos/alien-trailer.mp4',
+        title: 'Alien'
+    },
             ayub
             joe
             trevor
@@ -53,7 +57,15 @@ const videos = [
         src: 'assets/videos/guardians3-trailer.mp4',
         title: 'Guardians of the Galaxy Vol. 3'
     },
+    {
+        src: 'assets/videos/guardians2-trailer.mp4',
+        title: 'Guardians of the Galaxy Vol. 2'
+    },
             roulette
+    {
+        src: 'assets/videos/guardians-trailer.mp4',
+        title: 'Guardians of the Galaxy'
+    },
             garrett
             ayub
             joe
@@ -64,7 +76,15 @@ const videos = [
         src: 'assets/videos/deadpool3-trailer.mp4',
         title: 'Deadpool and Wolverine'
     },
+    {
+        src: 'assets/videos/deadpool2-trailer.mp4',
+        title: 'Deadpool 2'
+    },
             roulette
+    {
+        src: 'assets/videos/deadpool-trailer.mp4',
+        title: 'Deadpool'
+    },
             garrett
             ayub
             joe
@@ -385,6 +405,7 @@ let spookyMovies = [
     '28 Days Later',
     'Scream',
     "Bram Stoker's Dracula",
+    "Alien",
     "Alien: Romulus",
     "Jaws",
     "Smile",
