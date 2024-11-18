@@ -40,6 +40,12 @@ const movieData = [
       "date": "10-2025"
     },
     garrett
+    { 
+      "title": "Alien: Romulus", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "10-2025"
+    },
     ayub
     joe
     trevor

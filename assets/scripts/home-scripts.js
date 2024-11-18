@@ -40,6 +40,10 @@ const videos = [
         title: 'Jaws'
     },
             garrett
+    {
+        src: 'assets/videos/romulus-trailer.mp4',
+        title: 'Alien: Romulus'
+    },
             ayub
             joe
             trevor
@@ -381,6 +385,7 @@ let spookyMovies = [
     '28 Days Later',
     'Scream',
     "Bram Stoker's Dracula",
+    "Alien: Romulus",
     "Jaws",
     "Smile",
     "Smile 2",
