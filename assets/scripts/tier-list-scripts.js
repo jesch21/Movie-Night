@@ -252,13 +252,13 @@ const movieData = [
       "star-ratings": [],
       "date": "11-2024"
     },
+    */
     { 
       "title": "Pirates of the Caribbean: The Curse of the Black Pearl", 
       "chosenBy": ["Alex"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "4.5/5", "4/5", "4/5", "4/5"],
       "date": "11-2024"
     },
-    */
     { 
       "title": "Indiana Jones and The Last Crusade", 
       "chosenBy": ["John"], 
