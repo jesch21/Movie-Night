@@ -235,8 +235,8 @@ const movieData = [
       "date": "12-2024"
     },
     { 
-      "title": "Goodfellas", 
-      "chosenBy": ["Joe"], 
+      "title": "Eight Crazy Nights", 
+      "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "12-2024"
     },
@@ -247,8 +247,8 @@ const movieData = [
       "date": "12-2024"
     },
     { 
-      "title": "Eight Crazy Nights", 
-      "chosenBy": ["Jayden"], 
+      "title": "Goodfellas", 
+      "chosenBy": ["Joe"], 
       "star-ratings": [],
       "date": "11-2024"
     },
