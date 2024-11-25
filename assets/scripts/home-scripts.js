@@ -106,8 +106,8 @@ const videos = [
             alex
             jayden
     {
-        src: 'assets/videos/princess-trailer.mp4',
-        title: 'The Princess Bride'
+        src: 'assets/videos/prey-trailer.mp4',
+        title: 'Prey'
     },
     {
         src: 'assets/videos/skywalker-trailer.mp4',

@@ -132,7 +132,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "The Princess Bride", 
+      "title": "Prey", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
