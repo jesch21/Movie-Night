@@ -246,13 +246,13 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
+    */
     { 
       "title": "Goodfellas", 
       "chosenBy": ["Joe"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "4.5/5", "5/5", "3.5/5", "2.5/5"],
       "date": "11-2024"
     },
-    */
     { 
       "title": "Pirates of the Caribbean: The Curse of the Black Pearl", 
       "chosenBy": ["Alex"], 
