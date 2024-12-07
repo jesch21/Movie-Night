@@ -176,11 +176,11 @@ const videos = [
         src: 'assets/videos/matrix-reloaded-trailer.mp4',
         title: 'The Matrix Reloaded'
     },
+    */
     {
         src: 'assets/videos/eight-trailer.mp4',
         title: 'Eight Crazy Nights'
     },
-    */
     {
         src: 'assets/videos/transformers-trailer.mp4',
         title: 'Transformers'

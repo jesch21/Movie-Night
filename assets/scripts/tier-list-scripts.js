@@ -240,13 +240,13 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
+    */
     { 
       "title": "Transformers", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": [],
+      "star-ratings": ["2.5/5", "2/5", "2.5/5", "2.5/5", "1.5/5"],
       "date": "12-2024"
     },
-    */
     { 
       "title": "Goodfellas", 
       "chosenBy": ["Joe"], 
@@ -550,7 +550,7 @@ const movieData = [
     { 
         "title": "Collateral", 
         "chosenBy": ["Joe"], 
-        "star-ratings": ["3/5", "4.5/5", "5/5", "4/5", "4/5", "4.5/5"],
+        "star-ratings": ["3.5/5", "4.5/5", "5/5", "4/5", "4/5", "4.5/5"],
         "date": "9-2024"
       },
       { 
