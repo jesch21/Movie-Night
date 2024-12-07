@@ -478,7 +478,7 @@ const movieData = [
     { 
       "title": "Uncut Gems", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": ["4/5", "4.5/5", "5/5", "2.5/5", "3.5/5"],
+      "star-ratings": ["4/5", "4.5/5", "5/5", "2.5/5", "3.5/5", "5/5"],
       "date": "6-2024"
     },
     { 

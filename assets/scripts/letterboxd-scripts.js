@@ -260,6 +260,7 @@ const landonList = [
     { "movie": "The Batman", "stars": "5/5", "liked": "Liked", "rating": "This film took me 3 day to watch, but by the end I was standing on all fours hootin AND hollering. Best non-animated Batman film to date." },
     { "movie": "A Silent Voice", "stars": "5/5", "liked": "Not Liked", "rating": "i watched bits and pieces but this piece of media is the single most tear streaming, jaw dropping, heart sinking bundle of emotion. I cried and went through 3 pairs of jeans." },
     { "movie": "Fallen Angels", "stars": "5/5", "liked": "Liked", "rating": "I've got nothing to say. I want to go to sleep." },
+    { "movie": "Uncut Gems", "stars": "5/5", "liked": "Liked", "rating": "absolutely amazing film" },
     { "movie": "Collateral", "stars": "4.5/5", "liked": "Liked", "rating": "good job tom cruise" },
     { "movie": "The Suicide Squad", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Truman Show", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
