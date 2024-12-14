@@ -234,13 +234,13 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
+    */
     { 
       "title": "Eight Crazy Nights", 
       "chosenBy": ["Jayden"], 
-      "star-ratings": [],
+      "star-ratings": ["2.5/5", "1/5", "2.5/5", "3/5", "4/5"],
       "date": "12-2024"
     },
-    */
     { 
       "title": "Transformers", 
       "chosenBy": ["Trevor"], 
