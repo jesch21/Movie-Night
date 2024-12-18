@@ -21,43 +21,42 @@
     </section>
 </header>
 <main>
-    <img src="../assets/images/white-top.png" id="white-top" alt="White Top Effect">
-    <img src="../assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
-    <img src="assets/images/white-top.png" id="white-top" alt="White Top Effect">
-    <img src="assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
     <section id="instructions">
         <h2>Guess the Movie!</h2>
         <p>Using the information provided, guess the movie! Earn points for faster answers with less hints used!</p>
+        <button class="gameButton" id="startButton" onclick="startGame();">Start the Game!</button>
     </section>
-    <section id="gameImageContainer">
-        <img src="../assets/images/mini-img/truman.jpg" class="miniGameImage" alt="Mini Truman Image">
-        <img src="../assets/images/slideshow/truman.jpg" class="fullGameImage" alt="Full Truman Image">
+    <section id="gameContainer">
+        <section id="gameImageContainer">
+        </section>
+        <div id="timer">
+            <p></p>
+        </div>
+        <button class="gameButton" onclick="getHint();">Get a Hint!</button>
+        <section id="hints">
+            <div class="hint" id="hint1">
+                <h3>Length:</h3>
+                <p></p>
+            </div>
+            <div class="hint" id="hint2">
+                <h3>Released in</h3>
+                <p></p>
+            </div>
+            <div class="hint" id="hint3">
+                <h3>Starring</h3>
+                <p></p>
+            </div>
+            <div class="hint" id="hint4">
+                <h3>Full Image Shown</h3>
+            </div>
+        </section>
+        <form id="gameAnswer" name="gameAnswer" method="post">
+            <h3>Answer here!</h3>
+            <input type="text" id="answer" name="answer" placeholder="Type your guess here..." required>
+            <button type="submit" id="submit">Submit</button>
+        </form>
     </section>
-    <div id="timer">
-        <p>3:00 left</p>
-    </div>
-    <button id="hintButton">Get a Hint!</button>
-    <section id="hints">
-        <div class="hint" id="hint1">
-            <h3>Length:</h3>
-            <p>200 hrs 30 mins</p>
-        </div>
-        <div class="hint" id="hint2">
-            <h3>Released in</h3>
-            <p>3070</p>
-        </div>
-        <div class="hint" id="hint3">
-            <h3>Starring</h3>
-            <p>That one guy</p>
-        </div>
-        <!--Hint 4 shows the full image-->
-    </section>
-    <form id="gameAnswer" name="gameAnswer" method="post">
-        <h3>Answer here!</h3>
-        <input type="text" id="answer" name="answer" placeholder="Type your guess here..." required>
-        <button type="submit" id="submit">Submit</button>
-    </form>
-    <img src="../assets/images/game-bottom.png" class="gameBottomImg" alt="Bottom of Page Image">
+    <img src="../assets/images/game-bottom.png" id="gameBottomImg" alt="Bottom of Page Image">
 </main>
 
 <footer>

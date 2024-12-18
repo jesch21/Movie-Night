@@ -100,11 +100,37 @@ h3 {
     color:#FF0000;
 }
 
-#gameImageContainer {
+#gameImageContainer, #gameContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#gameContainer {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#instructions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameButton {
+    background-color:#F2F5EA;
+    font-family: monospace;
+    padding: .75em;
+    margin: 15px;
+    border: 2px solid black;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color .3s, font-weight .3s;
 }
 
 #hints {
@@ -117,6 +143,7 @@ h3 {
 .hint {
     margin: 10px;
     margin-bottom: 0;
+    display: none;
 }
 
 #answer {
@@ -138,6 +165,11 @@ h3 {
 
 #gameAnswer {
     margin-bottom: 50px;
+}
+
+#gameBottomImg {
+    margin: 25px;
+    width: 80%;
 }
 
 .miniGameImage {
