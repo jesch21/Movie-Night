@@ -100,11 +100,47 @@ h3 {
     color:#FF0000;
 }
 
+#gameImageContainer, #gameContainer, #correctAnswer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #gameImageContainer, #gameContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#correctAnswer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+#correctAnswer .result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#correctAnswer h3 {
+    margin: 0.5rem 0;
+}
+
+#correctAnswer button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #F2F5EA;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
 }
 
 #gameContainer {
@@ -178,7 +214,6 @@ h3 {
 
 .fullGameImage {
     width: 600px;
-    display: none;
 }
 
 .page {

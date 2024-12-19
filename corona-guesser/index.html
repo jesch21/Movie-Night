@@ -50,11 +50,12 @@
                 <h3>Full Image Shown</h3>
             </div>
         </section>
-        <form id="gameAnswer" name="gameAnswer" method="post">
+        <section id="gameAnswer">
             <h3>Answer here!</h3>
             <input type="text" id="answer" name="answer" placeholder="Type your guess here..." required>
-            <button type="submit" id="submit">Submit</button>
-        </form>
+            <button id="submit" onclick="checkAnswer();">Submit</button>
+        </section>
+        <section id="correctAnswer"></section>
     </section>
     <img src="../assets/images/game-bottom.png" id="gameBottomImg" alt="Bottom of Page Image">
 </main>
