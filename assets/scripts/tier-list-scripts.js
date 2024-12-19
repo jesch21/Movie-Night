@@ -687,10 +687,8 @@ let counts23 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0,
 let jan24 = 0, feb24 = 0, mar24 = 0, apr24 = 0, may24 = 0, jun24 = 0, jul24 = 0, aug24 = 0, sep24 = 0, oct24 = 0, nov24 = 0, dec24 = 0;
 let counts24 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0 };
 
-/*
 let jan25 = 0, feb25 = 0, mar25 = 0, apr25 = 0, may25 = 0, jun25 = 0, jul25 = 0, aug25 = 0, sep25 = 0, oct25 = 0, nov25 = 0, dec25 = 0;
 let counts25 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0 };
-*/
 
 /**
  * Function to calculate average ratings per month for the years 2023, 2024, and 2025.
