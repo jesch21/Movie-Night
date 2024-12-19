@@ -172,6 +172,10 @@ const videos = [
         src: 'assets/videos/hateful-trailer.mp4',
         title: 'The Hateful Eight - Extended Version'
     },
+    {
+        src: 'assets/videos/christmas-story-trailer.mp4',
+        title: 'A Christmas Story'
+    },
     */
     {
         src: 'assets/videos/matrix-reloaded-trailer.mp4',
@@ -413,6 +417,8 @@ let spookyMovies = [
 ]
 
 let merryMovies = [
+    'A Christmas Story',
+    'Eight Crazy Nights',
     'Violent Night',
     "National Lampoon's Christmas Vacation",
 ]
