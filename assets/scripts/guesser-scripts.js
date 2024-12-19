@@ -11,16 +11,11 @@ function startGame() {
     let gameContainer = document.getElementById("gameContainer");
     let gameButton = document.getElementById("startButton");
 
-    if(gameButton.innerHTML === "Start the Game!") {
-        gameContainer.style.display = "flex";
-        gameButton.style.display = "none";
+    gameContainer.style.display = "flex";
+    gameButton.style.display = "none";
 
-        startTimer();
-        loadMiniImg();
-
-    } else {
-
-    }
+    startTimer();
+    loadMiniImg();
 }
 
 function loadMiniImg(){
@@ -107,6 +102,10 @@ const gameImageContainer = document.getElementById("gameImageContainer");
             if (timeRemaining <= 0) {
                 clearInterval(timerInterval);
                 timerElement.textContent = "Time's up!";
+                alert("You ran out of time! The answer was " + currentMovie[0] + "! Click OK to move on to the next round!");
+                currentTime = 0;
+                
+                resetPage();
             } else if (timerOn === false) {
                 clearInterval(timerInterval);
                 document.getElementById("timer").querySelector("p").textContent = ``;
@@ -118,6 +117,8 @@ const gameImageContainer = document.getElementById("gameImageContainer");
     }
 
 function calculatePoints(){
+    if(currentTime === 0){return 0;}
+
     let hintPoints = 4 - currentHint;
     let wrongPoints = 20 * wrongGuesses;
     if(wrongPoints > 100){wrongPoints = 100;}
