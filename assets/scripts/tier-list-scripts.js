@@ -229,7 +229,7 @@ const movieData = [
       "date": "12-2024"
     },
     { 
-      "title": "A Christmas Story", 
+      "title": "The Nightmare Before Christmas", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2024"
