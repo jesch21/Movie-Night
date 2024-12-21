@@ -175,7 +175,6 @@ const unseenMovieData = {
         {"chosenBy": ["Joe"], "title": "Bone Tomahawk"},
         {"chosenBy": ["Ayub"], "title": "The Social Network"},
         {"chosenBy": ["Ayub"], "title": "Fantastic Mr. Fox"},
-        {"chosenBy": ["Ayub"], "title": "The Lighthouse"},
         {"chosenBy": ["Ayub"], "title": "The Northman"},
         {"chosenBy": ["Ayub"], "title": "Blade Runner 2049"},
         {"chosenBy": ["Ayub", " Trevor"], "title": "Knock at the Cabin"},
@@ -212,6 +211,7 @@ const unseenMovieData = {
     "seen": [
         {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
         {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
+        {"chosenBy": ["Ayub"], "title": "The Lighthouse"},
     ],
     "bonus": [
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},

@@ -40,6 +40,7 @@ const alexList = [
 
 const ayubList = [
     { "movie": "The Matrix", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Matrix Reloaded", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Mad Max: Fury Road", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Grand Budapest Hotel", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Princess Mononoke", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -110,6 +111,7 @@ const joeList = [
     { "movie": "Scream", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "High and Low", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Matrix Reloaded", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Full Metal Jacket", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Burn After Reading", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Se7en", "stars": "4.5/5", "liked": "Liked", "rating": "" },
@@ -201,6 +203,8 @@ const johnList = [
         "rating": "This movie had it's ups and downs. I think the narration throughout the movie was a hard carry for me, as it often felt like the movie would've been much slower and less entertaining without it. But I wasn't a big fan of the way the pacing of the ending felt, and the general story itself. Although I liked the characters and the story throughout, I felt the pacing was more akin to a constant stream of events instead of a more organized passing story. Regardless I thought it had quite a few perks, so it was definitely a fun watch. Overall, quit bustin' my balls." },
     { "movie": "Mad Max: Fury Road", "stars": "3.5/5", "liked": "Liked", 
         "rating": "This movie is to me a very enjoyable and honestly classic action movie, but it in general settles out to be just a few points above your average action movie for me. I can recognize a lot of quality in this from the practical effects and many of the shots looking very cinematic and impressive. With that being said, the primary things holding this movie back in my opinion are the story and pacing during many portions during the middle. I personally found my attention dwindling during many of the scenes post-convoy escape, which took away from the experience overall. Overall, I totally get why Max was mad." },
+    { "movie": "The Matrix: Reloaded", "stars": "3.5/5", "liked": "Not Liked", 
+        "rating": "I can't say I was too big of a fan of this one. I liked the fighting for the most part, and the effects are mostly quite good, but I think a lot of the world building, mystery, and appeal present in the first wasn't quite reciprocated in this one. I also felt a lot of the action sequences were a bit drawn out in parts that began removing my interest in each fight. And I'm once again not a fan of the trend of 'the power of love saving them', although it was better this time since it was more like he restarted her heart with electricity. I also hope the next film better explains him being able to stop the machines, because it's deviating a bit beyond what feels feasible in the world. Overall, I'm still taking the blue pill I don't like that shit." },
     { "movie": "Burn After Reading", "stars": "3.5/5", "liked": "Liked", 
         "rating": "This movie had a very slow start for me, and honestly Chad was definitely the reason I started paying more attention to it. I liked a lot of the character interactions, and the performances were also quite good. Nothing blew my mind in this movie, but it was fun to watch nonetheless. However I demand justice for Chad, he didn't deserve what he got. Bro was smiling to the end. Overall, Osborne Cox?" },
     { "movie": "Master and Commander: The Far Side of the World", "stars": "3.5/5", "liked": "Liked", 
@@ -293,6 +297,8 @@ const trevorList = [
         "rating": "good move, made me sad :(" },
     { "movie": "Pirates of the Carribean: The Curse of the Black Pearl", "stars": "4/5", "liked": "Liked", 
         "rating": "Good movie. My snack was a big turkey sandwich. Overall good movie. I liked it. It was a good movie I liked it overall it was good." },
+    { "movie": "The Matrix Reloaded", "stars": "4/5", "liked": "Liked", 
+        "rating": "Good movie. Excited for the next one. My snack was a Giant turkey sub from jersey mikes." },
     { "movie": "Eight Crazy Nights", "stars": "4/5", "liked": "Liked", 
         "rating": "FUNNY AS FUCK LMAO" },
     { "movie": "Princess Mononoke", "stars": "4/5", "liked": "Not Liked", 

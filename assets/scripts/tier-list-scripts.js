@@ -234,13 +234,13 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
+    */
     { 
       "title": "The Matrix Reloaded", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "4/5", "5/5", "5/5"],
       "date": "12-2024"
     },
-    */
     { 
       "title": "Eight Crazy Nights", 
       "chosenBy": ["Jayden"], 

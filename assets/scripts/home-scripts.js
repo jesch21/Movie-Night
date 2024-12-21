@@ -172,11 +172,11 @@ const videos = [
         src: 'assets/videos/hateful-trailer.mp4',
         title: 'The Hateful Eight - Extended Version'
     },
+    */
     {
-        src: 'assets/videos/nightmare-story-trailer.mp4',
+        src: 'assets/videos/nightmare-trailer.mp4',
         title: 'The Nightmare Before Christmas'
     },
-    */
     {
         src: 'assets/videos/matrix-reloaded-trailer.mp4',
         title: 'The Matrix Reloaded'
