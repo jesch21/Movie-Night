@@ -1,6 +1,15 @@
-const movieList = [["The Truman Show", "truman.jpg", "1 hrs 43 mins", "1998", "Ed Harris"]];
+// 55 total
+let movieList = [
+    ["The Truman Show", "truman.jpg", "1 hrs 43 mins", "1998", "Ed Harris"],
+    ["The Matrix", "matrix.jpg", "2 hrs 16 mins", "1999", "Laurence Fishburne"],
+    ["The Terminator", "terminator.jpg", "1 hrs 47 mins", "1984", "Linda Hamilton"],
+    ["Fallen Angels", "angels.jpg", "1 hrs 36 mins", "1995", "Leon Lai"],
+    ["The Batman", "batman.jpg", "2 hrs 56 mins", "2022", "Colin Farrel"],
+];
+
+let guessedMovies=[];
 let currentHint = 0;
-let currentMovie;
+let currentMovie=[];
 let currentTime;
 let wrongGuesses = 0;
 let timerOn = true;
@@ -18,35 +27,33 @@ function startGame() {
     loadMiniImg();
 }
 
-function loadMiniImg(){
-    const randomIndex = Math.floor(Math.random() * movieList.length);
-    const selectedMovie = movieList[randomIndex];
+function loadMiniImg() {
+    let loop = true;
+    let selectedMovie;
 
-    const [title, imageName, duration, year, mainActor] = currentMovie = selectedMovie;
+    while (loop) {
+        let randomIndex = Math.floor(Math.random() * movieList.length);
+        selectedMovie = movieList[randomIndex];
 
-    const gameImageContainer = document.getElementById("gameImageContainer");
+        // Break loop if the selected movie is not in guessedMovies
+        if (!guessedMovies.includes(selectedMovie[0])) {
+            loop = false;
+        }
+    }
 
-    gameImageContainer.innerHTML = "";
+    let [title, imageName, duration, year, mainActor] = currentMovie = selectedMovie;
 
-    const miniImg = document.createElement("img");
+    let gameImageContainer = document.getElementById("gameImageContainer");
+    gameImageContainer.innerHTML = ""; // Clears previous images
+
+    let miniImg = document.createElement("img");
     miniImg.src = `../assets/images/mini-img/${imageName}`;
     miniImg.className = "miniGameImage";
     miniImg.alt = `Mini ${title} Image`;
+
+    guessedMovies.push(currentMovie[0]); // Add the title to guessedMovies
     gameImageContainer.appendChild(miniImg);
 }
-
-const gameImageContainer = document.getElementById("gameImageContainer");
-
-    gameImageContainer.innerHTML = "";
-
-    imageNames.forEach((imageName) => {
-        const miniImg = document.createElement("img");
-        miniImg.src = `../assets/images/mini-img/${imageName}`;
-        miniImg.className = "miniGameImage";
-        miniImg.alt = `Mini ${imageName.split('.')[0]} Image`;
-
-        gameImageContainer.appendChild(miniImg);
-    });
 
     function getHint() {
         if (currentHint < 4) {
