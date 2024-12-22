@@ -33,7 +33,33 @@ let movieList = [
     ["Mid90s", "mid90s.jpg", "1 hrs 25 mins", "2018", "Sunny Suljic"],
     ["The Possession", "possession.jpg", "1 hrs 32 mins", "2012", "Jeffrey Dean Morgan"],
     ["I Want to Eat Your Pancreas", "pancreas.jpg", "1 hrs 49 mins", "2018", "Mahiro Takasugi"],
+    ["All Quiet on the Western Front", "western.jpg", "2 hrs 28 mins", "2022", "Felix Kammerer"],
+    ["9", "9.jpg", "1 hrs 19 mins", "2009", "Elijah Wood"],
+    ["Collateral", "collateral.jpg", "2 hrs 00 mins", "2009", "Jamie Foxx"],
+    ["The Grand Budapest Hotel", "budapest.jpg", "1 hrs 39 mins", "2014", "Ralph Fiennes"],
+    ["Sherlock Holmes (2009)", "sherlock.jpg", "2 hrs 08 mins", "2009", "Jude Law"],
+    ["Godzilla Minus One", "godzilla.jpg", "2 hrs 04 mins", "2023", "Minami Hamabe"],
+    ["Ernest Scared Stupid", "ernest.gif", "1 hrs 31 mins", "1991", "Jim Varney"],
+    ["The Thing (1982)", "thing.jpg", "1 hrs 49 mins", "1982", "Kurt Russel"],
+    ["The Texas Chainsaw Massacre", "chainsaw.jpg", "1 hrs 23 mins", "1974", "Marilyn Burns"],
+    ["The Conjuring", "conjuring.jpg", "1 hrs 52 mins", "2013", "Patrick Wilson"],
+    ["The Platform 2", "platform2.jpg", "1 hrs 39 mins", "2024", "Milena Smit"],
+    ["The Lighthouse", "lighthouse.jpg", "1 hrs 49 mins", "2019", "Wilem DaFoe"],
+    ["28 Days Later", "28.jpg", "1 hrs 53 mins", "2002", "Cillian Murphy"],
+    ["Scream", "scream.jpg", "1 hrs 51 mins", "1996", "Courteney Cox"],
+    ["Bram Stoker's Dracula", "dracula.jpg", "2 hrs 08 mins", "1992", "Keanu Reeves"],
+    ["Burn After Reading", "burn.jpg", "1 hrs 36 mins", "2008", "Brad Pitt"],
+    ["Indiana Jones and The Last Crusade", "crusade.jpg", "2 hrs 07 mins", "1989", "Sean Connery"],
+    ["Pirates of the Carribean: The Curse of the Black Pearl", "pearl.jpg", "2 hrs 23 mins", "2003", "Orlando Bloom"],
+    ["Goodfellas", "goodfellas.jpg", "2 hrs 25 mins", "1990", "Joe Pesci"],
+    ["Transformers", "transformers.jpg", "2 hrs 24 mins", "2007", "Megan Fox"],
+    ["Eight Crazy Nights", "eight.jpg", "1 hrs 16 mins", "2002", "Adam Sandler"],
+    ["The Matrix Reloaded", "matrix-reloaded.jpg", "2 hrs 18 mins", "2003", "Keanu Reeves"],
+    ["The Nightmare Before Christmas", "nightmare.jpg", "1 hrs 16 mins", "1993", "Daniel Elfman"],
+    /*
+    ["The Hateful Eight - Extended Version", "hateful.jpg", "3 hrs 30 mins", "2019", "Kurt Russel"],
     
+    */
 ];
 
 let guessedMovies=[];
