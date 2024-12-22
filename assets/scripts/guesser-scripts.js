@@ -5,6 +5,15 @@ let movieList = [
     ["The Terminator", "terminator.jpg", "1 hrs 47 mins", "1984", "Linda Hamilton"],
     ["Fallen Angels", "angels.jpg", "1 hrs 36 mins", "1995", "Leon Lai"],
     ["The Batman", "batman.jpg", "2 hrs 56 mins", "2022", "Colin Farrel"],
+    ["A Silent Voice", "silent-voice.jpg", "2 hrs 10 mins", "2016", "Miyu Irino"],
+    ["Cloverfield", "cloverfield.jpg", "1 hrs 25 mins", "2008", "T.J. Miller"],
+    ["The Platform", "platform.jpg", "1 hrs 34 mins", "2019", "Antonia San Juan"],
+    ["Yojimbo", "yojimbo.jpg", "1 hrs 50 mins", "1961", "Tatsuya Nakadai"],
+    ["Princess Mononoke", "mononoke.jpg", "2 hrs 13 mins", "1997", "Yuriko Ishida"],
+    ["Se7en", "se7en.gif", "2 hrs 7 mins", "1995", "Brad Pitt"],
+    ["Indiana Jones: Raiders of the Lost Ark", "raiders.jpg", "1 hrs 55 mins", "1981", "Paul Freeman"],
+    ["Click", "click.jpg", "1 hrs 47 mins", "2006", "Adam Sandler"],
+    ["Attack on Titan: The Final Chapter Part 1", "aot.jpg", "1 hrs 1 mins", "2023", "Adam Sandler"],
 ];
 
 let guessedMovies=[];
@@ -216,3 +225,47 @@ function resetPage() {
         startGame();
     }
 }
+
+function displayMovieNames() {
+    const nameOptions = document.getElementById("nameOptions");
+    nameOptions.innerHTML = ""; // Clear any existing content
+
+    // Add the H3 heading
+    const heading = document.createElement("h3");
+    heading.textContent = "All Available Answers";
+    nameOptions.appendChild(heading);
+
+    // Add the movie names
+    movieList.forEach(movie => {
+        const movieName = movie[0]; // Get the movie name from the list
+        const movieElement = document.createElement("p"); // Create a paragraph element
+        movieElement.textContent = movieName; // Set the text content to the movie name
+        nameOptions.appendChild(movieElement); // Append the element to the nameOptions section
+    });
+
+    toggleMovieList();
+}
+
+function toggleMovieList() {
+    const nameOptions = document.getElementById("nameOptions");
+    if (nameOptions.style.display === "none") {
+        nameOptions.style.display = "block"; // Show the list
+    } else {
+        nameOptions.style.display = "none"; // Hide the list
+    }
+}
+
+// Add the toggle button
+function addToggleButton() {
+    const button = document.createElement("button");
+    button.textContent = "Toggle Movie List";
+    button.onclick = toggleMovieList;
+    button.style.cursor = "pointer";
+
+    const nameOptions = document.getElementById("nameOptions");
+    nameOptions.before(button); // Add the button before the nameOptions section
+}
+
+// Call functions to initialize
+displayMovieNames();
+addToggleButton();
