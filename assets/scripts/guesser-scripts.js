@@ -58,7 +58,52 @@ let movieList = [
     ["The Nightmare Before Christmas", "nightmare.jpg", "1 hrs 16 mins", "1993", "Daniel Elfman"],
     /*
     ["The Hateful Eight - Extended Version", "hateful.jpg", "3 hrs 30 mins", "2019", "Kurt Russel"],
-    
+
+    ["Star Wars: A New Hope", "hope.jpg", "2 hrs 01 mins", "1977", "Mark Hamill"],
+    ["Star Wars: The Empire Strikes Back", "empire.jpg", "2 hrs 04 mins", "1980", "Carrie Fischer"],
+    ["The Ministry of Ungentlemanly Warfare", "ministry.jpg", "2 hrs 02 mins", "2024", "Alan Ritchson"],
+    ["Star Wars: Return of the Jedi", "return.jpg", "2 hrs 11 mins", "1983", "Anthony Daniels"],
+
+    ["Star Wars: The Phantom Menace", "phantom.jpg", "2 hrs 16 mins", "1999", "Liam Neeson"],
+
+    ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
+    ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
+    ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
+
+    ["Rogue One: A Star Wars Story", "rogue.jpg", "2 hrs 13 mins", "2016", "Felicity Jones"],
+    ["Matrix Revolutions", "matrix-revolutions.jpg", "2 hrs 09 mins", "2003", "Laurence Fishburne"],
+    ["Star Wars: The Force Awakens", "awakens.jpg", "2 hrs 18 mins", "2015", "Harrison Ford"],
+
+    ["Star Wars: The Last Jedi", "last.jpg", "2 hrs 32 mins", "2017", "Benecio Del Toro"],
+
+    ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
+    ["Prey", "prey.jpg", "1 hrs 40 mins", "2022", "Amber Midthunder"],
+
+    ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
+
+    ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
+
+    ["Deadpool", "deadpool.jpg", "1 hrs 48 mins", "2016", "Ryan Reynolds"],
+
+    ["Deadpool 2", "deadpool2.jpg", "1 hrs 59 mins", "2018", "Josh Brolin"],
+    ["Deadpool and Wolverine", "deadpool3.jpg", "2 hrs 08 mins", "2024", "Emma Corrin"],
+
+    ["Guardians of the Galaxy", "guardians.jpg", "2 hrs 01 mins", "2014", "Chris Pratt"],
+
+    ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
+    ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
+
+    ["Alien", "alien.jpg", "1 hrs 57 mins", "1979", "Sigourney Weaver"],
+    ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
+
+    ["Jaws", "jaws.jpg", "2 hrs 04 mins", "1975", "Roy Schneider"],
+
+    ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
+    ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
+
+    ["Violent Night", "violent.jpg", "1 hrs 52 mins", "2022", "David Harbour"],
+
+    ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Chevy Chase"],
     */
 ];
 
