@@ -14,6 +14,26 @@ let movieList = [
     ["Indiana Jones: Raiders of the Lost Ark", "raiders.jpg", "1 hrs 55 mins", "1981", "Paul Freeman"],
     ["Click", "click.jpg", "1 hrs 47 mins", "2006", "Adam Sandler"],
     ["Attack on Titan: The Final Chapter Part 1", "aot.jpg", "1 hrs 1 mins", "2023", "Adam Sandler"],
+    ["Sanjuro", "sanjuro.jpg", "1 hrs 36 mins", "1962", "Tatsuya Nakadai"],
+    ["A Beautiful Mind", "beautiful-mind.jpg", "2 hrs 15 mins", "2001", "Russel Crowe"],
+    ["Fight Club", "fight.jpg", "2 hrs 19 mins", "1999", "Brad Pitt"],
+    ["Das Leben der Anderen", "leben.jpg", "2 hrs 17 mins", "2006", "Martina Gedeck"],
+    ["Midsommar", "midsommar.jpg", "2 hrs 28 mins", "2019", "Florence Pugh"],
+    ["Kill Bill Vol. 1", "bill.jpg", "1 hrs 53 mins", "2003", "David Carradine"],
+    ["Jarhead", "jarhead.jpg", "2 hrs 05 mins", "2005", "Jamie Foxx"],
+    ["Mad Max: Fury Road", "max.jpg", "2 hrs 00 mins", "2015", "Tom Hardy"],
+    ["Master and Commander: The Far Side of the World", "commander.jpg", "2 hrs 18 mins", "2013", "Russel Crowe"],
+    ["Uncut Gems", "gems.jpg", "2 hrs 15 mins", "2019", "Adam Sandler"],
+    ["The Suicide Squad", "suicide.jpg", "2 hrs 12 mins", "2021", "Idris Elba"],
+    ["Hardcore Henry", "henry.jpg", "1 hrs 36 mins", "2015", "Tim Roth"],
+    ["Gladiator", "gladiator.jpg", "2 hrs 35 mins", "2000", "Russel Crowe"],
+    ["John Wick", "wick.jpg", "1 hrs 41 mins", "2014", "Keanu Reeves"],
+    ["High and Low", "high-and-low.jpg", "2 hrs 23 mins", "1963", "Tatsuya Nakadai"],
+    ["Full Metal Jacket", "fmj.jpg", "1 hrs 56 mins", "1987", "Matthew Modine"],
+    ["Mid90s", "mid90s.jpg", "1 hrs 25 mins", "2018", "Sunny Suljic"],
+    ["The Possession", "possession.jpg", "1 hrs 32 mins", "2012", "Jeffrey Dean Morgan"],
+    ["I Want to Eat Your Pancreas", "pancreas.jpg", "1 hrs 49 mins", "2018", "Mahiro Takasugi"],
+    
 ];
 
 let guessedMovies=[];
