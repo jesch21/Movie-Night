@@ -56,9 +56,8 @@ let movieList = [
     ["Eight Crazy Nights", "eight.jpg", "1 hrs 16 mins", "2002", "Adam Sandler"],
     ["The Matrix Reloaded", "matrix-reloaded.jpg", "2 hrs 18 mins", "2003", "Keanu Reeves"],
     ["The Nightmare Before Christmas", "nightmare.jpg", "1 hrs 16 mins", "1993", "Daniel Elfman"],
-    /*
     ["The Hateful Eight - Extended Version", "hateful.jpg", "3 hrs 30 mins", "2019", "Kurt Russel"],
-
+    /*
     ["Star Wars: A New Hope", "hope.jpg", "2 hrs 01 mins", "1977", "Mark Hamill"],
     ["Star Wars: The Empire Strikes Back", "empire.jpg", "2 hrs 04 mins", "1980", "Carrie Fischer"],
     ["The Ministry of Ungentlemanly Warfare", "ministry.jpg", "2 hrs 02 mins", "2024", "Alan Ritchson"],

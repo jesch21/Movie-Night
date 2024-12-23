@@ -167,12 +167,11 @@ const videos = [
         src: 'assets/videos/hope-trailer.mp4',
         title: "Star Wars: A New Hope"
     },
-
+    */
     {
         src: 'assets/videos/hateful-trailer.mp4',
         title: 'The Hateful Eight - Extended Version'
     },
-    */
     {
         src: 'assets/videos/nightmare-trailer.mp4',
         title: 'The Nightmare Before Christmas'

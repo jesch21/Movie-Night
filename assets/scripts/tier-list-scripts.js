@@ -228,13 +228,13 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
+    */
     { 
       "title": "The Nightmare Before Christmas", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
+      "chosenBy": ["John", "Ayub"], 
+      "star-ratings": ["3.5/5", "4.5/5", "4.5/5"],
       "date": "12-2024"
     },
-    */
     { 
       "title": "The Matrix Reloaded", 
       "chosenBy": ["Ayub"], 
@@ -400,7 +400,7 @@ const movieData = [
     { 
       "title": "Princess Mononoke", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": ["5/5", "4/5", "2/5", "4/5"],
+      "star-ratings": ["5/5", "4.5/5", "2/5", "4/5"],
       "date": "3-2024"
     },
     { 
