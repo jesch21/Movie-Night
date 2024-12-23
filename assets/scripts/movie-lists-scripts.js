@@ -133,7 +133,7 @@ const movieData = {
         {"date": "11/21/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "11/28/2025", "chosenBy": "Garrett", "title": ""},
         {"date": "12/5/2025", "chosenBy": "Roulette", "title": ""},
-        {"date": "12/12/2025", "chosenBy": "John", "title": "Violent Night"},
+        {"date": "12/12/2025", "chosenBy": "John", "title": "Die Hard"},
         {"date": "12/19/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "12/26/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"}
     ]
