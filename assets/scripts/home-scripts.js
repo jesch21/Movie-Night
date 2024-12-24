@@ -16,8 +16,12 @@ const videos = [
     },
             jayden
     {
-        src: 'assets/videos/violent-trailer.mp4',
-        title: 'Violent Night'
+        src: 'assets/videos/die-hard-trailer.mp4',
+        title: 'Die Hard'
+    },
+    {
+        src: 'assets/videos/polar-trailer.mp4',
+        title: 'The Polar Express'
     },
             roulette
             garrett
@@ -418,7 +422,8 @@ let spookyMovies = [
 let merryMovies = [
     'The Nightmare Before Christmas',
     'Eight Crazy Nights',
-    'Violent Night',
+    'The Polar Express',
+    'Die Hard',
     "National Lampoon's Christmas Vacation",
 ]
 

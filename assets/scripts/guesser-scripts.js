@@ -100,9 +100,10 @@ let movieList = [
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
 
-    ["Violent Night", "violent.jpg", "1 hrs 52 mins", "2022", "David Harbour"],
+    ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
+    ["Die Hard", "die-hard.jpg", "2 hrs 12 mins", "1988", "David Harbour"],
 
-    ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Chevy Chase"],
+    ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
     */
 ];
 

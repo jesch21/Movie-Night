@@ -8,7 +8,13 @@ const movieData = [
     },
     jayden
     { 
-      "title": "Violent Night", 
+      "title": "Die Hard", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "12-2025"
+    },
+    { 
+      "title": "Polar Express", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2025"
