@@ -63,7 +63,7 @@ const movieData = {
         {"date": "12/20/2024", "chosenBy": "Ayub", "title": "The Matrix Reloaded"},
         {"date": "12/22/2024", "chosenBy": "Bonus Movie: John, Ayub", "title": "The Nightmare Before Christmas"},
         {"date": "12/26/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 1)"},
-        {"date": "12/27/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 2)"},
+        {"date": "12/27/2024", "chosenBy": "Bonus Movie: Joe", "title": "Drive"},
 ],
     "2025": [
         {"date": "1/2/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: A New Hope"},
@@ -213,6 +213,7 @@ const unseenMovieData = {
         {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
         {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
         {"chosenBy": ["Ayub"], "title": "The Lighthouse"},
+        {"chosenBy": ["Joe"], "title": "Drive"},
     ],
     "bonus": [
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},

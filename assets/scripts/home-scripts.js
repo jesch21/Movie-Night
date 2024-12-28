@@ -171,10 +171,18 @@ const videos = [
         src: 'assets/videos/hope-trailer.mp4',
         title: "Star Wars: A New Hope"
     },
-    */
     {
         src: 'assets/videos/hateful-trailer.mp4',
-        title: 'The Hateful Eight - Extended Version'
+        title: 'The Hateful Eight - Extended Version Part 2'
+    },
+    */
+    {
+        src: 'assets/videos/drive-trailer.mp4',
+        title: "Drive"
+    },
+    {
+        src: 'assets/videos/hateful-trailer.mp4',
+        title: 'The Hateful Eight - Extended Version Part 1'
     },
     {
         src: 'assets/videos/nightmare-trailer.mp4',

@@ -234,6 +234,12 @@ const movieData = [
       "star-ratings": [],
       "date": "12-2024"
     },
+    { 
+      "title": "Drive", 
+      "chosenBy": ["Joe"], 
+      "star-ratings": [],
+      "date": "12-2024"
+    },
     */
     { 
       "title": "The Nightmare Before Christmas", 
