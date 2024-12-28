@@ -164,12 +164,6 @@ const movieData = [
       "date": "2-2025"
     },
     { 
-      "title": "Matrix Revolutions", 
-      "chosenBy": ["Ayub"], 
-      "star-ratings": [],
-      "date": "2-2025"
-    },
-    { 
       "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
       "star-ratings": [],
@@ -205,6 +199,12 @@ const movieData = [
     { 
       "title": "Star Wars: Return of the Jedi", 
       "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
+    { 
+      "title": "Matrix Revolutions", 
+      "chosenBy": ["Ayub"], 
       "star-ratings": [],
       "date": "1-2025"
     },
