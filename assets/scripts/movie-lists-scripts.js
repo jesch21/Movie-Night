@@ -196,7 +196,6 @@ const unseenMovieData = {
         {"chosenBy": ["Trevor"], "title": "Inside Out 2"},
         {"chosenBy": ["Ayub"], "title": "Wall-E"},
         {"chosenBy": ["John"], "title": "Shrek"},
-        {"chosenBy": ["Ayub"], "title": "Drive"},
         {"chosenBy": ["John"], "title": "Taken"},
         {"chosenBy": ["Joe"], "title": "Super Mario Bros (1993)"},
         {"chosenBy": ["John"], "title": "MIB"},
@@ -208,6 +207,7 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Mission Impossible"},
         {"chosenBy": ["John"], "title": "Top Gun"},
         {"chosenBy": ["Landon"], "title": "Hairspray"},
+        {"chosenBy": ["Alex"], "title": "Greyhound"},
     ],
     "seen": [
         {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},

@@ -167,22 +167,18 @@ const videos = [
         title: "Star Wars: The Empire Strikes Back"
     },
             Roulette
+    */
     {
         src: 'assets/videos/hope-trailer.mp4',
         title: "Star Wars: A New Hope"
     },
-    {
-        src: 'assets/videos/hateful-trailer.mp4',
-        title: 'The Hateful Eight - Extended Version Part 2'
-    },
-    */
     {
         src: 'assets/videos/drive-trailer.mp4',
         title: "Drive"
     },
     {
         src: 'assets/videos/hateful-trailer.mp4',
-        title: 'The Hateful Eight - Extended Version Part 1'
+        title: 'The Hateful Eight - Extended Version'
     },
     {
         src: 'assets/videos/nightmare-trailer.mp4',
