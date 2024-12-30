@@ -227,14 +227,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
-
+    */
     { 
       "title": "The Hateful Eight - Extended Version", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "4.5/5", "4.5/5"],
       "date": "12-2024"
     },
-    */
     { 
       "title": "Drive", 
       "chosenBy": ["Joe"], 

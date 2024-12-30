@@ -1,5 +1,5 @@
 //movie-lists
-const firstTable = 2024;  // Set this to the default year you want to load
+const firstTable = 2025;  // Set this to the default year you want to load
 
 const movieData = {
     "2023": [
@@ -64,6 +64,7 @@ const movieData = {
         {"date": "12/22/2024", "chosenBy": "Bonus Movie: John, Ayub", "title": "The Nightmare Before Christmas"},
         {"date": "12/26/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 1)"},
         {"date": "12/27/2024", "chosenBy": "Bonus Movie: Joe", "title": "Drive"},
+        {"date": "12/29/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 2)"},
 ],
     "2025": [
         {"date": "1/2/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: A New Hope"},
