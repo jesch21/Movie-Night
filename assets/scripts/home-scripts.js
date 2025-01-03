@@ -166,12 +166,12 @@ const videos = [
         src: 'assets/videos/empire-trailer.mp4',
         title: "Star Wars: The Empire Strikes Back"
     },
-            Roulette
-    */
     {
         src: 'assets/videos/hope-trailer.mp4',
         title: "Star Wars: A New Hope"
     },
+            Roulette
+    */
     {
         src: 'assets/videos/hateful-trailer.mp4',
         title: 'The Hateful Eight - Extended Version'

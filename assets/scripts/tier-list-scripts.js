@@ -220,13 +220,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
-    Roulette
     { 
       "title": "Star Wars: A New Hope", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
     },
+    Roulette
     */
     { 
       "title": "The Hateful Eight - Extended Version", 
