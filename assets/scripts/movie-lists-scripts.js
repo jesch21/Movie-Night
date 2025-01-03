@@ -68,7 +68,7 @@ const movieData = {
 ],
     "2025": [
         {"date": "1/3/2025", "chosenBy": "Roulette", "title": ""},
-        {"date": "1/5/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: A New Hope"},
+        {"date": "1/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: A New Hope"},
         {"date": "1/9/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Empire Strikes Back"},
         {"date": "1/10/2025", "chosenBy": "John", "title": "The Ministry of Ungentlemanly Warfare"},
         {"date": "1/12/2025", "chosenBy": "Bonus Movie: Ayub", "title": "The Matrix Revolutions"},
