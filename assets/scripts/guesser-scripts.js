@@ -58,6 +58,7 @@ let movieList = [
     ["The Nightmare Before Christmas", "nightmare.jpg", "1 hrs 16 mins", "1993", "Daniel Elfman"],
     ["The Hateful Eight - Extended Version", "hateful.jpg", "3 hrs 30 mins", "2019", "Kurt Russel"],
     ["Drive", "drive.jpg", "1 hrs 40 mins", "2011", "Bryan Cranston"],
+    ["Greyhound", "greyhound.jpg", "1 hrs 31 mins", "2020", "Tom Hanks"],
     /*
     ["Star Wars: A New Hope", "hope.jpg", "2 hrs 01 mins", "1977", "Mark Hamill"],
     ["Star Wars: The Empire Strikes Back", "empire.jpg", "2 hrs 04 mins", "1980", "Carrie Fischer"],

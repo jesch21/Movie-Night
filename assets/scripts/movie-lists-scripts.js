@@ -67,7 +67,7 @@ const movieData = {
         {"date": "12/29/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 2)"},
 ],
     "2025": [
-        {"date": "1/3/2025", "chosenBy": "Roulette", "title": ""},
+        {"date": "1/3/2025", "chosenBy": "Roulette", "title": "Greyhound"},
         {"date": "1/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: A New Hope"},
         {"date": "1/9/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Empire Strikes Back"},
         {"date": "1/10/2025", "chosenBy": "John", "title": "The Ministry of Ungentlemanly Warfare"},
@@ -209,7 +209,6 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Mission Impossible"},
         {"chosenBy": ["John"], "title": "Top Gun"},
         {"chosenBy": ["Landon"], "title": "Hairspray"},
-        {"chosenBy": ["Alex"], "title": "Greyhound"},
         {"chosenBy": ["John"], "title": "Naked Gun"},
         {"chosenBy": ["Ayub"], "title": "Total Recall"},
     ],
@@ -218,6 +217,7 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
         {"chosenBy": ["Ayub"], "title": "The Lighthouse"},
         {"chosenBy": ["Joe"], "title": "Drive"},
+        {"chosenBy": ["Alex"], "title": "Greyhound"},
     ],
     "bonus": [
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},
