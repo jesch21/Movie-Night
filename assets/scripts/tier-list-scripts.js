@@ -226,13 +226,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    */
     { 
       "title": "Greyhound", 
       "chosenBy": ["Alex"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "4/5", "3/5", "3/5"],
       "date": "1-2025"
     },
-    */
     { 
       "title": "The Hateful Eight - Extended Version", 
       "chosenBy": ["Garrett"], 
@@ -332,7 +332,7 @@ const movieData = [
     { 
       "title": "The Texas Chainsaw Massacre", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": ["4/5", "5/5", "4/5", "2.5/5", "4/5"],
+      "star-ratings": ["4.5/5", "5/5", "4/5", "2.5/5", "4/5"],
       "date": "10-2024"
     },
     { 
@@ -944,7 +944,7 @@ const myLineChart = new Chart(ctx, {
           },
           {
               label: '2025',
-              data: avg24,
+              data: avg25,
               borderColor: 'green',
               borderWidth: 2,
               fill: false,
