@@ -195,7 +195,12 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
-    jayden
+    { 
+      "title": "The Land Before Time", 
+      "chosenBy": ["Jayden"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
     { 
       "title": "Star Wars: Return of the Jedi", 
       "chosenBy": ["John"], 

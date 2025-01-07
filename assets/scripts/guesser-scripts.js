@@ -64,7 +64,7 @@ let movieList = [
     /*
     ["The Ministry of Ungentlemanly Warfare", "ministry.jpg", "2 hrs 02 mins", "2024", "Alan Ritchson"],
     ["Star Wars: Return of the Jedi", "return.jpg", "2 hrs 11 mins", "1983", "Anthony Daniels"],
-
+    ["The Land Before Time", "land.jpg", "1 hrs 9 mins", "1988", "Pat Hingle"],
     ["Star Wars: The Phantom Menace", "phantom.jpg", "2 hrs 16 mins", "1999", "Liam Neeson"],
 
     ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],

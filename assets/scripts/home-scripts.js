@@ -153,7 +153,10 @@ const videos = [
         src: 'assets/videos/phantom-trailer.mp4',
         title: "Star Wars: The Phantom Menace"
     },
-            jayden
+    {
+        src: 'assets/videos/land-trailer.mp4',
+        title: "The Land Before Time"
+    },
     {
         src: 'assets/videos/return-trailer.mp4',
         title: "Star Wars: Return of the Jedi"
