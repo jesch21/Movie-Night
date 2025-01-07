@@ -59,9 +59,9 @@ let movieList = [
     ["The Hateful Eight - Extended Version", "hateful.jpg", "3 hrs 30 mins", "2019", "Kurt Russel"],
     ["Drive", "drive.jpg", "1 hrs 40 mins", "2011", "Bryan Cranston"],
     ["Greyhound", "greyhound.jpg", "1 hrs 31 mins", "2020", "Tom Hanks"],
-    /*
     ["Star Wars: A New Hope", "hope.jpg", "2 hrs 01 mins", "1977", "Mark Hamill"],
     ["Star Wars: The Empire Strikes Back", "empire.jpg", "2 hrs 04 mins", "1980", "Carrie Fischer"],
+    /*
     ["The Ministry of Ungentlemanly Warfare", "ministry.jpg", "2 hrs 02 mins", "2024", "Alan Ritchson"],
     ["Star Wars: Return of the Jedi", "return.jpg", "2 hrs 11 mins", "1983", "Anthony Daniels"],
 

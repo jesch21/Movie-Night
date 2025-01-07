@@ -162,11 +162,11 @@ const videos = [
         src: 'assets/videos/ministry-trailer.mp4',
         title: 'The Ministry of Ungentlemenly Warfare'
     },
+    */
     {
         src: 'assets/videos/empire-trailer.mp4',
         title: "Star Wars: The Empire Strikes Back"
     },
-    */
     {
         src: 'assets/videos/hope-trailer.mp4',
         title: "Star Wars: A New Hope"

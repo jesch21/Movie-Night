@@ -220,13 +220,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    */
     { 
       "title": "Star Wars: A New Hope", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "3/5", "4.5/5", "4/5"],
       "date": "1-2025"
     },
-    */
     { 
       "title": "Greyhound", 
       "chosenBy": ["Alex"], 
