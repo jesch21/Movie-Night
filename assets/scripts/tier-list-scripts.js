@@ -208,6 +208,12 @@ const movieData = [
       "date": "1-2025"
     },
     { 
+      "title": "Star Wars: The Empire Strikes Back", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
+    { 
       "title": "Matrix Revolutions", 
       "chosenBy": ["Ayub"], 
       "star-ratings": [],
@@ -215,12 +221,6 @@ const movieData = [
     },
     { 
       "title": "The Ministry of Ungentlemenly Warfare", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "1-2025"
-    },
-    { 
-      "title": "Star Wars: The Empire Strikes Back", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"

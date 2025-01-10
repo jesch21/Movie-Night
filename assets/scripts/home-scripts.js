@@ -128,10 +128,6 @@ const videos = [
         title: "Star Wars: The Force Awakens"
     },
     {
-        src: 'assets/videos/matrix-revolutions-trailer.mp4',
-        title: 'The Matrix Revolutions'
-    },
-    {
         src: 'assets/videos/rogue-trailer.mp4',
         title: "Rogue One: A Star Wars Story"
     },
@@ -162,13 +158,17 @@ const videos = [
         title: "Star Wars: Return of the Jedi"
     },
     {
-        src: 'assets/videos/ministry-trailer.mp4',
-        title: 'The Ministry of Ungentlemenly Warfare'
+        src: 'assets/videos/empire-trailer.mp4',
+        title: "Star Wars: The Empire Strikes Back"
+    },
+    {
+        src: 'assets/videos/matrix-revolutions-trailer.mp4',
+        title: 'The Matrix Revolutions'
     },
     */
     {
-        src: 'assets/videos/empire-trailer.mp4',
-        title: "Star Wars: The Empire Strikes Back"
+        src: 'assets/videos/ministry-trailer.mp4',
+        title: 'The Ministry of Ungentlemenly Warfare'
     },
     {
         src: 'assets/videos/hope-trailer.mp4',
