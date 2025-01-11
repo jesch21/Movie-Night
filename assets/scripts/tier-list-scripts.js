@@ -196,6 +196,12 @@ const movieData = [
       "date": "1-2025"
     },
     { 
+      "title": "Matrix Revolutions", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
+    { 
       "title": "The Land Before Time", 
       "chosenBy": ["Jayden"], 
       "star-ratings": [],
@@ -210,12 +216,6 @@ const movieData = [
     { 
       "title": "Star Wars: The Empire Strikes Back", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "1-2025"
-    },
-    { 
-      "title": "Matrix Revolutions", 
-      "chosenBy": ["Ayub"], 
       "star-ratings": [],
       "date": "1-2025"
     },
