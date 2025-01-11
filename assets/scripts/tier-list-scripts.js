@@ -219,13 +219,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    */
     { 
       "title": "The Ministry of Ungentlemenly Warfare", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "2.5/5", "2.5/5", "2.5/5"],
       "date": "1-2025"
     },
-    */
     { 
       "title": "Star Wars: A New Hope", 
       "chosenBy": ["John"], 
