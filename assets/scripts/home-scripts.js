@@ -144,7 +144,10 @@ const videos = [
         src: 'assets/videos/clones-trailer.mp4',
         title: "Star Wars: Attack of the Clones"
     },
-            alex
+    {
+        src: 'assets/videos/rango-trailer.mp4',
+        title: "Rango"
+    },
     {
         src: 'assets/videos/phantom-trailer.mp4',
         title: "Star Wars: The Phantom Menace"

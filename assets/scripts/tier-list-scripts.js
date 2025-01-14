@@ -188,7 +188,12 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
-    alex
+    { 
+      "title": "Rango", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
     { 
       "title": "Star Wars: The Phatom Menace", 
       "chosenBy": ["John"], 
