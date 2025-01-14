@@ -188,9 +188,15 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
-    alex
     { 
       "title": "Star Wars: The Phatom Menace", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
+    alex
+    { 
+      "title": "Star Wars: Return of the Jedi", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
@@ -204,12 +210,6 @@ const movieData = [
     { 
       "title": "The Land Before Time", 
       "chosenBy": ["Jayden"], 
-      "star-ratings": [],
-      "date": "1-2025"
-    },
-    { 
-      "title": "Star Wars: Return of the Jedi", 
-      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
     },
