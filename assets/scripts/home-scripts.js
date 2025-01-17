@@ -157,11 +157,11 @@ const videos = [
         src: 'assets/videos/matrix-revolutions-trailer.mp4',
         title: 'The Matrix Revolutions'
     },
+    */
     {
         src: 'assets/videos/land-trailer.mp4',
         title: "The Land Before Time"
     },
-    */
     {
         src: 'assets/videos/empire-trailer.mp4',
         title: "Star Wars: The Empire Strikes Back"
