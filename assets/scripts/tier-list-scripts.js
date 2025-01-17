@@ -188,6 +188,7 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    alex
     { 
       "title": "Star Wars: The Phatom Menace", 
       "chosenBy": ["John"], 
