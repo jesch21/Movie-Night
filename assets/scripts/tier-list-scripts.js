@@ -218,7 +218,7 @@ const movieData = [
     { 
       "title": "Star Wars: The Empire Strikes Back", 
       "chosenBy": ["John"], 
-      "star-ratings": ["5/5"],
+      "star-ratings": ["5/5", "4.5/5", "4/5", "4/5", "4/5"],
       "date": "1-2025"
     },
     { 
