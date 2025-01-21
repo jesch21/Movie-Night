@@ -144,17 +144,19 @@ const videos = [
         src: 'assets/videos/clones-trailer.mp4',
         title: "Star Wars: Attack of the Clones"
     },
-            alex
     {
         src: 'assets/videos/phantom-trailer.mp4',
         title: "Star Wars: The Phantom Menace"
     },
-            alex
     {
+        src: 'assets/videos/rango-trailer.mp4',
+        title: "Rango"
+    },
+    */
+   {
         src: 'assets/videos/return-trailer.mp4',
         title: "Star Wars: Return of the Jedi"
     },
-    */
     {
         src: 'assets/videos/matrix-revolutions-trailer.mp4',
         title: 'The Matrix Revolutions'

@@ -188,27 +188,31 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
-    alex
     { 
       "title": "Star Wars: The Phatom Menace", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
     },
-    alex
+    { 
+      "title": "Rango", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "1-2025"
+    },
     { 
       "title": "Star Wars: Return of the Jedi", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
     },
+    */
     { 
-      "title": "Matrix Revolutions", 
+      "title": "The Matrix Revolutions", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["3/5", "5/5", "4/5", "4.5/5"],
       "date": "1-2025"
     },
-    */
     { 
       "title": "The Land Before Time", 
       "chosenBy": ["Jayden"], 
