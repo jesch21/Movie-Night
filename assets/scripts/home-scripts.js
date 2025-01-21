@@ -12,11 +12,22 @@ const videos = [
     /*
     garrett
     ayub
+    {
+        src: 'assets/videos/polar-trailer.mp4',
+        title: 'The Polar Express'
+    },
     joe
     trevor
     alex
     jayden
-    john
+    {
+        src: 'assets/videos/captain-america2-trailer.mp4',
+        title: 'Captain America: The Winter Soldier'
+    },
+    {
+        src: 'assets/videos/captain-america1-trailer.mp4',
+        title: 'Captain America: The First Avenger'
+    },
     roulette
     garrett
     ayub
@@ -24,7 +35,10 @@ const videos = [
     trevor
     alex
     jayden
-    john
+    {
+        src: 'assets/videos/shang-chi-trailer.mp4',
+        title: 'Shang Chi and the Legend of the Ten Rings'
+    },
     roulette
     garrett
     ayub
@@ -32,7 +46,10 @@ const videos = [
     trevor
     alex
     jayden
-    john
+    {
+        src: 'assets/videos/iron-man-trailer.mp4',
+        title: 'Iron Man'
+    },
     roulette
     garrett
     ayub
@@ -40,7 +57,10 @@ const videos = [
     trevor
     alex
     jayden
-    john
+    {
+        src: 'assets/videos/bullet-train-trailer.mp4',
+        title: 'Bullet Train'
+    },
     roulette
     garrett
     ayub
@@ -48,7 +68,10 @@ const videos = [
     trevor
     alex
     jayden
-    john
+    {
+        src: 'assets/videos/psycho-trailer.mp4',
+        title: 'American Psycho'
+    },
     roulette
     garrett
     ayub
@@ -56,8 +79,19 @@ const videos = [
     trevor
     alex
     jayden
-    john
+    {
+        src: 'assets/videos/guardians3-trailer.mp4',
+        title: 'Guardians of the Galaxy Vol. 3'
+    },
+    {
+        src: 'assets/videos/guardians2-trailer.mp4',
+        title: 'Guardians of the Galaxy Vol. 2'
+    },
     roulette
+    {
+        src: 'assets/videos/guardians-trailer.mp4',
+        title: 'Guardians of the Galaxy'
+    },
     garrett
     ayub
     joe
@@ -71,10 +105,6 @@ const videos = [
     {
         src: 'assets/videos/die-hard-trailer.mp4',
         title: 'Die Hard'
-    },
-    {
-        src: 'assets/videos/polar-trailer.mp4',
-        title: 'The Polar Express'
     },
             roulette
             garrett
@@ -111,27 +141,8 @@ const videos = [
             alex
             jayden
     {
-        src: 'assets/videos/guardians3-trailer.mp4',
-        title: 'Guardians of the Galaxy Vol. 3'
-    },
-    {
-        src: 'assets/videos/guardians2-trailer.mp4',
-        title: 'Guardians of the Galaxy Vol. 2'
-    },
-            roulette
-    {
-        src: 'assets/videos/guardians-trailer.mp4',
-        title: 'Guardians of the Galaxy'
-    },
-            garrett
-            ayub
-            joe
-            trevor
-            alex
-            jayden
-    {
         src: 'assets/videos/deadpool3-trailer.mp4',
-        title: 'Deadpool and Wolverine'
+        title: 'Deadpool 3'
     },
     {
         src: 'assets/videos/deadpool2-trailer.mp4',
@@ -151,6 +162,17 @@ const videos = [
     {
         src: 'assets/videos/logan-trailer.mp4',
         title: 'Logan'
+    },
+            roulette
+            garrett
+            ayub
+            joe
+            trevor
+            alex
+            jayden
+    {
+        src: 'assets/videos/kingsman-trailer.mp4',
+        title: 'Kingsman: The Secret Service'
     },
             roulette
             garrett
@@ -478,6 +500,7 @@ let spookyMovies = [
     '28 Days Later',
     'Scream',
     "Bram Stoker's Dracula",
+    "Prey",
     "Alien",
     "Alien: Romulus",
     "Jaws",
@@ -488,9 +511,9 @@ let spookyMovies = [
 let merryMovies = [
     'The Nightmare Before Christmas',
     'Eight Crazy Nights',
-    'The Polar Express',
     'Die Hard',
     "National Lampoon's Christmas Vacation",
+    'The Polar Express'
 ]
 
 const videoSlidesContainer = document.querySelector('.video-slides-container');

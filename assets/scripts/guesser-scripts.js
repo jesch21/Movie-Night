@@ -82,17 +82,14 @@ let movieList = [
 
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
 
-    ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
+    kingsman
+
+    ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"]
 
     ["Deadpool", "deadpool.jpg", "1 hrs 48 mins", "2016", "Ryan Reynolds"],
 
     ["Deadpool 2", "deadpool2.jpg", "1 hrs 59 mins", "2018", "Josh Brolin"],
     ["Deadpool and Wolverine", "deadpool3.jpg", "2 hrs 08 mins", "2024", "Emma Corrin"],
-
-    ["Guardians of the Galaxy", "guardians.jpg", "2 hrs 01 mins", "2014", "Chris Pratt"],
-
-    ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
-    ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
 
     ["Alien", "alien.jpg", "1 hrs 57 mins", "1979", "Sigourney Weaver"],
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
@@ -102,11 +99,27 @@ let movieList = [
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
 
-    ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
     ["Die Hard", "die-hard.jpg", "2 hrs 12 mins", "1988", "David Harbour"],
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
 
+    ["Guardians of the Galaxy", "guardians.jpg", "2 hrs 01 mins", "2014", "Chris Pratt"],
+
+    ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
+    ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
+
+    american psycho
+
+    bullet train
+
+    iron man
+
+    shang chi
+
+    captain america 1
+    captain america 2
+
+    ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
     */
 ];
 

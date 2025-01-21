@@ -2,11 +2,28 @@ const movieData = [
     /*
     garrett
     ayub
+    { 
+      "title": "Polar Express", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "12-2026"
+    },
     joe
     trevor
     alex
     jayden
-    john
+    { 
+      "title": "Captain America: The Winter Soldier", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "11-2026"
+    },
+    { 
+      "title": "Captain America: The First Avenger", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "11-2026"
+    },
     roulette
     garrett
     ayub
@@ -14,7 +31,12 @@ const movieData = [
     trevor
     alex
     jayden
-    john
+    { 
+      "title": "Shang Chi and the Legend of the Ten Rings", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "9-2026"
+    },
     roulette
     garrett
     ayub
@@ -22,7 +44,12 @@ const movieData = [
     trevor
     alex
     jayden
-    john
+    { 
+      "title": "Iron Man", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "7-2026"
+    },
     roulette
     garrett
     ayub
@@ -30,7 +57,12 @@ const movieData = [
     trevor
     alex
     jayden
-    john
+    { 
+      "title": "Bullet Train", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "5-2026"
+    },
     roulette
     garrett
     ayub
@@ -38,7 +70,12 @@ const movieData = [
     trevor
     alex
     jayden
-    john
+    { 
+      "title": "American Psycho", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "4-2026"
+    },
     roulette
     garrett
     ayub
@@ -46,8 +83,25 @@ const movieData = [
     trevor
     alex
     jayden
-    john
+    { 
+      "title": "Guardians of the Galaxy Vol. 3", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "2-2026"
+    },
+    { 
+      "title": "Guardians of the Galaxy Vol. 2", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "2-2026"
+    },
     roulette
+    { 
+      "title": "Guardians of the Galaxy", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "1-2026"
+    },
     garrett
     ayub
     joe
@@ -62,12 +116,6 @@ const movieData = [
     jayden
     { 
       "title": "Die Hard", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "12-2025"
-    },
-    { 
-      "title": "Polar Express", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2025"
@@ -123,48 +171,23 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Guardians of the Galaxy Vol. 3", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "8-2025"
-    },
-    { 
-      "title": "Guardians of the Galaxy Vol. 2", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "8-2025"
-    },
-    roulette
-    { 
-      "title": "Guardians of the Galaxy", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "8-2025"
-    },
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
-    { 
       "title": "Deadpool and Wolverine", 
       "chosenBy": ["John"], 
       "star-ratings": [],
-      "date": "6-2025"
+      "date": "8-2025"
     },
     { 
       "title": "Deadpool 2", 
       "chosenBy": ["John"], 
       "star-ratings": [],
-      "date": "6-2025"
+      "date": "8-2025"
     },
     roulette
     { 
       "title": "Deadpool", 
       "chosenBy": ["John"], 
       "star-ratings": [],
-      "date": "6-2025"
+      "date": "8-2025"
     },
     garrett
     ayub
@@ -174,6 +197,19 @@ const movieData = [
     jayden
     { 
       "title": "Logan", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "6-2025"
+    },
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    { 
+      "title": "Kingsman: The Secret Service", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "5-2025"
