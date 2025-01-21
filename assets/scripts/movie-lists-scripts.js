@@ -139,7 +139,61 @@ const movieData = {
         {"date": "12/12/2025", "chosenBy": "John", "title": "Die Hard"},
         {"date": "12/19/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "12/26/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"}
-    ]
+],
+    "2026": [
+        {"date": "1/02/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "1/09/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "1/16/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "1/23/2026", "chosenBy": "Garrett", "title": ""},
+        {"date": "1/30/2026", "chosenBy": "Roulette", "title": ""},
+        {"date": "2/06/2026", "chosenBy": "John", "title": ""},
+        {"date": "2/13/2026", "chosenBy": "Jayden", "title": ""},
+        {"date": "2/20/2026", "chosenBy": "Alex", "title": ""},
+        {"date": "2/27/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "3/06/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "3/13/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "3/20/2026", "chosenBy": "Garrett", "title": ""},
+        {"date": "3/27/2026", "chosenBy": "Roulette", "title": ""},
+        {"date": "4/03/2026", "chosenBy": "John", "title": ""},
+        {"date": "4/10/2026", "chosenBy": "Jayden", "title": ""},
+        {"date": "4/17/2026", "chosenBy": "Alex", "title": ""},
+        {"date": "4/24/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "5/01/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "5/08/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "5/15/2026", "chosenBy": "Garrett", "title": ""},
+        {"date": "5/22/2026", "chosenBy": "Roulette", "title": ""},
+        {"date": "5/29/2026", "chosenBy": "John", "title": ""},
+        {"date": "6/05/2026", "chosenBy": "Jayden", "title": ""},
+        {"date": "6/12/2026", "chosenBy": "Alex", "title": ""},
+        {"date": "6/19/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "6/26/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "7/03/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "7/10/2026", "chosenBy": "Garrett", "title": ""},
+        {"date": "7/17/2026", "chosenBy": "Roulette", "title": ""},
+        {"date": "7/24/2026", "chosenBy": "John", "title": ""},
+        {"date": "7/31/2026", "chosenBy": "Jayden", "title": ""},
+        {"date": "8/07/2026", "chosenBy": "Alex", "title": ""},
+        {"date": "8/14/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "8/21/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "8/28/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "9/04/2026", "chosenBy": "Garrett", "title": ""},
+        {"date": "9/11/2026", "chosenBy": "Roulette", "title": ""},
+        {"date": "9/18/2026", "chosenBy": "John", "title": ""},
+        {"date": "9/25/2026", "chosenBy": "Jayden", "title": ""},
+        {"date": "10/02/2026", "chosenBy": "Alex", "title": ""},
+        {"date": "10/09/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "10/16/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "10/23/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "10/30/2026", "chosenBy": "Garrett", "title": ""},
+        {"date": "11/06/2026", "chosenBy": "Roulette", "title": ""},
+        {"date": "11/13/2026", "chosenBy": "John", "title": ""},
+        {"date": "11/20/2026", "chosenBy": "Jayden", "title": ""},
+        {"date": "11/27/2026", "chosenBy": "Alex", "title": ""},
+        {"date": "12/04/2026", "chosenBy": "Trevor", "title": ""},
+        {"date": "12/11/2026", "chosenBy": "Joe", "title": ""},
+        {"date": "12/18/2026", "chosenBy": "Ayub", "title": ""},
+        {"date": "12/25/2026", "chosenBy": "Garrett", "title": ""}
+    ]    
 };
 
 function loadTable() {
@@ -158,7 +212,7 @@ function loadTable() {
 document.getElementById('yearSelect').addEventListener('change', loadTable);
 
 
-// Load 2024 table on page load
+// Load table on page load
 window.onload = loadTable;
 
 const unseenMovieData = {
@@ -193,7 +247,6 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "First Blood"},
         {"chosenBy": ["John"], "title": "Back to the Future"},
         {"chosenBy": ["Joe"], "title": "Crank"},
-        {"chosenBy": ["John"], "title": "Rango"},
         {"chosenBy": ["Trevor"], "title": "Robots"},
         {"chosenBy": ["Trevor"], "title": "Inside Out 2"},
         {"chosenBy": ["Ayub"], "title": "Wall-E"},
@@ -226,7 +279,7 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "The Nightmare Before Christmas"},
         {"chosenBy": ["John"], "title": "Star Wars: A New Hope"},
         {"chosenBy": ["John"], "title": "Star Wars: The Empire Strikes Back"},
-        {"chosenBy": ["Ayub"], "title": "Matrix Revolutions"},
+        {"chosenBy": ["Ayub"], "title": "The Matrix Revolutions"},
         {"chosenBy": ["John"], "title": "Star Wars: Return of the Jedi"},
         {"chosenBy": ["John"], "title": "Star Wars: The Phantom Menace"},
         {"chosenBy": ["John"], "title": "Star Wars: Attack of the Clones"},
