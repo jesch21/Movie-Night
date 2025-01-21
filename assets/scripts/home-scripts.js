@@ -10,6 +10,59 @@ let isInitialLoad = true;
 let currentVideoIndex = 0;
 const videos = [
     /*
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+
     {
         src: 'assets/videos/lampoon-trailer.mp4',
         title: 'National Lampoon's Christmas Vacation'

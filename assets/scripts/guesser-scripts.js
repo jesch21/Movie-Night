@@ -106,6 +106,7 @@ let movieList = [
     ["Die Hard", "die-hard.jpg", "2 hrs 12 mins", "1988", "David Harbour"],
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
+
     */
 ];
 

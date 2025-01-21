@@ -1,5 +1,58 @@
 const movieData = [
     /*
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    john
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    
     { 
       "title": "National Lampoon's Christmas Vacation", 
       "chosenBy": ["Alex"], 
