@@ -700,7 +700,7 @@ function calculateAverage(starRatings) {
         }
     });
 
-    return count === 0 ? 0 : (total / count).toFixed(2); // Round to 2 decimal places
+    return count === 0 ? 0 : (total / count).toFixed(3); // Round to 2 decimal places
 }
 
 /**
@@ -727,7 +727,7 @@ function loadMovieTable() {
                 <td>#${index + 1}</td> <!-- Ranking column -->
                 <td>${movie.title}</td>
                 <td>${chosenBy}</td>
-                <td>${movie.averageRating.toFixed(2)}</td> <!-- Show average rating -->
+                <td>${movie.averageRating.toFixed(3)}</td> <!-- Show average rating -->
             </tr>
         `;
         tableBody.innerHTML += row; // Append the row to the table body
@@ -762,7 +762,7 @@ function calculateAveragePickScores() {
     // Calculate average score for each person
     return people.map(person => {
         const { total, count } = personScores[person];
-        const averagePickScore = count === 0 ? 0 : (total / count).toFixed(2);
+        const averagePickScore = count === 0 ? 0 : (total / count).toFixed(3);
         return { name: person, averagePickScore: parseFloat(averagePickScore) };
     }).sort((a, b) => b.averagePickScore - a.averagePickScore); // Sort by averagePickScore descending
 }
@@ -782,7 +782,7 @@ function loadBestPicksTable() {
             <tr>
                 <td>#${index + 1}</td> <!-- Ranking column -->
                 <td>${person.name}</td>
-                <td>${person.averagePickScore.toFixed(2)}</td> <!-- Show average pick score -->
+                <td>${person.averagePickScore.toFixed(3)}</td> <!-- Show average pick score -->
             </tr>
         `;
         tableBody.innerHTML += row; // Append the row to the table body
@@ -1024,57 +1024,57 @@ function calculateMonthlyAverages() {
     });
 
     // Calculate the final averages for each year
-    jan23 = counts23.jan === 0 ? 0 : (jan23 / counts23.jan).toFixed(2);
-    feb23 = counts23.feb === 0 ? 0 : (feb23 / counts23.feb).toFixed(2);
-    mar23 = counts23.mar === 0 ? 0 : (mar23 / counts23.mar).toFixed(2);
-    apr23 = counts23.apr === 0 ? 0 : (apr23 / counts23.apr).toFixed(2);
-    may23 = counts23.may === 0 ? 0 : (may23 / counts23.may).toFixed(2);
-    jun23 = counts23.jun === 0 ? 0 : (jun23 / counts23.jun).toFixed(2);
-    jul23 = counts23.jul === 0 ? 0 : (jul23 / counts23.jul).toFixed(2);
-    aug23 = counts23.aug === 0 ? 0 : (aug23 / counts23.aug).toFixed(2);
-    sep23 = counts23.sep === 0 ? 0 : (sep23 / counts23.sep).toFixed(2);
-    oct23 = counts23.oct === 0 ? 0 : (oct23 / counts23.oct).toFixed(2);
-    nov23 = counts23.nov === 0 ? 0 : (nov23 / counts23.nov).toFixed(2);
-    dec23 = counts23.dec === 0 ? 0 : (dec23 / counts23.dec).toFixed(2);
+    jan23 = counts23.jan === 0 ? 0 : (jan23 / counts23.jan).toFixed(3);
+    feb23 = counts23.feb === 0 ? 0 : (feb23 / counts23.feb).toFixed(3);
+    mar23 = counts23.mar === 0 ? 0 : (mar23 / counts23.mar).toFixed(3);
+    apr23 = counts23.apr === 0 ? 0 : (apr23 / counts23.apr).toFixed(3);
+    may23 = counts23.may === 0 ? 0 : (may23 / counts23.may).toFixed(3);
+    jun23 = counts23.jun === 0 ? 0 : (jun23 / counts23.jun).toFixed(3);
+    jul23 = counts23.jul === 0 ? 0 : (jul23 / counts23.jul).toFixed(3);
+    aug23 = counts23.aug === 0 ? 0 : (aug23 / counts23.aug).toFixed(3);
+    sep23 = counts23.sep === 0 ? 0 : (sep23 / counts23.sep).toFixed(3);
+    oct23 = counts23.oct === 0 ? 0 : (oct23 / counts23.oct).toFixed(3);
+    nov23 = counts23.nov === 0 ? 0 : (nov23 / counts23.nov).toFixed(3);
+    dec23 = counts23.dec === 0 ? 0 : (dec23 / counts23.dec).toFixed(3);
 
-    jan24 = counts24.jan === 0 ? 0 : (jan24 / counts24.jan).toFixed(2);
-    feb24 = counts24.feb === 0 ? 0 : (feb24 / counts24.feb).toFixed(2);
-    mar24 = counts24.mar === 0 ? 0 : (mar24 / counts24.mar).toFixed(2);
-    apr24 = counts24.apr === 0 ? 0 : (apr24 / counts24.apr).toFixed(2);
-    may24 = counts24.may === 0 ? 0 : (may24 / counts24.may).toFixed(2);
-    jun24 = counts24.jun === 0 ? 0 : (jun24 / counts24.jun).toFixed(2);
-    jul24 = counts24.jul === 0 ? 0 : (jul24 / counts24.jul).toFixed(2);
-    aug24 = counts24.aug === 0 ? 0 : (aug24 / counts24.aug).toFixed(2);
-    sep24 = counts24.sep === 0 ? 0 : (sep24 / counts24.sep).toFixed(2);
-    oct24 = counts24.oct === 0 ? 0 : (oct24 / counts24.oct).toFixed(2);
-    nov24 = counts24.nov === 0 ? 0 : (nov24 / counts24.nov).toFixed(2);
-    dec24 = counts24.dec === 0 ? 0 : (dec24 / counts24.dec).toFixed(2);
+    jan24 = counts24.jan === 0 ? 0 : (jan24 / counts24.jan).toFixed(3);
+    feb24 = counts24.feb === 0 ? 0 : (feb24 / counts24.feb).toFixed(3);
+    mar24 = counts24.mar === 0 ? 0 : (mar24 / counts24.mar).toFixed(3);
+    apr24 = counts24.apr === 0 ? 0 : (apr24 / counts24.apr).toFixed(3);
+    may24 = counts24.may === 0 ? 0 : (may24 / counts24.may).toFixed(3);
+    jun24 = counts24.jun === 0 ? 0 : (jun24 / counts24.jun).toFixed(3);
+    jul24 = counts24.jul === 0 ? 0 : (jul24 / counts24.jul).toFixed(3);
+    aug24 = counts24.aug === 0 ? 0 : (aug24 / counts24.aug).toFixed(3);
+    sep24 = counts24.sep === 0 ? 0 : (sep24 / counts24.sep).toFixed(3);
+    oct24 = counts24.oct === 0 ? 0 : (oct24 / counts24.oct).toFixed(3);
+    nov24 = counts24.nov === 0 ? 0 : (nov24 / counts24.nov).toFixed(3);
+    dec24 = counts24.dec === 0 ? 0 : (dec24 / counts24.dec).toFixed(3);
 
-    jan25 = counts25.jan === 0 ? 0 : (jan25 / counts25.jan).toFixed(2);
-    feb25 = counts25.feb === 0 ? 0 : (feb25 / counts25.feb).toFixed(2);
-    mar25 = counts25.mar === 0 ? 0 : (mar25 / counts25.mar).toFixed(2);
-    apr25 = counts25.apr === 0 ? 0 : (apr25 / counts25.apr).toFixed(2);
-    may25 = counts25.may === 0 ? 0 : (may25 / counts25.may).toFixed(2);
-    jun25 = counts25.jun === 0 ? 0 : (jun25 / counts25.jun).toFixed(2);
-    jul25 = counts25.jul === 0 ? 0 : (jul25 / counts25.jul).toFixed(2);
-    aug25 = counts25.aug === 0 ? 0 : (aug25 / counts25.aug).toFixed(2);
-    sep25 = counts25.sep === 0 ? 0 : (sep25 / counts25.sep).toFixed(2);
-    oct25 = counts25.oct === 0 ? 0 : (oct25 / counts25.oct).toFixed(2);
-    nov25 = counts25.nov === 0 ? 0 : (nov25 / counts25.nov).toFixed(2);
-    dec25 = counts25.dec === 0 ? 0 : (dec25 / counts25.dec).toFixed(2);
+    jan25 = counts25.jan === 0 ? 0 : (jan25 / counts25.jan).toFixed(3);
+    feb25 = counts25.feb === 0 ? 0 : (feb25 / counts25.feb).toFixed(3);
+    mar25 = counts25.mar === 0 ? 0 : (mar25 / counts25.mar).toFixed(3);
+    apr25 = counts25.apr === 0 ? 0 : (apr25 / counts25.apr).toFixed(3);
+    may25 = counts25.may === 0 ? 0 : (may25 / counts25.may).toFixed(3);
+    jun25 = counts25.jun === 0 ? 0 : (jun25 / counts25.jun).toFixed(3);
+    jul25 = counts25.jul === 0 ? 0 : (jul25 / counts25.jul).toFixed(3);
+    aug25 = counts25.aug === 0 ? 0 : (aug25 / counts25.aug).toFixed(3);
+    sep25 = counts25.sep === 0 ? 0 : (sep25 / counts25.sep).toFixed(3);
+    oct25 = counts25.oct === 0 ? 0 : (oct25 / counts25.oct).toFixed(3);
+    nov25 = counts25.nov === 0 ? 0 : (nov25 / counts25.nov).toFixed(3);
+    dec25 = counts25.dec === 0 ? 0 : (dec25 / counts25.dec).toFixed(3);
     /*
-    jan26 = counts26.jan === 0 ? 0 : (jan26 / counts26.jan).toFixed(2);
-    feb26 = counts26.feb === 0 ? 0 : (feb26 / counts26.feb).toFixed(2);
-    mar26 = counts26.mar === 0 ? 0 : (mar26 / counts26.mar).toFixed(2);
-    apr26 = counts26.apr === 0 ? 0 : (apr26 / counts26.apr).toFixed(2);
-    may26 = counts26.may === 0 ? 0 : (may26 / counts26.may).toFixed(2);
-    jun26 = counts26.jun === 0 ? 0 : (jun26 / counts26.jun).toFixed(2);
-    jul26 = counts26.jul === 0 ? 0 : (jul26 / counts26.jul).toFixed(2);
-    aug26 = counts26.aug === 0 ? 0 : (aug26 / counts26.aug).toFixed(2);
-    sep26 = counts26.sep === 0 ? 0 : (sep26 / counts26.sep).toFixed(2);
-    oct26 = counts26.oct === 0 ? 0 : (oct26 / counts26.oct).toFixed(2);
-    nov26 = counts26.nov === 0 ? 0 : (nov26 / counts26.nov).toFixed(2);
-    dec26 = counts26.dec === 0 ? 0 : (dec26 / counts26.dec).toFixed(2);
+    jan26 = counts26.jan === 0 ? 0 : (jan26 / counts26.jan).toFixed(3);
+    feb26 = counts26.feb === 0 ? 0 : (feb26 / counts26.feb).toFixed(3);
+    mar26 = counts26.mar === 0 ? 0 : (mar26 / counts26.mar).toFixed(3);
+    apr26 = counts26.apr === 0 ? 0 : (apr26 / counts26.apr).toFixed(3);
+    may26 = counts26.may === 0 ? 0 : (may26 / counts26.may).toFixed(3);
+    jun26 = counts26.jun === 0 ? 0 : (jun26 / counts26.jun).toFixed(3);
+    jul26 = counts26.jul === 0 ? 0 : (jul26 / counts26.jul).toFixed(3);
+    aug26 = counts26.aug === 0 ? 0 : (aug26 / counts26.aug).toFixed(3);
+    sep26 = counts26.sep === 0 ? 0 : (sep26 / counts26.sep).toFixed(3);
+    oct26 = counts26.oct === 0 ? 0 : (oct26 / counts26.oct).toFixed(3);
+    nov26 = counts26.nov === 0 ? 0 : (nov26 / counts26.nov).toFixed(3);
+    dec26 = counts26.dec === 0 ? 0 : (dec26 / counts26.dec).toFixed(3);
     */
 }
 
