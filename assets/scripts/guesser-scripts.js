@@ -82,7 +82,7 @@ let movieList = [
 
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
 
-    kingsman
+    ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
 
     ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"]
 
@@ -108,16 +108,16 @@ let movieList = [
     ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
     ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
 
-    american psycho
+    ["American Psycho", "psycho.jpg", "1 hrs 42 mins", "2000", "Christian Bale"],
 
-    bullet train
+    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
 
-    iron man
+    ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
 
-    shang chi
+    ["Shang Chi and the Legend of the Ten Rings", "shang-chi.jpg", "2 hrs 12 mins", "2021", "Simu Liu"],
 
-    captain america 1
-    captain america 2
+    ["Captain America: The First Avenger", "captain-america1.jpg", "2 hrs 4 mins", "2011", "Hugo Weaving"],
+    ["Captain America: The Winter Soldier", "captain-america2.jpg", "2 hrs 16 mins", "2014", "Sebastian Stan"],
 
     ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
     */
