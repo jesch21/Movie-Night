@@ -225,7 +225,12 @@ const movieData = [
       "date": "3-2025"
     },
     alex
-    jayden
+    { 
+      "title": "The Holy Mountain", 
+      "chosenBy": ["Jayden"], 
+      "star-ratings": [],
+      "date": "3-2025"
+    },
     { 
       "title": "Star Wars: The Rise of Skywalker", 
       "chosenBy": ["John"], 

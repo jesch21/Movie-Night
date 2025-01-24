@@ -88,7 +88,7 @@ const movieData = {
         {"date": "3/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Last Jedi"},
         {"date": "3/7/2025", "chosenBy": "John", "title": "Prey"},
         {"date": "3/13/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Rise of Skywalker"},
-        {"date": "3/14/2025", "chosenBy": "Jayden", "title": ""},
+        {"date": "3/14/2025", "chosenBy": "Jayden", "title": "The Holy Mountain"},
         {"date": "3/21/2025", "chosenBy": "Alex", "title": ""},
         {"date": "3/28/2025", "chosenBy": "Trevor", "title": "Transformers: Dark of the Moon"},
         {"date": "4/4/2025", "chosenBy": "Joe", "title": ""},
