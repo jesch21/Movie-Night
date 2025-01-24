@@ -185,39 +185,40 @@ const videos = [
             alex
             jayden
     {
+        src: 'assets/videos/skywalker-trailer.mp4',
+        title: "Star Wars: The Rise of Skywalker"
+    },
+    {
         src: 'assets/videos/prey-trailer.mp4',
         title: 'Prey'
     },
     {
-        src: 'assets/videos/skywalker-trailer.mp4',
-        title: "Star Wars: The Rise of Skywalker"
-    },
-            Roulette
-    {
         src: 'assets/videos/last-trailer.mp4',
         title: "Star Wars: The Last Jedi"
     },
-            Garrett
+            Roulette
     {
         src: 'assets/videos/awakens-trailer.mp4',
         title: "Star Wars: The Force Awakens"
     },
+            Garrett
+    {
+        src: 'assets/videos/revenge-trailer.mp4',
+        title: "Star Wars: Revenge of the Sith"
+    },
+    ayub
     {
         src: 'assets/videos/rogue-trailer.mp4',
         title: "Rogue One: A Star Wars Story"
     },
             joe
     {
-        src: 'assets/videos/revenge-trailer.mp4',
-        title: "Star Wars: Revenge of the Sith"
+        src: 'assets/videos/clones-trailer.mp4',
+        title: "Star Wars: Attack of the Clones"
     },
     {
         src: 'assets/videos/transformers2-trailer.mp4',
         title: 'Transformers: Revenge of the Fallen'
-    },
-    {
-        src: 'assets/videos/clones-trailer.mp4',
-        title: "Star Wars: Attack of the Clones"
     },
     {
         src: 'assets/videos/phantom-trailer.mp4',

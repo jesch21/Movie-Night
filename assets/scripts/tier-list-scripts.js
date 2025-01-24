@@ -227,40 +227,47 @@ const movieData = [
     alex
     jayden
     { 
+      "title": "Star Wars: The Rise of Skywalker", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "3-2025"
+    },
+    { 
       "title": "Prey", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
     },
     { 
-      "title": "Star Wars: The Rise of Skywalker", 
+      "title": "Star Wars: The Last Jedi", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
     },
     Roulette
     { 
-      "title": "Star Wars: The Last Jedi", 
+      "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
     },
     Garrett
     { 
-      "title": "Star Wars: The Force Awakens", 
+      "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
     },
+    ayub
     { 
-      "title": "Rogue One: A Star Wars Story", 
+      "title": "Star Wars: Revenge of the Sith", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
     },
     joe
     { 
-      "title": "Star Wars: Revenge of the Sith", 
+      "title": "Star Wars: Attack of the Clones", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
@@ -268,12 +275,6 @@ const movieData = [
     { 
       "title": "Transformers: Revenge of the Fallen", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": [],
-      "date": "1-2025"
-    },
-    { 
-      "title": "Star Wars: Attack of the Clones", 
-      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
     },
