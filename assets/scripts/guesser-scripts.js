@@ -65,8 +65,8 @@ let movieList = [
     ["The Land Before Time", "land.jpg", "1 hrs 9 mins", "1988", "Pat Hingle"],
     ["The Matrix Revolutions", "matrix-revolutions.jpg", "2 hrs 09 mins", "2003", "Laurence Fishburne"],
     ["Star Wars: Return of the Jedi", "return.jpg", "2 hrs 11 mins", "1983", "Anthony Daniels"],
-    /*
     ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
+    /*
     ["Star Wars: The Phantom Menace", "phantom.jpg", "2 hrs 16 mins", "1999", "Liam Neeson"],
     ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
     ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
