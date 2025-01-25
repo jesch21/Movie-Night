@@ -294,13 +294,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    */
     { 
       "title": "Forest Gump", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "3/5", "3/5", "4/5"],
       "date": "1-2025"
     },
-    */
     { 
       "title": "Star Wars: Return of the Jedi", 
       "chosenBy": ["John"], 

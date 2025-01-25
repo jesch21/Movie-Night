@@ -226,11 +226,11 @@ const videos = [
         src: 'assets/videos/transformers2-trailer.mp4',
         title: 'Transformers: Revenge of the Fallen'
     },
+    */
     {
         src: 'assets/videos/phantom-trailer.mp4',
         title: "Star Wars: The Phantom Menace"
     },
-    */
     {
         src: 'assets/videos/gump-trailer.mp4',
         title: "Forest Gump"
