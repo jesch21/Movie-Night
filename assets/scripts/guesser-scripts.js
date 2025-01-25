@@ -65,7 +65,7 @@ let movieList = [
     ["The Land Before Time", "land.jpg", "1 hrs 9 mins", "1988", "Pat Hingle"],
     ["The Matrix Revolutions", "matrix-revolutions.jpg", "2 hrs 09 mins", "2003", "Laurence Fishburne"],
     ["Star Wars: Return of the Jedi", "return.jpg", "2 hrs 11 mins", "1983", "Anthony Daniels"],
-    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
+    ["Forest Gump", "gump.jpg", "2 hrs 22 mins", "1994", "Tom Hanks"],
     /*
     ["Star Wars: The Phantom Menace", "phantom.jpg", "2 hrs 16 mins", "1999", "Liam Neeson"],
     ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
@@ -81,6 +81,7 @@ let movieList = [
     ["Prey", "prey.jpg", "1 hrs 40 mins", "2022", "Amber Midthunder"],
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
     ["The Holy Mountain", "mountain.jpg", "1 hrs 54 mins", "1973", "Alejandro Jodorowsky"],
+    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
 
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],

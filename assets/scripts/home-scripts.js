@@ -182,7 +182,10 @@ const videos = [
         src: 'assets/videos/transformers3-trailer.mp4',
         title: 'Transformers: Dark of the Moon'
     },
-            alex
+    {
+        src: 'assets/videos/rango-trailer.mp4',
+        title: "Rango"
+    },
     {
         src: 'assets/videos/mountain-trailer.mp4',
         title: "The Holy Mountain"
@@ -229,8 +232,8 @@ const videos = [
     },
     */
     {
-        src: 'assets/videos/rango-trailer.mp4',
-        title: "Rango"
+        src: 'assets/videos/gump-trailer.mp4',
+        title: "Forest Gump"
     },
    {
         src: 'assets/videos/return-trailer.mp4',

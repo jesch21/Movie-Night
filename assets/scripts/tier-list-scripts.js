@@ -224,7 +224,12 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
-    alex
+    { 
+      "title": "Rango", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "3-2025"
+    },
     { 
       "title": "The Holy Mountain", 
       "chosenBy": ["Jayden"], 
@@ -290,8 +295,8 @@ const movieData = [
       "date": "1-2025"
     },
     { 
-      "title": "Rango", 
-      "chosenBy": ["Alex"], 
+      "title": "Forest Gump", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "1-2025"
     },
