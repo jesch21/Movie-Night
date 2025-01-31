@@ -288,13 +288,13 @@ const movieData = [
       "star-ratings": [],
       "date": "1-2025"
     },
+    */
     { 
       "title": "Star Wars: The Phatom Menace", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["3/5", "2.5/5", "3/5", "2.5/5"],
       "date": "1-2025"
     },
-    */
     { 
       "title": "Forest Gump", 
       "chosenBy": ["John"], 
