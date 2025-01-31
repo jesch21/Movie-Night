@@ -205,7 +205,12 @@ const movieData = [
     garrett
     ayub
     joe
-    trevor
+    { 
+      "title": "Interstellar", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "5-2025"
+    },
     alex
     jayden
     { 

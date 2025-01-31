@@ -86,6 +86,8 @@ let movieList = [
 
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
 
+    ["Interstellar", "interstellar.jpg", "2 hrs 49 mins", "2014", "Matthew McConaughey"],
+
     ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"]
 
     ["Deadpool", "deadpool.jpg", "1 hrs 48 mins", "2016", "Ryan Reynolds"],

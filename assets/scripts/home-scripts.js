@@ -167,7 +167,10 @@ const videos = [
             garrett
             ayub
             joe
-            trevor
+    {
+        src: 'assets/videos/interstellar-trailer.mp4',
+        title: 'Interstellar'
+    },
             alex
             jayden
     {
