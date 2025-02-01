@@ -70,7 +70,7 @@ let movieList = [
     ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
     ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
     /*
-
+    ["Heat", "heat.jpg", "2 hrs 50 mins", "1995", "Al Pacino"],
     ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
 
     ["Rogue One: A Star Wars Story", "rogue.jpg", "2 hrs 13 mins", "2016", "Felicity Jones"],
@@ -81,11 +81,12 @@ let movieList = [
     ["Prey", "prey.jpg", "1 hrs 40 mins", "2022", "Amber Midthunder"],
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
     ["The Holy Mountain", "mountain.jpg", "1 hrs 54 mins", "1973", "Alejandro Jodorowsky"],
-    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
+    ["Monty Python and the Holy Grail", "monty1.jpg", "1 hrs 31 mins", "1975", "Graham Chapman"],
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
 
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
 
+    ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
     ["Interstellar", "interstellar.jpg", "2 hrs 49 mins", "2014", "Matthew McConaughey"],
 
     ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"]

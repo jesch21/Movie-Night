@@ -211,7 +211,12 @@ const movieData = [
       "star-ratings": [],
       "date": "5-2025"
     },
-    alex
+    { 
+      "title": "Monty Python's Life of Brian", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "5-2025"
+    },
     jayden
     { 
       "title": "Kingsman: The Secret Service", 
@@ -230,7 +235,7 @@ const movieData = [
       "date": "3-2025"
     },
     { 
-      "title": "Rango", 
+      "title": "Monty Python and the Holy Grail", 
       "chosenBy": ["Alex"], 
       "star-ratings": [],
       "date": "3-2025"
@@ -280,7 +285,12 @@ const movieData = [
       "star-ratings": [],
       "date": "2-2025"
     },
-    joe
+    { 
+      "title": "Heat", 
+      "chosenBy": ["Joe"], 
+      "star-ratings": [],
+      "date": "2-2025"
+    },
     { 
       "title": "Star Wars: Attack of the Clones", 
       "chosenBy": ["John"], 

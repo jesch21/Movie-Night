@@ -171,7 +171,10 @@ const videos = [
         src: 'assets/videos/interstellar-trailer.mp4',
         title: 'Interstellar'
     },
-            alex
+    {
+        src: 'assets/videos/monty2-trailer.mp4',
+        title: "Monty Python's Holy Grail"
+    },
             jayden
     {
         src: 'assets/videos/kingsman-trailer.mp4',
@@ -186,8 +189,8 @@ const videos = [
         title: 'Transformers: Dark of the Moon'
     },
     {
-        src: 'assets/videos/rango-trailer.mp4',
-        title: "Rango"
+        src: 'assets/videos/monty1-trailer.mp4',
+        title: "Monty Python and the Holy Grail"
     },
     {
         src: 'assets/videos/mountain-trailer.mp4',
@@ -212,15 +215,18 @@ const videos = [
     },
             Garrett
     {
-        src: 'assets/videos/revenge-trailer.mp4',
-        title: "Star Wars: Revenge of the Sith"
-    },
-    ayub
-    {
         src: 'assets/videos/rogue-trailer.mp4',
         title: "Rogue One: A Star Wars Story"
     },
-            joe
+    ayub
+    {
+        src: 'assets/videos/revenge-trailer.mp4',
+        title: "Star Wars: Revenge of the Sith"
+    },
+    {
+        src: 'assets/videos/heat-trailer.mp4',
+        title: "Heat"
+    },
     */
    {
         src: 'assets/videos/clones-trailer.mp4',
