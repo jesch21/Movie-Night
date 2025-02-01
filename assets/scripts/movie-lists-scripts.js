@@ -261,7 +261,7 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Mission Impossible"},
         {"chosenBy": ["John"], "title": "Top Gun"},
         {"chosenBy": ["Landon"], "title": "Hairspray"},
-        {"chosenBy": ["John"], "title": "Monty Python"},
+        {"chosenBy": ["John"], "title": "Monty Python and the Holy Grail"},
         {"chosenBy": ["Ayub"], "title": "Total Recall"},
     ],
     "seen": [
