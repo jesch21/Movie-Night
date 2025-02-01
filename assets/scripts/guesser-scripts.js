@@ -68,8 +68,8 @@ let movieList = [
     ["Forest Gump", "gump.jpg", "2 hrs 22 mins", "1994", "Tom Hanks"],
     ["Star Wars: The Phantom Menace", "phantom.jpg", "2 hrs 16 mins", "1999", "Liam Neeson"],
     ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
-    /*
     ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
+    /*
 
     ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
 

@@ -221,11 +221,11 @@ const videos = [
         title: "Rogue One: A Star Wars Story"
     },
             joe
-    {
+    */
+   {
         src: 'assets/videos/clones-trailer.mp4',
         title: "Star Wars: Attack of the Clones"
     },
-    */
     {
         src: 'assets/videos/transformers2-trailer.mp4',
         title: 'Transformers: Revenge of the Fallen'
