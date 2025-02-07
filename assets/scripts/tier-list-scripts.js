@@ -291,13 +291,13 @@ const movieData = [
       "star-ratings": [],
       "date": "2-2025"
     },
+    */
     { 
       "title": "Star Wars: Attack of the Clones", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["1/5", "3/5", "3/5", "2.5/5"],
       "date": "2-2025"
     },
-    */
     { 
       "title": "Transformers: Revenge of the Fallen", 
       "chosenBy": ["Trevor"], 
