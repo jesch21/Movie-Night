@@ -52,6 +52,7 @@ const ayubList = [
     { "movie": "The Batman", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Bram Stoker's Dracula", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Se7en", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Heat", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Hateful Eight - Extended Version", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Lighthouse", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Nightmare Before Christmas", "stars": "4.5/5", "liked": "Liked", "rating": "" },
@@ -116,6 +117,7 @@ const ayubList = [
 ];
 
 const joeList = [
+    { "movie": "Heat", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Mad Max: Fury Road", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Matrix", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Thing (1982)", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -284,6 +286,8 @@ const johnList = [
         "rating": "I've found over recent viewing of other movies, that I'm not particularly fond of war movies. Although this movie had many well-planned shots, and it was cool to see the scale of how they pulled this off, I wasn't too interested in most of what's happened here. For a war-based movie, the only aspects that typically catch my eye are comedy and action, and although I recognize that neither were the focus of this film, it doesn't change that I didn't like their absence. Overall, this movie was not quiet, so must've been the east." },
     { "movie": "Cloverfield", "stars": "2.5/5", "liked": "Liked", 
         "rating": "This movie's intrigue for me comes from the unique perspective of showing a monster attack. As a fan of the Godzilla movies, I find the pedestrian-level perspective to be very interesting. Similar to Godzilla Minus One, this movie uses the monster more as a means of destruction rather than the main character, which allows for more development of the characters. With that being said however, I wasn't very interested in much of the characters. I didn't find myself caring for them too much, and the story itself was both predictable and uninteresting. Overall, how long is that fucking camera battery like holy shit." },
+    { "movie": "Heat", "stars": "2.5/5", "liked": "Not Liked", 
+        "rating": "This movie was pretty decent, and it had a lot of good moments with very well-structured action sequences. However the length of the movie and the drawn-out dialogue throughout the mid-section really took away alot for me, hence the rating. Overall, shit got hot." },
     { "movie": "Uncut Gems", "stars": "2.5/5", "liked": "Not Liked", 
         "rating": "For starters, had I rated this movie purely off my enjoyment it probably would've gotten 1/5. It was remarkably boring to me for most of the movie, with only patches of excitement scattered within. I also felt the pacing didn't work for me, and a lot of the narrative elements left me feeling a lack of connection to the characters they focused on. Despite this, I can recognize that this movie simply isn't my cup of tea, alas the 2.5/5. Overall, don't buy gems online from Ethiopia." },
     { "movie": "Midsommar", "stars": "2.5/5", "liked": "Not Liked", 
@@ -389,6 +393,8 @@ const trevorList = [
         "rating": "entertaining movie yes it was maybe. My snack was a chicken big mac, large fries, and a hot n spicy McChicken. Overall a good movie" },
     { "movie": "Star Wars: Return of the Jedi", "stars": "3.5/5", "liked": "Liked", 
         "rating": "Good movie, but I don't like Endor. Checherchecheechuh. My snack was a Giant turkey sub from Jersey Mikes. Overall decent movie." },
+    { "movie": "Heat", "stars": "3.5/5", "liked": "Not Liked", 
+        "rating": "Good movie. Music was fantastic, not much to say other than it was a pretty good movie. My snack was 1/4th of a giant turkey sub with white american cheese from Jersey Mikes. Overall it was pretty decent." },
     { "movie": "The Land Before Time", "stars": "3.5/5", "liked": "Liked", 
         "rating": "ROAAARRR GOOD MOVIE ROAAAARRRR. Beautiful ass movie, animation was nice. The line work was a little distracting at times but it was pretty good still, the colors were really nice. I don't have much to say other than it is a pretty good movie, I was invested. My snack for this movie was a cup of peanut butter Chex. Overall pretty good movie." },
     { "movie": "The Truman Show", "stars": "3.5/5", "liked": "Not Liked", 

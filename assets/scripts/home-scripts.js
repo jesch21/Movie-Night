@@ -219,11 +219,11 @@ const videos = [
         title: "Rogue One: A Star Wars Story"
     },
     ayub
+    */
     {
         src: 'assets/videos/revenge-trailer.mp4',
         title: "Star Wars: Revenge of the Sith"
     },
-    */
     {
         src: 'assets/videos/heat-trailer.mp4',
         title: "Heat"
