@@ -241,13 +241,19 @@ const movieData = [
       "date": "3-2025"
     },
     { 
+      "title": "Star Wars: The Rise of Skywalker", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "3-2025"
+    },
+    { 
       "title": "The Holy Mountain", 
       "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "3-2025"
     },
     { 
-      "title": "Star Wars: The Rise of Skywalker", 
+      "title": "Star Wars: The Last Jedi", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
@@ -259,32 +265,26 @@ const movieData = [
       "date": "3-2025"
     },
     { 
-      "title": "Star Wars: The Last Jedi", 
+      "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
     },
     Roulette
     { 
-      "title": "Star Wars: The Force Awakens", 
+      "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
     },
     Garrett
     { 
-      "title": "Rogue One: A Star Wars Story", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "2-2025"
-    },
-    ayub
-    { 
       "title": "Star Wars: Revenge of the Sith", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
     },
+    ayub
     */
     { 
       "title": "Heat", 
