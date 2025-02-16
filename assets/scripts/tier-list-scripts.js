@@ -270,7 +270,12 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
-    Roulette
+    { 
+      "title": "Furiosa", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "2-2025"
+    },
     { 
       "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
@@ -284,7 +289,6 @@ const movieData = [
       "star-ratings": [],
       "date": "2-2025"
     },
-    ayub
     */
     { 
       "title": "Heat", 

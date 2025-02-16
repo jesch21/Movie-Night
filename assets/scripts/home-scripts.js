@@ -212,7 +212,10 @@ const videos = [
         src: 'assets/videos/awakens-trailer.mp4',
         title: "Star Wars: The Force Awakens"
     },
-            Roulette
+    {
+        src: 'assets/videos/furiosa-trailer.mp4',
+        title: "Furiosa"
+    },
     {
         src: 'assets/videos/rogue-trailer.mp4',
         title: "Rogue One: A Star Wars Story"
@@ -222,7 +225,6 @@ const videos = [
         src: 'assets/videos/revenge-trailer.mp4',
         title: "Star Wars: Revenge of the Sith"
     },
-    ayub
     */
     {
         src: 'assets/videos/heat-trailer.mp4',
