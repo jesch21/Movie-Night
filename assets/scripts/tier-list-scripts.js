@@ -282,13 +282,13 @@ const movieData = [
       "star-ratings": [],
       "date": "2-2025"
     },
-    Garrett
     { 
       "title": "Star Wars: Revenge of the Sith", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2025"
     },
+    Garrett
     */
     { 
       "title": "Heat", 
