@@ -71,8 +71,8 @@ let movieList = [
     ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
     ["Heat", "heat.jpg", "2 hrs 50 mins", "1995", "Al Pacino"],
     /*
-    ["Furiosa", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
     ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
+    ["Furiosa", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
     ["Rogue One: A Star Wars Story", "rogue.jpg", "2 hrs 13 mins", "2016", "Felicity Jones"],
 
     ["Star Wars: The Force Awakens", "awakens.jpg", "2 hrs 18 mins", "2015", "Harrison Ford"],
