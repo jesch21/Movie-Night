@@ -122,7 +122,7 @@ const movieData = {
         {"date": "10/2/2025", "chosenBy": "Bonus Movie: John", "title": "Alien: Romulus"},
         {"date": "10/3/2025", "chosenBy": "Garrett", "title": ""},
         {"date": "10/9/2025", "chosenBy": "Bonus Movie: John", "title": "Jaws"},
-        {"date": "10/10/2025", "chosenBy": "Roulette", "title": ""},
+        {"date": "10/10/2025", "chosenBy": "Unseen Roulette", "title": ""},
         {"date": "10/16/2025", "chosenBy": "Bonus Movie: John", "title": "Smile"},
         {"date": "10/17/2025", "chosenBy": "John", "title": "Smile 2"},
         {"date": "10/24/2025", "chosenBy": "Jayden", "title": ""},
@@ -131,7 +131,7 @@ const movieData = {
         {"date": "11/14/2025", "chosenBy": "Joe", "title": ""},
         {"date": "11/21/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "11/28/2025", "chosenBy": "Garrett", "title": ""},
-        {"date": "12/5/2025", "chosenBy": "Roulette", "title": ""},
+        {"date": "12/5/2025", "chosenBy": "Unseen Roulette", "title": ""},
         {"date": "12/12/2025", "chosenBy": "John", "title": "Die Hard"},
         {"date": "12/19/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "12/26/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"}
@@ -264,7 +264,6 @@ const unseenMovieData = {
     "seen": [
         {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
         {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
-        {"chosenBy": ["Ayub"], "title": "The Lighthouse"},
         {"chosenBy": ["Joe"], "title": "Drive"},
         {"chosenBy": ["Alex"], "title": "Greyhound"},
         {"chosenBy": ["John"], "title": "Forest Gump"},
