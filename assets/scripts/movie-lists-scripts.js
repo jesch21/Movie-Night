@@ -81,9 +81,15 @@ const movieData = {
         {"date": "2/7/2025", "chosenBy": "Joe", "title": "Heat"},
         {"date": "2/20/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: Revenge of the Sith"},
         {"date": "2/21/2025", "chosenBy": "Garrett", "title": ""},
+<<<<<<< Updated upstream
         {"date": "2/27/2025", "chosenBy": "Bonus Movie: John", "title": "Rogue One: A Star Wars Story"},
         {"date": "2/28/2025", "chosenBy": "Ayub", "title": "Furiosa"},
         {"date": "3/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Force Awakens"},
+=======
+        {"date": "2/27/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Force Awakens"},
+        {"date": "2/28/2025", "chosenBy": "Unseen Roulette", "title": ""},
+        {"date": "3/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Last Jedi"},
+>>>>>>> Stashed changes
         {"date": "3/7/2025", "chosenBy": "John", "title": "Prey"},
         {"date": "3/13/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Last Jedi"},
         {"date": "3/14/2025", "chosenBy": "Jayden", "title": "The Holy Mountain"},
