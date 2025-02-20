@@ -288,7 +288,12 @@ const movieData = [
       "star-ratings": [],
       "date": "2-2025"
     },
-    Garrett
+    { 
+      "title": "The Big Lebowski", 
+      "chosenBy": ["Garrett"], 
+      "star-ratings": [],
+      "date": "2-2025"
+    },
     */
     { 
       "title": "Heat", 

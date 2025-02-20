@@ -224,8 +224,11 @@ const videos = [
         src: 'assets/videos/revenge-trailer.mp4',
         title: "Star Wars: Revenge of the Sith"
     },
-            Garrett
     */
+    {
+        src: 'assets/videos/lebowski-trailer.mp4',
+        title: "The Big Lebowski"
+    },
     {
         src: 'assets/videos/heat-trailer.mp4',
         title: "Heat"
