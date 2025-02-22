@@ -226,8 +226,8 @@ const videos = [
     },
     */
     {
-        src: 'assets/videos/lebowski-trailer.mp4',
-        title: "The Big Lebowski"
+        src: 'assets/videos/fantastic-mr-fox-trailer.mp4',
+        title: "Fantastic Mr. Fox"
     },
     {
         src: 'assets/videos/heat-trailer.mp4',

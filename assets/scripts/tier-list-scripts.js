@@ -289,8 +289,8 @@ const movieData = [
       "date": "2-2025"
     },
     { 
-      "title": "The Big Lebowski", 
-      "chosenBy": ["Garrett"], 
+      "title": "Fantastic Mr. Fox", 
+      "chosenBy": ["Ayub"], 
       "star-ratings": [],
       "date": "2-2025"
     },

@@ -70,7 +70,7 @@ let movieList = [
     ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
     ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
     ["Heat", "heat.jpg", "2 hrs 50 mins", "1995", "Al Pacino"],
-    ["The Big Lebowski", "lebowski.jpg", "1 hrs 57 mins", "1998", "John Goodman"],
+    ["Fantastic Mr. Fox", "fantastic-mr-fox.jpg", "1 hrs 27 mins", "2009", "Bill Murray"],
     /*
     ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
     ["Furiosa", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
