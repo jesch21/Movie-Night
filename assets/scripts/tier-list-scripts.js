@@ -288,13 +288,13 @@ const movieData = [
       "star-ratings": [],
       "date": "2-2025"
     },
+    */
     { 
       "title": "Fantastic Mr. Fox", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "4.5/5", "4.5/5", "3.5/5"],
       "date": "2-2025"
     },
-    */
     { 
       "title": "Heat", 
       "chosenBy": ["Joe"], 

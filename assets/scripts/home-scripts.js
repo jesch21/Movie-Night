@@ -220,11 +220,11 @@ const videos = [
         src: 'assets/videos/rogue-trailer.mp4',
         title: "Rogue One: A Star Wars Story"
     },
+    */
     {
         src: 'assets/videos/revenge-trailer.mp4',
         title: "Star Wars: Revenge of the Sith"
     },
-    */
     {
         src: 'assets/videos/fantastic-mr-fox-trailer.mp4',
         title: "Fantastic Mr. Fox"
