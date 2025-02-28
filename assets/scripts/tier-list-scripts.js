@@ -271,14 +271,14 @@ const movieData = [
       "date": "3-2025"
     },
     { 
-      "title": "Furiosa", 
-      "chosenBy": ["Ayub"], 
-      "star-ratings": [],
-      "date": "2-2025"
-    },
-    { 
       "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "3-2025"
+    },
+    { 
+      "title": "Furiosa", 
+      "chosenBy": ["Ayub"], 
       "star-ratings": [],
       "date": "2-2025"
     },

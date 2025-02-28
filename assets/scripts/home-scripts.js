@@ -213,13 +213,13 @@ const videos = [
         title: "Star Wars: The Force Awakens"
     },
     {
-        src: 'assets/videos/furiosa-trailer.mp4',
-        title: "Furiosa"
+        src: 'assets/videos/rogue-trailer.mp4',
+        title: "Rogue One: A Star Wars Story"
     },
     */
     {
-        src: 'assets/videos/rogue-trailer.mp4',
-        title: "Rogue One: A Star Wars Story"
+        src: 'assets/videos/furiosa-trailer.mp4',
+        title: "Furiosa"
     },
     {
         src: 'assets/videos/revenge-trailer.mp4',
