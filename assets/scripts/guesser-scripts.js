@@ -72,15 +72,16 @@ let movieList = [
     ["Heat", "heat.jpg", "2 hrs 50 mins", "1995", "Al Pacino"],
     ["Fantastic Mr. Fox", "fantastic-mr-fox.jpg", "1 hrs 27 mins", "2009", "Bill Murray"],
     ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
-    ["Furiosa", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
-    /*
+    ["Furiosa: A Mad Max Saga", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
     ["Rogue One: A Star Wars Story", "rogue.jpg", "2 hrs 13 mins", "2016", "Felicity Jones"],
+    /*
     ["Star Wars: The Force Awakens", "awakens.jpg", "2 hrs 18 mins", "2015", "Harrison Ford"],
     ["Prey", "prey.jpg", "1 hrs 40 mins", "2022", "Amber Midthunder"],
     ["Star Wars: The Last Jedi", "last.jpg", "2 hrs 32 mins", "2017", "Benecio Del Toro"],
     ["The Holy Mountain", "mountain.jpg", "1 hrs 54 mins", "1973", "Alejandro Jodorowsky"],
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
     ["Monty Python and the Holy Grail", "monty1.jpg", "1 hrs 31 mins", "1975", "Graham Chapman"],
+    
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
 
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],

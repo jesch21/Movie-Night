@@ -226,14 +226,14 @@ const movieData = [
     },
     roulette
     garrett
-    ayub
-    joe
     { 
       "title": "Transformers: Dark of the Moon", 
       "chosenBy": ["Trevors"], 
       "star-ratings": [],
       "date": "3-2025"
     },
+    joe
+    ayub
     { 
       "title": "Monty Python and the Holy Grail", 
       "chosenBy": ["Alex"], 
@@ -276,13 +276,13 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
+    */
     { 
-      "title": "Furiosa", 
+      "title": "Furiosa: A Mad Max Saga", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "5/5", "3.5/5", "3/5"],
       "date": "2-2025"
     },
-    */
     { 
       "title": "Star Wars: Revenge of the Sith", 
       "chosenBy": ["John"], 

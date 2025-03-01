@@ -182,12 +182,12 @@ const videos = [
     },
             roulette
             garrett
-            ayub
-            joe
     {
         src: 'assets/videos/transformers3-trailer.mp4',
         title: 'Transformers: Dark of the Moon'
     },
+            joe
+            ayub
     {
         src: 'assets/videos/monty1-trailer.mp4',
         title: "Monty Python and the Holy Grail"
@@ -212,14 +212,14 @@ const videos = [
         src: 'assets/videos/awakens-trailer.mp4',
         title: "Star Wars: The Force Awakens"
     },
+    */
     {
         src: 'assets/videos/rogue-trailer.mp4',
         title: "Rogue One: A Star Wars Story"
     },
-    */
     {
         src: 'assets/videos/furiosa-trailer.mp4',
-        title: "Furiosa"
+        title: "Furiosa: A Mad Max Saga"
     },
     {
         src: 'assets/videos/revenge-trailer.mp4',
