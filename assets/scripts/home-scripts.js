@@ -187,18 +187,22 @@ const videos = [
         title: 'Transformers: Dark of the Moon'
     },
             joe
+    {
+        src: 'assets/videos/skywalker-trailer.mp4',
+        title: "Star Wars: The Rise of Skywalker"
+    },
             ayub
+    {
+        src: 'assets/videos/last-trailer.mp4',
+        title: "Star Wars: The Last Jedi"
+    },
     {
         src: 'assets/videos/monty1-trailer.mp4',
         title: "Monty Python and the Holy Grail"
     },
     {
-        src: 'assets/videos/skywalker-trailer.mp4',
-        title: "Star Wars: The Rise of Skywalker"
-    },
-    {
-        src: 'assets/videos/last-trailer.mp4',
-        title: "Star Wars: The Last Jedi"
+        src: 'assets/videos/awakens-trailer.mp4',
+        title: "Star Wars: The Force Awakens"
     },
     {
         src: 'assets/videos/mountain-trailer.mp4',
@@ -207,10 +211,6 @@ const videos = [
     {
         src: 'assets/videos/prey-trailer.mp4',
         title: 'Prey'
-    },
-    {
-        src: 'assets/videos/awakens-trailer.mp4',
-        title: "Star Wars: The Force Awakens"
     },
     */
     {

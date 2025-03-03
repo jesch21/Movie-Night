@@ -230,10 +230,22 @@ const movieData = [
       "title": "Transformers: Dark of the Moon", 
       "chosenBy": ["Trevors"], 
       "star-ratings": [],
-      "date": "3-2025"
+      "date": "4-2025"
     },
     joe
+    { 
+      "title": "Star Wars: The Rise of Skywalker", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "4-2025"
+    },
     ayub
+    { 
+      "title": "Star Wars: The Last Jedi", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "3-2025"
+    },
     { 
       "title": "Monty Python and the Holy Grail", 
       "chosenBy": ["Alex"], 
@@ -241,13 +253,7 @@ const movieData = [
       "date": "3-2025"
     },
     { 
-      "title": "Star Wars: The Rise of Skywalker", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "3-2025"
-    },
-    { 
-      "title": "Star Wars: The Last Jedi", 
+      "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
@@ -260,12 +266,6 @@ const movieData = [
     },
     { 
       "title": "Prey", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "3-2025"
-    },
-    { 
-      "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
