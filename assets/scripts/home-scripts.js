@@ -197,12 +197,12 @@ const videos = [
         title: "Star Wars: The Rise of Skywalker"
     },
     {
-        src: 'assets/videos/mountain-trailer.mp4',
-        title: "The Holy Mountain"
-    },
-    {
         src: 'assets/videos/last-trailer.mp4',
         title: "Star Wars: The Last Jedi"
+    },
+    {
+        src: 'assets/videos/mountain-trailer.mp4',
+        title: "The Holy Mountain"
     },
     {
         src: 'assets/videos/prey-trailer.mp4',

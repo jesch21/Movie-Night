@@ -247,14 +247,14 @@ const movieData = [
       "date": "3-2025"
     },
     { 
-      "title": "The Holy Mountain", 
-      "chosenBy": ["Jayden"], 
+      "title": "Star Wars: The Last Jedi", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "3-2025"
     },
     { 
-      "title": "Star Wars: The Last Jedi", 
-      "chosenBy": ["John"], 
+      "title": "The Holy Mountain", 
+      "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "3-2025"
     },
