@@ -270,13 +270,13 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
+    */
     { 
       "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "4/5", "2.5/5", "2.5/5", "2.5/5"],
       "date": "3-2025"
     },
-    */
     { 
       "title": "Furiosa: A Mad Max Saga", 
       "chosenBy": ["Ayub"], 

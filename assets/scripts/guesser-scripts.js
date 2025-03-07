@@ -74,8 +74,8 @@ let movieList = [
     ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
     ["Furiosa: A Mad Max Saga", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
     ["Rogue One: A Star Wars Story", "rogue.jpg", "2 hrs 13 mins", "2016", "Felicity Jones"],
-    /*
     ["Prey", "prey.jpg", "1 hrs 40 mins", "2022", "Amber Midthunder"],
+    /*
     ["The Holy Mountain", "mountain.jpg", "1 hrs 54 mins", "1973", "Alejandro Jodorowsky"],
     ["Star Wars: The Force Awakens", "awakens.jpg", "2 hrs 18 mins", "2015", "Harrison Ford"],
     ["Monty Python and the Holy Grail", "monty1.jpg", "1 hrs 31 mins", "1975", "Graham Chapman"],
