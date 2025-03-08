@@ -204,11 +204,11 @@ const videos = [
         src: 'assets/videos/awakens-trailer.mp4',
         title: "Star Wars: The Force Awakens"
     },
+    */
     {
         src: 'assets/videos/mountain-trailer.mp4',
         title: "The Holy Mountain"
     },
-    */
     {
         src: 'assets/videos/prey-trailer.mp4',
         title: 'Prey'

@@ -264,13 +264,13 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
+    */
     { 
       "title": "Prey", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["2/5", "4/5", "2.5/5", "2.5/5"],
       "date": "3-2025"
     },
-    */
     { 
       "title": "Rogue One: A Star Wars Story", 
       "chosenBy": ["John"], 
