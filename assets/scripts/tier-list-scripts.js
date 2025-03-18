@@ -258,13 +258,13 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
+    */
     { 
       "title": "Ninja Assassin", 
       "chosenBy": ["Jayden"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "2.5/5", "3.5/5", "2.5/5"],
       "date": "3-2025"
     },
-    */
     { 
       "title": "Prey", 
       "chosenBy": ["John"], 
