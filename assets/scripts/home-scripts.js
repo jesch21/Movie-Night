@@ -206,8 +206,8 @@ const videos = [
     },
     */
     {
-        src: 'assets/videos/mountain-trailer.mp4',
-        title: "The Holy Mountain"
+        src: 'assets/videos/ninja-trailer.mp4',
+        title: "Ninja Assassin"
     },
     {
         src: 'assets/videos/prey-trailer.mp4',

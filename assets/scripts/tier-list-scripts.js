@@ -259,7 +259,7 @@ const movieData = [
       "date": "3-2025"
     },
     { 
-      "title": "The Holy Mountain", 
+      "title": "Ninja Assassin", 
       "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "3-2025"
