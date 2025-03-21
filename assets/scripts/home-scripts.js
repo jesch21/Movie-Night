@@ -137,7 +137,10 @@ const videos = [
     },
             ayub
             joe
-            trevor
+    {
+        src: 'assets/videos/ninjago-trailer.mp4',
+        title: 'The Lego Ninjago Movie'
+    },
             alex
             jayden
     {
@@ -156,7 +159,10 @@ const videos = [
             garrett
             ayub
             joe
-            trevor
+    {
+        src: 'assets/videos/gladiator2-trailer.mp4',
+        title: 'Gladiator II'
+    },
             alex
             jayden
     {

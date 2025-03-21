@@ -167,7 +167,12 @@ const movieData = [
     },
     ayub
     joe
-    trevor
+    { 
+      "title": "The Lego Ninjago Movie", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "9-2025"
+    },
     alex
     jayden
     { 
@@ -185,14 +190,19 @@ const movieData = [
     roulette
     { 
       "title": "Deadpool", 
-      "chosenBy": ["John"], 
+      "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "8-2025"
     },
     garrett
     ayub
     joe
-    trevor
+    { 
+      "title": "Gladiator II", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "7-2025"
+    },
     alex
     jayden
     { 
