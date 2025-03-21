@@ -196,11 +196,11 @@ const videos = [
         src: 'assets/videos/last-trailer.mp4',
         title: "Star Wars: The Last Jedi"
     },
+    */
     {
         src: 'assets/videos/monty1-trailer.mp4',
         title: "Monty Python and the Holy Grail"
     },
-    */
     {
         src: 'assets/videos/awakens-trailer.mp4',
         title: "Star Wars: The Force Awakens"

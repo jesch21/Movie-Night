@@ -252,13 +252,13 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
+    */
     { 
       "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["2/5", "2/5", "2/5", "3/5"],
       "date": "3-2025"
     },
-    */
     { 
       "title": "Ninja Assassin", 
       "chosenBy": ["Jayden"], 
