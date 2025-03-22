@@ -198,11 +198,11 @@ const videos = [
         title: "Star Wars: The Rise of Skywalker"
     },
             ayub
+    */
     {
         src: 'assets/videos/last-trailer.mp4',
         title: "Star Wars: The Last Jedi"
     },
-    */
     {
         src: 'assets/videos/monty1-trailer.mp4',
         title: "Monty Python and the Holy Grail"

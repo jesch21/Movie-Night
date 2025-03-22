@@ -256,13 +256,13 @@ const movieData = [
       "star-ratings": [],
       "date": "3-2025"
     },
+    */
     { 
       "title": "Monty Python and the Holy Grail", 
       "chosenBy": ["Alex"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "3.5/5", "3.5/5", "4/5"],
       "date": "3-2025"
     },
-    */
     { 
       "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 

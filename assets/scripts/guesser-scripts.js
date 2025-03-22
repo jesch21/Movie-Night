@@ -78,8 +78,8 @@ let movieList = [
     ["Ninja Assassin", "ninja.jpg", "1 hrs 39 mins", "2009", "Matthew Sand"],
     ["Star Wars: The Force Awakens", "awakens.jpg", "2 hrs 18 mins", "2015", "Harrison Ford"],
     ["Monty Python and the Holy Grail", "monty1.jpg", "1 hrs 31 mins", "1975", "Graham Chapman"],
-    /*
     ["Star Wars: The Last Jedi", "last.jpg", "2 hrs 32 mins", "2017", "Benecio Del Toro"],
+    /*
     
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
