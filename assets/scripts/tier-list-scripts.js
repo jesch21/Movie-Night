@@ -234,14 +234,14 @@ const movieData = [
       "star-ratings": [],
       "date": "5-2025"
     },
-    roulette
-    garrett
     { 
       "title": "Transformers: Dark of the Moon", 
       "chosenBy": ["Trevors"], 
       "star-ratings": [],
       "date": "4-2025"
     },
+    garrett
+    roulette
     joe
     { 
       "title": "Star Wars: The Rise of Skywalker", 
@@ -249,14 +249,19 @@ const movieData = [
       "star-ratings": [],
       "date": "4-2025"
     },
-    ayub
     { 
-      "title": "Star Wars: The Last Jedi", 
-      "chosenBy": ["John"], 
+      "title": "The Royal Tenenbaums", 
+      "chosenBy": ["Ayub"], 
       "star-ratings": [],
       "date": "3-2025"
     },
     */
+    { 
+      "title": "Star Wars: The Last Jedi", 
+      "chosenBy": ["John"], 
+      "star-ratings": ["0.5/5", "3/5", "2.5/5", "3/5"],
+      "date": "3-2025"
+    },
     { 
       "title": "Monty Python and the Holy Grail", 
       "chosenBy": ["Alex"], 
