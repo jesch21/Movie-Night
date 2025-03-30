@@ -192,11 +192,11 @@ const videos = [
     },
             garrett
             roulette
-            joe
     {
         src: 'assets/videos/skywalker-trailer.mp4',
         title: "Star Wars: The Rise of Skywalker"
     },
+            joe
     */
     {
         src: 'assets/videos/tenenbaums-trailer.mp4',

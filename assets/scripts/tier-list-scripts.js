@@ -242,18 +242,18 @@ const movieData = [
     },
     garrett
     roulette
-    joe
     { 
       "title": "Star Wars: The Rise of Skywalker", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2025"
     },
+    joe
     { 
       "title": "The Royal Tenenbaums", 
       "chosenBy": ["Ayub"], 
       "star-ratings": [],
-      "date": "3-2025"
+      "date": "4-2025"
     },
     */
     { 
