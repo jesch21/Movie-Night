@@ -249,13 +249,13 @@ const movieData = [
       "date": "4-2025"
     },
     joe
+    */
     { 
       "title": "The Royal Tenenbaums", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "5/5", "5/5", "3/5", "1.5/5"],
       "date": "4-2025"
     },
-    */
     { 
       "title": "Star Wars: The Last Jedi", 
       "chosenBy": ["John"], 
