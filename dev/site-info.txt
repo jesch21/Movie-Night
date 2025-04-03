@@ -1,0 +1,9 @@
+The CoronaCinema website is a html-based sight with external css styles and various javascript files for interactivity and expanded functionality.
+
+The domain www.coronacinema.com is paid for on namecheap (yearly subscription)
+
+The website is host on netlify (free, sign in with GitHub account)
+
+Currently testing using Supabase for backend database (free, sign in with GitHub account). Password on notes app
+SUPABASE_URL: https://mmydvnnofhfqvpzrzqxa.supabase.co
+SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1teWR2bm5vZmhmcXZwenJ6cXhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MDU0ODgsImV4cCI6MjA1OTI4MTQ4OH0.5X-6PcQqx5QQ_s4FBOoORmNVxDnQ48RxaTti5SOR97g
