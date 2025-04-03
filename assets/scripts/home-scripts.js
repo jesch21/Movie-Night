@@ -196,8 +196,11 @@ const videos = [
         src: 'assets/videos/skywalker-trailer.mp4',
         title: "Star Wars: The Rise of Skywalker"
     },
-            joe
     */
+    {
+        src: 'assets/videos/ai-trailer.mp4',
+        title: "A.I. Artificial Intelligence"
+    },
     {
         src: 'assets/videos/tenenbaums-trailer.mp4',
         title: "The Royal Tenenbaums"

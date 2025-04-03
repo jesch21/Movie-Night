@@ -80,6 +80,7 @@ let movieList = [
     ["Monty Python and the Holy Grail", "monty1.jpg", "1 hrs 31 mins", "1975", "Graham Chapman"],
     ["Star Wars: The Last Jedi", "last.jpg", "2 hrs 32 mins", "2017", "Benecio Del Toro"],
     ["The Royal Tenenbaums", "tenenbaums.jpg", "1 hrs 50 mins", "2001", "Gwyneht Paltrow"],
+    ["A.I. Artificial Intelligence", "ai.jpg", "2 hrs 26 mins", "2001", "Jude Law"],
     /*
 
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
