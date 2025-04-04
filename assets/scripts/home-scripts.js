@@ -195,12 +195,12 @@ const videos = [
         src: 'assets/videos/skywalker-trailer.mp4',
         title: "Star Wars: The Rise of Skywalker"
     },
-            roulette
-    */
     {
         src: 'assets/videos/ai-trailer.mp4',
         title: "A.I. Artificial Intelligence"
     },
+            roulette
+    */
     {
         src: 'assets/videos/tenenbaums-trailer.mp4',
         title: "The Royal Tenenbaums"
@@ -549,11 +549,9 @@ let merryMovies = [
     'The Polar Express'
 ]
 
-const videoSlidesContainer = document.querySelector('.video-slides-container');
 
 // Getting the elements for both the slideshow title and the video title
 const slideshowTitle = document.getElementById('slideshow-title');
-const videoTitle = document.getElementById('video-title');
 
 function revealArrows() {
     document.getElementById('lleft').style.opacity = '60%';
@@ -610,23 +608,6 @@ function showSlide(index) {
         slideshowTitle.style.letterSpacing = "";
         slideshowTitle.style.fontWeight = "";
     }
-
-    if (isSpooky(videos[index].title)) {
-        videoTitle.style.fontFamily = "Nosifer";
-        videoTitle.style.letterSpacing = "3px";
-        videoTitle.style.fontWeight = "lighter";
-    } else if(isMerry(videos[index].title)) {
-        videoTitle.style.fontFamily = "Mountains of Christmas";
-        videoTitle.style.letterSpacing = "3px";
-        videoTitle.style.fontWeight = "bold";
-        videoTitle.style.fontSize = "35px";
-    }
-    else {
-        // Reset to default font styles if not spooky or merry
-        videoTitle.style.fontFamily = "";
-        videoTitle.style.letterSpacing = "";
-        videoTitle.style.fontWeight = "";
-    }
 }
 
 
@@ -665,76 +646,6 @@ document.getElementById('lleft').addEventListener('click', prevSlide);
 
 // Initial setup for slideshow
 showSlide(currentIndex);
-
-// Function to show a specific video
-function showVideo(index) {
-    const video = document.createElement('video');
-    video.src = videos[index].src;
-    video.controls = true;
-    video.style.width = '100%';
-    video.style.height = 'auto';
-    video.style.maxHeight = '80vh';
-    video.style.objectFit = 'cover';
-    videoSlidesContainer.innerHTML = ''; // Clear previous videos
-    videoSlidesContainer.appendChild(video);
-    video.load(); // Load the new video
-
-    // Update the video title only
-    videoTitle.textContent = `${videos[index].title}`;
-
-    if (isSpooky(videos[index].title)) {
-        slideshowTitle.style.fontFamily = "Nosifer";
-        slideshowTitle.style.letterSpacing = "3px";
-        slideshowTitle.style.fontWeight = "lighter";
-    } else if(isMerry(videos[index].title)) {
-        slideshowTitle.style.fontFamily = "Mountains of Christmas";
-        slideshowTitle.style.letterSpacing = "3px";
-        slideshowTitle.style.fontWeight = "bold";
-        slideshowTitle.style.fontSize = "35px";
-    }
-    else {
-        // Reset to default font styles if not spooky or merry
-        slideshowTitle.style.fontFamily = "";
-        slideshowTitle.style.letterSpacing = "";
-        slideshowTitle.style.fontWeight = "";
-    }
-
-    if (isSpooky(videos[index].title)) {
-        videoTitle.style.fontFamily = "Nosifer";
-        videoTitle.style.letterSpacing = "3px";
-        videoTitle.style.fontWeight = "lighter";
-    } else if(isMerry(videos[index].title)) {
-        videoTitle.style.fontFamily = "Mountains of Christmas";
-        videoTitle.style.letterSpacing = "3px";
-        videoTitle.style.fontWeight = "bold";
-        videoTitle.style.fontSize = "35px";
-    }
-    else {
-        // Reset to default font styles if not spooky or merry
-        videoTitle.style.fontFamily = "";
-        videoTitle.style.letterSpacing = "";
-        videoTitle.style.fontWeight = "";
-    }
-}
-
-// Function to go to the next video
-function nextVideo() {
-    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-    showVideo(currentVideoIndex);
-}
-
-// Function to go to the previous video
-function prevVideo() {
-    currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-    showVideo(currentVideoIndex);
-}
-
-// Arrow navigation for videos
-document.getElementById('dright').addEventListener('click', nextVideo);
-document.getElementById('dleft').addEventListener('click', prevVideo);
-
-// Initial setup for video
-showVideo(currentVideoIndex);
 
 document.getElementById('streaming-button').addEventListener('click', function() {
     const streamLinks = document.getElementById('stream-links');
