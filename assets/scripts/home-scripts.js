@@ -191,11 +191,11 @@ const videos = [
         title: 'Transformers: Dark of the Moon'
     },
             garrett
-            roulette
     {
         src: 'assets/videos/skywalker-trailer.mp4',
         title: "Star Wars: The Rise of Skywalker"
     },
+            roulette
     */
     {
         src: 'assets/videos/ai-trailer.mp4',

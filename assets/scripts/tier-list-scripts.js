@@ -241,13 +241,13 @@ const movieData = [
       "date": "4-2025"
     },
     garrett
-    roulette
     { 
       "title": "Star Wars: The Rise of Skywalker", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2025"
     },
+    roulette
     */
     { 
       "title": "A.I. Artificial Intelligence", 
