@@ -24,10 +24,10 @@ async function fetchData() {
             <div>
                 <h2>${item.name}</h2>
                 <p>${item.description}</p>
-                <img src="${item.image_url}" width="150" />
+                <img src="https://mmydvnnofhfqvpzrzqxa.supabase.co/storage/v1/object/public/slideshow/${item.image_url}" width="150" />
             </div>
         `;
-    });
+    });    
 }
 
 // Ensure Supabase library is loaded before running fetchData()
