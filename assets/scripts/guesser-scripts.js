@@ -85,6 +85,7 @@ let movieList = [
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
     
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
+    
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
 
     ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
