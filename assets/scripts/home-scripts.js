@@ -190,17 +190,17 @@ const videos = [
         src: 'assets/videos/transformers3-trailer.mp4',
         title: 'Transformers: Dark of the Moon'
     },
+            roulette
             garrett
     {
         src: 'assets/videos/skywalker-trailer.mp4',
         title: "Star Wars: The Rise of Skywalker"
     },
+    */
     {
         src: 'assets/videos/ai-trailer.mp4',
         title: "A.I. Artificial Intelligence"
     },
-            roulette
-    */
     {
         src: 'assets/videos/tenenbaums-trailer.mp4',
         title: "The Royal Tenenbaums"

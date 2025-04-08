@@ -240,6 +240,7 @@ const movieData = [
       "star-ratings": [],
       "date": "4-2025"
     },
+    roulette
     garrett
     { 
       "title": "Star Wars: The Rise of Skywalker", 
@@ -253,7 +254,6 @@ const movieData = [
       "star-ratings": [],
       "date": "4-2025"
     },
-    roulette
     */
     { 
       "title": "The Royal Tenenbaums", 
