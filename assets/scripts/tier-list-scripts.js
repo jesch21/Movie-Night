@@ -248,13 +248,13 @@ const movieData = [
       "star-ratings": [],
       "date": "4-2025"
     },
+    */
     { 
       "title": "A.I. Artificial Intelligence", 
       "chosenBy": ["Joe"], 
-      "star-ratings": [],
+      "star-ratings": ["1.5/5", "4.5/5", "5/5", "4/5"],
       "date": "4-2025"
     },
-    */
     { 
       "title": "The Royal Tenenbaums", 
       "chosenBy": ["Ayub"], 
