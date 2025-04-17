@@ -91,7 +91,7 @@ const movieData = {
         {"date": "4/1/2025", "chosenBy": "Ayub", "title": "The Royal Tenenbaums"},
         {"date": "4/11/2025", "chosenBy": "Joe", "title": "A.I. Artificial Intelligence"},
         {"date": "4/17/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Rise of Skywalker"},
-        {"date": "4/18/2025", "chosenBy": "Garrett", "title": ""},
+        {"date": "4/18/2025", "chosenBy": "Garrett", "title": "The Big Lebowski"},
         {"date": "4/25/2025", "chosenBy": "Trevor", "title": "Transformers: Dark of the Moon"},
         {"date": "5/1/2025", "chosenBy": "Unseen Roulette", "title": ""},
         {"date": "5/2/2025", "chosenBy": "John", "title": "Kingsman: The Secret Service"},

@@ -191,7 +191,10 @@ const videos = [
         src: 'assets/videos/transformers3-trailer.mp4',
         title: 'Transformers: Dark of the Moon'
     },
-            garrett
+    {
+        src: 'assets/videos/lebowski-trailer.mp4',
+        title: 'The Big Lebowski'
+    },
     */
     {
         src: 'assets/videos/skywalker-trailer.mp4',
