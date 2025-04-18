@@ -2,11 +2,13 @@
 
 const alexList = [
     { "movie": "Master and Commander: The Far Side of the World", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Star Wars: The Empire Strikes Back", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Thing (1982)", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Grand Budapest Hotel", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Goodfellas", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Gladiator", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Pirates of the Carribean: The Curse of the Black Pearl", "stars": "4.5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Star Wars: A New Hope", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Burn After Reading", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Full Metal Jacket", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Bram Stoker's Dracula", "stars": "4.5/5", "liked": "Liked", "rating": "" },
@@ -19,11 +21,13 @@ const alexList = [
     { "movie": "High and Low", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Conjuring", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Monty Python and the Holy Grail", "stars": "4/5", "liked": "Liked", "rating": "" },
+    { "movie": "Star Wars: Return of the Jedi", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Rogue One: A Star Wars Story", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Greyhound", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Uncut Gems", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Suicide Squad", "stars": "4/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: Revenge of the Sith", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Godzilla: Minus One", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Kill Bill: Vol. 1", "stars": "4/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Jarhead", "stars": "4/5", "liked": "Not Liked", "rating": "" },
@@ -36,12 +40,17 @@ const alexList = [
     { "movie": "Hardcore Henry", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "mid90s", "stars": "3/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Eight Crazy Nights", "stars": "2.5/5", "liked": "Liked", "rating": "" },
+    { "movie": "Star Wars: The Phantom Menace", "stars": "2.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Transformers", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: The Force Awakens", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Ernest Scared Stupid", "stars": "2.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Click", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "Transformers: Revenge of the Fallen", "stars": "2/5", "liked": "Not Liked", "rating": "" },
-    { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Transformers: Revenge of the Fallen", "stars": "2.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: The Last Jedi", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: Attack of the Clones", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "9", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: The Rise of Skywalker", "stars": "1/5", "liked": "Not Liked", "rating": "" },
 ];
 
 const ayubList = [
@@ -126,6 +135,7 @@ const ayubList = [
     { "movie": "The Possession", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Platform 2", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Eight Crazy Nights", "stars": "1/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: The Rise of Skywalker", "stars": "1/5", "liked": "Not Liked", "rating": "" },
     { "movie": "Das Leben der Anderan", "stars": "1/5", "liked": "Not Liked", "rating": "" },
     { "movie": "9", "stars": "1/5", "liked": "Not Liked", "rating": "" },
 ];
@@ -208,6 +218,7 @@ const joeList = [
     { "movie": "9", "stars": "2/5", "liked": "Not Liked", "rating": "" },
     { "movie": "I Want to Eat Your Pancreas", "stars": "1.5/5", "liked": "Not Liked", "rating": "" },
     { "movie": "The Possession", "stars": "1/5", "liked": "Not Liked", "rating": "" },
+    { "movie": "Star Wars: The Rise of Skywalker", "stars": "1/5", "liked": "Not Liked", "rating": "" },
 ];
 
 const johnList = [
@@ -373,7 +384,9 @@ const johnList = [
         "rating": "The only reason I watched this movie was it was an assignment for my German class, and honestly I definitely could've lived without seeing it. It's not horrible, but it's not really anything either. I'm not a staunch enjoyer of romance stories unless the romance is cut with something else enjoying, like comedy or action. This movie cuts romance with pity and sorrow, which just make it worse. I'd rate it lower, but I did like the performances in some moments. Overall, dieser Film ist nicht sehr gut." },
     { "movie": "9", "stars": "0.5/5", "liked": "Not Liked", 
         "rating": "Holy shit this movie was horrible. The story was incredibly dull, the animation is pretty poor and lacking in detail, which is disappointing since the art style had potential. The characters were shallow and bland, and the villain was basically nothing at all. Overall, I'd give it a 9... out of 9,000." },
-];
+    { "movie": "Star Wars: The Rise of Skywalker", "stars": "0.5/5", "liked": "Not Liked", 
+        "rating": "This movie is the equivalent of pissing on someone's grave after eating asparagus, then taking a runny shit on it, dumping a barrel of plague-ridden rats on top, then just blowing it up. The only things in this movie that give me a remote sense of joy are the Sith trooper designs and the sound of the lightning on Exegol. Instead of ending this trilogy in a minor sense of grace after the dumpster fire of the last jedi, JJ Abrams threw a temper tantrum that he didn't get to write ep 8 and decided to add some gas to it. Could've been crazy good, could've been hype, but instead this movie just doubles down on insulting Star Wars. The best parts of the story of this movie come from the shows and games released AFTER to try and remedy it. God I wish I could erase my mind of this movie's existence. Overall, somehow star wars will return..." },
+    ];
 
 const landonList = [
     { "movie": "The Batman", "stars": "5/5", "liked": "Liked", "rating": "This film took me 3 day to watch, but by the end I was standing on all fours hootin AND hollering. Best non-animated Batman film to date." },
@@ -512,6 +525,8 @@ const trevorList = [
         "rating": "The movies definitely a classic. The music is Iconic and so are the characters. The girl was hot, the movies very colorful with a nice premise. It's weird Indiana jones is so good at fighting. The effects are a little obviously fake but I can excuse it for how old it is. Overall a pretty good movie. My snack was 2 chicken patties." },
     { "movie": "Godzilla: Minus One", "stars": "2.5/5", "liked": "Not Liked", 
         "rating": "JUST RUN LIKE IT IS GOJIRA. My snack was 6 tyson chicken tenders with ketchup." },
+    { "movie": "Star Wars: The Rise of Skywalker", "stars": "2/5", "liked": "Not Liked", 
+        "rating": "was still entertaining. John had more lines than the whole script lol. My snack was kettle sea salt and vinegar chips with french onion dip." },
     { "movie": "A Beautiful Mind", "stars": "2/5", "liked": "Not Liked", 
         "rating": "Movie was pretty mid. I saw it in senior year, thought it was good but looking back it really wasn't. Pacing was too fast and the movie just wasn't really that engagins. My snack was some peanut butter m&ms and some xtra cheddar goldfish. Overall a pretty mediocre movie." },
     { "movie": "Sanjuro", "stars": "2/5", "liked": "Not Liked", 

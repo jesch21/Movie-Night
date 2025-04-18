@@ -247,13 +247,13 @@ const movieData = [
       "star-ratings": [],
       "date": "4-2025"
     },
+    */
     { 
       "title": "Star Wars: The Rise of Skywalker", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["0.5/5", "1/5", "1/5", "1/5", "2/5"],
       "date": "4-2025"
     },
-    */
     { 
       "title": "A.I. Artificial Intelligence", 
       "chosenBy": ["Joe"], 
@@ -269,7 +269,7 @@ const movieData = [
     { 
       "title": "Star Wars: The Last Jedi", 
       "chosenBy": ["John"], 
-      "star-ratings": ["0.5/5", "3/5", "2.5/5", "3/5"],
+      "star-ratings": ["0.5/5", "3/5", "2.5/5", "3/5", "1.5/5"],
       "date": "3-2025"
     },
     { 
@@ -281,7 +281,7 @@ const movieData = [
     { 
       "title": "Star Wars: The Force Awakens", 
       "chosenBy": ["John"], 
-      "star-ratings": ["2/5", "2/5", "2/5", "3/5"],
+      "star-ratings": ["2/5", "2/5", "2/5", "3/5", "2.5/5"],
       "date": "3-2025"
     },
     { 
@@ -311,7 +311,7 @@ const movieData = [
     { 
       "title": "Star Wars: Revenge of the Sith", 
       "chosenBy": ["John"], 
-      "star-ratings": ["4.5/5", "4/5", "3.5/5", "4/5"],
+      "star-ratings": ["4.5/5", "4/5", "3.5/5", "4/5", "4/5"],
       "date": "2-2025"
     },
     { 
@@ -329,19 +329,19 @@ const movieData = [
     { 
       "title": "Star Wars: Attack of the Clones", 
       "chosenBy": ["John"], 
-      "star-ratings": ["1/5", "3/5", "3/5", "2.5/5"],
+      "star-ratings": ["1/5", "3/5", "3/5", "2.5/5", "1.5/5"],
       "date": "2-2025"
     },
     { 
       "title": "Transformers: Revenge of the Fallen", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": ["1.5/5", "2/5", "2/5", "2.5/5", "3.5/5"],
+      "star-ratings": ["1.5/5", "2.5/5", "2/5", "2.5/5", "3.5/5"],
       "date": "1-2025"
     },
     { 
       "title": "Star Wars: The Phatom Menace", 
       "chosenBy": ["John"], 
-      "star-ratings": ["3/5", "2.5/5", "3/5", "2.5/5"],
+      "star-ratings": ["3/5", "2.5/5", "3/5", "2.5/5", "2.5/5"],
       "date": "1-2025"
     },
     { 
@@ -353,7 +353,7 @@ const movieData = [
     { 
       "title": "Star Wars: Return of the Jedi", 
       "chosenBy": ["John"], 
-      "star-ratings": ["4.5/5", "4/5", "4/5", "3.5/5"],
+      "star-ratings": ["4.5/5", "4/5", "4/5", "3.5/5", "4/5"],
       "date": "1-2025"
     },
     { 
@@ -371,7 +371,7 @@ const movieData = [
     { 
       "title": "Star Wars: The Empire Strikes Back", 
       "chosenBy": ["John"], 
-      "star-ratings": ["5/5", "4.5/5", "4/5", "4/5", "4/5"],
+      "star-ratings": ["5/5", "4.5/5", "4/5", "4/5", "4/5", "5/5"],
       "date": "1-2025"
     },
     { 
@@ -383,7 +383,7 @@ const movieData = [
     { 
       "title": "Star Wars: A New Hope", 
       "chosenBy": ["John"], 
-      "star-ratings": ["4/5", "3/5", "4.5/5", "4/5"],
+      "star-ratings": ["4/5", "3/5", "4.5/5", "4/5", "4.5/5"],
       "date": "1-2025"
     },
     { 
@@ -725,7 +725,7 @@ const movieData = [
     { 
       "title": "9", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": ["2/5", "1/5", "2/5", "0.5/5", "3/5"],
+      "star-ratings": ["1.5/5", "1/5", "2/5", "0.5/5", "3/5"],
       "date": "8-2024"
     },
     { 
