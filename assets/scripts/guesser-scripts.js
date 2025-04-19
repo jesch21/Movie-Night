@@ -83,9 +83,8 @@ let movieList = [
     ["A.I. Artificial Intelligence", "ai.jpg", "2 hrs 26 mins", "2001", "Jude Law"],
     ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
     ["The Big Lebowski", "lebowski.jpg", "1 hrs 57 mins", "1998", "John Goodman"],
-    /*
-
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
+    /*
     
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
 

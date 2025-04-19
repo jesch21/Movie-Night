@@ -187,11 +187,11 @@ const videos = [
         title: 'Kingsman: The Secret Service'
     },
             roulette
+    */
     {
         src: 'assets/videos/transformers3-trailer.mp4',
         title: 'Transformers: Dark of the Moon'
     },
-    */
     {
         src: 'assets/videos/lebowski-trailer.mp4',
         title: 'The Big Lebowski'

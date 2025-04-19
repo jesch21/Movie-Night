@@ -10,6 +10,7 @@ const alexList = [
     { "movie": "Pirates of the Carribean: The Curse of the Black Pearl", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Star Wars: A New Hope", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Burn After Reading", "stars": "4.5/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Big Lebowski", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Full Metal Jacket", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Bram Stoker's Dracula", "stars": "4.5/5", "liked": "Liked", "rating": "" },
     { "movie": "Mad Max: Fury Road", "stars": "4.5/5", "liked": "Not Liked", "rating": "" },
@@ -93,6 +94,7 @@ const ayubList = [
     { "movie": "Indiana Jones and The Last Crusade", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Star Wars: Return of the Jedi", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Gladiator", "stars": "4/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Big Lebowski", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Drive", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "Pirates of the Carribean: The Curse of the Black Pearl", "stars": "4/5", "liked": "Liked", "rating": "" },
     { "movie": "28 Days Later", "stars": "4/5", "liked": "Liked", "rating": "" },
@@ -156,6 +158,7 @@ const joeList = [
     { "movie": "The Royal Tenenbaums", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Scream", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Indiana Jones: Raiders of the Lost Ark", "stars": "5/5", "liked": "Liked", "rating": "" },
+    { "movie": "The Big Lebowski", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "High and Low", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "The Matrix Reloaded", "stars": "5/5", "liked": "Liked", "rating": "" },
     { "movie": "Full Metal Jacket", "stars": "5/5", "liked": "Liked", "rating": "" },
@@ -340,6 +343,8 @@ const johnList = [
         "rating": "This movie's intrigue for me comes from the unique perspective of showing a monster attack. As a fan of the Godzilla movies, I find the pedestrian-level perspective to be very interesting. Similar to Godzilla Minus One, this movie uses the monster more as a means of destruction rather than the main character, which allows for more development of the characters. With that being said however, I wasn't very interested in much of the characters. I didn't find myself caring for them too much, and the story itself was both predictable and uninteresting. Overall, how long is that fucking camera battery like holy shit." },
     { "movie": "Heat", "stars": "2.5/5", "liked": "Not Liked", 
         "rating": "This movie was pretty decent, and it had a lot of good moments with very well-structured action sequences. However the length of the movie and the drawn-out dialogue throughout the mid-section really took away alot for me, hence the rating. Overall, shit got hot." },
+    { "movie": "The Big Lebowski", "stars": "2.5/5", "liked": "Liked", 
+        "rating": "This movie is definitely... weird. I didn't really vibe with it as much as I thought I would, and the comedy I expected wasn't really there for me as much. Might have been just not my kind of humor. The movie kinda just felt super random, to the point where I couldn't really follow or get invested in much. But I can't say I hate it, still had a kind of enjoyable vibe to it. Overall, the dude abides." },
     { "movie": "Uncut Gems", "stars": "2.5/5", "liked": "Not Liked", 
         "rating": "For starters, had I rated this movie purely off my enjoyment it probably would've gotten 1/5. It was remarkably boring to me for most of the movie, with only patches of excitement scattered within. I also felt the pacing didn't work for me, and a lot of the narrative elements left me feeling a lack of connection to the characters they focused on. Despite this, I can recognize that this movie simply isn't my cup of tea, alas the 2.5/5. Overall, don't buy gems online from Ethiopia." },
     { "movie": "Midsommar", "stars": "2.5/5", "liked": "Not Liked", 
@@ -386,7 +391,7 @@ const johnList = [
         "rating": "Holy shit this movie was horrible. The story was incredibly dull, the animation is pretty poor and lacking in detail, which is disappointing since the art style had potential. The characters were shallow and bland, and the villain was basically nothing at all. Overall, I'd give it a 9... out of 9,000." },
     { "movie": "Star Wars: The Rise of Skywalker", "stars": "0.5/5", "liked": "Not Liked", 
         "rating": "This movie is the equivalent of pissing on someone's grave after eating asparagus, then taking a runny shit on it, dumping a barrel of plague-ridden rats on top, then just blowing it up. The only things in this movie that give me a remote sense of joy are the Sith trooper designs and the sound of the lightning on Exegol. Instead of ending this trilogy in a minor sense of grace after the dumpster fire of the last jedi, JJ Abrams threw a temper tantrum that he didn't get to write ep 8 and decided to add some gas to it. Could've been crazy good, could've been hype, but instead this movie just doubles down on insulting Star Wars. The best parts of the story of this movie come from the shows and games released AFTER to try and remedy it. God I wish I could erase my mind of this movie's existence. Overall, somehow star wars will return..." },
-    ];
+];
 
 const landonList = [
     { "movie": "The Batman", "stars": "5/5", "liked": "Liked", "rating": "This film took me 3 day to watch, but by the end I was standing on all fours hootin AND hollering. Best non-animated Batman film to date." },
@@ -429,6 +434,8 @@ const trevorList = [
         "rating": "Good movie. Excited for the next one. My snack was a Giant turkey sub from jersey mikes." },
     { "movie": "A.I. Artificial Intelligence", "stars": "4/5", "liked": "Liked", 
         "rating": "I loved this movie. Joe was hype, everything was awesome. Everything is cool when you're part of a team. TEDDY!!!!!" },
+    { "movie": "The Big Lebowski", "stars": "4/5", "liked": "Liked", 
+        "rating": "Good movie. Funny movie. Walter was funny, but this shit would PISS me off if I was drunk or high. Landon Ricketts was cool, the teen looked like my brother. My snack for the movie was a super turkey and American cheese sub from which wich. Overall good movie." },
     { "movie": "Eight Crazy Nights", "stars": "4/5", "liked": "Liked", 
         "rating": "FUNNY AS FUCK LMAO" },
     { "movie": "Forest Gump", "stars": "4/5", "liked": "Liked", 

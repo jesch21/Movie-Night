@@ -241,13 +241,13 @@ const movieData = [
       "star-ratings": [],
       "date": "4-2025"
     },
+    */
     { 
       "title": "The Big Lebowski", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": [],
+      "star-ratings": ["2.5/5", "4.5/5", "5/5", "4/5", "4/5"],
       "date": "4-2025"
     },
-    */
     { 
       "title": "Star Wars: The Rise of Skywalker", 
       "chosenBy": ["John"], 
