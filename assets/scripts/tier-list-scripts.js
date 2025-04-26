@@ -235,13 +235,13 @@ const movieData = [
       "date": "5-2025"
     },
     roulette
+    */
     { 
       "title": "Transformers: Dark of the Moon", 
-      "chosenBy": ["Trevors"], 
-      "star-ratings": [],
+      "chosenBy": ["Trevor"], 
+      "star-ratings": ["1.5/5", "3/5", "2/5", "1.5/5", "3/5", "3/5"],
       "date": "4-2025"
     },
-    */
     { 
       "title": "The Big Lebowski", 
       "chosenBy": ["Garrett"], 
