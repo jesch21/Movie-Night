@@ -182,12 +182,12 @@ const videos = [
         title: "Monty Python's Holy Grail"
     },
             jayden
+            roulette
+    */
     {
         src: 'assets/videos/kingsman-trailer.mp4',
         title: 'Kingsman: The Secret Service'
     },
-            roulette
-    */
     {
         src: 'assets/videos/transformers3-trailer.mp4',
         title: 'Transformers: Dark of the Moon'
