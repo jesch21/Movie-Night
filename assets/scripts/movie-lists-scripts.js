@@ -94,7 +94,7 @@ const movieData = {
         {"date": "4/18/2025", "chosenBy": "Garrett", "title": "The Big Lebowski"},
         {"date": "4/25/2025", "chosenBy": "Trevor", "title": "Transformers: Dark of the Moon"},
         {"date": "5/2/2025", "chosenBy": "John", "title": "Kingsman: The Secret Service"},
-        {"date": "5/9/2025", "chosenBy": "Jayden", "title": ""},
+        {"date": "5/9/2025", "chosenBy": "Jayden", "title": "Everyone's Hero"},
         {"date": "5/16/2025", "chosenBy": "Alex", "title": "Monty Python's Life of Brian"},
         {"date": "5/23/2025", "chosenBy": "Trevor", "title": "Interstellar"},
         {"date": "5/30/2025", "chosenBy": "Joe", "title": ""},

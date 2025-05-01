@@ -227,7 +227,12 @@ const movieData = [
       "star-ratings": [],
       "date": "5-2025"
     },
-    jayden
+    { 
+      "title": "Everyone's Hero", 
+      "chosenBy": ["Jayden"], 
+      "star-ratings": [],
+      "date": "5-2025"
+    },
     { 
       "title": "Kingsman: The Secret Service", 
       "chosenBy": ["John"], 
