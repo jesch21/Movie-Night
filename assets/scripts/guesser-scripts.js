@@ -118,7 +118,7 @@ let movieList = [
     ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
     ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
 
-    ["American Psycho", "psycho.jpg", "1 hrs 42 mins", "2000", "Christian Bale"],
+    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
 
     ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
 

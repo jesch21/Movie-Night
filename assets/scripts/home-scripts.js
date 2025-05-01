@@ -69,8 +69,8 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/psycho-trailer.mp4',
-        title: 'American Psycho'
+        src: 'assets/videos/thunderbolts-trailer.mp4',
+        title: 'Thunderbolts*'
     },
     roulette
     garrett
@@ -182,7 +182,6 @@ const videos = [
         title: "Monty Python's Holy Grail"
     },
             jayden
-            roulette
     */
     {
         src: 'assets/videos/kingsman-trailer.mp4',

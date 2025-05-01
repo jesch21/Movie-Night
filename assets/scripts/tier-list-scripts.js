@@ -71,7 +71,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "American Psycho", 
+      "title": "Thunderbolts*", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2026"
@@ -228,7 +228,6 @@ const movieData = [
       "date": "5-2025"
     },
     jayden
-    roulette
     { 
       "title": "Kingsman: The Secret Service", 
       "chosenBy": ["John"], 
