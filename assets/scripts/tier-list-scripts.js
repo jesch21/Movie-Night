@@ -71,12 +71,24 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Thunderbolts*", 
+      "title": "Deadpool and Wolverine", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "4-2026"
+    },
+    { 
+      "title": "Deadpool 2", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2026"
     },
     roulette
+    { 
+      "title": "Deadpool", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "3-2026"
+    },
     garrett
     ayub
     joe
@@ -176,24 +188,12 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Deadpool and Wolverine", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "8-2025"
-    },
-    { 
-      "title": "Deadpool 2", 
+      "title": "Thunderbolts*", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "8-2025"
     },
     roulette
-    { 
-      "title": "Deadpool", 
-      "chosenBy": ["Trevor"], 
-      "star-ratings": [],
-      "date": "8-2025"
-    },
     garrett
     ayub
     joe

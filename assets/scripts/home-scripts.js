@@ -69,10 +69,18 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/thunderbolts-trailer.mp4',
-        title: 'Thunderbolts*'
+        src: 'assets/videos/deadpool3-trailer.mp4',
+        title: 'Deadpool 3'
+    },
+    {
+        src: 'assets/videos/deadpool2-trailer.mp4',
+        title: 'Deadpool 2'
     },
     roulette
+    {
+        src: 'assets/videos/deadpool-trailer.mp4',
+        title: 'Deadpool'
+    },
     garrett
     ayub
     joe
@@ -144,18 +152,10 @@ const videos = [
             alex
             jayden
     {
-        src: 'assets/videos/deadpool3-trailer.mp4',
-        title: 'Deadpool 3'
-    },
-    {
-        src: 'assets/videos/deadpool2-trailer.mp4',
-        title: 'Deadpool 2'
+        src: 'assets/videos/thunderbolts-trailer.mp4',
+        title: 'Thunderbolts*'
     },
             roulette
-    {
-        src: 'assets/videos/deadpool-trailer.mp4',
-        title: 'Deadpool'
-    },
             garrett
             ayub
             joe

@@ -94,10 +94,7 @@ let movieList = [
 
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
-    ["Deadpool", "deadpool.jpg", "1 hrs 48 mins", "2016", "Ryan Reynolds"],
-
-    ["Deadpool 2", "deadpool2.jpg", "1 hrs 59 mins", "2018", "Josh Brolin"],
-    ["Deadpool and Wolverine", "deadpool3.jpg", "2 hrs 08 mins", "2024", "Emma Corrin"],
+    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
 
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
@@ -118,7 +115,10 @@ let movieList = [
     ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
     ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
 
-    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
+    ["Deadpool", "deadpool.jpg", "1 hrs 48 mins", "2016", "Ryan Reynolds"],
+
+    ["Deadpool 2", "deadpool2.jpg", "1 hrs 59 mins", "2018", "Josh Brolin"],
+    ["Deadpool and Wolverine", "deadpool3.jpg", "2 hrs 08 mins", "2024", "Emma Corrin"],
 
     ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
 
