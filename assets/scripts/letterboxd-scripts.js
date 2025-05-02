@@ -495,7 +495,7 @@ const trevorList = [
     { "movie": "The Grand Budapest Hotel", "stars": "3.5/5", "liked": "Not Liked", 
         "rating": "Alright movie. The effects were really bad but thats the only real major flaw about the movie. And even then I can see it being intentional. The music was really good at times it did nice to add to the movie. The plot was alright but were the movie really shines is the humor and characters. The characters are very colorful and the jokes are relatively good. My snack for this movie was half a cup of xtra cheddar goldfish. Overall I liked the movie however somethings a little off-putting. I can't say why. But the movie was nice." },
     { "movie": "Transformers: Dark of the Moon", "stars": "3/5", "liked": "Liked", 
-        "rating": "" },
+        "rating": "My snack was 5 slices of dominos cheese pizza, and some of johns homebaked cookies. Overall I loved it but wasn't as good as I remember." },
     { "movie": "Furiosa: A Mad Max Saga", "stars": "3/5", "liked": "Liked", 
         "rating": "was an ok movie. I liked the first one way more and their characters, I did like Dementus he was very entertaining, same with jack. I learned Immortan Joe is weird as fuck. Overall an ok movie, my snack for this movie was one cup of xtra cheddar goldfish." },
     { "movie": "Star Wars: The Last Jedi", "stars": "3/5", "liked": "Not Liked", 
