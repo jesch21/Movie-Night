@@ -233,13 +233,13 @@ const movieData = [
       "star-ratings": [],
       "date": "5-2025"
     },
+    */
     { 
       "title": "Kingsman: The Secret Service", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["4.5/5", "2.5/5", "2/5"],
       "date": "5-2025"
     },
-    */
     { 
       "title": "Transformers: Dark of the Moon", 
       "chosenBy": ["Trevor"], 

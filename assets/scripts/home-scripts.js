@@ -181,11 +181,11 @@ const videos = [
         src: 'assets/videos/monty2-trailer.mp4',
         title: "Monty Python's Holy Grail"
     },
+    */
     {
         src: 'assets/videos/everyones-hero-trailer.mp4',
         title: "Everyone's Hero"
     },
-    */
     {
         src: 'assets/videos/kingsman-trailer.mp4',
         title: 'Kingsman: The Secret Service'
