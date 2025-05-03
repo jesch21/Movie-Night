@@ -188,7 +188,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Thunderbolts*", 
+      "title": "Logan", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "8-2025"
@@ -206,7 +206,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Logan", 
+      "title": "Thunderbolts*", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "6-2025"

@@ -152,8 +152,8 @@ const videos = [
             alex
             jayden
     {
-        src: 'assets/videos/thunderbolts-trailer.mp4',
-        title: 'Thunderbolts*'
+        src: 'assets/videos/logan-trailer.mp4',
+        title: 'Logan'
     },
             roulette
             garrett
@@ -166,8 +166,8 @@ const videos = [
             alex
             jayden
     {
-        src: 'assets/videos/logan-trailer.mp4',
-        title: 'Logan'
+        src: 'assets/videos/thunderbolts-trailer.mp4',
+        title: 'Thunderbolts*'
     },
             roulette
             garrett

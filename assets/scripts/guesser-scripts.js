@@ -90,11 +90,11 @@ let movieList = [
     ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
     ["Interstellar", "interstellar.jpg", "2 hrs 49 mins", "2014", "Matthew McConaughey"],
 
-    ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
+    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
 
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
-    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
+    ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
 
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
