@@ -163,7 +163,10 @@ const videos = [
         src: 'assets/videos/gladiator2-trailer.mp4',
         title: 'Gladiator II'
     },
-            alex
+    {
+        src: 'assets/videos/rango-trailer.mp4',
+        title: 'Rango'
+    },
             jayden
     {
         src: 'assets/videos/thunderbolts-trailer.mp4',

@@ -203,7 +203,12 @@ const movieData = [
       "star-ratings": [],
       "date": "7-2025"
     },
-    alex
+    { 
+      "title": "Rango", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "7-2025"
+    },
     jayden
     { 
       "title": "Thunderbolts*", 

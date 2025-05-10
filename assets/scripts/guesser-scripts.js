@@ -92,6 +92,7 @@ let movieList = [
 
     ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
 
+    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
     ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
