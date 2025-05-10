@@ -222,18 +222,18 @@ const movieData = [
       "date": "5-2025"
     },
     { 
-      "title": "Monty Python's Life of Brian", 
-      "chosenBy": ["Alex"], 
-      "star-ratings": [],
-      "date": "5-2025"
-    },
-    { 
       "title": "Everyone's Hero", 
       "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "5-2025"
     },
     */
+   { 
+      "title": "Monty Python's Life of Brian", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": ["4/5", "4/5", "3.5/5", "3.5/5", "2.5/5"],
+      "date": "5-2025"
+    },
     { 
       "title": "Kingsman: The Secret Service", 
       "chosenBy": ["John"], 
@@ -279,7 +279,7 @@ const movieData = [
     { 
       "title": "Monty Python and the Holy Grail", 
       "chosenBy": ["Alex"], 
-      "star-ratings": ["4/5", "3.5/5", "3.5/5", "4/5"],
+      "star-ratings": ["4/5", "3/5", "3.5/5", "4/5"],
       "date": "3-2025"
     },
     { 

@@ -85,9 +85,9 @@ let movieList = [
     ["The Big Lebowski", "lebowski.jpg", "1 hrs 57 mins", "1998", "John Goodman"],
     ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
     ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
+    ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
     ["Everyone's Hero", "everyones-hero.jpg", "1 hrs 27 mins", "2006", "Whoopi Goldberg"],
     /*
-    ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
     ["Interstellar", "interstellar.jpg", "2 hrs 49 mins", "2014", "Matthew McConaughey"],
 
     ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
