@@ -177,13 +177,13 @@ const videos = [
             ayub
             joe
     {
-        src: 'assets/videos/interstellar-trailer.mp4',
-        title: 'Interstellar'
+        src: 'assets/videos/everyones-hero-trailer.mp4',
+        title: "Everyone's Hero"
     },
     */
    {
-        src: 'assets/videos/everyones-hero-trailer.mp4',
-        title: "Everyone's Hero"
+        src: 'assets/videos/interstellar-trailer.mp4',
+        title: 'Interstellar'
     },
     {
         src: 'assets/videos/monty2-trailer.mp4',

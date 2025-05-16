@@ -221,14 +221,14 @@ const movieData = [
     ayub
     joe
     { 
-      "title": "Interstellar", 
-      "chosenBy": ["Trevor"], 
+      "title": "Everyone's Hero", 
+      "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "5-2025"
     },
     { 
-      "title": "Everyone's Hero", 
-      "chosenBy": ["Jayden"], 
+      "title": "Interstellar", 
+      "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "5-2025"
     },
