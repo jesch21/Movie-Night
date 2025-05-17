@@ -199,7 +199,7 @@ const movieData = [
     joe
     { 
       "title": "Gladiator II", 
-      "chosenBy": ["John"], 
+      "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "7-2025"
     },
@@ -226,13 +226,13 @@ const movieData = [
       "star-ratings": [],
       "date": "5-2025"
     },
-    { 
+    */
+   { 
       "title": "Interstellar", 
       "chosenBy": ["Trevor"], 
-      "star-ratings": [],
+      "star-ratings": ["4.5/5", "4.5/5", "4.5/5", "3.5/5", "4.5/5"],
       "date": "5-2025"
     },
-    */
    { 
       "title": "Monty Python's Life of Brian", 
       "chosenBy": ["Alex"], 
