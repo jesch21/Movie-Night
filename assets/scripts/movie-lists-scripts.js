@@ -63,7 +63,7 @@ const movieData = {
         {"date": "12/20/2024", "chosenBy": "Ayub", "title": "The Matrix Reloaded"},
         {"date": "12/22/2024", "chosenBy": "Bonus Movie: John, Ayub", "title": "The Nightmare Before Christmas"},
         {"date": "12/26/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 1)"},
-        {"date": "12/27/2024", "chosenBy": "Bonus Movie: Joe", "title": "Drive"},
+        {"date": "12/27/2024", "chosenBy": "Unseen Roulette", "title": "Drive"},
         {"date": "12/29/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 2)"},
 ],
     "2025": [
