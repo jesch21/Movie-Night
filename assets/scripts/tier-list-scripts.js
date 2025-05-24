@@ -220,13 +220,13 @@ const movieData = [
     garrett
     ayub
     joe
-    { 
-      "title": "Everyone's Hero", 
-      "chosenBy": ["Jayden"], 
-      "star-ratings": [],
+    */
+   { 
+      "title": "Blade", 
+      "chosenBy": ["Joe"], 
+      "star-ratings": ["3.5/5", "3/5", "2.5/5", "2.5/5"],
       "date": "5-2025"
     },
-    */
    { 
       "title": "Interstellar", 
       "chosenBy": ["Trevor"], 

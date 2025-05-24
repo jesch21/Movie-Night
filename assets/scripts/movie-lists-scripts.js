@@ -96,7 +96,7 @@ const movieData = {
         {"date": "5/2/2025", "chosenBy": "John", "title": "Kingsman: The Secret Service"},
         {"date": "5/9/2025", "chosenBy": "Alex", "title": "Monty Python's Life of Brian"},
         {"date": "5/16/2025", "chosenBy": "Trevor", "title": "Interstellar"},
-        {"date": "5/23/2025", "chosenBy": "Jayden", "title": "Everyone's Hero"},
+        {"date": "5/23/2025", "chosenBy": "Unseen Roulette", "title": "Blade"},
         {"date": "5/30/2025", "chosenBy": "Joe", "title": ""},
         {"date": "6/6/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "6/13/2025", "chosenBy": "Garrett", "title": ""},
@@ -217,7 +217,6 @@ window.onload = loadTable;
 const unseenMovieData = {
     "unseen": [
         {"chosenBy": ["Joe", "Ayub", "Trevor"], "title": "Akira"},
-        {"chosenBy": ["Joe", "Ayub", "Trevor"], "title": "Blade"},
         {"chosenBy": ["Ayub", "Trevor"], "title": "Knock at the Cabin"},
         {"chosenBy": ["Alex"], "title": "The VVitch"},
         {"chosenBy": ["Ayub"], "title": "The Social Network"},
@@ -272,6 +271,7 @@ const unseenMovieData = {
         {"chosenBy": ["Alex"], "title": "Greyhound"},
         {"chosenBy": ["John"], "title": "Forest Gump"},
         {"chosenBy": ["Ayub"], "title": "Fantastic Mr. Fox"},
+        {"chosenBy": ["Joe"], "title": "Blade"},
     ],
     "bonus": [
         {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},

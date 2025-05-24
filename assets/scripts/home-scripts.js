@@ -178,8 +178,8 @@ const videos = [
             joe
     */
    {
-        src: 'assets/videos/everyones-hero-trailer.mp4',
-        title: "Everyone's Hero"
+        src: 'assets/videos/blade-trailer.mp4',
+        title: 'Blade'
     },
    {
         src: 'assets/videos/interstellar-trailer.mp4',
