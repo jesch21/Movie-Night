@@ -88,6 +88,7 @@ let movieList = [
     ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
     ["Interstellar", "interstellar.jpg", "2 hrs 49 mins", "2014", "Matthew McConaughey"],
     ["Blade", "blade.jpg", "1 hrs 55 mins", "1998", "Wesley Snipes"],
+    ["Starship Troopers", "starship.jpg", "2 hrs 9 mins", "1997", "Denise Richards"],
     /*
 
     ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],

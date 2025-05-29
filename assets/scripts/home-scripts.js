@@ -175,8 +175,11 @@ const videos = [
             roulette
             garrett
             ayub
-            joe
     */
+   {
+        src: 'assets/videos/starship-trailer.mp4',
+        title: 'Starship Troopers'
+    },
    {
         src: 'assets/videos/blade-trailer.mp4',
         title: 'Blade'

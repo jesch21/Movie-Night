@@ -97,7 +97,7 @@ const movieData = {
         {"date": "5/9/2025", "chosenBy": "Alex", "title": "Monty Python's Life of Brian"},
         {"date": "5/16/2025", "chosenBy": "Trevor", "title": "Interstellar"},
         {"date": "5/23/2025", "chosenBy": "Unseen Roulette", "title": "Blade"},
-        {"date": "5/30/2025", "chosenBy": "Joe", "title": ""},
+        {"date": "5/30/2025", "chosenBy": "Joe", "title": "Starship Troopers"},
         {"date": "6/6/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "6/13/2025", "chosenBy": "Garrett", "title": ""},
         {"date": "6/20/2025", "chosenBy": "Unseen Roulette", "title": ""},
