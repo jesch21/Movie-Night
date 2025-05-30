@@ -548,6 +548,7 @@ let spookyMovies = [
     'Scream',
     "Bram Stoker's Dracula",
     "Prey",
+    "Sinners",
     "Alien",
     "Alien: Romulus",
     "Jaws",
