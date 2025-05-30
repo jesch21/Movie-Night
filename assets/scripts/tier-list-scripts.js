@@ -218,7 +218,12 @@ const movieData = [
     },
     roulette
     garrett
-    ayub
+    { 
+      "title": "Sinners", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "6-2025"
+    },
     { 
       "title": "Starship Troopers", 
       "chosenBy": ["Joe"], 
