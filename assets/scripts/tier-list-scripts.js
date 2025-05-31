@@ -224,13 +224,13 @@ const movieData = [
       "star-ratings": [],
       "date": "6-2025"
     },
-    { 
+    */
+   { 
       "title": "Starship Troopers", 
       "chosenBy": ["Joe"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "2.5/5", "4.5/5", "3.5/5", "3/5"],
       "date": "5-2025"
     },
-    */
    { 
       "title": "Blade", 
       "chosenBy": ["Joe"], 

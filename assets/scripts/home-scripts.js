@@ -174,11 +174,11 @@ const videos = [
     },
             roulette
             garrett
-    {
+    */
+   {
         src: 'assets/videos/sinners-trailer.mp4',
         title: 'Sinners'
     },
-    */
    {
         src: 'assets/videos/starship-trailer.mp4',
         title: 'Starship Troopers'
