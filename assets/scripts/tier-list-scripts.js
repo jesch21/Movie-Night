@@ -218,13 +218,13 @@ const movieData = [
     },
     roulette
     garrett
-    { 
+    */
+   { 
       "title": "Sinners", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "5/5", "4/5", "4/5", "4/5"],
       "date": "6-2025"
     },
-    */
    { 
       "title": "Starship Troopers", 
       "chosenBy": ["Joe"], 
