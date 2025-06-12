@@ -217,7 +217,12 @@ const movieData = [
       "date": "6-2025"
     },
     roulette
-    garrett
+    { 
+      "title": "Anora", 
+      "chosenBy": ["Garrett"], 
+      "star-ratings": [],
+      "date": "6-2025"
+    },
     */
    { 
       "title": "Sinners", 
