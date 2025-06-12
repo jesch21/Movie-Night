@@ -152,12 +152,6 @@ const movieData = [
       "date": "10-2025"
     },
     roulette
-    { 
-      "title": "Jaws", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "10-2025"
-    },
     garrett
     { 
       "title": "Alien: Romulus", 
@@ -170,12 +164,6 @@ const movieData = [
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "10-2025"
-    },
-    { 
-      "title": "Alien", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "9-2025"
     },
     ayub
     joe

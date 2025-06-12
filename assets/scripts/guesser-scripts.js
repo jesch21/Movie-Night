@@ -102,10 +102,7 @@ let movieList = [
 
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
-    ["Alien", "alien.jpg", "1 hrs 57 mins", "1979", "Sigourney Weaver"],
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
-
-    ["Jaws", "jaws.jpg", "2 hrs 04 mins", "1975", "Roy Schneider"],
 
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],

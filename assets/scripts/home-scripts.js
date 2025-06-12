@@ -130,18 +130,10 @@ const videos = [
         title: 'Smile'
     },
             roulette
-    {
-        src: 'assets/videos/jaws-trailer.mp4',
-        title: 'Jaws'
-    },
             garrett
     {
         src: 'assets/videos/romulus-trailer.mp4',
         title: 'Alien: Romulus'
-    },
-    {
-        src: 'assets/videos/alien-trailer.mp4',
-        title: 'Alien'
     },
             ayub
             joe
@@ -552,9 +544,7 @@ let spookyMovies = [
     "Bram Stoker's Dracula",
     "Prey",
     "Sinners",
-    "Alien",
     "Alien: Romulus",
-    "Jaws",
     "Smile",
     "Smile 2",
 ]
