@@ -173,8 +173,11 @@ const videos = [
         title: 'Thunderbolts*'
     },
             roulette
-            garrett
     */
+   {
+        src: 'assets/videos/anora-trailer.mp4',
+        title: 'Anora'
+    },
    {
         src: 'assets/videos/sinners-trailer.mp4',
         title: 'Sinners'
