@@ -205,13 +205,13 @@ const movieData = [
       "date": "6-2025"
     },
     roulette
-    { 
+    */
+   { 
       "title": "Anora", 
       "chosenBy": ["Garrett"], 
-      "star-ratings": [],
+      "star-ratings": ["1/5", "4/5", "3.5/5", "2.5/5", "3/5"],
       "date": "6-2025"
     },
-    */
    { 
       "title": "Sinners", 
       "chosenBy": ["Ayub"], 
