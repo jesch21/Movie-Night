@@ -160,12 +160,11 @@ const videos = [
         title: 'Rango'
     },
             jayden
-    {
+    */
+       {
         src: 'assets/videos/thunderbolts-trailer.mp4',
         title: 'Thunderbolts*'
     },
-            roulette
-    */
    {
         src: 'assets/videos/anora-trailer.mp4',
         title: 'Anora'

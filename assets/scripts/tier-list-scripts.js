@@ -198,13 +198,12 @@ const movieData = [
       "date": "7-2025"
     },
     jayden
-    { 
+        { 
       "title": "Thunderbolts*", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "6-2025"
     },
-    roulette
     */
    { 
       "title": "Anora", 
