@@ -151,7 +151,10 @@ const videos = [
         title: 'Logan'
     },
             roulette
-            garrett
+    {
+        src: 'assets/videos/sin-city-trailer.mp4',
+        title: 'Sin City'
+    },
             ayub
             joe
     {

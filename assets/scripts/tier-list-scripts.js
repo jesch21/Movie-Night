@@ -181,7 +181,12 @@ const movieData = [
       "date": "8-2025"
     },
     roulette
-    garrett
+    { 
+      "title": "Sin City", 
+      "chosenBy": ["Garrett"], 
+      "star-ratings": [],
+      "date": "8-2025"
+    },
     ayub
     joe
     { 
