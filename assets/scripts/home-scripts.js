@@ -150,7 +150,6 @@ const videos = [
         src: 'assets/videos/logan-trailer.mp4',
         title: 'Logan'
     },
-            roulette
     {
         src: 'assets/videos/sin-city-trailer.mp4',
         title: 'Sin City'
@@ -158,12 +157,12 @@ const videos = [
             ayub
             joe
     {
-        src: 'assets/videos/thunderbolts-trailer.mp4',
-        title: 'Thunderbolts*'
-    },
-    {
         src: 'assets/videos/rango-trailer.mp4',
         title: 'Rango'
+    },
+    {
+        src: 'assets/videos/thunderbolts-trailer.mp4',
+        title: 'Thunderbolts*'
     },
     */
    {

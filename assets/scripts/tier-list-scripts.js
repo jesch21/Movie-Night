@@ -180,7 +180,6 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    roulette
     { 
       "title": "Sin City", 
       "chosenBy": ["Garrett"], 
@@ -190,14 +189,14 @@ const movieData = [
     ayub
     joe
     { 
-      "title": "Thunderbolts*", 
-      "chosenBy": ["John"], 
+      "title": "Rango", 
+      "chosenBy": ["Alex"], 
       "star-ratings": [],
       "date": "7-2025"
     },
     { 
-      "title": "Rango", 
-      "chosenBy": ["Alex"], 
+      "title": "Thunderbolts*", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "7-2025"
     },
