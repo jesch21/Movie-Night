@@ -91,20 +91,22 @@ let movieList = [
     ["Starship Troopers", "starship.jpg", "2 hrs 9 mins", "1997", "Denise Richards"],
     ["Sinners", "sinners.jpg", "2 hrs 17 mins", "2025", "Michael B. Jordan"],
     ["Anora", "anora.jpg", "2 hrs 19 mins", "2024", "Mikey Madison"],
-    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
+    ["Teen Titans GO! To the Movies", "teen-titans.jpg", "1 hrs 24 mins", "2018", "Aaron Siegel"],
+    ["All Dogs Go to Heaven", "all-dogs.jpg", "1 hrs 24 mins", "1989", "Don Bluth"],
     /*
-
     ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
-    ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
+    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
 
     ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
 
-    ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
+    ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
 
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
+
+    ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
     ["Die Hard", "die-hard.jpg", "2 hrs 12 mins", "1988", "David Harbour"],
 

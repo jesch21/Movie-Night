@@ -118,7 +118,10 @@ const videos = [
             garrett
             ayub
             joe
-            trevor
+    {
+        src: 'assets/videos/ninjago-trailer.mp4',
+        title: 'The Lego Ninjago Movie'
+    },
             alex
             jayden
     {
@@ -138,8 +141,8 @@ const videos = [
             ayub
             joe
     {
-        src: 'assets/videos/ninjago-trailer.mp4',
-        title: 'The Lego Ninjago Movie'
+        src: 'assets/videos/gladiator2-trailer.mp4',
+        title: 'Gladiator II'
     },
             alex
             jayden
@@ -152,18 +155,21 @@ const videos = [
             ayub
             joe
     {
-        src: 'assets/videos/gladiator2-trailer.mp4',
-        title: 'Gladiator II'
+        src: 'assets/videos/thunderbolts-trailer.mp4',
+        title: 'Thunderbolts*'
     },
     {
         src: 'assets/videos/rango-trailer.mp4',
         title: 'Rango'
     },
-            jayden
     */
-       {
-        src: 'assets/videos/thunderbolts-trailer.mp4',
-        title: 'Thunderbolts*'
+   {
+        src: 'assets/videos/all-dogs-trailer.mp4',
+        title: 'All Dogs Go to Heaven'
+    },
+    {
+        src: 'assets/videos/teen-titans-trailer.mp4',
+        title: 'Teen Titans GO! To the Movies'
     },
    {
         src: 'assets/videos/anora-trailer.mp4',
@@ -187,7 +193,7 @@ const videos = [
     },
     {
         src: 'assets/videos/monty2-trailer.mp4',
-        title: "Monty Python's Holy Grail"
+        title: "Monty Python's Life of Brian"
     },
     {
         src: 'assets/videos/kingsman-trailer.mp4',

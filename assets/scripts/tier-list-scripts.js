@@ -136,7 +136,12 @@ const movieData = [
     garrett
     ayub
     joe
-    trevor
+    { 
+      "title": "The Lego Ninjago Movie", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "11-2025"
+    },
     alex
     jayden
     { 
@@ -159,16 +164,10 @@ const movieData = [
       "star-ratings": [],
       "date": "10-2025"
     },
-    { 
-      "title": "Alien: Romulus", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "10-2025"
-    },
     ayub
     joe
     { 
-      "title": "The Lego Ninjago Movie", 
+      "title": "Gladiator II", 
       "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "9-2025"
@@ -186,8 +185,8 @@ const movieData = [
     ayub
     joe
     { 
-      "title": "Gladiator II", 
-      "chosenBy": ["Trevor"], 
+      "title": "Thunderbolts*", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "7-2025"
     },
@@ -197,14 +196,19 @@ const movieData = [
       "star-ratings": [],
       "date": "7-2025"
     },
-    jayden
-        { 
-      "title": "Thunderbolts*", 
-      "chosenBy": ["John"], 
+    { 
+      "title": "All Dogs Go to Heaven", 
+      "chosenBy": ["Jayden"], 
       "star-ratings": [],
-      "date": "6-2025"
+      "date": "7-2025"
     },
     */
+   { 
+      "title": "Teen Titans GO! To the Movies", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": ["4/5", "3/5", "1.5/5", "4.5/5"],
+      "date": "6-2025"
+    },
    { 
       "title": "Anora", 
       "chosenBy": ["Garrett"], 
