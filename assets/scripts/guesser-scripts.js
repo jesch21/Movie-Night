@@ -92,10 +92,10 @@ let movieList = [
     ["Sinners", "sinners.jpg", "2 hrs 17 mins", "2025", "Michael B. Jordan"],
     ["Anora", "anora.jpg", "2 hrs 19 mins", "2024", "Mikey Madison"],
     ["Teen Titans GO! To the Movies", "teen-titans.jpg", "1 hrs 24 mins", "2018", "Aaron Siegel"],
-    ["All Dogs Go to Heaven", "all-dogs.jpg", "1 hrs 24 mins", "1989", "Don Bluth"],
-    /*
-    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
     ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
+    /*
+    ["All Dogs Go to Heaven", "all-dogs.jpg", "1 hrs 24 mins", "1989", "Don Bluth"],
+    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
 
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
 

@@ -195,18 +195,18 @@ const movieData = [
       "date": "7-2025"
     },
     { 
-      "title": "Thunderbolts*", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "7-2025"
-    },
-    { 
       "title": "All Dogs Go to Heaven", 
       "chosenBy": ["Jayden"], 
       "star-ratings": [],
       "date": "7-2025"
     },
     */
+   { 
+      "title": "Thunderbolts*", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "7-2025"
+    },
    { 
       "title": "Teen Titans GO! To the Movies", 
       "chosenBy": ["Trevor"], 

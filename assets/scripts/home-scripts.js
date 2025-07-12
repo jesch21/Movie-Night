@@ -161,13 +161,13 @@ const videos = [
         title: 'Rango'
     },
     {
-        src: 'assets/videos/thunderbolts-trailer.mp4',
-        title: 'Thunderbolts*'
+        src: 'assets/videos/all-dogs-trailer.mp4',
+        title: 'All Dogs Go to Heaven'
     },
     */
    {
-        src: 'assets/videos/all-dogs-trailer.mp4',
-        title: 'All Dogs Go to Heaven'
+        src: 'assets/videos/thunderbolts-trailer.mp4',
+        title: 'Thunderbolts*'
     },
     {
         src: 'assets/videos/teen-titans-trailer.mp4',
