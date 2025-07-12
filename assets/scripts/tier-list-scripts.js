@@ -172,8 +172,8 @@ const movieData = [
       "star-ratings": [],
       "date": "9-2025"
     },
-    alex
     jayden
+    alex
     { 
       "title": "Logan", 
       "chosenBy": ["John"], 

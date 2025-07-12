@@ -144,8 +144,8 @@ const videos = [
         src: 'assets/videos/gladiator2-trailer.mp4',
         title: 'Gladiator II'
     },
-            alex
             jayden
+            alex
     {
         src: 'assets/videos/logan-trailer.mp4',
         title: 'Logan'
