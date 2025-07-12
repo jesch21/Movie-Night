@@ -204,7 +204,7 @@ const movieData = [
    { 
       "title": "Thunderbolts*", 
       "chosenBy": ["John"], 
-      "star-ratings": [],
+      "star-ratings": ["3/5", "2.5/5", "5/5", "2/5", "2/5"],
       "date": "7-2025"
     },
    { 

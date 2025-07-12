@@ -160,11 +160,11 @@ const videos = [
         src: 'assets/videos/rango-trailer.mp4',
         title: 'Rango'
     },
-    {
+    */
+   {
         src: 'assets/videos/all-dogs-trailer.mp4',
         title: 'All Dogs Go to Heaven'
     },
-    */
    {
         src: 'assets/videos/thunderbolts-trailer.mp4',
         title: 'Thunderbolts*'
