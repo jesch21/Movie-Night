@@ -195,6 +195,12 @@ const movieData = [
       "date": "7-2025"
     },
     { 
+      "title": "The Road to El Dorado", 
+      "chosenBy": ["Trevor"], 
+      "star-ratings": [],
+      "date": "7-2025"
+    },
+    { 
       "title": "All Dogs Go to Heaven", 
       "chosenBy": ["Jayden"], 
       "star-ratings": [],
