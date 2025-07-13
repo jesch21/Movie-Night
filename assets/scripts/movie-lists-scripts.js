@@ -126,7 +126,7 @@ const movieData = {
         {"date": "11/21/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "11/28/2025", "chosenBy": "Garrett", "title": ""},
         {"date": "12/5/2025", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "12/12/2025", "chosenBy": "John", "title": "Die Hard"},
+        {"date": "12/12/2025", "chosenBy": "John", "title": "Spider-Man"},
         {"date": "12/19/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "12/26/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"}
 ],
@@ -136,7 +136,7 @@ const movieData = {
         {"date": "1/16/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "1/23/2026", "chosenBy": "Garrett", "title": ""},
         {"date": "1/30/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "2/6/2026", "chosenBy": "John", "title": "Spider-Man"},
+        {"date": "2/6/2026", "chosenBy": "John", "title": "Terminator 2: Judgement Day"},
         {"date": "2/13/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "2/20/2026", "chosenBy": "Alex", "title": ""},
         {"date": "2/27/2026", "chosenBy": "Trevor", "title": ""},
@@ -144,7 +144,7 @@ const movieData = {
         {"date": "3/13/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "3/20/2026", "chosenBy": "Garrett", "title": ""},
         {"date": "3/27/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "4/3/2026", "chosenBy": "John", "title": "Terminator 2: Judgement Day"},
+        {"date": "4/3/2026", "chosenBy": "John", "title": "Spider-Man 2"},
         {"date": "4/10/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "4/17/2026", "chosenBy": "Alex", "title": ""},
         {"date": "4/24/2026", "chosenBy": "Trevor", "title": ""},
@@ -152,7 +152,7 @@ const movieData = {
         {"date": "5/8/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "5/15/2026", "chosenBy": "Garrett", "title": ""},
         {"date": "5/22/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "5/29/2026", "chosenBy": "John", "title": "Spider-Man 2"},
+        {"date": "5/29/2026", "chosenBy": "John", "title": "Iron Man"},
         {"date": "6/5/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "6/12/2026", "chosenBy": "Alex", "title": ""},
         {"date": "6/19/2026", "chosenBy": "Trevor", "title": ""},
@@ -160,7 +160,7 @@ const movieData = {
         {"date": "7/3/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "7/10/2026", "chosenBy": "Garrett", "title": ""},
         {"date": "7/17/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "7/24/2026", "chosenBy": "John", "title": "Iron Man"},
+        {"date": "7/24/2026", "chosenBy": "John", "title": "Captain America: The First Avenger"},
         {"date": "7/31/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "8/7/2026", "chosenBy": "Alex", "title": ""},
         {"date": "8/14/2026", "chosenBy": "Trevor", "title": ""},
@@ -168,7 +168,7 @@ const movieData = {
         {"date": "8/28/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "9/4/2026", "chosenBy": "Garrett", "title": ""},
         {"date": "9/11/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "9/18/2026", "chosenBy": "John", "title": "Captain America: The First Avenger"},
+        {"date": "9/18/2026", "chosenBy": "John", "title": "The Avengers"},
         {"date": "9/25/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "10/2/2026", "chosenBy": "Alex", "title": ""},
         {"date": "10/9/2026", "chosenBy": "Trevor", "title": ""},
@@ -176,7 +176,7 @@ const movieData = {
         {"date": "10/23/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "10/30/2026", "chosenBy": "Garrett", "title": ""},
         {"date": "11/6/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "11/13/2026", "chosenBy": "John", "title": "The Avengers"},
+        {"date": "11/13/2026", "chosenBy": "John", "title": "Mission Impossible"},
         {"date": "11/20/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "11/27/2026", "chosenBy": "Alex", "title": ""},
         {"date": "12/4/2026", "chosenBy": "Trevor", "title": ""},
@@ -184,7 +184,10 @@ const movieData = {
         {"date": "12/17/2026", "chosenBy": "Bonus Movie: John", "title": "The Polar Express"},
         {"date": "12/18/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "12/25/2026", "chosenBy": "Garrett", "title": ""}
-    ]    
+],
+    "2027": [
+        
+]    
 };
 
 function loadTable() {

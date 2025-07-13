@@ -111,13 +111,11 @@ let movieList = [
 
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
-    ["Die Hard", "die-hard.jpg", "2 hrs 12 mins", "1988", "David Harbour"],
+    ["Spider-Man", "spider-man.jpg", "2 hrs 1 mins", "2002", "Tobey Maguire"],
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
 
 
-
-    ["Spider-Man", "spider-man.jpg", "2 hrs 1 mins", "2002", "Tobey Maguire"],
 
     ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
 
@@ -128,6 +126,8 @@ let movieList = [
     ["Captain America: The First Avenger", "captain-america1.jpg", "2 hrs 4 mins", "2011", "Hugo Weaving"],
 
     ["The Avengers", "avengers1.jpg", "2 hrs 23 mins", "2012", "Scarlett Johansson"],
+
+    ["Mission Impossible", "mission-impossible1.jpg", "1 hrs 50 mins", "1996", "Tom Cruise"],
 
     ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
     */

@@ -2,7 +2,7 @@
 let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
-const slideInterval = 30000; // 30 seconds
+const slideInterval = 15000; // 15 seconds
 let autoSlide;
 let isInitialLoad = true;
 
@@ -16,6 +16,17 @@ const videos = [
         src: 'assets/videos/polar-trailer.mp4',
         title: 'The Polar Express'
     },
+    joe
+    trevor
+    alex
+    jayden
+    {
+        src: 'assets/videos/mission-impossible1-trailer.mp4',
+        title: 'Mission Impossible'
+    },
+    roulette
+    garrett
+    ayub
     joe
     trevor
     alex
@@ -73,17 +84,6 @@ const videos = [
     ayub
     joe
     trevor
-    alex
-    jayden
-    {
-        src: 'assets/videos/spider-man-trailer.mp4',
-        title: 'Spider-Man'
-    },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
 
     {
         src: 'assets/videos/lampoon-trailer.mp4',
@@ -91,8 +91,8 @@ const videos = [
     },
             jayden
     {
-        src: 'assets/videos/die-hard-trailer.mp4',
-        title: 'Die Hard'
+        src: 'assets/videos/spider-man-trailer.mp4',
+        title: 'Spider-Man'
     },
             roulette
             garrett

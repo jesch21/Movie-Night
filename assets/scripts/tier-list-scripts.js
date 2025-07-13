@@ -13,7 +13,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "The Avengers", 
+      "title": "Mission Impossible", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "11-2026"
@@ -26,7 +26,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Captain America: The First Avenger", 
+      "title": "The Avengers", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "9-2026"
@@ -39,7 +39,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Iron Man", 
+      "title": "Captain America: The First Avenger", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "7-2026"
@@ -52,7 +52,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Spider-Man 2", 
+      "title": "Iron Man", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "5-2026"
@@ -65,7 +65,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Terminator 2: Judgement Day", 
+      "title": "Spider-Man 2", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2026"
@@ -78,7 +78,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Spider-Man", 
+      "title": "Terminator 2: Judgement Day", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2026"
@@ -97,7 +97,7 @@ const movieData = [
     },
     jayden
     { 
-      "title": "Die Hard", 
+      "title": "Spider-Man", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2025"
@@ -863,8 +863,11 @@ let counts25 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0,
 //let jan26 = 0, feb26 = 0, mar26 = 0, apr26 = 0, may26 = 0, jun26 = 0, jul26 = 0, aug26 = 0, sep26 = 0, oct26 = 0, nov26 = 0, dec26 = 0;
 //let counts26 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0 };
 
+//let jan27 = 0, feb27 = 0, mar27 = 0, apr27 = 0, may27 = 0, jun27 = 0, jul27 = 0, aug27 = 0, sep27 = 0, oct27 = 0, nov27 = 0, dec27 = 0;
+//let counts27 = { jan: 0, feb: 0, mar: 0, apr: 0, may: 0, jun: 0, jul: 0, aug: 0, sep: 0, oct: 0, nov: 0, dec: 0 };
+
 /**
- * Function to calculate average ratings per month for the years 2023, 2024, and 2025.
+ * Function to calculate average ratings per month for the years 2023, 2024, 2025, 2026, 2027.
  */
 function calculateMonthlyAverages() {
     movieData.forEach(movie => {
@@ -1075,6 +1078,58 @@ function calculateMonthlyAverages() {
                   counts26.dec++;
                   break;
           }
+        } 
+          else if (year === 2027) {
+          switch(month) {
+              case 1:
+                  jan27 += averageRating;
+                  counts27.jan++;
+                  break;
+              case 2:
+                  feb27 += averageRating;
+                  counts27.feb++;
+                  break;
+              case 3:
+                  mar27 += averageRating;
+                  counts27.mar++;
+                  break;
+              case 4:
+                  apr27 += averageRating;
+                  counts27.apr++;
+                  break;
+              case 5:
+                  may27 += averageRating;
+                  counts27.may++;
+                  break;
+              case 6:
+                  jun27 += averageRating;
+                  counts27.jun++;
+                  break;
+              case 7:
+                  jul27 += averageRating;
+                  counts27.jul++;
+                  break;
+              case 8:
+                  aug27 += averageRating;
+                  counts27.aug++;
+                  break;
+              case 9:
+                  sep27 += averageRating;
+                  counts27.sep++;
+                  break;
+              case 10:
+                  oct27 += averageRating;
+                  counts27.oct++;
+                  break;
+              case 11:
+                  nov27 += averageRating;
+                  counts27.nov++;
+                  break;
+              case 12:
+                  dec27 += averageRating;
+                  counts27.dec++;
+                  break;
+          }
         } */
     });
 
@@ -1130,6 +1185,19 @@ function calculateMonthlyAverages() {
     oct26 = counts26.oct === 0 ? 0 : (oct26 / counts26.oct).toFixed(3);
     nov26 = counts26.nov === 0 ? 0 : (nov26 / counts26.nov).toFixed(3);
     dec26 = counts26.dec === 0 ? 0 : (dec26 / counts26.dec).toFixed(3);
+
+    jan27 = counts27.jan === 0 ? 0 : (jan27 / counts27.jan).toFixed(3);
+    feb27 = counts27.feb === 0 ? 0 : (feb27 / counts27.feb).toFixed(3);
+    mar27 = counts27.mar === 0 ? 0 : (mar27 / counts27.mar).toFixed(3);
+    apr27 = counts27.apr === 0 ? 0 : (apr27 / counts27.apr).toFixed(3);
+    may27 = counts27.may === 0 ? 0 : (may27 / counts27.may).toFixed(3);
+    jun27 = counts27.jun === 0 ? 0 : (jun27 / counts27.jun).toFixed(3);
+    jul27 = counts27.jul === 0 ? 0 : (jul27 / counts27.jul).toFixed(3);
+    aug27 = counts27.aug === 0 ? 0 : (aug27 / counts27.aug).toFixed(3);
+    sep27 = counts27.sep === 0 ? 0 : (sep27 / counts27.sep).toFixed(3);
+    oct27 = counts27.oct === 0 ? 0 : (oct27 / counts27.oct).toFixed(3);
+    nov27 = counts27.nov === 0 ? 0 : (nov27 / counts27.nov).toFixed(3);
+    dec27 = counts27.dec === 0 ? 0 : (dec27 / counts27.dec).toFixed(3);
     */
 }
 
@@ -1141,6 +1209,7 @@ let avg23 = [null, null, null, null, null, null, null, null, null, null, null, d
 let avg24 = [jan24, feb24, mar24, apr24, may24, jun24, jul24, aug24, sep24, oct24, nov24, dec24];
 let avg25 = [jan25, feb25, mar25, apr25, may25, jun25, jul25, aug25, sep25, oct25, nov25, dec25];
 //let avg26 = [jan26, feb26, mar26, apr26, may26, jun26, jul26, aug26, sep26, oct26, nov26, dec26];
+//let avg27 = [jan27, feb27, mar27, apr27, may27, jun27, jul27, aug27, sep27, oct27, nov27, dec27];
 
 const ctx = document.getElementById('myLineChart').getContext('2d');
 const myLineChart = new Chart(ctx, {
@@ -1180,7 +1249,15 @@ const myLineChart = new Chart(ctx, {
             borderWidth: 2,
             fill: false,
             tension: 0.2
-        }
+          },
+          {
+            label: '2027',
+            data: avg27,
+            borderColor: 'orange',
+            borderWidth: 2,
+            fill: false,
+            tension: 0.2
+          }
             */
       ]
   },
@@ -1245,6 +1322,19 @@ function getBestMonth() {
       { month: 'October', value: oct26, year: 2026 },
       { month: 'November', value: nov26, year: 2026 },
       { month: 'December', value: dec26, year: 2026 }
+
+      { month: 'January', value: jan27, year: 2027 },
+      { month: 'February', value: feb27, year: 2027 },
+      { month: 'March', value: mar27, year: 2027 },
+      { month: 'April', value: apr27, year: 2027 },
+      { month: 'May', value: may27, year: 2027 },
+      { month: 'June', value: jun27, year: 2027 },
+      { month: 'July', value: jul27, year: 2027 },
+      { month: 'August', value: aug27, year: 2027 },
+      { month: 'September', value: sep27, year: 2027 },
+      { month: 'October', value: oct27, year: 2027 },
+      { month: 'November', value: nov27, year: 2027 },
+      { month: 'December', value: dec27, year: 2027 }
        */
   ];
 
