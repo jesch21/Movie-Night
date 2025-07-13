@@ -13,13 +13,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Captain America: The Winter Soldier", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "11-2026"
-    },
-    { 
-      "title": "Captain America: The First Avenger", 
+      "title": "The Avengers", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "11-2026"
@@ -32,7 +26,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Shang Chi and the Legend of the Ten Rings", 
+      "title": "Captain America: The First Avenger", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "9-2026"
@@ -58,7 +52,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Bullet Train", 
+      "title": "Spider-Man 2", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "5-2026"
@@ -71,24 +65,12 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Deadpool and Wolverine", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "4-2026"
-    },
-    { 
-      "title": "Deadpool 2", 
+      "title": "Terminator 2: Judgement Day", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2026"
     },
     roulette
-    { 
-      "title": "Deadpool", 
-      "chosenBy": ["Trevor"], 
-      "star-ratings": [],
-      "date": "3-2026"
-    },
     garrett
     ayub
     joe
@@ -96,24 +78,12 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Guardians of the Galaxy Vol. 3", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "2-2026"
-    },
-    { 
-      "title": "Guardians of the Galaxy Vol. 2", 
+      "title": "Spider-Man", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2026"
     },
     roulette
-    { 
-      "title": "Guardians of the Galaxy", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "1-2026"
-    },
     garrett
     ayub
     joe
@@ -175,7 +145,7 @@ const movieData = [
     jayden
     alex
     { 
-      "title": "Logan", 
+      "title": "Bullet Train", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "8-2025"

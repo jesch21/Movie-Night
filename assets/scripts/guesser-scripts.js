@@ -100,7 +100,7 @@ let movieList = [
 
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
 
-    ["Logan", "logan.jpg", "2 hrs 17 mins", "2017", "Hugh Jackman"],
+    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
 
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
@@ -115,24 +115,19 @@ let movieList = [
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
 
-    ["Guardians of the Galaxy", "guardians.jpg", "2 hrs 01 mins", "2014", "Chris Pratt"],
 
-    ["Guardians of the Galaxy Vol. 2", "guardians2.jpg", "2 hrs 16 mins", "2017", "Kurt Russel"],
-    ["Guardians of the Galaxy Vol. 3", "guardians3.jpg", "2 hrs 30 mins", "2023", "Bradley Cooper"],
 
-    ["Deadpool", "deadpool.jpg", "1 hrs 48 mins", "2016", "Ryan Reynolds"],
+    ["Spider-Man", "spider-man.jpg", "2 hrs 1 mins", "2002", "Tobey Maguire"],
 
-    ["Deadpool 2", "deadpool2.jpg", "1 hrs 59 mins", "2018", "Josh Brolin"],
-    ["Deadpool and Wolverine", "deadpool3.jpg", "2 hrs 08 mins", "2024", "Emma Corrin"],
+    ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
 
-    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
+    ["Spider-Man 2", "spider-man2.jpg", "2 hrs 7 mins", "2004", "Alfred Molina"],
 
     ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
 
-    ["Shang Chi and the Legend of the Ten Rings", "shang-chi.jpg", "2 hrs 12 mins", "2021", "Simu Liu"],
-
     ["Captain America: The First Avenger", "captain-america1.jpg", "2 hrs 4 mins", "2011", "Hugo Weaving"],
-    ["Captain America: The Winter Soldier", "captain-america2.jpg", "2 hrs 16 mins", "2014", "Sebastian Stan"],
+
+    ["The Avengers", "avengers1.jpg", "2 hrs 23 mins", "2012", "Scarlett Johansson"],
 
     ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
     */

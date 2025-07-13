@@ -21,12 +21,8 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/captain-america2-trailer.mp4',
-        title: 'Captain America: The Winter Soldier'
-    },
-    {
-        src: 'assets/videos/captain-america1-trailer.mp4',
-        title: 'Captain America: The First Avenger'
+        src: 'assets/videos/avengers1-trailer.mp4',
+        title: 'The Avengers'
     },
     roulette
     garrett
@@ -36,8 +32,8 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/shang-chi-trailer.mp4',
-        title: 'Shang Chi and the Legend of the Ten Rings'
+        src: 'assets/videos/captain-america1-trailer.mp4',
+        title: 'Captain America: The First Avenger'
     },
     roulette
     garrett
@@ -58,8 +54,8 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/bullet-train-trailer.mp4',
-        title: 'Bullet Train'
+        src: 'assets/videos/spider-man2-trailer.mp4',
+        title: 'Spider-Man 2'
     },
     roulette
     garrett
@@ -69,18 +65,10 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/deadpool3-trailer.mp4',
-        title: 'Deadpool 3'
-    },
-    {
-        src: 'assets/videos/deadpool2-trailer.mp4',
-        title: 'Deadpool 2'
+        src: 'assets/videos/terminator2-trailer.mp4',
+        title: 'Terminator 2: Judgement Day'
     },
     roulette
-    {
-        src: 'assets/videos/deadpool-trailer.mp4',
-        title: 'Deadpool'
-    },
     garrett
     ayub
     joe
@@ -88,18 +76,10 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/guardians3-trailer.mp4',
-        title: 'Guardians of the Galaxy Vol. 3'
-    },
-    {
-        src: 'assets/videos/guardians2-trailer.mp4',
-        title: 'Guardians of the Galaxy Vol. 2'
+        src: 'assets/videos/spider-man-trailer.mp4',
+        title: 'Spider-Man'
     },
     roulette
-    {
-        src: 'assets/videos/guardians-trailer.mp4',
-        title: 'Guardians of the Galaxy'
-    },
     garrett
     ayub
     joe
@@ -147,8 +127,8 @@ const videos = [
             jayden
             alex
     {
-        src: 'assets/videos/logan-trailer.mp4',
-        title: 'Logan'
+        src: 'assets/videos/bullet-train-trailer.mp4',
+        title: 'Bullet Train'
     },
     {
         src: 'assets/videos/sin-city-trailer.mp4',
