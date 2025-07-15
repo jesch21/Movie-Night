@@ -291,7 +291,6 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Smile"},
         {"chosenBy": ["John"], "title": "Captain America: The First Avenger"},
         {"chosenBy": ["John"], "title": "Mission Impossible 2"},
-        {"chosenBy": ["John"], "title": "Smile"},
         {"chosenBy": ["John"], "title": "The Polar Express"},
     ]
 };
