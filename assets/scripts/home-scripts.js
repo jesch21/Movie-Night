@@ -21,6 +21,43 @@ const videos = [
     alex
     jayden
     {
+        src: 'assets/videos/mission-impossible6-trailer.mp4',
+        title: 'Mission Impossible - Fallout'
+    },
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    {
+        src: 'assets/videos/mission-impossible5-trailer.mp4',
+        title: 'Mission Impossible - Rogue Nation'
+    },
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    {
+        src: 'assets/videos/mission-impossible4-trailer.mp4',
+        title: 'Mission Impossible - Ghost Protocol'
+    },
+    {
+        src: 'assets/videos/mission-impossible2-trailer.mp4',
+        title: 'Mission Impossible II'
+    },
+    roulette
+    garrett
+    ayub
+    joe
+    trevor
+    alex
+    jayden
+    {
         src: 'assets/videos/mission-impossible1-trailer.mp4',
         title: 'Mission Impossible'
     },
@@ -32,16 +69,9 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/avengers1-trailer.mp4',
-        title: 'The Avengers'
+        src: 'assets/videos/captain-america2-trailer.mp4',
+        title: 'Captain America: The Winter Soldier'
     },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
     {
         src: 'assets/videos/captain-america1-trailer.mp4',
         title: 'Captain America: The First Avenger'
@@ -62,28 +92,6 @@ const videos = [
     ayub
     joe
     trevor
-    alex
-    jayden
-    {
-        src: 'assets/videos/spider-man2-trailer.mp4',
-        title: 'Spider-Man 2'
-    },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
-    {
-        src: 'assets/videos/terminator2-trailer.mp4',
-        title: 'Terminator 2: Judgement Day'
-    },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
 
     {
         src: 'assets/videos/lampoon-trailer.mp4',
@@ -91,8 +99,8 @@ const videos = [
     },
             jayden
     {
-        src: 'assets/videos/spider-man-trailer.mp4',
-        title: 'Spider-Man'
+        src: 'assets/videos/terminator2-trailer.mp4',
+        title: 'Terminator 2: Judgement Day'
     },
             roulette
             garrett

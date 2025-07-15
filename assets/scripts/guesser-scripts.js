@@ -111,23 +111,24 @@ let movieList = [
 
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
-    ["Spider-Man", "spider-man.jpg", "2 hrs 1 mins", "2002", "Tobey Maguire"],
+    ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
 
 
-
-    ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
-
-    ["Spider-Man 2", "spider-man2.jpg", "2 hrs 7 mins", "2004", "Alfred Molina"],
-
     ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
 
     ["Captain America: The First Avenger", "captain-america1.jpg", "2 hrs 4 mins", "2011", "Hugo Weaving"],
-
-    ["The Avengers", "avengers1.jpg", "2 hrs 23 mins", "2012", "Scarlett Johansson"],
+    ["Captain America: The Winter Soldier", "captain-america2.jpg", "2 hrs 16 mins", "2014", "Chris Evans"],
 
     ["Mission Impossible", "mission-impossible1.jpg", "1 hrs 50 mins", "1996", "Tom Cruise"],
+
+    ["Mission Impossible II", "mission-impossible2.jpg", "2 hrs 3 mins", "2000", "Tom Cruise"],
+    ["Mission Impossible - Ghost Protocol", "mission-impossible4.jpg", "2 hrs 12 mins", "2011", "Jeremy Renner"],
+
+    ["Mission Impossible - Rogue Nation", "mission-impossible5.jpg", "2 hrs 11 mins", "2015", "Simon Pegg"],
+
+    ["Mission Impossible - Fallout", "mission-impossible6.jpg", "2 hrs 27 mins", "2018", "Henry Cavill"],
 
     ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
     */

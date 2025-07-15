@@ -13,7 +13,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Mission Impossible", 
+      "title": "Mission Impossible - Fallout", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "11-2026"
@@ -26,7 +26,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "The Avengers", 
+      "title": "Mission Impossible - Rogue Nation", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "9-2026"
@@ -39,7 +39,13 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Captain America: The First Avenger", 
+      "title": "Mission Impossible - Ghost Protocol", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "7-2026"
+    },
+    { 
+      "title": "Mission Impossible II", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "7-2026"
@@ -52,7 +58,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Iron Man", 
+      "title": "Mission Impossible", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "5-2026"
@@ -65,7 +71,13 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Spider-Man 2", 
+      "title": "Captain America: The Winter Soldier", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "4-2026"
+    },
+    { 
+      "title": "Captain America: The First Avenger", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2026"
@@ -78,7 +90,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Terminator 2: Judgement Day", 
+      "title": "Iron Man", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "2-2026"
@@ -97,7 +109,7 @@ const movieData = [
     },
     jayden
     { 
-      "title": "Spider-Man", 
+      "title": "Terminator 2: Judgement Day", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2025"
