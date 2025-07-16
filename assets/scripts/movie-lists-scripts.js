@@ -247,7 +247,6 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Taken"},
         {"chosenBy": ["John"], "title": "Scary Movie 3"},
         {"chosenBy": ["John"], "title": "Django Unchained"},
-        {"chosenBy": ["John"], "title": "Top Gun"},
         {"chosenBy": ["John"], "title": "Ghost Rider"},
         {"chosenBy": ["John"], "title": "Phone Booth"},
         {"chosenBy": ["John"], "title": "Everything Everywhere All At Once"},
