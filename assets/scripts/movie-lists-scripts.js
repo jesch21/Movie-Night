@@ -249,7 +249,6 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Django Unchained"},
         {"chosenBy": ["John"], "title": "Top Gun"},
         {"chosenBy": ["John"], "title": "Ghost Rider"},
-        {"chosenBy": ["John"], "title": "Resident Evil (2002)"},
         {"chosenBy": ["John"], "title": "Phone Booth"},
         {"chosenBy": ["John"], "title": "Everything Everywhere All At Once"},
         {"chosenBy": ["John"], "title": "Robocop"},
