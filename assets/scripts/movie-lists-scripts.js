@@ -103,7 +103,7 @@ const movieData = {
         {"date": "6/27/2025", "chosenBy": "Trevor", "title": "Teen Titans GO! To the Movies"},
         {"date": "7/11/2025", "chosenBy": "John", "title": "Thunderbolts*"},
         {"date": "7/17/2025", "chosenBy": "Jayden", "title": "All Dogs Go to Heaven"},
-        {"date": "7/18/2025", "chosenBy": "Bonus Movie: Trevor", "title": "The Road to El Dorado"},
+        {"date": "7/24/2025", "chosenBy": "Bonus Movie: Trevor", "title": "The Road to El Dorado"},
         {"date": "7/25/2025", "chosenBy": "Alex", "title": "Rango"},
         {"date": "8/1/2025", "chosenBy": "Joe", "title": ""},
         {"date": "8/8/2025", "chosenBy": "Ayub", "title": ""},

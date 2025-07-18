@@ -182,13 +182,13 @@ const movieData = [
       "star-ratings": [],
       "date": "7-2025"
     },
-    { 
+    */
+   { 
       "title": "All Dogs Go to Heaven", 
       "chosenBy": ["Jayden"], 
-      "star-ratings": [],
+      "star-ratings": ["2/5", "0.5/5", "2.5/5", "2.5/5"],
       "date": "7-2025"
     },
-    */
    { 
       "title": "Thunderbolts*", 
       "chosenBy": ["John"], 
