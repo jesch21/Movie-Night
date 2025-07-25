@@ -145,13 +145,13 @@ const videos = [
             ayub
             joe
     {
-        src: 'assets/videos/rango-trailer.mp4',
-        title: 'Rango'
+        src: 'assets/videos/el-dorado-trailer.mp4',
+        title: 'The Road to El Dorado'
     },
     */
    {
-        src: 'assets/videos/el-dorado-trailer.mp4',
-        title: 'The Road to El Dorado'
+        src: 'assets/videos/rango-trailer.mp4',
+        title: 'Rango'
     },
    {
         src: 'assets/videos/all-dogs-trailer.mp4',

@@ -94,9 +94,9 @@ let movieList = [
     ["Teen Titans GO! To the Movies", "teen-titans.jpg", "1 hrs 24 mins", "2018", "Aaron Siegel"],
     ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
     ["All Dogs Go to Heaven", "all-dogs.jpg", "1 hrs 24 mins", "1989", "Don Bluth"],
-    ["The Road to El Dorado", "el-dorado.jpg", "1 hrs 29 mins", "2000", "Rosie Perez"],
-    /*
     ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
+    /*
+    ["The Road to El Dorado", "el-dorado.jpg", "1 hrs 29 mins", "2000", "Rosie Perez"],
 
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
 

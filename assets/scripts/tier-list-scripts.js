@@ -171,14 +171,14 @@ const movieData = [
     ayub
     joe
     { 
-      "title": "Rango", 
-      "chosenBy": ["Alex"], 
+      "title": "The Road to El Dorado", 
+      "chosenBy": ["Trevor"], 
       "star-ratings": [],
       "date": "7-2025"
     },
     { 
-      "title": "The Road to El Dorado", 
-      "chosenBy": ["Trevor"], 
+      "title": "Rango", 
+      "chosenBy": ["Alex"], 
       "star-ratings": [],
       "date": "7-2025"
     },
