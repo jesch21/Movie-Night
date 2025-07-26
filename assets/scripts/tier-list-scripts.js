@@ -346,7 +346,7 @@ const movieData = [
       "date": "1-2025"
     },
     { 
-      "title": "Star Wars: The Phatom Menace", 
+      "title": "Star Wars: The Phantom Menace", 
       "chosenBy": ["John"], 
       "star-ratings": ["3/5", "2.5/5", "3/5", "2.5/5", "2.5/5"],
       "date": "1-2025"
