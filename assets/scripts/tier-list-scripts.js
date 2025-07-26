@@ -176,13 +176,13 @@ const movieData = [
       "star-ratings": [],
       "date": "7-2025"
     },
-    { 
+    */
+   { 
       "title": "Rango", 
       "chosenBy": ["Alex"], 
-      "star-ratings": [],
+      "star-ratings": ["5/5", "4/5", "4/5", "4/5", "4.5/5"],
       "date": "7-2025"
     },
-    */
    { 
       "title": "All Dogs Go to Heaven", 
       "chosenBy": ["Jayden"], 
