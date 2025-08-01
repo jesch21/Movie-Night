@@ -169,12 +169,17 @@ const movieData = [
       "date": "8-2025"
     },
     ayub
-    joe
     { 
       "title": "The Road to El Dorado", 
       "chosenBy": ["Trevor"], 
       "star-ratings": [],
-      "date": "7-2025"
+      "date": "8-2025"
+    },
+    { 
+      "title": "Happy Gilmore", 
+      "chosenBy": ["Joe"], 
+      "star-ratings": [],
+      "date": "8-2025"
     },
     */
    { 
