@@ -101,7 +101,7 @@ let movieList = [
 
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
 
-    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
+    ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
 
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
@@ -112,19 +112,20 @@ let movieList = [
 
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
-    ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
+    ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
 
 
     ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
 
-    ["Captain America: The First Avenger", "captain-america1.jpg", "2 hrs 4 mins", "2011", "Hugo Weaving"],
-    ["Captain America: The Winter Soldier", "captain-america2.jpg", "2 hrs 16 mins", "2014", "Chris Evans"],
+    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
 
     ["Mission Impossible", "mission-impossible1.jpg", "1 hrs 50 mins", "1996", "Tom Cruise"],
 
     ["Mission Impossible II", "mission-impossible2.jpg", "2 hrs 3 mins", "2000", "Tom Cruise"],
+
+    ["Mission Impossible III", "mission-impossible3.jpg", "2 hrs 6 mins", "2006", "Philip Seymour Hoffman"],
     ["Mission Impossible - Ghost Protocol", "mission-impossible4.jpg", "2 hrs 12 mins", "2011", "Jeremy Renner"],
 
     ["Mission Impossible - Rogue Nation", "mission-impossible5.jpg", "2 hrs 11 mins", "2015", "Simon Pegg"],

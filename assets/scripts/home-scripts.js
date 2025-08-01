@@ -47,10 +47,14 @@ const videos = [
         title: 'Mission Impossible - Ghost Protocol'
     },
     {
+        src: 'assets/videos/mission-impossible3-trailer.mp4',
+        title: 'Mission Impossible III'
+    },
+    roulette
+    {
         src: 'assets/videos/mission-impossible2-trailer.mp4',
         title: 'Mission Impossible II'
     },
-    roulette
     garrett
     ayub
     joe
@@ -69,12 +73,8 @@ const videos = [
     alex
     jayden
     {
-        src: 'assets/videos/captain-america2-trailer.mp4',
-        title: 'Captain America: The Winter Soldier'
-    },
-    {
-        src: 'assets/videos/captain-america1-trailer.mp4',
-        title: 'Captain America: The First Avenger'
+        src: 'assets/videos/bullet-train-trailer.mp4',
+        title: 'Bullet Train'
     },
     roulette
     garrett
@@ -99,8 +99,8 @@ const videos = [
     },
             jayden
     {
-        src: 'assets/videos/terminator2-trailer.mp4',
-        title: 'Terminator 2: Judgement Day'
+        src: 'assets/videos/fantastic4-trailer.mp4',
+        title: 'The Fantastic Four: First Steps'
     },
             roulette
             garrett
@@ -135,8 +135,8 @@ const videos = [
             jayden
             alex
     {
-        src: 'assets/videos/bullet-train-trailer.mp4',
-        title: 'Bullet Train'
+        src: 'assets/videos/terminator2-trailer.mp4',
+        title: 'Terminator 2: Judgement Day'
     },
     {
         src: 'assets/videos/sin-city-trailer.mp4',

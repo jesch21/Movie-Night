@@ -45,12 +45,18 @@ const movieData = [
       "date": "7-2026"
     },
     { 
-      "title": "Mission Impossible II", 
+      "title": "Mission Impossible III", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "7-2026"
     },
     roulette
+    { 
+      "title": "Mission Impossible II", 
+      "chosenBy": ["John"], 
+      "star-ratings": [],
+      "date": "7-2026"
+    },
     garrett
     ayub
     joe
@@ -71,13 +77,7 @@ const movieData = [
     alex
     jayden
     { 
-      "title": "Captain America: The Winter Soldier", 
-      "chosenBy": ["John"], 
-      "star-ratings": [],
-      "date": "4-2026"
-    },
-    { 
-      "title": "Captain America: The First Avenger", 
+      "title": "Bullet Train", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "4-2026"
@@ -109,7 +109,7 @@ const movieData = [
     },
     jayden
     { 
-      "title": "Terminator 2: Judgement Day", 
+      "title": "The Fantastic Four: First Steps", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "12-2025"
@@ -157,7 +157,7 @@ const movieData = [
     jayden
     alex
     { 
-      "title": "Bullet Train", 
+      "title": "Terminator 2: Judgement Day", 
       "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "8-2025"
