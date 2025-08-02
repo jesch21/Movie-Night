@@ -175,13 +175,13 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    { 
+    */
+   { 
       "title": "Happy Gilmore", 
       "chosenBy": ["Joe"], 
-      "star-ratings": [],
+      "star-ratings": ["2.5/5", "1.5/5", "4/5", "2.5/5", "2/5"],
       "date": "8-2025"
     },
-    */
    { 
       "title": "Rango", 
       "chosenBy": ["Alex"], 

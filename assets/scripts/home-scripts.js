@@ -143,11 +143,11 @@ const videos = [
         title: 'Sin City'
     },
             ayub
-    {
+    */
+   {
         src: 'assets/videos/el-dorado-trailer.mp4',
         title: 'The Road to El Dorado'
     },
-    */
    {
         src: 'assets/videos/gilmore-trailer.mp4',
         title: 'Happy Gilmore'
