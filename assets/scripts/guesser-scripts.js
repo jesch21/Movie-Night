@@ -96,8 +96,8 @@ let movieList = [
     ["All Dogs Go to Heaven", "all-dogs.jpg", "1 hrs 24 mins", "1989", "Don Bluth"],
     ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
     ["Happy Gilmore", "gilmore.jpg", "1 hrs 32 mins", "1996", "Adam Sandler"],
+    ["Ne Zha", "ne-zha.jpg", "1 hrs 50 mins", "2019", "Joseph"],
     /*
-
     ["The Road to El Dorado", "el-dorado.jpg", "1 hrs 29 mins", "2000", "Rosie Perez"],
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
 

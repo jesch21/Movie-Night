@@ -105,7 +105,7 @@ const movieData = {
         {"date": "7/17/2025", "chosenBy": "Jayden", "title": "All Dogs Go to Heaven"},
         {"date": "7/25/2025", "chosenBy": "Alex", "title": "Rango"},
         {"date": "8/1/2025", "chosenBy": "Joe", "title": "Happy Gilmore"},
-        {"date": "8/8/2025", "chosenBy": "Ayub", "title": ""},
+        {"date": "8/8/2025", "chosenBy": "Ayub", "title": "Ne Zha"},
         {"date": "8/14/2025", "chosenBy": "Bonus Movie: Trevor", "title": "The Road to El Dorado"},
         {"date": "8/15/2025", "chosenBy": "Garrett", "title": "Sin City"},
         {"date": "8/22/2025", "chosenBy": "John", "title": "Terminator 2: Judgement Day"},

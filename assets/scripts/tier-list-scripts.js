@@ -174,7 +174,12 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    ayub
+    { 
+      "title": "Ne Zha", 
+      "chosenBy": ["Ayub"], 
+      "star-ratings": [],
+      "date": "8-2025"
+    },
     */
    { 
       "title": "Happy Gilmore", 
