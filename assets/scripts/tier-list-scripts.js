@@ -157,14 +157,14 @@ const movieData = [
     jayden
     alex
     { 
-      "title": "Terminator 2: Judgement Day", 
-      "chosenBy": ["John"], 
+      "title": "Sin City", 
+      "chosenBy": ["Garrett"], 
       "star-ratings": [],
       "date": "8-2025"
     },
     { 
-      "title": "Sin City", 
-      "chosenBy": ["Garrett"], 
+      "title": "Terminator 2: Judgement Day", 
+      "chosenBy": ["John"], 
       "star-ratings": [],
       "date": "8-2025"
     },
@@ -174,13 +174,13 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    { 
+    */
+   { 
       "title": "Ne Zha", 
       "chosenBy": ["Ayub"], 
-      "star-ratings": [],
+      "star-ratings": ["4/5", "4/5", "3/5", "4/5", "2.5/5"],
       "date": "8-2025"
     },
-    */
    { 
       "title": "Happy Gilmore", 
       "chosenBy": ["Joe"], 

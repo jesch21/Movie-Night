@@ -135,18 +135,18 @@ const videos = [
             jayden
             alex
     {
-        src: 'assets/videos/terminator2-trailer.mp4',
-        title: 'Terminator 2: Judgement Day'
-    },
-    {
         src: 'assets/videos/sin-city-trailer.mp4',
         title: 'Sin City'
     },
     {
+        src: 'assets/videos/terminator2-trailer.mp4',
+        title: 'Terminator 2: Judgement Day'
+    },
+    */
+   {
         src: 'assets/videos/el-dorado-trailer.mp4',
         title: 'The Road to El Dorado'
     },
-    */
    {
         src: 'assets/videos/ne-zha-trailer.mp4',
         title: 'Ne Zha'
