@@ -97,9 +97,8 @@ let movieList = [
     ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
     ["Happy Gilmore", "gilmore.jpg", "1 hrs 32 mins", "1996", "Adam Sandler"],
     ["Ne Zha", "ne-zha.jpg", "1 hrs 50 mins", "2019", "Joseph"],
-    ["The Road to El Dorado", "el-dorado.jpg", "1 hrs 29 mins", "2000", "Rosie Perez"],
-    /*
     ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
+    /*
 
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
 

@@ -168,12 +168,6 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    { 
-      "title": "The Road to El Dorado", 
-      "chosenBy": ["Trevor"], 
-      "star-ratings": [],
-      "date": "8-2025"
-    },
     */
    { 
       "title": "Ne Zha", 
