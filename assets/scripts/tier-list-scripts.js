@@ -155,13 +155,13 @@ const movieData = [
       "date": "9-2025"
     },
     jayden
-    alex
     { 
       "title": "Sin City", 
       "chosenBy": ["Garrett"], 
       "star-ratings": [],
       "date": "8-2025"
     },
+    alex
     { 
       "title": "Terminator 2: Judgement Day", 
       "chosenBy": ["John"], 
