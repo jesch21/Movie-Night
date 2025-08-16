@@ -161,14 +161,19 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    alex
     { 
-      "title": "Terminator 2: Judgement Day", 
-      "chosenBy": ["John"], 
+      "title": "The Gentlemen", 
+      "chosenBy": ["Alex"], 
       "star-ratings": [],
       "date": "8-2025"
     },
     */
+   { 
+      "title": "Terminator 2: Judgement Day", 
+      "chosenBy": ["John"], 
+      "star-ratings": ["3.5/5", "2.5/5", "4/5", "4/5"],
+      "date": "8-2025"
+    },
    { 
       "title": "Ne Zha", 
       "chosenBy": ["Ayub"], 

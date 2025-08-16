@@ -137,8 +137,11 @@ const videos = [
         src: 'assets/videos/sin-city-trailer.mp4',
         title: 'Sin City'
     },
-            alex
     */
+   {
+        src: 'assets/videos/gentlemen-trailer.mp4',
+        title: 'The Gentlemen'
+    },
    {
         src: 'assets/videos/terminator2-trailer.mp4',
         title: 'Terminator 2: Judgement Day'
