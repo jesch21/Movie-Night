@@ -110,7 +110,7 @@ const videos = [
         src: 'assets/videos/ninjago-trailer.mp4',
         title: 'The Lego Ninjago Movie'
     },
-            alex
+            roulette
             jayden
     {
         src: 'assets/videos/smile2-trailer.mp4',
@@ -120,7 +120,14 @@ const videos = [
         src: 'assets/videos/smile-trailer.mp4',
         title: 'Smile'
     },
-            roulette
+    {
+        src: 'assets/videos/sudbury-trailer.mp4',
+        title: 'The Sudbury Devil'
+    },
+    {
+        src: 'assets/videos/vvitch-trailer.mp4',
+        title: 'The Vvitch'
+    },
             garrett
     {
         src: 'assets/videos/romulus-trailer.mp4',
@@ -133,11 +140,11 @@ const videos = [
         title: 'Gladiator II'
     },
             jayden
-    {
+    */
+   {
         src: 'assets/videos/sin-city-trailer.mp4',
         title: 'Sin City'
     },
-    */
    {
         src: 'assets/videos/gentlemen-trailer.mp4',
         title: 'The Gentlemen'

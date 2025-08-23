@@ -99,16 +99,19 @@ let movieList = [
     ["Ne Zha", "ne-zha.jpg", "1 hrs 50 mins", "2019", "Joseph"],
     ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
     ["The Gentlemen", "gentlemen.jpg", "1 hrs 53 mins", "2019", "Matthew McConaughey"],
-    /*
     ["Sin City", "sin-city.jpg", "2 hrs 4 mins", "2005", "Quentin Tarantino"],
+    /*
 
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
 
+    ["The Vvitch", "vvitch.jpg", "1 hrs 32 mins", "2015", "Anya Taylor-Joy"],
+    ["The Sudbury Devil", "sudbury.jpg", "1 hrs 30 mins", "2023", "Benton Guiness"],
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
 
+    ["The Vvitch", "vvitch.jpg", "1 hrs 32 mins", "2015", "Anya Taylor-Joy"],
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
     ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],

@@ -124,7 +124,7 @@ const movieData = [
       "star-ratings": [],
       "date": "11-2025"
     },
-    alex
+    roulette
     jayden
     { 
       "title": "Smile 2", 
@@ -138,7 +138,18 @@ const movieData = [
       "star-ratings": [],
       "date": "10-2025"
     },
-    roulette
+    { 
+      "title": "The Sudbury Devil", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    { 
+      "title": "The Vvitch", 
+      "chosenBy": ["Alex"], 
+      "star-ratings": [],
+      "date": "10-2025"
+    },
     garrett
     { 
       "title": "Alien: Romulus", 
@@ -161,13 +172,13 @@ const movieData = [
       "star-ratings": [],
       "date": "8-2025"
     },
-    { 
+    */
+   { 
       "title": "The Gentlemen", 
       "chosenBy": ["Alex"], 
-      "star-ratings": [],
+      "star-ratings": ["3.5/5", "2.5/5", "1.5/5", "4/5"],
       "date": "8-2025"
     },
-    */
    { 
       "title": "Terminator 2: Judgement Day", 
       "chosenBy": ["John"], 
