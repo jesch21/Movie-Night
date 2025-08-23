@@ -10,38 +10,44 @@ let isInitialLoad = true;
 let currentVideoIndex = 0;
 const videos = [
     /*
-    garrett
-    ayub
+    Jayden
     {
         src: 'assets/videos/polar-trailer.mp4',
         title: 'The Polar Express'
     },
-    joe
-    trevor
-    alex
-    jayden
+    Unseen Roulette
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
+    John
+    Unseen Roulette
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
     {
         src: 'assets/videos/mission-impossible6-trailer.mp4',
         title: 'Mission Impossible - Fallout'
     },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
+    Unseen Roulette
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
     {
         src: 'assets/videos/mission-impossible5-trailer.mp4',
         title: 'Mission Impossible - Rogue Nation'
     },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
+    Unseen Roulette
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
     {
         src: 'assets/videos/mission-impossible4-trailer.mp4',
         title: 'Mission Impossible - Ghost Protocol'
@@ -50,75 +56,65 @@ const videos = [
         src: 'assets/videos/mission-impossible3-trailer.mp4',
         title: 'Mission Impossible III'
     },
-    roulette
+    Unseen Roulette
     {
         src: 'assets/videos/mission-impossible2-trailer.mp4',
         title: 'Mission Impossible II'
     },
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
     {
         src: 'assets/videos/mission-impossible1-trailer.mp4',
         title: 'Mission Impossible'
     },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
+    Unseen Roulette
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
     {
         src: 'assets/videos/bullet-train-trailer.mp4',
         title: 'Bullet Train'
     },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-    alex
-    jayden
+    Unseen Roulette
+    Ayub
+    Joe
+    Trevor
+    Alex
+    Jayden
     {
         src: 'assets/videos/iron-man-trailer.mp4',
         title: 'Iron Man'
     },
-    roulette
-    garrett
-    ayub
-    joe
-    trevor
-
-    {
-        src: 'assets/videos/lampoon-trailer.mp4',
-        title: 'National Lampoon's Christmas Vacation'
-    },
-            jayden
-    {
-        src: 'assets/videos/fantastic4-trailer.mp4',
-        title: 'The Fantastic Four: First Steps'
-    },
-            roulette
-            garrett
-            ayub
-            joe
+    Unseen Roulette
+    
+    Ayub
+    Joe
     {
         src: 'assets/videos/ninjago-trailer.mp4',
         title: 'The Lego Ninjago Movie'
     },
-            roulette
-            jayden
     {
-        src: 'assets/videos/smile2-trailer.mp4',
-        title: 'Smile 2'
+        src: 'assets/videos/lampoon-trailer.mp4',
+        title: 'National Lampoon's Christmas Vacation'
     },
+    Jayden
     {
-        src: 'assets/videos/smile-trailer.mp4',
-        title: 'Smile'
+        src: 'assets/videos/fantastic4-trailer.mp4',
+        title: 'The Fantastic Four: First Steps'
+    },
+    Jayden
+    Ayub
+    Unseen Roulette
+    Trevor
+    Joe
+    {
+        src: 'assets/videos/romulus-trailer.mp4',
+        title: 'Alien: Romulus'
     },
     {
         src: 'assets/videos/sudbury-trailer.mp4',
@@ -128,23 +124,23 @@ const videos = [
         src: 'assets/videos/vvitch-trailer.mp4',
         title: 'The Vvitch'
     },
-            garrett
     {
-        src: 'assets/videos/romulus-trailer.mp4',
-        title: 'Alien: Romulus'
+        src: 'assets/videos/smile2-trailer.mp4',
+        title: 'Smile 2'
     },
-            ayub
-            joe
+    {
+        src: 'assets/videos/smile-trailer.mp4',
+        title: 'Smile'
+    },
+    Jayden
+    Ayub
+    Joe
     {
         src: 'assets/videos/gladiator2-trailer.mp4',
         title: 'Gladiator II'
     },
-            jayden
+    Unseen Roulette
     */
-   {
-        src: 'assets/videos/sin-city-trailer.mp4',
-        title: 'Sin City'
-    },
    {
         src: 'assets/videos/gentlemen-trailer.mp4',
         title: 'The Gentlemen'
