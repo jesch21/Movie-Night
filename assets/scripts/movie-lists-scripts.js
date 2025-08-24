@@ -186,9 +186,7 @@ const movieData = {
         {"date": "12/18/2026", "chosenBy": "John", "title": "The Polar Express"},
         {"date": "12/25/2026", "chosenBy": "Jayden", "title": ""}
   ],
-    "2027": [
-        
-]    
+    "2027": []    
 };
 
 function loadTable() {
