@@ -7,6 +7,12 @@ const movieData = [
     "date": "12-2026"
   },
   {
+    "title": "Bullet Train",
+    "chosenBy": ["John"],
+    "star-ratings": [],
+    "date": "12-2026"
+  },
+  {
     "title": "The Polar Express",
     "chosenBy": ["John"],
     "star-ratings": [],
@@ -271,7 +277,7 @@ const movieData = [
     "date": "03-2026"
   },
   {
-    "title": "Bullet Train",
+    "title": "Iron Man",
     "chosenBy": ["John"],
     "star-ratings": [],
     "date": "02-2026"
@@ -313,7 +319,7 @@ const movieData = [
     "date": "01-2026"
   },
   {
-    "title": "Iron Man",
+    "title": "The Fantastic Four: First Steps",
     "chosenBy": ["John"],
     "star-ratings": [],
     "date": "01-2026"
@@ -356,8 +362,8 @@ const movieData = [
     "date": "11-2025"
   },
   {
-    "title": "The Fantastic Four: First Steps",
-    "chosenBy": ["John"],
+    "title": "",
+    "chosenBy": ["Joe"],
     "star-ratings": [],
     "date": "11-2025"
   },
@@ -434,8 +440,8 @@ const movieData = [
     "date": "9-2025"
   },
   {
-    "title": "",
-    "chosenBy": ["Joe"],
+    "title": "Superman",
+    "chosenBy": ["John"],
     "star-ratings": [],
     "date": "9-2025"
   },

@@ -102,6 +102,7 @@ let movieList = [
     /*
 
     ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
+    ["Superman", "superman.jpg", "2 hrs 9 mins", "2025", "Nicholas Hoult"],
 
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
@@ -109,15 +110,13 @@ let movieList = [
     ["The Vvitch", "vvitch.jpg", "1 hrs 32 mins", "2015", "Anya Taylor-Joy"],
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
 
-    ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],
-
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
     ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
 
 
-    ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
+    ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],
 
-    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
+    ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
 
     ["Mission Impossible", "mission-impossible1.jpg", "1 hrs 50 mins", "1996", "Tom Cruise"],
 
@@ -131,6 +130,7 @@ let movieList = [
     ["Mission Impossible - Fallout", "mission-impossible6.jpg", "2 hrs 27 mins", "2018", "Henry Cavill"],
 
     ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
+    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
     */
 ];
 

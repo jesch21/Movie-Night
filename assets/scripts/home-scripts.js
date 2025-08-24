@@ -12,6 +12,10 @@ const videos = [
     /*
     Jayden
     {
+        src: 'assets/videos/bullet-train-trailer.mp4',
+        title: 'Bullet Train'
+    },
+    {
         src: 'assets/videos/polar-trailer.mp4',
         title: 'The Polar Express'
     },
@@ -77,8 +81,8 @@ const videos = [
     Alex
     Jayden
     {
-        src: 'assets/videos/bullet-train-trailer.mp4',
-        title: 'Bullet Train'
+        src: 'assets/videos/iron-man-trailer.mp4',
+        title: 'Iron Man'
     },
     Unseen Roulette
     Ayub
@@ -87,8 +91,8 @@ const videos = [
     Alex
     Jayden
     {
-        src: 'assets/videos/iron-man-trailer.mp4',
-        title: 'Iron Man'
+        src: 'assets/videos/fantastic4-trailer.mp4',
+        title: 'The Fantastic Four: First Steps'
     },
     Unseen Roulette
     
@@ -103,10 +107,7 @@ const videos = [
         title: 'National Lampoon's Christmas Vacation'
     },
     Jayden
-    {
-        src: 'assets/videos/fantastic4-trailer.mp4',
-        title: 'The Fantastic Four: First Steps'
-    },
+    Joe
     Jayden
     Ayub
     Unseen Roulette
@@ -134,7 +135,10 @@ const videos = [
     },
     Jayden
     Ayub
-    Joe
+    {
+        src: 'assets/videos/superman-trailer.mp4',
+        title: 'Superman'
+    },
     {
         src: 'assets/videos/gladiator2-trailer.mp4',
         title: 'Gladiator II'

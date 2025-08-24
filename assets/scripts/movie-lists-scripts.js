@@ -110,7 +110,7 @@ const movieData = {
         {"date": "8/22/2025", "chosenBy": "Alex", "title": "The Gentlemen"},
         {"date": "8/29/2025", "chosenBy": "Unseen Roulette", "title": ""},
         {"date": "9/5/2025", "chosenBy": "Trevor", "title": "Gladiator II"},
-        {"date": "9/12/2025", "chosenBy": "Joe", "title": ""},
+        {"date": "9/12/2025", "chosenBy": "John", "title": "Superman"},
         {"date": "9/19/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "9/26/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "10/2/2025", "chosenBy": "Bonus Movie: John", "title": "Smile"},
@@ -123,7 +123,7 @@ const movieData = {
         {"date": "10/31/2025", "chosenBy": "Unseen Roulette", "title": ""},
         {"date": "11/07/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "11/14/2025", "chosenBy": "Jayden", "title": ""},
-        {"date": "11/21/2025", "chosenBy": "John", "title": "The Fantastic Four: First Steps"},
+        {"date": "11/21/2025", "chosenBy": "Joe", "title": ""},
         {"date": "11/28/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "12/5/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"},
         {"date": "12/12/2025", "chosenBy": "Trevor", "title": "The Lego Ninjago Movie"},
@@ -132,14 +132,14 @@ const movieData = {
 ],
   "2026": [
         {"date": "01/02/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "01/09/2026", "chosenBy": "John", "title": "Iron Man"},
+        {"date": "01/09/2026", "chosenBy": "John", "title": "The Fantastic Four: First Steps"},
         {"date": "01/16/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "01/23/2026", "chosenBy": "Alex", "title": ""},
         {"date": "01/30/2026", "chosenBy": "Trevor", "title": ""},
         {"date": "02/06/2026", "chosenBy": "Joe", "title": ""},
         {"date": "02/13/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "02/20/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "02/27/2026", "chosenBy": "John", "title": "Bullet Train"},
+        {"date": "02/27/2026", "chosenBy": "John", "title": "Iron Man"},
         {"date": "03/06/2026", "chosenBy": "Jayden", "title": ""},
         {"date": "03/13/2026", "chosenBy": "Alex", "title": ""},
         {"date": "03/20/2026", "chosenBy": "Trevor", "title": ""},
@@ -183,7 +183,8 @@ const movieData = {
         {"date": "11/27/2026", "chosenBy": "Joe", "title": ""},
         {"date": "12/04/2026", "chosenBy": "Ayub", "title": ""},
         {"date": "12/11/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "12/18/2026", "chosenBy": "John", "title": "The Polar Express"},
+        {"date": "12/17/2026", "chosenBy": "Bonus Movie: John", "title": "The Polar Express"},
+        {"date": "12/18/2026", "chosenBy": "John", "title": "Bullet Train"},
         {"date": "12/25/2026", "chosenBy": "Jayden", "title": ""}
   ],
     "2027": []    
@@ -274,6 +275,7 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Alien: Romulus"},
         {"chosenBy": ["John"], "title": "Mission Impossible II"},
         {"chosenBy": ["John"], "title": "Mission Impossible III"},
+        {"chosenBy": ["John"], "title": "The Polar Express"}
     ]
 };
 
