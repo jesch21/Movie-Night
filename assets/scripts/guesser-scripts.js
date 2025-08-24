@@ -105,8 +105,8 @@ let movieList = [
 
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
     ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
-    ["The Vvitch", "vvitch.jpg", "1 hrs 32 mins", "2015", "Anya Taylor-Joy"],
     ["The Sudbury Devil", "sudbury.jpg", "1 hrs 30 mins", "2023", "Benton Guiness"],
+    ["The Vvitch", "vvitch.jpg", "1 hrs 32 mins", "2015", "Anya Taylor-Joy"],
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
 
     ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],

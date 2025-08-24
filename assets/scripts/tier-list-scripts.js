@@ -398,13 +398,13 @@ const movieData = [
     "date": "10-2025"
   },
   {
-    "title": "The Sudbury Devil",
+    "title": "The Vvitch",
     "chosenBy": ["Alex"],
     "star-ratings": [],
     "date": "10-2025"
   },
   {
-    "title": "The Vvitch",
+    "title": "The Sudbury Devil",
     "chosenBy": ["Alex"],
     "star-ratings": [],
     "date": "10-2025"

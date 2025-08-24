@@ -117,12 +117,12 @@ const videos = [
         title: 'Alien: Romulus'
     },
     {
-        src: 'assets/videos/sudbury-trailer.mp4',
-        title: 'The Sudbury Devil'
-    },
-    {
         src: 'assets/videos/vvitch-trailer.mp4',
         title: 'The Vvitch'
+    },
+    {
+        src: 'assets/videos/sudbury-trailer.mp4',
+        title: 'The Sudbury Devil'
     },
     {
         src: 'assets/videos/smile2-trailer.mp4',
