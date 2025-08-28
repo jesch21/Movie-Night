@@ -125,6 +125,8 @@ let movieList = [
     ["Mission Impossible III", "mission-impossible3.jpg", "2 hrs 6 mins", "2006", "Philip Seymour Hoffman"],
     ["Mission Impossible - Ghost Protocol", "mission-impossible4.jpg", "2 hrs 12 mins", "2011", "Jeremy Renner"],
 
+    ["Jaws", "jaws.jpg", "2 hrs 4 mins", "1975", "Robert Shaw"],
+
     ["Mission Impossible - Rogue Nation", "mission-impossible5.jpg", "2 hrs 11 mins", "2015", "Simon Pegg"],
 
     ["Mission Impossible - Fallout", "mission-impossible6.jpg", "2 hrs 27 mins", "2018", "Henry Cavill"],

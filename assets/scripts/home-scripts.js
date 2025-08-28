@@ -25,7 +25,7 @@ const videos = [
     Trevor
     Alex
     Jayden
-    John
+    Joe
     Unseen Roulette
     Ayub
     Joe
@@ -48,7 +48,10 @@ const videos = [
     },
     Unseen Roulette
     Ayub
-    Joe
+    {
+        src: 'assets/videos/jaws-trailer.mp4',
+        title: 'Jaws'
+    },
     Trevor
     Alex
     Jayden

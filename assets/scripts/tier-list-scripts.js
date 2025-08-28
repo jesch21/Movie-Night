@@ -56,7 +56,7 @@ const movieData = [
   },
   {
     "title": "",
-    "chosenBy": ["John"],
+    "chosenBy": ["Joe"],
     "star-ratings": [],
     "date": "10-2026"
   },
@@ -157,8 +157,8 @@ const movieData = [
     "date": "07-2026"
   },
   {
-    "title": "",
-    "chosenBy": ["Joe"],
+    "title": "Jaws",
+    "chosenBy": ["John"],
     "star-ratings": [],
     "date": "07-2026"
   },
