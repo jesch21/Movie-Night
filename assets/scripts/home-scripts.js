@@ -146,8 +146,11 @@ const videos = [
         src: 'assets/videos/gladiator2-trailer.mp4',
         title: 'Gladiator II'
     },
-    Unseen Roulette
     */
+   {
+        src: 'assets/videos/stalin-trailer.mp4',
+        title: 'The Death of Stalin'
+    },
    {
         src: 'assets/videos/gentlemen-trailer.mp4',
         title: 'The Gentlemen'
