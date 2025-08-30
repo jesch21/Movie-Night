@@ -102,8 +102,8 @@ const videos = [
     Ayub
     Joe
     {
-        src: 'assets/videos/ninjago-trailer.mp4',
-        title: 'The Lego Ninjago Movie'
+        src: 'assets/videos/gladiator2-trailer.mp4',
+        title: 'Gladiator II'
     },
     {
         src: 'assets/videos/lampoon-trailer.mp4',
@@ -142,11 +142,8 @@ const videos = [
         src: 'assets/videos/superman-trailer.mp4',
         title: 'Superman'
     },
+    Trevor
     */
-   {
-        src: 'assets/videos/gladiator2-trailer.mp4',
-        title: 'Gladiator II'
-    },
    {
         src: 'assets/videos/stalin-trailer.mp4',
         title: 'The Death of Stalin'

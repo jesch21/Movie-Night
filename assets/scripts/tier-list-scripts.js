@@ -344,7 +344,7 @@ const movieData = [
       "date": "12-2025"
     },
     {
-      "title": "The Lego Ninjago Movie",
+      "title": "Gladiator II",
       "chosenBy": ["Trevor"],
       "star-ratings": [],
       "date": "12-2025"
@@ -446,7 +446,7 @@ const movieData = [
       "date": "9-2025"
     },
     {
-      "title": "Gladiator II",
+      "title": "",
       "chosenBy": ["Trevor"],
       "star-ratings": [],
       "date": "9-2025"

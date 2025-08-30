@@ -109,7 +109,7 @@ const movieData = {
         {"date": "8/15/2025", "chosenBy": "John", "title": "Terminator 2: Judgement Day"},
         {"date": "8/22/2025", "chosenBy": "Alex", "title": "The Gentlemen"},
         {"date": "8/29/2025", "chosenBy": "Unseen Roulette", "title": "The Death of Stalin"},
-        {"date": "9/5/2025", "chosenBy": "Trevor", "title": "Gladiator II"},
+        {"date": "9/5/2025", "chosenBy": "Trevor", "title": ""},
         {"date": "9/12/2025", "chosenBy": "John", "title": "Superman"},
         {"date": "9/19/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "9/26/2025", "chosenBy": "Jayden", "title": ""},
@@ -126,7 +126,7 @@ const movieData = {
         {"date": "11/21/2025", "chosenBy": "Joe", "title": ""},
         {"date": "11/28/2025", "chosenBy": "Jayden", "title": ""},
         {"date": "12/5/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"},
-        {"date": "12/12/2025", "chosenBy": "Trevor", "title": "The Lego Ninjago Movie"},
+        {"date": "12/12/2025", "chosenBy": "Trevor", "title": "Gladiator II"},
         {"date": "12/17/2025", "chosenBy": "Joe", "title": ""},
         {"date": "12/26/2025", "chosenBy": "Ayub", "title": ""}
 ],
@@ -213,8 +213,8 @@ const unseenMovieData = {
     "unseen": [
         {"chosenBy": ["Joe", "Ayub", "Trevor"], "title": "Akira"},
         {"chosenBy": ["Ayub", "Trevor"], "title": "Knock at the Cabin"},
+        {"chosenBy": ["Ayub", "Alex"], "title": "The Northman"},
         {"chosenBy": ["Ayub"], "title": "The Social Network"},
-        {"chosenBy": ["Ayub"], "title": "The Northman"},
         {"chosenBy": ["Ayub"], "title": "Blade Runner 2049"},
         {"chosenBy": ["Ayub"], "title": "Wall-E"},
         {"chosenBy": ["Ayub"], "title": "Total Recall"},
@@ -240,8 +240,8 @@ const unseenMovieData = {
         {"chosenBy": ["John"], "title": "Robocop"},
         {"chosenBy": ["Landon"], "title": "Hairspray"},
         {"chosenBy": ["Trevor"], "title": "Across the Spiderverse"},
+        {"chosenBy": ["Trevor"], "title": "KPop Demon Hunters"},
         {"chosenBy": ["Trevor"], "title": "Robots"},
-        {"chosenBy": ["Trevor"], "title": "Inside Out 2"},
         {"chosenBy": ["Trevor"], "title": "Zoolander"},
     ],
     "seen": [

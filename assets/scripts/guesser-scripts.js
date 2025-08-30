@@ -100,8 +100,8 @@ let movieList = [
     ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
     ["The Gentlemen", "gentlemen.jpg", "1 hrs 53 mins", "2019", "Matthew McConaughey"],
     ["The Death of Stalin", "stalin.jpg", "1 hrs 47 mins", "2017", "Steve Buscemi"],
-    ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
     /*
+
     ["Superman", "superman.jpg", "2 hrs 9 mins", "2025", "Nicholas Hoult"],
 
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
@@ -111,7 +111,7 @@ let movieList = [
     ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
 
     ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
-    ["The Lego Ninjago Movie", "ninjago.jpg", "1 hrs 41 mins", "2017", "Jackie Chan"],
+    ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
 
 
     ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],
