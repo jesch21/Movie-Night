@@ -1,463 +1,463 @@
 const movieData = [
     /*
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "12-2026"
-  },
-  {
-    "title": "Bullet Train",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "12-2026"
-  },
-  {
-    "title": "The Polar Express",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "12-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "12-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "12-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "11-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "11-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "11-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "11-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "10-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "10-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "10-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "10-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "10-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "09-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "09-2026"
-  },
-  {
-    "title": "Mission Impossible - Fallout",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "09-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "09-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "08-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "08-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "08-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "08-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "07-2026"
-  },
-  {
-    "title": "Mission Impossible - Rogue Nation",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "07-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "07-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "07-2026"
-  },
-  {
-    "title": "Jaws",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "07-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "06-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "06-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "06-2026"
-  },
-  {
-    "title": "Mission Impossible - Ghost Protocol",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "06-2026"
-  },
-  {
-    "title": "Mission Impossible III",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "06-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "05-2026"
-  },
-  {
-    "title": "Mission Impossible II",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "05-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "05-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "05-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "05-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "05-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "04-2026"
-  },
-  {
-    "title": "Mission Impossible",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "04-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "04-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "04-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "03-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "03-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "03-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "03-2026"
-  },
-  {
-    "title": "Iron Man",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "02-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "02-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "02-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "02-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "01-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "01-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "01-2026"
-  },
-  {
-    "title": "The Fantastic Four: First Steps",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "01-2026"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "01-2026"
-  }
-    
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "12-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "12-2025"
-  },
-  {
-    "title": "The Lego Ninjago Movie",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "12-2025"
-  },
-  {
-    "title": "National Lampoon's Christmas Vacation",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "12-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "11-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "11-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "11-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "11-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Joe"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "Alien: Romulus",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "The Vvitch",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "The Sudbury Devil",
-    "chosenBy": ["Alex"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "Smile 2",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "Smile",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "10-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Jayden"],
-    "star-ratings": [],
-    "date": "9-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": ["Ayub"],
-    "star-ratings": [],
-    "date": "9-2025"
-  },
-  {
-    "title": "Superman",
-    "chosenBy": ["John"],
-    "star-ratings": [],
-    "date": "9-2025"
-  },
-  {
-    "title": "Gladiator II",
-    "chosenBy": ["Trevor"],
-    "star-ratings": [],
-    "date": "9-2025"
-  },
-  {
-    "title": "",
-    "chosenBy": [""],
-    "star-ratings": [],
-    "date": "8-2025"
-  }
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "12-2026"
+    },
+    {
+      "title": "Bullet Train",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "12-2026"
+    },
+    {
+      "title": "The Polar Express",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "12-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "12-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "12-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "11-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "11-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "11-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "11-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "10-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "10-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "10-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "10-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "10-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "09-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "09-2026"
+    },
+    {
+      "title": "Mission Impossible - Fallout",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "09-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "09-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "08-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "08-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "08-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "08-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "07-2026"
+    },
+    {
+      "title": "Mission Impossible - Rogue Nation",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "07-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "07-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "07-2026"
+    },
+    {
+      "title": "Jaws",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "07-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "06-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "06-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "06-2026"
+    },
+    {
+      "title": "Mission Impossible - Ghost Protocol",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "06-2026"
+    },
+    {
+      "title": "Mission Impossible III",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "06-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "05-2026"
+    },
+    {
+      "title": "Mission Impossible II",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "05-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "05-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "05-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "05-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "05-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "04-2026"
+    },
+    {
+      "title": "Mission Impossible",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "04-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "04-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "04-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "03-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "03-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "03-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "03-2026"
+    },
+    {
+      "title": "Iron Man",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "02-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "02-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "02-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "02-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "01-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "01-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "01-2026"
+    },
+    {
+      "title": "The Fantastic Four: First Steps",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "01-2026"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "01-2026"
+    }
+      
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "12-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "12-2025"
+    },
+    {
+      "title": "Gladiator II",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "12-2025"
+    },
+    {
+      "title": "National Lampoon's Christmas Vacation",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "12-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "11-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "11-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "11-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "11-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": [""],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Joe"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "Alien: Romulus",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "The Vvitch",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "The Sudbury Devil",
+      "chosenBy": ["Alex"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "Smile 2",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "Smile",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "10-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Jayden"],
+      "star-ratings": [],
+      "date": "9-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Ayub"],
+      "star-ratings": [],
+      "date": "9-2025"
+    },
+    {
+      "title": "Superman",
+      "chosenBy": ["John"],
+      "star-ratings": [],
+      "date": "9-2025"
+    },
+    {
+      "title": "",
+      "chosenBy": ["Trevor"],
+      "star-ratings": [],
+      "date": "9-2025"
+    },
     */
+    {
+      "title": "The Death of Stalin",
+      "chosenBy": ["Alex"],
+      "star-ratings": ["4/5", "2/5", "2.5/5", "1/5"],
+      "date": "8-2025"
+    },
    { 
       "title": "The Gentlemen", 
       "chosenBy": ["Alex"], 
