@@ -25,8 +25,6 @@
 </header>
 
 <main>
-    <img src="../assets/images/white-top.png" id="white-top" alt="White Top Effect">
-    <img src="../assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
     <div class="tables-container">
         <div id="stats">
             <div class="table-wrapper">
@@ -55,6 +53,18 @@
         </div>
         <div class="table-wrapper">
             <h2>The Tier List</h2>
+            <label for="tierListFilter">Filter</label>
+            <select id="tierListFilter" onchange="filter()">
+                <option value="None">None</option>
+                <option value="Ayub">Ayub</option>
+                <option value="Alex">Alex</option>
+                <option value="Garrett">Garrett</option>
+                <option value="Jayden">Jayden</option>
+                <option value="Joe">Joe</option>
+                <option value="John">John</option>
+                <option value="Landon">Landon</option>
+                <option value="Trevor">Trevor</option>
+            </select>
             <table id="movieTable">
                 <thead>
                     <tr>

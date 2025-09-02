@@ -1077,33 +1077,49 @@ function calculateAverage(starRatings) {
 
 /**
  * Function to load the movie data into the table.
+ * @param {string|null} filterPerson - Name to filter by, or null to show all.
  */
-function loadMovieTable() {
+function loadMovieTable(filterPerson = null) {
     const tableBody = document.querySelector('#movieTable tbody');
     tableBody.innerHTML = ''; // Clear any existing rows
 
     // Calculate the average for each movie and add a new property for sorting
-    const movieDataWithAverages = movieData.map(movie => {
+    let movieDataWithAverages = movieData.map(movie => {
         const averageRating = calculateAverage(movie["star-ratings"]);
         return { ...movie, averageRating: parseFloat(averageRating) }; // Store average as a float
     });
+
+    // Apply filter if needed
+    if (filterPerson && filterPerson !== "None") {
+        movieDataWithAverages = movieDataWithAverages.filter(movie =>
+            movie.chosenBy.includes(filterPerson)
+        );
+    }
 
     // Sort the movie data by averageRating (descending order)
     movieDataWithAverages.sort((a, b) => b.averageRating - a.averageRating);
 
     // Populate the table with sorted data
     movieDataWithAverages.forEach((movie, index) => {
-        const chosenBy = movie.chosenBy.join(", "); // Join chosenBy array into a string
+        const chosenBy = movie.chosenBy.join(", ");
         const row = `
             <tr>
                 <td>#${index + 1}</td> <!-- Ranking column -->
                 <td>${movie.title}</td>
                 <td>${chosenBy}</td>
-                <td>${movie.averageRating.toFixed(3)}</td> <!-- Show average rating -->
+                <td>${movie.averageRating.toFixed(3)}</td>
             </tr>
         `;
-        tableBody.innerHTML += row; // Append the row to the table body
+        tableBody.innerHTML += row;
     });
+}
+
+/**
+ * Function to filter movies shown on the tier list by the name of who picked it
+ */
+function filter() {
+    const selected = document.getElementById("tierListFilter").value;
+    loadMovieTable(selected === "None" ? null : selected);
 }
 
 /**

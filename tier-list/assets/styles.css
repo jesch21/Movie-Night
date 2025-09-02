@@ -141,6 +141,32 @@ table {
     border: 3px solid rgb(143, 143, 143);
 }
 
+#tierListFilter {
+    height: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 15px;
+    font-size: 15px;
+    background-color: #F2F5EA;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: black;
+    transition: border-radius .3s, color .2s;
+}
+
+#tierListFilter:hover {
+    color: #623CEA;
+    border-radius: 15px;
+}
+
+label {
+    margin-right: 10px;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px black;
+    font-size: 35px;
+    color: #FF0000;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 #chartContainer {
     width: 95%;
     height: auto;
@@ -328,6 +354,13 @@ footer {
     #logo {
         width: 110px;
     }
+  }
+
+   @media only screen and (max-width: 1200px) {
+    label {
+            text-shadow: 2px 2px 1px black;
+            font-size: 25px;
+        }
   }
 
   @media only screen and (max-width: 1100px) {
