@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap');
+
 body {
     background-color: #131313;
 }
@@ -196,7 +198,7 @@ td, #unseenTable td {
     font-size: 35px;
     font-weight: bold;
     text-shadow: 2px 2px 1px black;
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     color: #FF0000;
     display: inline-block;
     margin-right: 10px;
@@ -260,7 +262,7 @@ h1 {
 }
 
 h1, h2, label {
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     color: #FF0000;
     text-align: center;
 }
@@ -301,7 +303,7 @@ h2 {
 .page {
     color: black;
     text-decoration: none;
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     margin: 1.5vw;
     margin-left: 0;
     margin-right: 0;

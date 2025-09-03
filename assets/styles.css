@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap');
 
 html, body {
     overflow-x: hidden;
@@ -63,7 +64,7 @@ h1 {
 }
 
 h1, h2 {
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     color: #FF0000;
     text-align: center;
 }
@@ -84,7 +85,7 @@ h2 {
 .page {
     color: black;
     text-decoration: none;
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     margin: 1.5vw;
     margin-left: 0;
     margin-right: 0;
@@ -152,7 +153,7 @@ h2 {
     left: 49.5%;
     transform: translateX(-50%);
     background-color:#F2F5EA;
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     padding: .75em;
     margin: 15px;
     border: 2px solid black;
@@ -277,7 +278,7 @@ video {
 }
 
 .movie-night-title {
-    font-family: monospace;
+    font-family: "Bungee Tint", sans-serif;
     font-size: 20px;
     color: #FF0000;
     text-shadow: 1px 1px 1px black;
