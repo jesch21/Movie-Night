@@ -1,293 +1,247 @@
-//movie-lists
+// movie-lists
+
 const firstTable = 2025;  // Set this to the default year you want to load
 
-const movieData = {
-    "2023": [
-        {"date": "12/29/2023", "chosenBy": "Trevor", "title": "The Truman Show"},
-],
-    "2024": [
-        {"date": "1/5/2024", "chosenBy": "Ayub/Joe/Garrett", "title": "The Matrix"},
-        {"date": "1/12/2024", "chosenBy": "Ayub", "title": "The Terminator"},
-        {"date": "1/19/2024", "chosenBy": "Garrett", "title": "Fallen Angels"},
-        {"date": "1/26/2024", "chosenBy": "John", "title": "The Batman"},
-        {"date": "2/2/2024", "chosenBy": "Jayden", "title": "A Silent Voice"},
-        {"date": "2/9/2024", "chosenBy": "Landon", "title": "Cloverfield"},
-        {"date": "2/16/2024", "chosenBy": "Trevor", "title": "The Platform"},
-        {"date": "2/23/2024", "chosenBy": "Joe", "title": "Yojimbo"},
-        {"date": "3/1/2024", "chosenBy": "Ayub", "title": "Princess Mononoke"},
-        {"date": "3/8/2024", "chosenBy": "Garrett", "title": "Se7en"},
-        {"date": "3/15/2024", "chosenBy": "John", "title": "Indiana Jones: Raiders of the Lost Ark"},
-        {"date": "3/22/2024", "chosenBy": "Jayden", "title": "Click"},
-        {"date": "3/29/2024", "chosenBy": "Ayub/John", "title": "Attack on Titan: The Final Chapter Part 1"},
-        {"date": "4/5/2024", "chosenBy": "Hez", "title": "None"},
-        {"date": "4/12/2024", "chosenBy": "Joe", "title": "Sanjuro"},
-        {"date": "4/19/2024", "chosenBy": "Landon", "title": "A Beautiful Mind"},
-        {"date": "4/26/2024", "chosenBy": "Garrett", "title": "Fight Club"},
-        {"date": "5/3/2024", "chosenBy": "John", "title": "Das Leben der Anderen"},
-        {"date": "5/10/2024", "chosenBy": "Trevor", "title": "Midsommar"},
-        {"date": "5/17/2024", "chosenBy": "Ayub", "title": "Kill Bill Vol. 1"},
-        {"date": "5/24/2024", "chosenBy": "Jayden", "title": "Jarhead"},
-        {"date": "5/31/2024", "chosenBy": "Joe", "title": "Mad Max: Fury Road"},
-        {"date": "6/7/2024", "chosenBy": "Alex", "title": "Master and Commander: The Far Side of the World"},
-        {"date": "6/14/2024", "chosenBy": "Garrett", "title": "Uncut Gems"},
-        {"date": "6/21/2024", "chosenBy": "John", "title": "The Suicide Squad"},
-        {"date": "6/28/2024", "chosenBy": "Jayden", "title": "Hardcore Henry"},
-        {"date": "7/5/2024", "chosenBy": "Unseen Roulette", "title": "Gladiator"},
-        {"date": "7/12/2024", "chosenBy": "John", "title": "John Wick"},
-        {"date": "7/19/2024", "chosenBy": "Joe", "title": "High and Low"},
-        {"date": "7/26/2024", "chosenBy": "Ayub", "title": "Fullmetal Jacket"},
-        {"date": "8/2/2024", "chosenBy": "Garrett", "title": "Mid 90s"},
-        {"date": "8/9/2024", "chosenBy": "Trevor", "title": "The Possession"},
-        {"date": "8/16/2024", "chosenBy": "Jayden", "title": "I Want to Eat Your Pancreas"},
-        {"date": "8/23/2024", "chosenBy": "Alex", "title": "All Quiet on the Western Front (2022)"},
-        {"date": "8/30/2024", "chosenBy": "Trevor", "title": "9"},
-        {"date": "9/6/2024", "chosenBy": "Joe", "title": "Collateral"},
-        {"date": "9/13/2024", "chosenBy": "Ayub", "title": "The Grand Budapest Hotel"},
-        {"date": "9/20/2024", "chosenBy": "Unseen Roulette", "title": "Sherlock Holmes (2009)"},
-        {"date": "9/27/2024", "chosenBy": "John", "title": "Godzilla Minus One"},
-        {"date": "10/4/2024", "chosenBy": "Jayden", "title": "Ernest Scared Stupid"},
-        {"date": "10/11/2024", "chosenBy": "Alex", "title": "The Thing (1982)"},
-        {"date": "10/17/2024", "chosenBy": "Bonus Movie: Ayub", "title": "The Texas Chainsaw Massacre"},
-        {"date": "10/18/2024", "chosenBy": "Trevor", "title": "The Conjuring"},
-        {"date": "10/20/2024", "chosenBy": "Bonus Movie: Trevor", "title": "The Platform 2"},
-        {"date": "10/25/2024", "chosenBy": "Joe", "title": "The Lighthouse"},
-        {"date": "10/27/2024", "chosenBy": "Bonus Movie: Trevor", "title": "28 Days Later"},
-        {"date": "10/31/2024", "chosenBy": "Bonus Movie: John", "title": "Scream"},
-        {"date": "11/1/2024", "chosenBy": "Ayub", "title": "Bram Stoker's Dracula"},
-        {"date": "11/8/2024", "chosenBy": "Garrett", "title": "Burn After Reading"},
-        {"date": "11/15/2024", "chosenBy": "John", "title": "Indiana Jones and The Last Crusade"},
-        {"date": "11/22/2024", "chosenBy": "Alex", "title": "Pirates of the Caribbean: The Curse of the Black Pearl"},
-        {"date": "11/29/2024", "chosenBy": "Joe", "title": "Goodfellas"},
-        {"date": "12/6/2024", "chosenBy": "Trevor", "title": "Transformers"},
-        {"date": "12/13/2024", "chosenBy": "Jayden", "title": "Eight Crazy Nights"},
-        {"date": "12/20/2024", "chosenBy": "Ayub", "title": "The Matrix Reloaded"},
-        {"date": "12/22/2024", "chosenBy": "Bonus Movie: John, Ayub", "title": "The Nightmare Before Christmas"},
-        {"date": "12/26/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 1)"},
-        {"date": "12/27/2024", "chosenBy": "Unseen Roulette", "title": "Drive"},
-        {"date": "12/29/2024", "chosenBy": "Garrett", "title": "The Hateful Eight - Extended Version (Part 2)"},
-],
-    "2025": [
-        {"date": "1/3/2025", "chosenBy": "Unseen Roulette", "title": "Greyhound"},
-        {"date": "1/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: A New Hope"},
-        {"date": "1/10/2025", "chosenBy": "John", "title": "The Ministry of Ungentlemanly Warfare"},
-        {"date": "1/16/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Empire Strikes Back"},
-        {"date": "1/17/2025", "chosenBy": "Jayden", "title": "The Land Before Time"},
-        {"date": "1/20/2025", "chosenBy": "Bonus Movie: Ayub", "title": "The Matrix Revolutions"},
-        {"date": "1/23/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: Return of the Jedi"},
-        {"date": "1/24/2025", "chosenBy": "Unseen Roulette", "title": "Forest Gump"},
-        {"date": "1/30/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Phantom Menace"},
-        {"date": "1/31/2025", "chosenBy": "Trevor", "title": "Transformers: Revenge of the Fallen"},
-        {"date": "2/6/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: Attack of the Clones"},
-        {"date": "2/7/2025", "chosenBy": "Joe", "title": "Heat"},
-        {"date": "2/21/2025", "chosenBy": "Unseen Roulette", "title": "Fantastic Mr. Fox"},
-        {"date": "2/24/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: Revenge of the Sith"},
-        {"date": "2/28/2025", "chosenBy": "Ayub", "title": "Furiosa: A Mad Max Saga"},
-        {"date": "3/6/2025", "chosenBy": "Bonus Movie: John", "title": "Rogue One: A Star Wars Story"},
-        {"date": "3/7/2025", "chosenBy": "John", "title": "Prey"},
-        {"date": "3/17/2025", "chosenBy": "Jayden", "title": "Ninja Assassin"},
-        {"date": "3/20/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Force Awakens"},
-        {"date": "3/21/2025", "chosenBy": "Alex", "title": "Monty Python and the Holy Grail"},
-        {"date": "3/27/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Last Jedi"},
-        {"date": "4/1/2025", "chosenBy": "Ayub", "title": "The Royal Tenenbaums"},
-        {"date": "4/11/2025", "chosenBy": "Joe", "title": "A.I. Artificial Intelligence"},
-        {"date": "4/17/2025", "chosenBy": "Bonus Movie: John", "title": "Star Wars: The Rise of Skywalker"},
-        {"date": "4/18/2025", "chosenBy": "Garrett", "title": "The Big Lebowski"},
-        {"date": "4/25/2025", "chosenBy": "Trevor", "title": "Transformers: Dark of the Moon"},
-        {"date": "5/2/2025", "chosenBy": "John", "title": "Kingsman: The Secret Service"},
-        {"date": "5/9/2025", "chosenBy": "Alex", "title": "Monty Python's Life of Brian"},
-        {"date": "5/16/2025", "chosenBy": "Trevor", "title": "Interstellar"},
-        {"date": "5/23/2025", "chosenBy": "Unseen Roulette", "title": "Blade"},
-        {"date": "5/30/2025", "chosenBy": "Joe", "title": "Starship Troopers"},
-        {"date": "6/6/2025", "chosenBy": "Ayub", "title": "Sinners"},
-        {"date": "6/13/2025", "chosenBy": "Garrett", "title": "Anora"},
-        {"date": "6/27/2025", "chosenBy": "Trevor", "title": "Teen Titans GO! To the Movies"},
-        {"date": "7/11/2025", "chosenBy": "John", "title": "Thunderbolts*"},
-        {"date": "7/17/2025", "chosenBy": "Jayden", "title": "All Dogs Go to Heaven"},
-        {"date": "7/25/2025", "chosenBy": "Alex", "title": "Rango"},
-        {"date": "8/1/2025", "chosenBy": "Joe", "title": "Happy Gilmore"},
-        {"date": "8/8/2025", "chosenBy": "Ayub", "title": "Ne Zha"},
-        {"date": "8/15/2025", "chosenBy": "John", "title": "Terminator 2: Judgement Day"},
-        {"date": "8/22/2025", "chosenBy": "Alex", "title": "The Gentlemen"},
-        {"date": "8/29/2025", "chosenBy": "Unseen Roulette", "title": "The Death of Stalin"},
-        {"date": "9/5/2025", "chosenBy": "Trevor", "title": "The Road to El Dorado"},
-        {"date": "9/12/2025", "chosenBy": "John", "title": "Superman"},
-        {"date": "9/19/2025", "chosenBy": "Ayub", "title": ""},
-        {"date": "9/26/2025", "chosenBy": "Jayden", "title": ""},
-        {"date": "10/2/2025", "chosenBy": "Bonus Movie: John", "title": "Smile"},
-        {"date": "10/3/2025", "chosenBy": "John", "title": "Smile 2"},
-        {"date": "10/9/2025", "chosenBy": "Bonus Movie: Alex", "title": "The Sudbury Devil"},
-        {"date": "10/10/2025", "chosenBy": "Alex", "title": "The Vvitch"},
-        {"date": "10/16/2025", "chosenBy": "Bonus Movie: John", "title": "Alien: Romulus"},
-        {"date": "10/17/2025", "chosenBy": "Joe", "title": ""},
-        {"date": "10/24/2025", "chosenBy": "Trevor", "title": ""},
-        {"date": "10/31/2025", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "11/07/2025", "chosenBy": "Ayub", "title": ""},
-        {"date": "11/14/2025", "chosenBy": "Jayden", "title": ""},
-        {"date": "11/21/2025", "chosenBy": "Joe", "title": ""},
-        {"date": "11/28/2025", "chosenBy": "Jayden", "title": ""},
-        {"date": "12/5/2025", "chosenBy": "Alex", "title": "National Lampoon's Christmas Vacation"},
-        {"date": "12/12/2025", "chosenBy": "Trevor", "title": "Gladiator II"},
-        {"date": "12/17/2025", "chosenBy": "Joe", "title": ""},
-        {"date": "12/26/2025", "chosenBy": "Ayub", "title": ""}
-],
-  "2026": [
-        {"date": "01/02/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "01/09/2026", "chosenBy": "John", "title": "The Fantastic Four: First Steps"},
-        {"date": "01/16/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "01/23/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "01/30/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "02/06/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "02/13/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "02/20/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "02/27/2026", "chosenBy": "John", "title": "Iron Man"},
-        {"date": "03/06/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "03/13/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "03/20/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "03/27/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "04/03/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "04/10/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "04/17/2026", "chosenBy": "John", "title": "Mission Impossible"},
-        {"date": "04/24/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "05/01/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "05/08/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "05/15/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "05/22/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "05/28/2026", "chosenBy": "Bonus Movie: John", "title": "Mission Impossible II"},
-        {"date": "05/29/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "06/4/2026", "chosenBy": "Bonus Movie: John", "title": "Mission Impossible III"},
-        {"date": "06/05/2026", "chosenBy": "John", "title": "Mission Impossible - Ghost Protocol"},
-        {"date": "06/12/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "06/19/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "06/26/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "07/03/2026", "chosenBy": "John", "title": "Jaws"},
-        {"date": "07/10/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "07/17/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "07/24/2026", "chosenBy": "John", "title": "Mission Impossible - Rogue Nation"},
-        {"date": "07/31/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "08/07/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "08/14/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "08/21/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "08/28/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "09/04/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "09/11/2026", "chosenBy": "John", "title": "Mission Impossible - Fallout"},
-        {"date": "09/18/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "09/25/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "10/02/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "10/09/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "10/16/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "10/23/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "10/30/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "11/06/2026", "chosenBy": "Jayden", "title": ""},
-        {"date": "11/13/2026", "chosenBy": "Alex", "title": ""},
-        {"date": "11/20/2026", "chosenBy": "Trevor", "title": ""},
-        {"date": "11/27/2026", "chosenBy": "Joe", "title": ""},
-        {"date": "12/04/2026", "chosenBy": "Ayub", "title": ""},
-        {"date": "12/11/2026", "chosenBy": "Unseen Roulette", "title": ""},
-        {"date": "12/17/2026", "chosenBy": "Bonus Movie: John", "title": "The Polar Express"},
-        {"date": "12/18/2026", "chosenBy": "John", "title": "Bullet Train"},
-        {"date": "12/25/2026", "chosenBy": "Jayden", "title": ""}
-  ],
-    "2027": []    
-};
+// --- Supabase setup (uses the values you provided earlier) ---
+const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// --- Replace hardcoded data with Supabase-backed data structures ---
+let movieData = {}; // will become { "2023": [...], "2024": [...], ... }
+let unseenMovieData = { unseen: [], seen: [], bonus: [] };
+const EXPECTED_YEARS = ["2023","2024","2025","2026","2027"];
+EXPECTED_YEARS.forEach(y => { movieData[y] = []; });
+
+/** Helper: parse "pickedBy" values into an array (handles "A/B", "A, B", string, array) */
+function parsePickedBy(pb) {
+  if (!pb) return [];
+  if (Array.isArray(pb)) return pb;
+  return pb.toString().split(/[\/,]+/).map(s => s.trim()).filter(Boolean);
+}
+
+/** Helper: extract year from date strings like "1/5/2024" or "12/29/2023" or ISO dates */
+function extractYearFromDate(raw) {
+  if (!raw) return null;
+  if (typeof raw === 'string') {
+    // common format is M/D/YYYY or MM/DD/YYYY
+    const parts = raw.split('/');
+    if (parts.length === 3 && /^\d{4}$/.test(parts[2])) return parts[2];
+    // try dash separated YYYY-MM-DD or YYYY-M-D
+    const dashParts = raw.split('-');
+    if (dashParts.length === 3 && /^\d{4}$/.test(dashParts[0])) return dashParts[0];
+    // fallback: try Date parse
+    const d = new Date(raw);
+    if (!isNaN(d)) return String(d.getFullYear());
+  } else if (raw instanceof Date && !isNaN(raw)) {
+    return String(raw.getFullYear());
+  }
+  return null;
+}
+
+/** Format date into MM/DD/YY (e.g. 12/29/23). Handles:
+ *  - "YYYY-MM-DD" or "YYYY-M-D"
+ *  - "M/D/YYYY" or "MM/DD/YYYY"
+ *  - Date objects or other parseable strings as fallback
+ */
+function formatDateShort(raw) {
+  if (!raw) return '';
+  // If already in M/D/YYYY or similar with slashes:
+  if (typeof raw === 'string' && raw.includes('/')) {
+    const parts = raw.split('/');
+    if (parts.length === 3) {
+      let month = parts[0].padStart(2, '0');
+      let day = parts[1].padStart(2, '0');
+      let year = parts[2];
+      // year might be '2024' or '24'
+      if (year.length === 4) year = year.slice(2);
+      else year = year.padStart(2, '0');
+      return `${month}/${day}/${year}`;
+    }
+  }
+
+  // If dash-separated like YYYY-MM-DD or YYYY-M-D:
+  if (typeof raw === 'string' && raw.includes('-')) {
+    const parts = raw.split('-');
+    if (parts.length === 3 && parts[0].length === 4) {
+      const year = parts[0].slice(2);
+      const month = parts[1].padStart(2, '0');
+      const day = parts[2].padStart(2, '0');
+      return `${month}/${day}/${year}`;
+    }
+  }
+
+  // Try Date parsing fallback
+  const d = new Date(raw);
+  if (!isNaN(d)) {
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const year = String(d.getFullYear()).slice(2);
+    return `${month}/${day}/${year}`;
+  }
+
+  // If nothing matched, return raw as-is
+  return raw;
+}
+
+/** Build movieData from moviesList table (date, pickedBy, title) */
+async function buildMovieDataFromSupabase() {
+  try {
+    const { data, error } = await supabase
+      .from('moviesList')
+      .select('date, pickedBy, title, movieType');
+
+    if (error) {
+      console.error('Error fetching moviesList:', error);
+      return;
+    }
+
+    // Reset expected years then fill
+    EXPECTED_YEARS.forEach(y => movieData[y] = []);
+
+    (data || []).forEach(row => {
+      const year = extractYearFromDate(row.date) || String(firstTable);
+      if (!movieData[year]) movieData[year] = [];
+      movieData[year].push({
+        date: row.date || '',
+        chosenBy: row.pickedBy || '',
+        title: row.title || '',
+        movieType: row.movieType || ''
+      });
+    });
+
+    // Optional: sort each year's list by date (old -> new) if date strings are parseable
+    Object.keys(movieData).forEach(year => {
+      movieData[year].sort((a,b) => {
+        const da = new Date(a.date);
+        const db = new Date(b.date);
+        if (isNaN(da) || isNaN(db)) return 0;
+        return da - db;
+      });
+    });
+
+  } catch (err) {
+    console.error('buildMovieDataFromSupabase error:', err);
+  }
+}
+
+/** Build unseenMovieData:
+ *  - unseen: rows from unseenList (pickedBy, title)
+ *  - seen: moviesList rows with movieType == 'roulette' AND stars present
+ *  - bonus: moviesList rows with movieType == 'bonus'
+ *  Case-insensitive checks for movieType.
+ */
+async function buildUnseenMovieDataFromSupabase() {
+  try {
+    // unseenList -> unseen
+    const { data: unseenRows, error: unseenErr } = await supabase
+      .from('unseenList')
+      .select('pickedBy, title');
+
+    if (unseenErr) {
+      console.error('Error fetching unseenList:', unseenErr);
+    }
+
+    // moviesList -> seen & bonus
+    const { data: movieRows, error: movieErr } = await supabase
+      .from('moviesList')
+      .select('pickedBy, title, movieType, stars');
+
+    if (movieErr) {
+      console.error('Error fetching moviesList for seen/bonus:', movieErr);
+    }
+
+    unseenMovieData.unseen = (unseenRows || []).map(r => ({
+      chosenBy: parsePickedBy(r.pickedBy),
+      title: r.title || ''
+    }));
+
+    const seen = [];
+    const bonus = [];
+    (movieRows || []).forEach(r => {
+      const type = (r.movieType || '').toString().toLowerCase();
+      const stars = (r.stars || '').toString().toLowerCase();
+      if (type === 'roulette') {
+        if (stars && stars !== 'none' && stars !== 'null') {
+          seen.push({
+            chosenBy: parsePickedBy(r.pickedBy),
+            title: r.title || '',
+            movieType: r.movieType,
+            stars: r.stars
+          });
+        }
+      } else if (type === 'bonus') {
+        bonus.push({
+          chosenBy: parsePickedBy(r.pickedBy),
+          title: r.title || '',
+          movieType: r.movieType,
+          stars: r.stars
+        });
+      }
+    });
+
+    unseenMovieData.seen = seen;
+    unseenMovieData.bonus = bonus;
+
+  } catch (err) {
+    console.error('buildUnseenMovieDataFromSupabase error:', err);
+  }
+}
+
+// ----------------- Remaining original script (unchanged logic) -----------------
 
 function loadTable() {
     const year = document.getElementById('yearSelect') ? document.getElementById('yearSelect').value : firstTable.toString();
     const tableBody = document.getElementById('movieTable').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = ''; // Clear current table rows
+
+    // If the year key missing or empty array, just exit gracefully
+    if (!movieData[year] || movieData[year].length === 0) {
+        return;
+    }
+
     // Populate the table with data from the selected year
     movieData[year].forEach(movie => {
         const row = document.createElement('tr');
-        row.innerHTML = `<td>${movie.date}</td><td>${movie.chosenBy}</td><td>${movie.title}</td>`;
+        const formattedDate = formatDateShort(movie.date);
+
+        // Prefix "Who's Movie" column based on type
+        let chosenByStr = movie.chosenBy;
+        const type = movie.movieType ? movie.movieType.toString().toLowerCase() : "";
+        if (type === "roulette") {
+            chosenByStr = `Unseen Roulette`;
+        } else if (type === "bonus") {
+            chosenByStr = `Bonus Movie: ${chosenByStr}`;
+        }
+
+        row.innerHTML = `<td>${formattedDate}</td><td>${chosenByStr}</td><td>${movie.title}</td>`;
         tableBody.appendChild(row);
     });
 }
 
-// Add event listener for year selection
-document.getElementById('yearSelect').addEventListener('change', loadTable);
+// Add event listener for year selection if element exists
+const yearSelectElem = document.getElementById('yearSelect');
+if (yearSelectElem) {
+  yearSelectElem.addEventListener('change', loadTable);
+}
 
-
-// Load table on page load
-window.onload = loadTable;
-
-const unseenMovieData = {
-    "unseen": [
-        {"chosenBy": ["Joe", "Ayub", "Trevor"], "title": "Akira"},
-        {"chosenBy": ["Ayub", "Trevor"], "title": "Knock at the Cabin"},
-        {"chosenBy": ["Ayub", "Alex"], "title": "The Northman"},
-        {"chosenBy": ["Ayub"], "title": "The Social Network"},
-        {"chosenBy": ["Ayub"], "title": "Blade Runner 2049"},
-        {"chosenBy": ["Ayub"], "title": "Wall-E"},
-        {"chosenBy": ["Ayub"], "title": "Total Recall"},
-        {"chosenBy": ["Joe"], "title": "Bone Tomahawk"},
-        {"chosenBy": ["Joe"], "title": "Who Framed Roger Rabbit"},
-        {"chosenBy": ["Joe"], "title": "Crank"},
-        {"chosenBy": ["Joe"], "title": "Super Mario Bros (1993)"},
-        {"chosenBy": ["Joe"], "title": "The Babadook"},
-        {"chosenBy": ["Joe"], "title": "10 Cloverfield Lane"},
-        {"chosenBy": ["Joe"], "title": "Popstar: Never Stop, Never Stopping"},
-        {"chosenBy": ["John"], "title": "Animal House"},
-        {"chosenBy": ["John"], "title": "Baby Driver"},
-        {"chosenBy": ["John"], "title": "Whiplash"},
-        {"chosenBy": ["John"], "title": "300"},
-        {"chosenBy": ["John"], "title": "Back to the Future"},
-        {"chosenBy": ["John"], "title": "Shrek"},
-        {"chosenBy": ["John"], "title": "Taken"},
-        {"chosenBy": ["John"], "title": "Scary Movie 3"},
-        {"chosenBy": ["John"], "title": "Django Unchained"},
-        {"chosenBy": ["John"], "title": "Ghost Rider"},
-        {"chosenBy": ["John"], "title": "Phone Booth"},
-        {"chosenBy": ["John"], "title": "Everything Everywhere All At Once"},
-        {"chosenBy": ["John"], "title": "Robocop"},
-        {"chosenBy": ["Landon"], "title": "Hairspray"},
-        {"chosenBy": ["Trevor"], "title": "Across the Spiderverse"},
-        {"chosenBy": ["Trevor"], "title": "KPop Demon Hunters"},
-        {"chosenBy": ["Trevor"], "title": "Robots"},
-        {"chosenBy": ["Trevor"], "title": "Zoolander"},
-    ],
-    "seen": [
-        {"chosenBy": ["John", "Ayub", "Trevor"], "title": "Gladiator"},
-        {"chosenBy": ["John"], "title": "Sherlock Holmes (2009)"},
-        {"chosenBy": ["Joe"], "title": "Drive"},
-        {"chosenBy": ["Alex"], "title": "Greyhound"},
-        {"chosenBy": ["John"], "title": "Forest Gump"},
-        {"chosenBy": ["Ayub"], "title": "Fantastic Mr. Fox"},
-        {"chosenBy": ["Joe"], "title": "Blade"},
-    ],
-    "bonus": [
-        {"chosenBy": ["Ayub"], "title": "The Texas Chainsaw Massacre"},
-        {"chosenBy": ["Trevor"], "title": "The Platform 2"},
-        {"chosenBy": ["Trevor"], "title": "28 Days Later"},
-        {"chosenBy": ["John"], "title": "Scream"},
-        {"chosenBy": ["John"], "title": "The Nightmare Before Christmas"},
-        {"chosenBy": ["John"], "title": "Star Wars: A New Hope"},
-        {"chosenBy": ["John"], "title": "Star Wars: The Empire Strikes Back"},
-        {"chosenBy": ["Ayub"], "title": "The Matrix Revolutions"},
-        {"chosenBy": ["John"], "title": "Star Wars: Return of the Jedi"},
-        {"chosenBy": ["John"], "title": "Star Wars: The Phantom Menace"},
-        {"chosenBy": ["John"], "title": "Star Wars: Attack of the Clones"},
-        {"chosenBy": ["John"], "title": "Star Wars: Revenge of the Sith"},
-        {"chosenBy": ["John"], "title": "Rogue One: A Star Wars Story"},
-        {"chosenBy": ["John"], "title": "Star Wars: The Force Awakens"},
-        {"chosenBy": ["John"], "title": "Star Wars: The Last Jedi"},
-        {"chosenBy": ["John"], "title": "Star Wars: The Rise of Skywalker"},
-        {"chosenBy": ["John"], "title": "Smile"},
-        {"chosenBy": ["Alex"], "title": "The Sudbury Devil"},
-        {"chosenBy": ["John"], "title": "Alien: Romulus"},
-        {"chosenBy": ["John"], "title": "Mission Impossible II"},
-        {"chosenBy": ["John"], "title": "Mission Impossible III"},
-        {"chosenBy": ["John"], "title": "The Polar Express"}
-    ]
-};
-
+// Load unseen/unseen/bonus table renderer (uses unseenMovieData built above)
 function loadUnseenTable() {
     const status = document.getElementById('unseenSelect').value;
     const tableBody = document.getElementById('unseenTable').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = ''; // Clear current table rows
 
+    // if nothing present for that status, do nothing
+    if (!unseenMovieData || !unseenMovieData[status] || unseenMovieData[status].length === 0) {
+        return;
+    }
+
     // Populate the table with unseen/seen data
     unseenMovieData[status].forEach(movie => {
         const row = document.createElement('tr');
-        row.innerHTML = `<td>${movie.chosenBy}</td><td>${movie.title}</td>`;
+        // chosenBy may be array or string depending on source; show it sensibly
+        const chosenByStr = Array.isArray(movie.chosenBy) ? movie.chosenBy.join('/') : movie.chosenBy;
+        row.innerHTML = `<td>${chosenByStr}</td><td>${movie.title}</td>`;
         tableBody.appendChild(row);
     });
 }
@@ -304,18 +258,33 @@ function toggleWheel() {
     }
 }
 
-// Load table on page load using firstTable
-window.onload = () => {
-    document.getElementById('yearSelect').value = firstTable; // Set the select menu to the default year
-    loadTable(); // Main Movie List
-    loadUnseenTable(); // Unseen List
+// Load table on page load using firstTable, but first fetch data from Supabase
+window.onload = async () => {
+    // set select to default year (same behavior as before)
+    const yearSelectElem = document.getElementById('yearSelect');
+    if (yearSelectElem) yearSelectElem.value = firstTable;
+
+    // Fetch data from Supabase to populate movieData and unseenMovieData
+    await Promise.all([
+      buildMovieDataFromSupabase(),
+      buildUnseenMovieDataFromSupabase()
+    ]);
+
+    // Debug logging so you can inspect shapes in console
+    console.log('movieData (sample):', movieData);
+    console.log('unseenMovieData (sample):', unseenMovieData);
+
+    // Call original renderers
+    loadTable();       // Main Movie List
+    loadUnseenTable(); // Unseen/Seen/Bonus lists
 };
 
+// ----------------- Spinner / wheel / canvas code (unchanged) -----------------
 
 // Default movie list
 let spinnerMovies = ["Choose", "2", "Movies", "Each"];
 const canvas = document.getElementById('wheel');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 const spinBtn = document.getElementById('spinBtn');
 const updateWheelBtn = document.getElementById('updateWheelBtn');
 const movieInput = document.getElementById('movieInput');
@@ -337,6 +306,7 @@ function getFontSize() {
 
 // Function to draw the wheel with colored segments
 function drawWheel(rotation = 0) {
+    if (!ctx || !canvas) return;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     const radius = canvas.width / 2;
@@ -370,6 +340,7 @@ function drawWheel(rotation = 0) {
 
 // Function to draw the black triangle pointer on the right side
 function drawTriangle() {
+    if (!ctx || !canvas) return;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     const triangleSize = 20;
@@ -385,6 +356,7 @@ function drawTriangle() {
 
 // Function to spin the wheel
 function spinWheel() {
+    if (!ctx || !canvas) return;
     const randomSpin = Math.floor(Math.random() * 360) + 720; // Ensure at least 2 full rotations
     let currentRotation = 0;
     const spinInterval = setInterval(() => {
@@ -404,30 +376,33 @@ function spinWheel() {
 }
 
 // Event listener for updating the wheel based on text input
-updateWheelBtn.addEventListener('click', () => {
-    const userInput = movieInput.value;
-    
-    if (userInput.trim()) {
-        // Split user input by // and trim whitespace
-        spinnerMovies = userInput.split('//').map(movie => movie.trim());
-        numSegments = spinnerMovies.length; // Update the number of segments
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-        drawWheel();  // Redraw the wheel with updated movies
-        drawTriangle(); // Redraw the triangle
-    } else {
-        alert('Please enter movie names.');
-    }
-});
+if (updateWheelBtn && movieInput) {
+  updateWheelBtn.addEventListener('click', () => {
+      const userInput = movieInput.value;
+      
+      if (userInput.trim()) {
+          // Split user input by // and trim whitespace
+          spinnerMovies = userInput.split('//').map(movie => movie.trim());
+          numSegments = spinnerMovies.length; // Update the number of segments
+          if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+          drawWheel();  // Redraw the wheel with updated movies
+          drawTriangle(); // Redraw the triangle
+      } else {
+          alert('Please enter movie names.');
+      }
+  });
+}
 
 // Initial draw of the wheel
 drawWheel();
 drawTriangle(); // Draw triangle on initial wheel
 
 // Attach spin button event
-spinBtn.addEventListener('click', spinWheel);
+if (spinBtn) spinBtn.addEventListener('click', spinWheel);
 
 // Redraw the wheel when the window is resized
 window.addEventListener('resize', () => {
+    if (!ctx || !canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
     drawWheel();  // Redraw the wheel with updated font size
     drawTriangle(); // Redraw the triangle

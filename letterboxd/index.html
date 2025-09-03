@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corona Cinema | Letterboxd </title>
+    <title>Corona Cinema | Letterboxd</title>
     <link rel="stylesheet" href="../letterboxd/assets/styles.css">
     <link rel="icon" href="../assets/images/icon.png" type="image/png">
+    <!-- Add Supabase client library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <header>
@@ -41,13 +43,11 @@
                         <th>Review</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Rows will be injected via JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </li>
 
-        <li class="letterboxd-entry">
+        <li class="letterboxd-entry" id="ayub">
             <section class="letterbox-header">
                 <h2 class="letterboxd">Ayub's Letterboxd</h2>
                 <button class="hide-button" onclick="toggleTable('ayub-table')">Show/Hide Table</button>
@@ -63,13 +63,11 @@
                         <th>Review</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Rows will be injected via JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </li>
 
-        <li class="letterboxd-entry">
+        <li class="letterboxd-entry" id="joe">
             <section class="letterbox-header">
                 <h2 class="letterboxd">Joe's Letterboxd</h2>
                 <button class="hide-button" onclick="toggleTable('joe-table')">Show/Hide Table</button>
@@ -85,13 +83,11 @@
                         <th>Review</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Rows will be injected via JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </li>
 
-        <li class="letterboxd-entry">
+        <li class="letterboxd-entry" id="john">
             <section class="letterbox-header">
                 <h2 class="letterboxd">John's Letterboxd</h2>
                 <button class="hide-button" onclick="toggleTable('john-table')">Show/Hide Table</button>
@@ -107,13 +103,11 @@
                         <th>Review</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Rows will be injected via JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </li>
 
-        <li class="letterboxd-entry" id="landon"></li>
+        <li class="letterboxd-entry" id="landon">
             <section class="letterbox-header">
                 <h2 class="letterboxd">Landon's Letterboxd</h2>
                 <button class="hide-button" onclick="toggleTable('landon-table')">Show/Hide Table</button>
@@ -129,9 +123,7 @@
                         <th>Review</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Rows will be injected via JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </li>
 
@@ -151,9 +143,7 @@
                         <th>Review</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Rows will be injected via JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
         </li>
     </ul>
@@ -165,7 +155,7 @@
 
 <footer>
     <section id="streaming">
-        <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
+        <button id="streaming-button">Streaming</button>
         <div id="stream-links">
             <a href="https://ww4.fmovies.co/24/"><img src="../assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
             <a href="https://himovies.sx/"><img src="../assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
@@ -180,6 +170,7 @@
         <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
     </section>
 </footer>
+
 <script src="../assets/scripts/letterboxd-scripts.js"></script>
 </body>
 </html>

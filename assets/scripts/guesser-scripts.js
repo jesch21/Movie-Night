@@ -1,293 +1,243 @@
-// 55 total
-let movieList = [
-    ["The Truman Show", "truman.jpg", "1 hrs 43 mins", "1998", "Ed Harris"],
-    ["The Matrix", "matrix.jpg", "2 hrs 16 mins", "1999", "Laurence Fishburne"],
-    ["The Terminator", "terminator.jpg", "1 hrs 47 mins", "1984", "Linda Hamilton"],
-    ["Fallen Angels", "angels.jpg", "1 hrs 36 mins", "1995", "Leon Lai"],
-    ["The Batman", "batman.jpg", "2 hrs 56 mins", "2022", "Colin Farrel"],
-    ["A Silent Voice", "silent-voice.jpg", "2 hrs 10 mins", "2016", "Miyu Irino"],
-    ["Cloverfield", "cloverfield.jpg", "1 hrs 25 mins", "2008", "T.J. Miller"],
-    ["The Platform", "platform.jpg", "1 hrs 34 mins", "2019", "Antonia San Juan"],
-    ["Yojimbo", "yojimbo.jpg", "1 hrs 50 mins", "1961", "Tatsuya Nakadai"],
-    ["Princess Mononoke", "mononoke.jpg", "2 hrs 13 mins", "1997", "Yuriko Ishida"],
-    ["Se7en", "se7en.gif", "2 hrs 7 mins", "1995", "Brad Pitt"],
-    ["Indiana Jones: Raiders of the Lost Ark", "raiders.jpg", "1 hrs 55 mins", "1981", "Paul Freeman"],
-    ["Click", "click.jpg", "1 hrs 47 mins", "2006", "Adam Sandler"],
-    ["Attack on Titan: The Final Chapter Part 1", "aot.jpg", "1 hrs 1 mins", "2023", "Adam Sandler"],
-    ["Sanjuro", "sanjuro.jpg", "1 hrs 36 mins", "1962", "Tatsuya Nakadai"],
-    ["A Beautiful Mind", "beautiful-mind.jpg", "2 hrs 15 mins", "2001", "Russel Crowe"],
-    ["Fight Club", "fight.jpg", "2 hrs 19 mins", "1999", "Brad Pitt"],
-    ["Das Leben der Anderen", "leben.jpg", "2 hrs 17 mins", "2006", "Martina Gedeck"],
-    ["Midsommar", "midsommar.jpg", "2 hrs 28 mins", "2019", "Florence Pugh"],
-    ["Kill Bill Vol. 1", "bill.jpg", "1 hrs 53 mins", "2003", "David Carradine"],
-    ["Jarhead", "jarhead.jpg", "2 hrs 05 mins", "2005", "Jamie Foxx"],
-    ["Mad Max: Fury Road", "max.jpg", "2 hrs 00 mins", "2015", "Tom Hardy"],
-    ["Master and Commander: The Far Side of the World", "commander.jpg", "2 hrs 18 mins", "2013", "Russel Crowe"],
-    ["Uncut Gems", "gems.jpg", "2 hrs 15 mins", "2019", "Adam Sandler"],
-    ["The Suicide Squad", "suicide.jpg", "2 hrs 12 mins", "2021", "Idris Elba"],
-    ["Hardcore Henry", "henry.jpg", "1 hrs 36 mins", "2015", "Tim Roth"],
-    ["Gladiator", "gladiator.jpg", "2 hrs 35 mins", "2000", "Russel Crowe"],
-    ["John Wick", "wick.jpg", "1 hrs 41 mins", "2014", "Keanu Reeves"],
-    ["High and Low", "high-and-low.jpg", "2 hrs 23 mins", "1963", "Tatsuya Nakadai"],
-    ["Full Metal Jacket", "fmj.jpg", "1 hrs 56 mins", "1987", "Matthew Modine"],
-    ["Mid90s", "mid90s.jpg", "1 hrs 25 mins", "2018", "Sunny Suljic"],
-    ["The Possession", "possession.jpg", "1 hrs 32 mins", "2012", "Jeffrey Dean Morgan"],
-    ["I Want to Eat Your Pancreas", "pancreas.jpg", "1 hrs 49 mins", "2018", "Mahiro Takasugi"],
-    ["All Quiet on the Western Front", "western.jpg", "2 hrs 28 mins", "2022", "Felix Kammerer"],
-    ["9", "9.jpg", "1 hrs 19 mins", "2009", "Elijah Wood"],
-    ["Collateral", "collateral.jpg", "2 hrs 00 mins", "2009", "Jamie Foxx"],
-    ["The Grand Budapest Hotel", "budapest.jpg", "1 hrs 39 mins", "2014", "Ralph Fiennes"],
-    ["Sherlock Holmes (2009)", "sherlock.jpg", "2 hrs 08 mins", "2009", "Jude Law"],
-    ["Godzilla Minus One", "godzilla.jpg", "2 hrs 04 mins", "2023", "Minami Hamabe"],
-    ["Ernest Scared Stupid", "ernest.gif", "1 hrs 31 mins", "1991", "Jim Varney"],
-    ["The Thing (1982)", "thing.jpg", "1 hrs 49 mins", "1982", "Kurt Russel"],
-    ["The Texas Chainsaw Massacre", "chainsaw.jpg", "1 hrs 23 mins", "1974", "Marilyn Burns"],
-    ["The Conjuring", "conjuring.jpg", "1 hrs 52 mins", "2013", "Patrick Wilson"],
-    ["The Platform 2", "platform2.jpg", "1 hrs 39 mins", "2024", "Milena Smit"],
-    ["The Lighthouse", "lighthouse.jpg", "1 hrs 49 mins", "2019", "Wilem DaFoe"],
-    ["28 Days Later", "28.jpg", "1 hrs 53 mins", "2002", "Cillian Murphy"],
-    ["Scream", "scream.jpg", "1 hrs 51 mins", "1996", "Courteney Cox"],
-    ["Bram Stoker's Dracula", "dracula.jpg", "2 hrs 08 mins", "1992", "Keanu Reeves"],
-    ["Burn After Reading", "burn.jpg", "1 hrs 36 mins", "2008", "Brad Pitt"],
-    ["Indiana Jones and The Last Crusade", "crusade.jpg", "2 hrs 07 mins", "1989", "Sean Connery"],
-    ["Pirates of the Carribean: The Curse of the Black Pearl", "pearl.jpg", "2 hrs 23 mins", "2003", "Orlando Bloom"],
-    ["Goodfellas", "goodfellas.jpg", "2 hrs 25 mins", "1990", "Joe Pesci"],
-    ["Transformers", "transformers.jpg", "2 hrs 24 mins", "2007", "Megan Fox"],
-    ["Eight Crazy Nights", "eight.jpg", "1 hrs 16 mins", "2002", "Adam Sandler"],
-    ["The Matrix Reloaded", "matrix-reloaded.jpg", "2 hrs 18 mins", "2003", "Keanu Reeves"],
-    ["The Nightmare Before Christmas", "nightmare.jpg", "1 hrs 16 mins", "1993", "Daniel Elfman"],
-    ["The Hateful Eight - Extended Version", "hateful.jpg", "3 hrs 30 mins", "2019", "Kurt Russel"],
-    ["Drive", "drive.jpg", "1 hrs 40 mins", "2011", "Bryan Cranston"],
-    ["Greyhound", "greyhound.jpg", "1 hrs 31 mins", "2020", "Tom Hanks"],
-    ["Star Wars: A New Hope", "hope.jpg", "2 hrs 01 mins", "1977", "Mark Hamill"],
-    ["The Ministry of Ungentlemanly Warfare", "ministry.jpg", "2 hrs 02 mins", "2024", "Alan Ritchson"],
-    ["Star Wars: The Empire Strikes Back", "empire.jpg", "2 hrs 04 mins", "1980", "Carrie Fischer"],
-    ["The Land Before Time", "land.jpg", "1 hrs 9 mins", "1988", "Pat Hingle"],
-    ["The Matrix Revolutions", "matrix-revolutions.jpg", "2 hrs 09 mins", "2003", "Laurence Fishburne"],
-    ["Star Wars: Return of the Jedi", "return.jpg", "2 hrs 11 mins", "1983", "Anthony Daniels"],
-    ["Forest Gump", "gump.jpg", "2 hrs 22 mins", "1994", "Tom Hanks"],
-    ["Star Wars: The Phantom Menace", "phantom.jpg", "2 hrs 16 mins", "1999", "Liam Neeson"],
-    ["Transformers: Revenge of the Fallen", "transformers2.jpg", "2 hrs 29 mins", "2009", "Shia LaBeouf"],
-    ["Star Wars: Attack of the Clones", "clones.jpg", "2 hrs 22 mins", "2002", "Natalie Portman"],
-    ["Heat", "heat.jpg", "2 hrs 50 mins", "1995", "Al Pacino"],
-    ["Fantastic Mr. Fox", "fantastic-mr-fox.jpg", "1 hrs 27 mins", "2009", "Bill Murray"],
-    ["Star Wars: Revenge of the Sith", "revenge.jpg", "2 hrs 20 mins", "2005", "Ian McDiarmid"],
-    ["Furiosa: A Mad Max Saga", "furiosa.jpg", "2 hrs 28 mins", "2024", "Chris Hemsworth"],
-    ["Rogue One: A Star Wars Story", "rogue.jpg", "2 hrs 13 mins", "2016", "Felicity Jones"],
-    ["Prey", "prey.jpg", "1 hrs 40 mins", "2022", "Amber Midthunder"],
-    ["Ninja Assassin", "ninja.jpg", "1 hrs 39 mins", "2009", "Matthew Sand"],
-    ["Star Wars: The Force Awakens", "awakens.jpg", "2 hrs 18 mins", "2015", "Harrison Ford"],
-    ["Monty Python and the Holy Grail", "monty1.jpg", "1 hrs 31 mins", "1975", "Graham Chapman"],
-    ["Star Wars: The Last Jedi", "last.jpg", "2 hrs 32 mins", "2017", "Benecio Del Toro"],
-    ["The Royal Tenenbaums", "tenenbaums.jpg", "1 hrs 50 mins", "2001", "Gwyneht Paltrow"],
-    ["A.I. Artificial Intelligence", "ai.jpg", "2 hrs 26 mins", "2001", "Jude Law"],
-    ["Star Wars: The Rise of Skywalker", "skywalker.jpg", "2 hrs 21 mins", "2019", "Oscar Isaac"],
-    ["The Big Lebowski", "lebowski.jpg", "1 hrs 57 mins", "1998", "John Goodman"],
-    ["Transformers: Dark of the Moon", "transformers3.jpg", "2 hrs 34 mins", "2011", "Tyrese Gibson"],
-    ["Kingsman: The Secret Service", "kingsman.jpg", "2 hrs 9 mins", "2014", "Samuel L. Jackson"],
-    ["Monty Python's Life of Brian", "monty2.jpg", "1 hrs 34 mins", "1979", "John Cleese"],
-    ["Interstellar", "interstellar.jpg", "2 hrs 49 mins", "2014", "Matthew McConaughey"],
-    ["Blade", "blade.jpg", "1 hrs 55 mins", "1998", "Wesley Snipes"],
-    ["Starship Troopers", "starship.jpg", "2 hrs 9 mins", "1997", "Denise Richards"],
-    ["Sinners", "sinners.jpg", "2 hrs 17 mins", "2025", "Michael B. Jordan"],
-    ["Anora", "anora.jpg", "2 hrs 19 mins", "2024", "Mikey Madison"],
-    ["Teen Titans GO! To the Movies", "teen-titans.jpg", "1 hrs 24 mins", "2018", "Aaron Siegel"],
-    ["Thunderbolts*", "thunderbolts.jpg", "2 hrs 6 mins", "2025", "Sebastian Stan"],
-    ["All Dogs Go to Heaven", "all-dogs.jpg", "1 hrs 24 mins", "1989", "Don Bluth"],
-    ["Rango", "rango.jpg", "1 hrs 47 mins", "2011", "Johnny Depp"],
-    ["Happy Gilmore", "gilmore.jpg", "1 hrs 32 mins", "1996", "Adam Sandler"],
-    ["Ne Zha", "ne-zha.jpg", "1 hrs 50 mins", "2019", "Joseph"],
-    ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
-    ["The Gentlemen", "gentlemen.jpg", "1 hrs 53 mins", "2019", "Matthew McConaughey"],
-    ["The Death of Stalin", "stalin.jpg", "1 hrs 47 mins", "2017", "Steve Buscemi"],
-    ["The Road to El Dorado", "el-dorado.jpg", "1 hrs 29 mins", "2000", "Kevin Kline"],
-    /*
-    ["Superman", "superman.jpg", "2 hrs 9 mins", "2025", "Nicholas Hoult"],
-
-    ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],
-    ["Smile 2", "smile2.jpg", "2 hrs 07 mins", "2024", "Naomi Scott"],
-    ["The Sudbury Devil", "sudbury.jpg", "1 hrs 30 mins", "2023", "Benton Guiness"],
-    ["The Vvitch", "vvitch.jpg", "1 hrs 32 mins", "2015", "Anya Taylor-Joy"],
-    ["Alien: Romulus", "romulus.jpg", "1 hrs 59 mins", "2024", "Cailee Spaeny"],
-
-    ["National Lampoon's Christmas Vacation", "lampoon.jpg", "1 hrs 37 mins", "1989", "Bruce Willis"],
-    ["Gladiator II", "gladiator2.jpg", "2 hrs 28 mins", "2024", "Pedro Pascal"],
-
-
-    ["The Fantastic Four: First Steps", "fantastic4.jpg", "1 hrs 54 mins", "2025", "Pedro Pascal"],
-
-    ["Iron Man", "iron-man.jpg", "2 hrs 6 mins", "2008", "Robert Downey Jr."],
-
-    ["Mission Impossible", "mission-impossible1.jpg", "1 hrs 50 mins", "1996", "Tom Cruise"],
-
-    ["Mission Impossible II", "mission-impossible2.jpg", "2 hrs 3 mins", "2000", "Tom Cruise"],
-
-    ["Mission Impossible III", "mission-impossible3.jpg", "2 hrs 6 mins", "2006", "Philip Seymour Hoffman"],
-    ["Mission Impossible - Ghost Protocol", "mission-impossible4.jpg", "2 hrs 12 mins", "2011", "Jeremy Renner"],
-
-    ["Jaws", "jaws.jpg", "2 hrs 4 mins", "1975", "Robert Shaw"],
-
-    ["Mission Impossible - Rogue Nation", "mission-impossible5.jpg", "2 hrs 11 mins", "2015", "Simon Pegg"],
-
-    ["Mission Impossible - Fallout", "mission-impossible6.jpg", "2 hrs 27 mins", "2018", "Henry Cavill"],
-
-    ["The Polar Express", "polar.jpg", "1 hrs 40 mins", "2004", "Tom Hanks"],
-    ["Bullet Train", "bullet-train.jpg", "2 hrs 7 mins", "2022", "Brad Pitt"],
-    */
-];
-
-let guessedMovies=[];
+// --- Supabase setup (replace these values if needed) ---
+const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// -----------------------------------------------------
+ 
+// movieList will be populated from Supabase. Each entry kept in the same format your game expects:
+// [ title, imageName, length, year, starring, miniImagePublicUrl ]
+let movieList = [];
+ 
+let guessedMovies = [];
 let currentHint = 0;
-let currentMovie=[];
+let currentMovie = [];
 let currentTime;
 let wrongGuesses = 0;
 let timerOn = true;
 let roundNum = 1;
 let totalPoints = 0;
-
+ 
+// Fetch movie list from Supabase and public URLs from storage bucket "miniImages"
+async function fetchMovieListFromSupabase() {
+    try {
+        // Query only movies with stars not NULL and not "None"
+        const { data, error } = await supabase
+            .from('moviesList')
+            .select('title, image, length, releaseYear, starring')
+            .not('stars', 'is', null)
+            .neq('stars', 'None');
+ 
+        if (error) {
+            console.error('Error fetching moviesList:', error);
+            return;
+        }
+ 
+        // Map rows into the array format used by the rest of the script
+        const rows = data || [];
+        const built = [];
+ 
+        // For each row, attempt to get a public URL from the 'miniImages' storage bucket
+        for (const row of rows) {
+            const title = row.title || '';
+            const imageName = row.image || ''; // stored filename in bucket (e.g. truman.jpg)
+            const length = row.length || '';
+            const year = row.releaseYear || '';
+            const starring = row.starring || '';
+ 
+            // Get public URL for mini image from bucket 'miniImages'
+            let miniPublicUrl = null;
+            try {
+                const { data: urlData } = supabase.storage.from('miniImages').getPublicUrl(imageName);
+                if (urlData && urlData.publicUrl) {
+                    miniPublicUrl = urlData.publicUrl;
+                }
+            } catch (e) {
+                console.warn('Could not get public URL for', imageName, e);
+            }
+ 
+            // push array in the same structure the rest of the code expects
+            // NOTE: index 5 will be the mini image public url (or null fallback)
+            built.push([title, imageName, length, year, starring, miniPublicUrl]);
+        }
+ 
+        // If no rows returned, movieList remains empty (UI will still work)
+        movieList = built;
+    } catch (err) {
+        console.error('Unexpected error fetching movie list:', err);
+    }
+}
+ 
 function startGame() {
     let gameContainer = document.getElementById("gameContainer");
     let gameButton = document.getElementById("startButton");
-
+ 
     gameContainer.style.display = "flex";
     gameButton.style.display = "none";
-
+ 
     startTimer();
     loadMiniImg();
 }
-
+ 
 function loadMiniImg() {
     let loop = true;
     let selectedMovie;
-
+ 
+    // If movieList is empty, guard
+    if (!Array.isArray(movieList) || movieList.length === 0) {
+        alert("No movies available to play.");
+        return;
+    }
+ 
     while (loop) {
         let randomIndex = Math.floor(Math.random() * movieList.length);
         selectedMovie = movieList[randomIndex];
-
+ 
         // Break loop if the selected movie is not in guessedMovies
         if (!guessedMovies.includes(selectedMovie[0])) {
             loop = false;
+        } else {
+            // If all movies are guessed, break to avoid infinite loop
+            if (guessedMovies.length >= movieList.length) {
+                loop = false;
+            }
         }
     }
-
-    let [title, imageName, duration, year, mainActor] = currentMovie = selectedMovie;
-
+ 
+    let [title, imageName, duration, year, mainActor, miniPublicUrl] = currentMovie = selectedMovie;
+ 
     let gameImageContainer = document.getElementById("gameImageContainer");
     gameImageContainer.innerHTML = ""; // Clears previous images
-
+ 
     let miniImg = document.createElement("img");
-    miniImg.src = `../assets/images/mini-img/${imageName}`;
+    // Use the Supabase mini image public URL if available, otherwise fall back to the old local path
+    if (miniPublicUrl) {
+        miniImg.src = miniPublicUrl;
+    } else {
+        miniImg.src = `../assets/images/mini-img/${imageName}`;
+    }
     miniImg.className = "miniGameImage";
     miniImg.alt = `Mini ${title} Image`;
-
+ 
     guessedMovies.push(currentMovie[0]); // Add the title to guessedMovies
     gameImageContainer.appendChild(miniImg);
 }
-
-    function getHint() {
-        if (currentHint < 4) {
-            switch(currentHint) {
-                case 0:
-                    document.getElementById("hint1").style.display = "block";
-                    let hint1Text = currentMovie[2];
-                    document.querySelector("#hint1 p").textContent = hint1Text;
-                    break;
-                case 1:
-                    document.getElementById("hint2").style.display = "block";
-                    let hint2Text = currentMovie[3];
-                    document.querySelector("#hint2 p").textContent = hint2Text;
-                    break;
-                case 2:
-                    document.getElementById("hint3").style.display = "block";
-                    let hint3Text = currentMovie[4];
-                    document.querySelector("#hint3 p").textContent = hint3Text;
-                    break;
-                case 3:
-                    document.getElementById("hint4").style.display = "block";
-                    const gameImageContainer = document.getElementById("gameImageContainer");
-                    let imageName = currentMovie[1];
-
-                    gameImageContainer.innerHTML = "";
-                    const fullImg = document.createElement("img");
+ 
+// make getHint async so the fourth hint can fetch slideshow image public URL
+async function getHint() {
+    if (currentHint < 4) {
+        switch(currentHint) {
+            case 0:
+                document.getElementById("hint1").style.display = "block";
+                let hint1Text = currentMovie[2];
+                document.querySelector("#hint1 p").textContent = hint1Text;
+                break;
+            case 1:
+                document.getElementById("hint2").style.display = "block";
+                let hint2Text = currentMovie[3];
+                document.querySelector("#hint2 p").textContent = hint2Text;
+                break;
+            case 2:
+                document.getElementById("hint3").style.display = "block";
+                let hint3Text = currentMovie[4];
+                document.querySelector("#hint3 p").textContent = hint3Text;
+                break;
+            case 3:
+                document.getElementById("hint4").style.display = "block";
+                const gameImageContainer = document.getElementById("gameImageContainer");
+                let imageName = currentMovie[1];
+ 
+                gameImageContainer.innerHTML = "";
+                const fullImg = document.createElement("img");
+                // Try to fetch public URL from slideshowImages bucket
+                try {
+                    const { data: urlData } = supabase.storage.from('slideshowImages').getPublicUrl(imageName);
+                    if (urlData && urlData.publicUrl) {
+                        fullImg.src = urlData.publicUrl;
+                    } else {
+                        fullImg.src = `../assets/images/slideshow/${imageName}`;
+                    }
+                } catch (e) {
+                    // fallback to local slideshow path if anything goes wrong
                     fullImg.src = `../assets/images/slideshow/${imageName}`;
-                    fullImg.className = "fullGameImage";
-                    fullImg.alt = `Full ${imageName.split('.')[0]} Image`;
-
-                    gameImageContainer.appendChild(fullImg);
-                    break;
-            }
-            currentHint++;
-        } else {
-            alert("All the hints are used!");
+                }
+                fullImg.className = "fullGameImage";
+                fullImg.alt = `Full ${imageName.split('.')[0]} Image`;
+ 
+                gameImageContainer.appendChild(fullImg);
+                break;
         }
+        currentHint++;
+    } else {
+        alert("All the hints are used!");
     }
-
-    function startTimer() {
-        let timerElement = document.getElementById("timer").querySelector("p");
-        let timeRemaining = 120;  // Initial time in seconds
-    
-        currentTime = timeRemaining;  // Store the initial time in the global variable
-    
-        let timerInterval = setInterval(() => {
-            let minutes = Math.floor(timeRemaining / 60);
-            let seconds = timeRemaining % 60;
-    
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            timerElement.textContent = `${minutes}:${seconds} left`;
-    
-            if (timeRemaining <= 0) {
-                clearInterval(timerInterval);
-                timerElement.textContent = "Time's up!";
-                alert("You ran out of time! The answer was " + currentMovie[0] + "! Click OK to move on to the next round!");
-                currentTime = 0;
-                
-                resetPage();
-            } else if (timerOn === false) {
-                clearInterval(timerInterval);
-                document.getElementById("timer").querySelector("p").textContent = ``;
-            }
-    
-            currentTime = timeRemaining;  // Update the global currentTime with the remaining time
-            timeRemaining--;
-        }, 1000);
-    }
-
+}
+ 
+function startTimer() {
+    let timerElement = document.getElementById("timer").querySelector("p");
+    let timeRemaining = 120;  // Initial time in seconds
+ 
+    currentTime = timeRemaining;  // Store the initial time in the global variable
+ 
+    let timerInterval = setInterval(() => {
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+ 
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        timerElement.textContent = `${minutes}:${seconds} left`;
+ 
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            timerElement.textContent = "Time's up!";
+            alert("You ran out of time! The answer was " + currentMovie[0] + "! Click OK to move on to the next round!");
+            currentTime = 0;
+ 
+            resetPage();
+        } else if (timerOn === false) {
+            clearInterval(timerInterval);
+            document.getElementById("timer").querySelector("p").textContent = ``;
+        }
+ 
+        currentTime = timeRemaining;  // Update the global currentTime with the remaining time
+        timeRemaining--;
+    }, 1000);
+}
+ 
 function calculatePoints(){
     if(currentTime === 0){return 0;}
-
+ 
     let hintPoints = 4 - currentHint;
     let wrongPoints = 20 * wrongGuesses;
     if(wrongPoints > 100){wrongPoints = 100;}
     if(hintPoints > 0) {
         hintPoints = ((hintPoints*120)/4)
     }
-
+ 
     return (currentTime+hintPoints - wrongPoints);
 }
-
+ 
 function checkAnswer() {
     const submittedAnswer = document.getElementById("answer").value.trim();
     const correctAnswer = currentMovie[0];
     const correctAnswerSection = document.getElementById("correctAnswer");
-
+ 
     // Clear previous results if any
     const previousResult = document.querySelector("#correctAnswer .result");
     if (previousResult) {
         previousResult.remove();
     }
-
+ 
     if (submittedAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
         // Calculate Points
         let points = calculatePoints();
         totalPoints += points;
-
+ 
         // Create a container for the result
         const resultContainer = document.createElement("div");
         resultContainer.className = "result";
-
+ 
         // Turn off timer
         timerOn = false;
-
+ 
         // Create the success message
         const successMessage = document.createElement("h3");
         successMessage.textContent = `Correct! You earned ${points} points!`; // Update BLANK with dynamic points if needed
@@ -306,7 +256,7 @@ function checkAnswer() {
         alert("Incorrect! Check your spelling & try again!");
     }
 }
-
+ 
 function resetPage() {
     // Remove all displayed hints
     for (let i = 1; i <= 4; i++) {
@@ -316,27 +266,27 @@ function resetPage() {
             hint.querySelector("p").textContent = "";
         }
     }
-
+ 
     // Clear the correctAnswer section
     const correctAnswerSection = document.getElementById("correctAnswer");
     correctAnswerSection.innerHTML = "";
-
+ 
     // Clear the gameImageContainer
     const gameImageContainer = document.getElementById("gameImageContainer");
     gameImageContainer.innerHTML = "";
-
+ 
     // Reset the input field in the gameAnswer section
     const answerInput = document.getElementById("answer");
     answerInput.value = "";
-
+ 
     // Reset the hint counter
     currentHint = 0;
-
+ 
     // Reset Timer Boolean
     timerOn = true;
-
+ 
     wrongGuesses=0;
-
+ 
     if(roundNum === 5) {
         alert("You got a total of " + totalPoints + " points!")
         window.location.href = "results.html";
@@ -345,16 +295,16 @@ function resetPage() {
         startGame();
     }
 }
-
+ 
 function displayMovieNames() {
     const nameOptions = document.getElementById("nameOptions");
     nameOptions.innerHTML = ""; // Clear any existing content
-
+ 
     // Add the H3 heading
     const heading = document.createElement("h3");
     heading.textContent = "All Available Answers";
     nameOptions.appendChild(heading);
-
+ 
     // Add the movie names
     movieList.forEach(movie => {
         const movieName = movie[0]; // Get the movie name from the list
@@ -362,10 +312,10 @@ function displayMovieNames() {
         movieElement.textContent = movieName; // Set the text content to the movie name
         nameOptions.appendChild(movieElement); // Append the element to the nameOptions section
     });
-
+ 
     toggleMovieList();
 }
-
+ 
 function toggleMovieList() {
     const nameOptions = document.getElementById("nameOptions");
     if (nameOptions.style.display === "none") {
@@ -374,18 +324,22 @@ function toggleMovieList() {
         nameOptions.style.display = "none"; // Hide the list
     }
 }
-
+ 
 // Add the toggle button
 function addToggleButton() {
     const button = document.createElement("button");
     button.textContent = "Toggle Movie List";
     button.onclick = toggleMovieList;
     button.style.cursor = "pointer";
-
+ 
     const nameOptions = document.getElementById("nameOptions");
     nameOptions.before(button); // Add the button before the nameOptions section
 }
-
-// Call functions to initialize
-displayMovieNames();
-addToggleButton();
+ 
+// --- Initialize: fetch movie list from Supabase, then initialize UI that depends on movieList ---
+(async function init() {
+    await fetchMovieListFromSupabase();
+    // after fetching, populate the movie list UI and add the toggle button
+    displayMovieNames();
+    addToggleButton();
+})();

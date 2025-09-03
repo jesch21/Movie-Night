@@ -1,270 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Corona Cinema</title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css"/>
     <link rel="icon" href="assets/images/icon.png" type="image/png">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <!-- Google Fonts for specialFont column -->
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-    <a href="index.html"><img src="assets/images/logo.jpg" id="logo" alt="Logo"></a>
-    <section id="header">
-        <h1>The Corona Cinema</h1>
-        <nav>
-            <ul id="menu">
-                <li><a href="letterboxd/index.html" id="letter" class="page">Letterboxd</a></li>
-                <li><a href="tier-list/index.html" id="tier" class="page">Tier List</a></li>
-                <li><a href="movie-lists/index.html" id="unseen" class="page">Movie Lists</a></li>
-            </ul>
-        </nav>
-    </section>
-</header>
-<main>
-    <img src="assets/images/white-top.png" id="white-top" alt="White Top Effect">
-    <img src="assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
-    
-    <div class="info" id="slide-info">
-        <h3 id="slideshow-title" class="movie-night-title"></h3>
-    </div>
-    <section id="slideshow" onmouseover="revealArrows();" onmouseleave="hideArrows();">
-        <div class="slides-container">
-            <!--
-            Jayden
-            <img src="assets/images/slideshow/bullet-train.jpg" class="slide" alt="Bullet Train">
-            <img src="assets/images/slideshow/polar.jpg" class="slide" alt="The Polar Express">
-            Unseen Roulette
-            Ayub
-            Joe
-            Trevor
-            Alex
-            Jayden
-            Joe
-            Unseen Roulette
-            Ayub
-            Joe
-            Trevor
-            Alex
-            Jayden
-            <img src="assets/images/slideshow/mission-impossible6.jpg" class="slide" alt="Mission Impossible - Fallout">
-            Unseen Roulette
-            Ayub
-            Joe
-            Trevor
-            Alex
-            Jayden
-            <img src="assets/images/slideshow/mission-impossible5.jpg" class="slide" alt="Mission Impossible - Rogue Nation">
-            Unseen Roulette
-            Ayub
-            <img src="assets/images/slideshow/jaws.jpg" class="slide" alt="Jaws">
-            Trevor
-            Alex
-            Jayden
-            <img src="assets/images/slideshow/mission-impossible4.jpg" class="slide" alt="Mission Impossible - Ghost Protocol">
-            <img src="assets/images/slideshow/mission-impossible3.jpg" class="slide" alt="Mission Impossible III">
-            Unseen Roulette
-            <img src="assets/images/slideshow/mission-impossible2.jpg" class="slide" alt="Mission Impossible II">
-            Ayub
-            Joe
-            Trevor
-            Alex
-            Jayden
-            <img src="assets/images/slideshow/mission-impossible1.jpg" class="slide" alt="Mission Impossible">
-            Unseen Roulette
-            Ayub
-            Joe
-            Trevor
-            Alex
-            Jayden
-            <img src="assets/images/slideshow/iron-man.jpg" class="slide" alt="Iron Man">
-            Unseen Roulette
-            Ayub
-            Joe
-            Trevor
-            Alex
-            Jayden
-            <img src="assets/images/slideshow/fantastic4.jpg" class="slide" alt="The Fantastic Four: First Steps">
-            Unseen Roulette
-
-            Ayub
-            Joe
-            <img src="assets/images/slideshow/gladiator2.jpg" class="slide" alt="Gladiator II">
-            <img src="assets/images/slideshow/lampoons.jpg" class="slide" alt="National Lampoon's Christmas Vacation">
-            Jayden
-            Joe
-            Jayden
-            Ayub
-            Unseen Roulette
-            Trevor
-            Joe
-            <img src="assets/images/slideshow/romulus.jpg" class="slide" alt="Alien Romulus">
-            <img src="assets/images/slideshow/vvitch.jpg" class="slide" alt="The Vvitch">
-            <img src="assets/images/slideshow/sudbury.jpg" class="slide" alt="The Sudbury Devil">
-            <img src="assets/images/slideshow/smile2.jpg" class="slide" alt="Smile 2">
-            <img src="assets/images/slideshow/smile.jpg" class="slide" alt="Smile">
-            Jayden
-            Ayub
-            Joe
-            <img src="assets/images/slideshow/superman.jpg" class="slide" alt="Superman">
-            -->
-            <img src="assets/images/slideshow/el-dorado.jpg" class="slide" alt="The Road to El Dorado">
-            <img src="assets/images/slideshow/stalin.jpg" class="slide" alt="The Death of Stalin">
-            <img src="assets/images/slideshow/gentlemen.jpg" class="slide" alt="The Gentlemen">
-            <img src="assets/images/slideshow/terminator2.jpg" class="slide" alt="Terminator 2: Judgement Day">
-            <img src="assets/images/slideshow/ne-zha.jpg" class="slide" alt="Ne Zha">
-            <img src="assets/images/slideshow/gilmore.jpg" class="slide" alt="Happy Gilmore">
-            <img src="assets/images/slideshow/rango.jpg" class="slide" alt="Rango">
-            <img src="assets/images/slideshow/all-dogs.jpg" class="slide" alt="All Dogs Go to Heaven">
-            <img src="assets/images/slideshow/thunderbolts.jpg" class="slide" alt="Thunderbolts*">
-            <img src="assets/images/slideshow/teen-titans.jpg" class="slide" alt="Teen Titans GO! To the Movies">
-            <img src="assets/images/slideshow/anora.jpg" class="slide" alt="Anora">
-            <img src="assets/images/slideshow/sinners.jpg" class="slide" alt="Sinners">
-            <img src="assets/images/slideshow/starship.jpg" class="slide" alt="Starship Troopers">
-            <img src="assets/images/slideshow/blade.jpg" class="slide" alt="Blade">
-            <img src="assets/images/slideshow/interstellar.jpg" class="slide" alt="Interstellar">
-            <img src="assets/images/slideshow/monty2.jpg" class="slide" alt="Monty Python's Life of Brian">
-            <img src="assets/images/slideshow/kingsman.jpg" class="slide" alt="Kingsman: The Secret Service">
-            <img src="assets/images/slideshow/transformers3.jpg" class="slide" alt="Transformers: Dark of the Moon">
-            <img src="assets/images/slideshow/lebowski.jpg" class="slide" alt="The Big Lebowski">
-            <img src="assets/images/slideshow/skywalker.jpg" class="slide" alt="Star Wars: The Rise of Skywalker">
-            <img src="assets/images/slideshow/ai.jpg" class="slide" alt="A.I. Artificial Intelligence">
-            <img src="assets/images/slideshow/tenenbaums.jpg" class="slide" alt="The Royal Tenenbaums">
-            <img src="assets/images/slideshow/last.jpg" class="slide" alt="Star Wars: The Last Jedi">
-            <img src="assets/images/slideshow/monty1.jpg" class="slide" alt="Monty Python and the Holy Grail">
-            <img src="assets/images/slideshow/awakens.jpg" class="slide" alt="Star Wars: The Force Awakens">
-            <img src="assets/images/slideshow/ninja.jpg" class="slide" alt="Ninja Assassin">
-            <img src="assets/images/slideshow/prey.jpg" class="slide" alt="Prey">
-            <img src="assets/images/slideshow/rogue.jpg" class="slide" alt="Rogue One: A Star Wars Story">
-            <img src="assets/images/slideshow/furiosa.jpg" class="slide" alt="Furiosa">
-            <img src="assets/images/slideshow/revenge.jpg" class="slide" alt="Star Wars: Revenge of the Sith">
-            <img src="assets/images/slideshow/fantastic-mr-fox.jpg" class="slide" alt="The Big Lebowski">
-            <img src="assets/images/slideshow/heat.jpg" class="slide" alt="Heat">
-            <img src="assets/images/slideshow/clones.jpg" class="slide" alt="Star Wars: Attack of the Clones">
-            <img src="assets/images/slideshow/transformers2.jpg" class="slide" alt="Transformers: Revenge of the Fallen">
-            <img src="assets/images/slideshow/phantom.jpg" class="slide" alt="Star Wars: The Phantom Menace">
-            <img src="assets/images/slideshow/gump.jpg" class="slide" alt="Forest Gump">
-            <img src="assets/images/slideshow/return.jpg" class="slide" alt="Star Wars: Return of the Jedi">
-            <img src="assets/images/slideshow/matrix-revolutions.jpg" class="slide" alt="The Matrix Revolutions">
-            <img src="assets/images/slideshow/land.jpg" class="slide" alt="The Land Before Time">
-            <img src="assets/images/slideshow/empire.jpg" class="slide" alt="Star Wars: The Empire Strikes Back">
-            <img src="assets/images/slideshow/ministry.jpg" class="slide" alt="The Ministry of Ungentlemanly Warfare">
-            <img src="assets/images/slideshow/hope.jpg" class="slide" alt="Star Wars: A New Hope">
-            <img src="assets/images/slideshow/greyhound.jpg" class="slide" alt="Greyhound">
-            <img src="assets/images/slideshow/hateful.jpg" class="slide" alt="The Hateful Eight - Extended Version">
-            <img src="assets/images/slideshow/drive.jpg" class="slide" alt="Drive">
-            <img src="assets/images/slideshow/nightmare.jpg" class="slide" alt="The Nightmare Before Christmas">
-            <img src="assets/images/slideshow/matrix-reloaded.jpg" class="slide" alt="The Matrix Reloaded">
-            <img src="assets/images/slideshow/eight.jpg" class="slide" alt="Eight Crazy Nights">
-            <img src="assets/images/slideshow/transformers.jpg" class="slide" alt="Transformers">
-            <img src="assets/images/slideshow/goodfellas.jpg" class="slide" alt="Goodfellas">
-            <img src="assets/images/slideshow/pearl.jpg" class="slide" alt="Pirates of the Caribbean: The Curse of the Black Pearl">
-            <img src="assets/images/slideshow/crusade.jpg" class="slide" alt="Indiana Jones and The Last Crusade">
-            <img src="assets/images/slideshow/burn.jpg" class="slide" alt="Burn After Reading">
-            <img src="assets/images/slideshow/dracula.jpg" class="slide" alt="Bram Stoker's Dracula">
-            <img src="assets/images/slideshow/scream.jpg" class="slide" alt="Scream">
-            <img src="assets/images/slideshow/28.jpg" class="slide" alt="28 Days Later">
-            <img src="assets/images/slideshow/lighthouse.jpg" class="slide" alt="The Lighthouse">
-            <img src="assets/images/slideshow/platform2.jpg" class="slide" alt="Platform 2">
-            <img src="assets/images/slideshow/conjuring.jpg" class="slide" alt="The Conjuring">
-            <img src="assets/images/slideshow/chainsaw.jpg" class="slide" alt="The Texas Chainsaw Massacre">
-            <img src="assets/images/slideshow/thing.jpg" class="slide" alt="The Thing">
-            <img src="assets/images/slideshow/ernest.gif" class="slide" alt="Ernest Scared Stupid">
-            <img src="assets/images/slideshow/godzilla.jpg" class="slide" alt="Godzilla">
-            <img src="assets/images/slideshow/sherlock.jpg" class="slide" alt="Sherlock">
-            <img src="assets/images/slideshow/budapest.jpg" class="slide" alt="Budapest">
-            <img src="assets/images/slideshow/collateral.jpg" class="slide" alt="Collateral Image">
-            <img src="assets/images/slideshow/9.jpg" class="slide" alt="9 Image">
-            <img src="assets/images/slideshow/western.jpg" class="slide" alt="Western Image">
-            <img src="assets/images/slideshow/pancreas.jpg" class="slide" alt="Pancreas Image">
-            <img src="assets/images/slideshow/possession.jpg" class="slide" alt="Possession Image">
-            <img src="assets/images/slideshow/mid90s.jpg" class="slide" alt="mid90s Image">
-            <img src="assets/images/slideshow/fmj.jpg" class="slide" alt="FMJ Image">
-            <img src="assets/images/slideshow/high-and-low.jpg" class="slide" alt="High and Low Image">
-            <img src="assets/images/slideshow/wick.jpg" class="slide" alt="Wick">
-            <img src="assets/images/slideshow/gladiator.jpg" class="slide" alt="Gladiator Image">
-            <img src="assets/images/slideshow/henry.jpg" class="slide" alt="Hardcore Henry Image">
-            <img src="assets/images/slideshow/suicide.jpg" class="slide" alt="Suicide Squad Image">
-            <img src="assets/images/slideshow/gems.jpg" class="slide" alt="Uncut Gems Image">
-            <img src="assets/images/slideshow/commander.jpg" class="slide" alt="Master and Commander Image">
-            <img src="assets/images/slideshow/max.jpg" class="slide" alt="Mad Max Image">
-            <img src="assets/images/slideshow/jarhead.jpg" class="slide" alt="Jarhead Image">
-            <img src="assets/images/slideshow/bill.jpg" class="slide" alt="Kill Bill Image">
-            <img src="assets/images/slideshow/midsommar.jpg" class="slide" alt="Midsommar Image">
-            <img src="assets/images/slideshow/leben.jpg" class="slide" alt="Das Leben Image">
-            <img src="assets/images/slideshow/fight.jpg" class="slide" alt="Fight Club Image">
-            <img src="assets/images/slideshow/beautiful-mind.jpg" class="slide" alt="Beautiful Mind Image">
-            <img src="assets/images/slideshow/sanjuro.jpg" class="slide" alt="Sanjuro Image">
-            <img src="assets/images/slideshow/aot.jpg" class="slide" alt="AOT Image">
-            <img src="assets/images/slideshow/click.jpg" class="slide" alt="Click Image">
-            <img src="assets/images/slideshow/raiders.jpg" class="slide" alt="Raiders Image">
-            <img src="assets/images/slideshow/se7en.gif" class="slide" alt="Se7en Image">
-            <img src="assets/images/slideshow/mononoke.jpg" class="slide" alt="Mononoke Image">
-            <img src="assets/images/slideshow/yojimbo.jpg" class="slide" alt="Yojimbo Image">
-            <img src="assets/images/slideshow/platform.jpg" class="slide" alt="Platform Image">
-            <img src="assets/images/slideshow/cloverfield.jpg" class="slide" alt="Cloverfield Image">
-            <img src="assets/images/slideshow/silent-voice.jpg" class="slide" alt="Silent Voice Image">
-            <img src="assets/images/slideshow/batman.jpg" class="slide" alt="Batman Image">
-            <img src="assets/images/slideshow/angels.jpg" class="slide" alt="Fallen Angels Image">
-            <img src="assets/images/slideshow/terminator.jpg" class="slide" alt="Terminator Image">
-            <img src="assets/images/slideshow/matrix.jpg" class="slide" alt="Matrix Image">
-            <img src="assets/images/slideshow/truman.jpg" class="slide" alt="Truman Show Image">
+    <header>
+        <a href="index.html"><img src="assets/images/logo.jpg" id="logo" alt="Logo"></a>
+        <section id="header">
+            <h1>The Corona Cinema</h1>
+            <nav>
+                <ul id="menu">
+                    <li><a href="letterboxd/index.html" id="letter" class="page">Letterboxd</a></li>
+                    <li><a href="tier-list/index.html" id="tier" class="page">Tier List</a></li>
+                    <li><a href="movie-lists/index.html" id="unseen" class="page">Movie Lists</a></li>
+                </ul>
+            </nav>
+        </section>
+    </header>
+    <main>
+        <img src="assets/images/white-top.png" id="white-top" alt="White Top Effect">
+        <img src="assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
+        
+        <div class="info" id="slide-info">
+            <h3 id="slideshow-title" class="movie-night-title"></h3>
         </div>
-        <img src="assets/images/arrow-light.png" id="lleft" class="arrow" alt="Previous">
-        <img src="assets/images/arrow-light.png" id="lright" class="arrow" alt="Next">
-    </section>
-    <a href="corona-guesser/index.html" id="gameNav">Play the Corona Guesser!</a>
-    <section id="bottom-main">
-        <div class="intro">
-            <h2>Welcome to the Corona Cinema</h2>
-            <p id="main-dump">
-                Welcome to the <strong>Corona Cinema</strong>! You're probably asking yourself: "<i>What am I looking at? Why are there pictures of random movies sliding by? Why is this site
-                named after either a beer or a virus?</i>". And you know those are some pretty valid questions. And don't worry, we've got answers. It all started back in April of 2020. 
-                Covid-19 was fresh, lockdown was still cool, and introverts were thriving spending all their days in their room. With the creation of a new group Discord channel, talks were
-                had about watching a movie all together in a call. The movie? <i>The Ritual</i>, a movie I myself didn't get to see; but they did. And thus begun an at-the-moment unoffical tradition
-                to occasionally watch movies on a call. These movies were mostly horror movies, with the first <i>Saw</i> being the only one I got to see. But the true traditon wouldn't begin until
-                later.<br><br>
 
-                The true start of Movie Night was on December 29th, 2023. The tradition was made that every Friday night, someone would pick a movie to watch. Typically the movie would be one
-                the person was very fond of, and that most of the people watching it hadn't seen yet. To make it more consistent, we also had us take turns chosing the films. And so as Trevor
-                picked <i>The Truman Show</i> for the first movie, it began. A few weeks later, with Jayden's pick of <i>A Silent Voice</i>, Ayub began his tradition of movie annoucements in
-                the Discord, along with a chosen still for each one (thats where those movie pics above came from). Around the same time, I created a Google Sheet, where I documented everyone's
-                movie night choices to better keep track of whose up next. Finally, after the absence of people for their own movie nights a few times, the idea of <strong>The Unseen List</strong>
-                was formed. This list is populated by movies that the choser has never seen, but wants to see. Then, when a person missed their movie night, we would have a Roulette Night, where
-                we spin a wheel and see whose roulette movie is chosen. In 2023, we only had one Roulette Night, which was my pick of <i>Gladiator</i>. But given the size of the growing Unseen 
-                List, in 2024 the Roulette Night was given it's own slot in the rotation, starting at the top of the year.<br><br>
+        <!-- Slideshow will be dynamically populated -->
+        <section id="slideshow" onmouseover="revealArrows();" onmouseleave="hideArrows();">
+            <div class="slides-container" id="slides-container">
+                <!-- Images inserted dynamically from Supabase -->
+            </div>
+            <img src="assets/images/arrow-light.png" id="lleft" class="arrow" alt="Previous">
+            <img src="assets/images/arrow-light.png" id="lright" class="arrow" alt="Next">
+        </section>
 
-                Now that's all well and good, but what is this website doing here? We had a good system going, why move it to a website? That sounds like a lot of work. Sure, it is. But 
-                it sounded fun, and so here we are. Like many things, this website was born of a spur-of-the-moment decision to make something cool, and from recent participation in a Web 
-                & Mobile class. So while I truly do hope that this website comes to be significantly more efficient to use than our current system, all that truly matters is the experience.
-                As I type this now, I've truly never had more fun making a website before because it's not for a grade, it's not for a job: it's just for fun. And so now you're caught up. So 
-                welcome! Enjoy the site, have fun. And remember... <u>Trevor has bad taste</u>.
-            </p>
-        </div>
-        <div class="info">
-            <h3 id="video-title" class="movie-night-title"></h3>
-        </div>
-    </section>
-</main>
-<footer>
-    <section id="streaming">
-        <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
-        <div id="stream-links">
-            <a href="https://ww4.fmovies.co/24/"><img src="assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
-            <a href="https://himovies.sx/"><img src="assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
-            <a href="https://www.hulu.com/"><img src="assets/images/hulu.png" id="hulu" class="stream" alt="hulu"></a>
-            <a href="https://play.max.com/"><img src="assets/images/max.png" id="max" class="stream" alt="max"></a>
-            <a href="https://www.paramountplus.com/"><img src="assets/images/paramount.png" id="paramount" class="stream" alt="paramount"></a>
-            <a href="https://www.amazon.com/Amazon-Video/b/?ie=UTF8&node=2858778011&ref_=nav_cs_prime_video"><img src="assets/images/amazon.png" id="amazon" class="stream" alt="amazon"></a>
-        </div>
-    </section>
-    <section id="right-tag">
-        <a href="references/index.html" id="references">References</a>
-        <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
-    </section>
-    <a href="secret/index.html"><img src="assets/images/rabbit.png" id="rabbit" alt="rabbit"></a>
-</footer>
+        <a href="corona-guesser/index.html" id="gameNav">Play the Corona Guesser!</a>
+        <section id="bottom-main">
+            <div class="intro">
+                <h2>Welcome to the Corona Cinema</h2>
+                <p id="main-dump">
+                    Welcome to the <strong>Corona Cinema</strong>! You're probably asking yourself: "<i>What am I looking at? Why are there pictures of random movies sliding by? Why is this site
+                    named after either a beer or a virus?</i>". And you know those are some pretty valid questions. And don't worry, we've got answers. It all started back in April of 2020. 
+                    Covid-19 was fresh, lockdown was still cool, and introverts were thriving spending all their days in their room. With the creation of a new group Discord channel, talks were
+                    had about watching a movie all together in a call. The movie? <i>The Ritual</i>, a movie I myself didn't get to see; but they did. And thus begun an at-the-moment unoffical tradition
+                    to occasionally watch movies on a call. These movies were mostly horror movies, with the first <i>Saw</i> being the only one I got to see. But the true traditon wouldn't begin until
+                    later.<br><br>
 
-<script src="assets/scripts/home-scripts.js"></script>
+                    The true start of Movie Night was on December 29th, 2023. The tradition was made that every Friday night, someone would pick a movie to watch. Typically the movie would be one
+                    the person was very fond of, and that most of the people watching it hadn't seen yet. To make it more consistent, we also had us take turns chosing the films. And so as Trevor
+                    picked <i>The Truman Show</i> for the first movie, it began. A few weeks later, with Jayden's pick of <i>A Silent Voice</i>, Ayub began his tradition of movie annoucements in
+                    the Discord, along with a chosen still for each one (thats where those movie pics above came from). Around the same time, I created a Google Sheet, where I documented everyone's
+                    movie night choices to better keep track of whose up next. Finally, after the absence of people for their own movie nights a few times, the idea of <strong>The Unseen List</strong>
+                    was formed. This list is populated by movies that the choser has never seen, but wants to see. Then, when a person missed their movie night, we would have a Roulette Night, where
+                    we spin a wheel and see whose roulette movie is chosen. In 2023, we only had one Roulette Night, which was my pick of <i>Gladiator</i>. But given the size of the growing Unseen 
+                    List, in 2024 the Roulette Night was given it's own slot in the rotation, starting at the top of the year.<br><br>
+
+                    Now that's all well and good, but what is this website doing here? We had a good system going, why move it to a website? That sounds like a lot of work. Sure, it is. But 
+                    it sounded fun, and so here we are. Like many things, this website was born of a spur-of-the-moment decision to make something cool, and from recent participation in a Web 
+                    & Mobile class. So while I truly do hope that this website comes to be significantly more efficient to use than our current system, all that truly matters is the experience.
+                    As I type this now, I've truly never had more fun making a website before because it's not for a grade, it's not for a job: it's just for fun. And so now you're caught up. So 
+                    welcome! Enjoy the site, have fun. And remember... <u>Trevor has bad taste</u>.
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section id="streaming">
+            <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
+            <div id="stream-links">
+                <a href="https://ww4.fmovies.co/24/"><img src="assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
+                <a href="https://himovies.sx/"><img src="assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
+                <a href="https://www.hulu.com/"><img src="assets/images/hulu.png" id="hulu" class="stream" alt="hulu"></a>
+                <a href="https://play.max.com/"><img src="assets/images/max.png" id="max" class="stream" alt="max"></a>
+                <a href="https://www.paramountplus.com/"><img src="assets/images/paramount.png" id="paramount" class="stream" alt="paramount"></a>
+                <a href="https://www.amazon.com/Amazon-Video/b/?ie=UTF8&node=2858778011&ref_=nav_cs_prime_video"><img src="assets/images/amazon.png" id="amazon" class="stream" alt="amazon"></a>
+            </div>
+        </section>
+        <section id="right-tag">
+            <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
+        </section>
+        <a href="secret/index.html"><img src="assets/images/rabbit.png" id="rabbit" alt="rabbit"></a>
+    </footer>
+
+    <!-- Home Scripts -->
+    <script src="assets/scripts/home-scripts.js"></script>
 </body>
 </html>

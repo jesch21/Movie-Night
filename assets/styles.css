@@ -119,8 +119,8 @@ h2 {
 #slideshow {
     position: relative;
     overflow: hidden;
-    width: 700px; 
-    height: auto;
+    width: 700px;
+    aspect-ratio: 16 / 9;
     border-bottom: 5px solid black; 
     border: 2px solid rgb(143, 143, 143);
     border-radius: 25px;
