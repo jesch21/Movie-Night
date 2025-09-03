@@ -11,7 +11,7 @@ function populateTable(tableId, data) {
     data.forEach((entry, index) => {
         const row = `
             <tr>
-                <td>#${entry.order || index + 1}</td>
+                <td>#${index + 1}</td>
                 <td>${entry.Movie || ""}</td>
                 <td>${entry.Stars || ""}</td>
                 <td>${entry.Liked || ""}</td>
@@ -36,8 +36,7 @@ function toggleTable(tableId) {
 async function fetchLetterboxdData(tableName) {
     const { data, error } = await supabase
         .from(tableName)
-        .select('*')
-        .order('order', { ascending: true });
+        .select('*'); // removed .order('order')
 
     if (error) {
         console.error(`Error fetching ${tableName}:`, error);
