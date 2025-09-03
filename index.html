@@ -6,11 +6,7 @@
     <title>Corona Cinema</title>
     <link rel="stylesheet" href="assets/styles.css"/>
     <link rel="icon" href="assets/images/icon.png" type="image/png">
-
-    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-    <!-- Google Fonts for specialFont column -->
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -27,18 +23,13 @@
             </nav>
         </section>
     </header>
-    <main>
-        <img src="assets/images/white-top.png" id="white-top" alt="White Top Effect">
-        <img src="assets/images/white-bottom.png" id="white-bottom" alt="White Bottom Effect">
-        
+    <main>     
         <div class="info" id="slide-info">
             <h3 id="slideshow-title" class="movie-night-title"></h3>
         </div>
 
-        <!-- Slideshow will be dynamically populated -->
         <section id="slideshow" onmouseover="revealArrows();" onmouseleave="hideArrows();">
             <div class="slides-container" id="slides-container">
-                <!-- Images inserted dynamically from Supabase -->
             </div>
             <img src="assets/images/arrow-light.png" id="lleft" class="arrow" alt="Previous">
             <img src="assets/images/arrow-light.png" id="lright" class="arrow" alt="Next">
@@ -76,7 +67,7 @@
     </main>
     <footer>
         <section id="streaming">
-            <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
+            <button id="streaming-button">Streaming</button> 
             <div id="stream-links">
                 <a href="https://ww4.fmovies.co/24/"><img src="assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
                 <a href="https://himovies.sx/"><img src="assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
