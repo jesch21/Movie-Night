@@ -129,7 +129,7 @@ async function buildMovieDataFromSupabase() {
  *  - unseen: rows from unseenList (pickedBy, title)
  *  - seen: moviesList rows with movieType == 'roulette' AND stars present
  *  - bonus: moviesList rows with movieType == 'bonus'
- *  Case-insensitive checks for movieType.
+ *  Seen & Bonus are ordered by date (oldest first).
  */
 async function buildUnseenMovieDataFromSupabase() {
   try {
@@ -145,7 +145,7 @@ async function buildUnseenMovieDataFromSupabase() {
     // moviesList -> seen & bonus
     const { data: movieRows, error: movieErr } = await supabase
       .from('moviesList')
-      .select('pickedBy, title, movieType, stars');
+      .select('pickedBy, title, movieType, stars, date');
 
     if (movieErr) {
       console.error('Error fetching moviesList for seen/bonus:', movieErr);
@@ -167,7 +167,8 @@ async function buildUnseenMovieDataFromSupabase() {
             chosenBy: parsePickedBy(r.pickedBy),
             title: r.title || '',
             movieType: r.movieType,
-            stars: r.stars
+            stars: r.stars,
+            date: r.date || ''
           });
         }
       } else if (type === 'bonus') {
@@ -175,10 +176,21 @@ async function buildUnseenMovieDataFromSupabase() {
           chosenBy: parsePickedBy(r.pickedBy),
           title: r.title || '',
           movieType: r.movieType,
-          stars: r.stars
+          stars: r.stars,
+          date: r.date || ''
         });
       }
     });
+
+    // Sort Seen & Bonus only (oldest first)
+    const sortByDate = (a, b) => {
+      const da = new Date(a.date);
+      const db = new Date(b.date);
+      if (isNaN(da) || isNaN(db)) return 0;
+      return da - db;
+    };
+    seen.sort(sortByDate);
+    bonus.sort(sortByDate);
 
     unseenMovieData.seen = seen;
     unseenMovieData.bonus = bonus;
