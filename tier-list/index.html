@@ -56,7 +56,7 @@
             <h2>The Tier List</h2>
             <label for="tierListFilter">Filter</label>
             <select id="tierListFilter" onchange="filter()">
-                <option value="None">None</option>
+                <option value="None">Name</option>
                 <option value="Ayub">Ayub</option>
                 <option value="Alex">Alex</option>
                 <option value="Garrett">Garrett</option>
@@ -66,6 +66,15 @@
                 <option value="Landon">Landon</option>
                 <option value="Trevor">Trevor</option>
             </select>
+
+            <!-- NEW: movieType filter placed directly to the right -->
+            <select id="movieTypeFilter" onchange="filter()" style="margin-left:8px;">
+                <option value="Type">Type</option>
+                <option value="Official">Official</option>
+                <option value="Roulette">Roulette</option>
+                <option value="Bonus">Bonus</option>
+            </select>
+
             <table id="movieTable">
                 <thead>
                     <tr>

@@ -28,9 +28,11 @@ async function fetchMovieData() {
         title: movie.title || "",
         chosenBy: movie.pickedBy ? movie.pickedBy.split(',').map(n => n.trim()) : [],
         "star-ratings": movie.stars ? movie.stars.split(',').map(r => r.trim()) : [],
-        date: movie.date || ""
+        date: movie.date || "",
+        movieType: movie.movieType || ""   // <-- add movieType here so we can filter by it
     }));
 }
+
 
 /**
  * Function to convert star ratings from string format "X/Y" to numeric format and calculate the average.
@@ -54,7 +56,7 @@ function calculateAverage(starRatings) {
  * Function to load the movie data into the table.
  * @param {string|null} filterPerson - Name to filter by, or null to show all.
  */
-function loadMovieTable(filterPerson = null) {
+function loadMovieTable(filterPerson = null, filterType = null) {
     const tableBody = document.querySelector('#movieTable tbody');
     tableBody.innerHTML = '';
 
@@ -63,9 +65,18 @@ function loadMovieTable(filterPerson = null) {
         return { ...movie, averageRating: parseFloat(averageRating) };
     });
 
+    // Person filter (existing behaviour)
     if (filterPerson && filterPerson !== "None") {
         movieDataWithAverages = movieDataWithAverages.filter(movie =>
             movie.chosenBy.includes(filterPerson)
+        );
+    }
+
+    // NEW: movieType filter (case-insensitive). The dropdown uses "Type" as default.
+    if (filterType && filterType !== "Type") {
+        const wantedType = String(filterType).toLowerCase();
+        movieDataWithAverages = movieDataWithAverages.filter(movie =>
+            (movie.movieType || "").toString().toLowerCase() === wantedType
         );
     }
 
@@ -86,8 +97,14 @@ function loadMovieTable(filterPerson = null) {
 }
 
 function filter() {
-    const selected = document.getElementById("tierListFilter").value;
-    loadMovieTable(selected === "None" ? null : selected);
+    const selectedPerson = document.getElementById("tierListFilter").value;
+    const selectedTypeElem = document.getElementById("movieTypeFilter");
+    const selectedType = selectedTypeElem ? selectedTypeElem.value : null;
+
+    const personArg = (selectedPerson === "None") ? null : selectedPerson;
+    const typeArg = (selectedType === "Type" || !selectedType) ? null : selectedType;
+
+    loadMovieTable(personArg, typeArg);
 }
 
 function calculateAveragePickScores() {
