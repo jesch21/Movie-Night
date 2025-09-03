@@ -100,8 +100,8 @@ let movieList = [
     ["Terminator 2: Judgement Day", "terminator2.jpg", "2 hrs 17 mins", "1991", "Edward Furlong"],
     ["The Gentlemen", "gentlemen.jpg", "1 hrs 53 mins", "2019", "Matthew McConaughey"],
     ["The Death of Stalin", "stalin.jpg", "1 hrs 47 mins", "2017", "Steve Buscemi"],
+    ["The Road to El Dorado", "el-dorado.jpg", "1 hrs 29 mins", "2000", "Kevin Kline"],
     /*
-
     ["Superman", "superman.jpg", "2 hrs 9 mins", "2025", "Nicholas Hoult"],
 
     ["Smile", "smile.jpg", "1 hrs 55 mins", "2022", "Sosie Bacon"],

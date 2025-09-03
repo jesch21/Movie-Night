@@ -142,8 +142,11 @@ const videos = [
         src: 'assets/videos/superman-trailer.mp4',
         title: 'Superman'
     },
-    Trevor
     */
+   {
+        src: 'assets/videos/el-dorado-trailer.mp4',
+        title: 'The Road to El Dorado'
+    },
    {
         src: 'assets/videos/stalin-trailer.mp4',
         title: 'The Death of Stalin'

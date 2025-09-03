@@ -446,7 +446,7 @@ const movieData = [
       "date": "9-2025"
     },
     {
-      "title": "",
+      "title": "The Road to El Dorado",
       "chosenBy": ["Trevor"],
       "star-ratings": [],
       "date": "9-2025"

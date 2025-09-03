@@ -109,7 +109,7 @@ const movieData = {
         {"date": "8/15/2025", "chosenBy": "John", "title": "Terminator 2: Judgement Day"},
         {"date": "8/22/2025", "chosenBy": "Alex", "title": "The Gentlemen"},
         {"date": "8/29/2025", "chosenBy": "Unseen Roulette", "title": "The Death of Stalin"},
-        {"date": "9/5/2025", "chosenBy": "Trevor", "title": ""},
+        {"date": "9/5/2025", "chosenBy": "Trevor", "title": "The Road to El Dorado"},
         {"date": "9/12/2025", "chosenBy": "John", "title": "Superman"},
         {"date": "9/19/2025", "chosenBy": "Ayub", "title": ""},
         {"date": "9/26/2025", "chosenBy": "Jayden", "title": ""},
