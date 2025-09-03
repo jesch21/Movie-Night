@@ -12,7 +12,7 @@ main {
 
 header {
     display: flex;
-    background-color: #423e3b;
+    background-color: #4c0606;
     border-bottom: 5px solid black;
 }
 
@@ -234,7 +234,7 @@ th:first-child, td:first-child {
 }
 
 footer {
-    background-color: #423e3b;
+    background-color: #4c0606;
     border-top: 5px solid black;
     margin: 0;
     display: flex;
