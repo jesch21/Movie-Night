@@ -126,17 +126,17 @@ async function buildMovieDataFromSupabase() {
 }
 
 /** Build unseenMovieData:
- *  - unseen: rows from unseenList (pickedBy, title)
+ *  - unseen: rows from unseenList (pickedBy, title, order → used for sorting)
  *  - seen: moviesList rows with movieType == 'roulette' AND stars present
  *  - bonus: moviesList rows with movieType == 'bonus'
  *  Seen & Bonus are ordered by date (oldest first).
  */
 async function buildUnseenMovieDataFromSupabase() {
   try {
-    // unseenList -> unseen
+    // unseenList -> unseen (now includes order)
     const { data: unseenRows, error: unseenErr } = await supabase
       .from('unseenList')
-      .select('pickedBy, title');
+      .select('pickedBy, title, order');
 
     if (unseenErr) {
       console.error('Error fetching unseenList:', unseenErr);
@@ -151,10 +151,14 @@ async function buildUnseenMovieDataFromSupabase() {
       console.error('Error fetching moviesList for seen/bonus:', movieErr);
     }
 
-    unseenMovieData.unseen = (unseenRows || []).map(r => ({
-      chosenBy: parsePickedBy(r.pickedBy),
-      title: r.title || ''
-    }));
+    // unseen: now sorted by "order"
+    unseenMovieData.unseen = (unseenRows || [])
+      .map(r => ({
+        chosenBy: parsePickedBy(r.pickedBy),
+        title: r.title || '',
+        order: r.order ?? 0
+      }))
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const seen = [];
     const bonus = [];
