@@ -7,7 +7,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let movieData = [];
 
 // List of all people
-const people = ["Ayub", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Landon"];
+const people = ["Ayub", "Caleb", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Landon"];
 
 /**
  * Fetch movie data from Supabase and format it to match previous structure
