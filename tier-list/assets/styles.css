@@ -613,3 +613,22 @@ footer {
         font-size: 11px;
     }
   }
+
+  /* Background colors for Top 10 ranks */
+.rank-1 { background-color: gold !important; font-weight: bold; }
+.rank-2 { background-color: silver !important; font-weight: bold; }
+.rank-3 { background-color: #cd7f32 !important; font-weight: bold; } /* bronze */
+.rank-4 { background-color: #ffd966 !important; }
+.rank-5 { background-color: #ffe699 !important; }
+.rank-6 { background-color: #fff2cc !important; }
+.rank-7 { background-color: #d9ead3 !important; }
+.rank-8 { background-color: #cfe2f3 !important; }
+.rank-9 { background-color: #d9d2e9 !important; }
+.rank-10 { background-color: #ead1dc !important; }
+
+/* Ensure only the rank cell gets colored */
+td.rank-1, td.rank-2, td.rank-3,
+td.rank-4, td.rank-5, td.rank-6,
+td.rank-7, td.rank-8, td.rank-9, td.rank-10 {
+    text-align: center;
+}

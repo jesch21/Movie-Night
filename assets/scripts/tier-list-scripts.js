@@ -83,23 +83,38 @@ function loadMovieTable(filterPerson = null, filterType = null) {
     let lastScore = null;
     let currentRank = 0;
 
-    movieDataWithAverages.forEach(movie => {
+    movieDataWithAverages.forEach((movie) => {
         if (movie.averageRating !== lastScore) {
-            currentRank++;
+            currentRank += 1;           // DENSE ranking: increment only when score changes
             lastScore = movie.averageRating;
         }
 
+        const rankClass = currentRank <= 10 ? `rank-${currentRank}` : "";
         const chosenBy = movie.chosenBy.join(", ");
-        const row = `
-            <tr>
-                <td>#${currentRank}</td>
-                <td>${movie.title}</td>
-                <td>${chosenBy}</td>
-                <td>${movie.averageRating.toFixed(3)}</td>
-            </tr>
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="${rankClass}">#${currentRank}</td>
+            <td>${movie.title}</td>
+            <td>${chosenBy}</td>
+            <td>${movie.averageRating.toFixed(3)}</td>
         `;
-        tableBody.innerHTML += row;
+        tableBody.appendChild(row);
     });
+
+
+    // ✅ After table is built, add a bottom border under the last Top 10
+    const rows = tableBody.querySelectorAll("tr");
+    let lastTop10Row = null;
+    rows.forEach(row => {
+        const rankCell = row.querySelector("td:first-child");
+        if (rankCell && parseInt(rankCell.textContent.replace("#", "")) <= 10) {
+            lastTop10Row = row;
+        }
+    });
+    if (lastTop10Row) {
+        lastTop10Row.style.borderBottom = "5px solid black";
+    }
 
     // Inside loadMovieTable()
 document.getElementById("movieCountLabel").innerText =
