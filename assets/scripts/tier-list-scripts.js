@@ -74,41 +74,59 @@ function loadMovieTable(filterPerson = null, filterType = null) {
     const tableBody = document.querySelector('#movieTable tbody');
     tableBody.innerHTML = '';
 
-    let movieDataWithAverages = movieData.map(movie => {
-        const averageRating = calculateAverage(movie["star-ratings"]);
-        return { ...movie, averageRating: parseFloat(averageRating) };
+    // Precompute original Top 10 bonuses once
+    const originalMovieBonuses = {};
+    const rankedMovies = movieData
+        .map(m => ({ ...m, avg: parseFloat(calculateAverage(m["star-ratings"])) }))
+        .sort((a, b) => b.avg - a.avg);
+
+    let lastScore = null;
+    let rankCounter = 0;
+
+    rankedMovies.forEach(m => {
+        if (m.avg !== lastScore) {
+            rankCounter++;
+            lastScore = m.avg;
+        }
+        originalMovieBonuses[m.title] = rankCounter <= 10 ? rankBonus[rankCounter] || 0 : 0;
     });
 
+    // Compute filtered averages
+    let movieDataWithAverages = movieData.map(movie => {
+        const averageRating = parseFloat(calculateAverage(movie["star-ratings"]));
+        return { ...movie, averageRating };
+    });
+
+    // Apply filters
     if (filterPerson && filterPerson !== "None") {
         movieDataWithAverages = movieDataWithAverages.filter(movie =>
             movie.chosenBy.includes(filterPerson)
         );
     }
-
     if (filterType && filterType !== "Type") {
         movieDataWithAverages = movieDataWithAverages.filter(movie =>
             movie.movieType === filterType
         );
     }
 
+    // Sort by average rating
     movieDataWithAverages.sort((a, b) => b.averageRating - a.averageRating);
 
-    let lastScore = null;
+    // Dense ranking
+    let lastScoreInTable = null;
     let currentRank = 0;
 
-    movieDataWithAverages.forEach((movie) => {
-        if (movie.averageRating !== lastScore) {
-            currentRank += 1;           // DENSE ranking: increment only when score changes
-            lastScore = movie.averageRating;
+    movieDataWithAverages.forEach(movie => {
+        if (movie.averageRating !== lastScoreInTable) {
+            currentRank++;
+            lastScoreInTable = movie.averageRating;
         }
 
         const rankClass = currentRank <= 10 ? `rank-${currentRank}` : "";
         const chosenBy = movie.chosenBy.join(", ");
+        const movieBonus = originalMovieBonuses[movie.title] || 0;
+        const bonusText = movieBonus > 0 ? ` (+${movieBonus.toFixed(2).replace(/^0/, "")})` : "";
 
-        const formattedBonus = rankBonus[currentRank]
-            ? rankBonus[currentRank].toFixed(2).replace(/^0+/, "")
-            : ".00";
-        const bonusText = ` (+${formattedBonus})`;
         const row = document.createElement("tr");
         row.innerHTML = `
             <td class="${rankClass}">#${currentRank}${bonusText}</td>
@@ -119,7 +137,7 @@ function loadMovieTable(filterPerson = null, filterType = null) {
         tableBody.appendChild(row);
     });
 
-    // ✅ After table is built, add a bottom border under the last Top 10
+    // Add bottom border under last Top 10
     const rows = tableBody.querySelectorAll("tr");
     let lastTop10Row = null;
     rows.forEach(row => {
