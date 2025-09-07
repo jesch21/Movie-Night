@@ -168,9 +168,11 @@ function loadBestPicksTable() {
             lastScore = person.averagePickScore;
         }
 
+        const rankClass = currentRank <= 10 ? `rank-${currentRank}` : "";
+
         const row = `
             <tr>
-                <td>#${currentRank}</td>
+                <td class="${rankClass}">#${currentRank}</td>
                 <td>${person.name}</td>
                 <td>${person.averagePickScore.toFixed(3)}</td>
             </tr>
