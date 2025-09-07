@@ -56,6 +56,7 @@ function calculateAverage(starRatings) {
  * Function to load the movie data into the table.
  * @param {string|null} filterPerson - Name to filter by, or null to show all.
  */
+// Update loadMovieTable to also respect movie type filter
 function loadMovieTable(filterPerson = null, filterType = null) {
     const tableBody = document.querySelector('#movieTable tbody');
     tableBody.innerHTML = '';
@@ -65,28 +66,33 @@ function loadMovieTable(filterPerson = null, filterType = null) {
         return { ...movie, averageRating: parseFloat(averageRating) };
     });
 
-    // Person filter (existing behaviour)
     if (filterPerson && filterPerson !== "None") {
         movieDataWithAverages = movieDataWithAverages.filter(movie =>
             movie.chosenBy.includes(filterPerson)
         );
     }
 
-    // NEW: movieType filter (case-insensitive). The dropdown uses "Type" as default.
     if (filterType && filterType !== "Type") {
-        const wantedType = String(filterType).toLowerCase();
         movieDataWithAverages = movieDataWithAverages.filter(movie =>
-            (movie.movieType || "").toString().toLowerCase() === wantedType
+            movie.movieType === filterType
         );
     }
 
     movieDataWithAverages.sort((a, b) => b.averageRating - a.averageRating);
 
-    movieDataWithAverages.forEach((movie, index) => {
+    let lastScore = null;
+    let currentRank = 0;
+
+    movieDataWithAverages.forEach(movie => {
+        if (movie.averageRating !== lastScore) {
+            currentRank++;
+            lastScore = movie.averageRating;
+        }
+
         const chosenBy = movie.chosenBy.join(", ");
         const row = `
             <tr>
-                <td>#${index + 1}</td>
+                <td>#${currentRank}</td>
                 <td>${movie.title}</td>
                 <td>${chosenBy}</td>
                 <td>${movie.averageRating.toFixed(3)}</td>
@@ -94,6 +100,10 @@ function loadMovieTable(filterPerson = null, filterType = null) {
         `;
         tableBody.innerHTML += row;
     });
+
+    // Inside loadMovieTable()
+document.getElementById("movieCountLabel").innerText =
+    `Showing ${movieDataWithAverages.length} entr${movieDataWithAverages.length === 1 ? "y" : "ies"}`;
 }
 
 function filter() {
@@ -133,10 +143,19 @@ function loadBestPicksTable() {
     tableBody.innerHTML = '';
 
     const bestPicks = calculateAveragePickScores();
-    bestPicks.forEach((person, index) => {
+
+    let lastScore = null;
+    let currentRank = 0;
+
+    bestPicks.forEach(person => {
+        if (person.averagePickScore !== lastScore) {
+            currentRank++; // increase rank only when score changes
+            lastScore = person.averagePickScore;
+        }
+
         const row = `
             <tr>
-                <td>#${index + 1}</td>
+                <td>#${currentRank}</td>
                 <td>${person.name}</td>
                 <td>${person.averagePickScore.toFixed(3)}</td>
             </tr>
