@@ -105,7 +105,10 @@ function loadMovieTable(filterPerson = null, filterType = null) {
         const rankClass = currentRank <= 10 ? `rank-${currentRank}` : "";
         const chosenBy = movie.chosenBy.join(", ");
 
-        const bonusText = rankBonus[currentRank] ? ` (+${rankBonus[currentRank].toFixed(2)})` : "";
+        const formattedBonus = rankBonus[currentRank]
+            ? rankBonus[currentRank].toFixed(2).replace(/^0+/, "")
+            : ".00";
+        const bonusText = ` (+${formattedBonus})`;
         const row = document.createElement("tr");
         row.innerHTML = `
             <td class="${rankClass}">#${currentRank}${bonusText}</td>
