@@ -3,6 +3,20 @@ const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Bonus points per rank (1 → 0.1, 2 → 0.09, …, 10 → 0.01)
+const rankBonus = {
+    1: 0.10,
+    2: 0.09,
+    3: 0.08,
+    4: 0.07,
+    5: 0.06,
+    6: 0.05,
+    7: 0.04,
+    8: 0.03,
+    9: 0.02,
+    10: 0.01
+};
+
 // Movie data will be fetched from Supabase
 let movieData = [];
 
@@ -56,7 +70,6 @@ function calculateAverage(starRatings) {
  * Function to load the movie data into the table.
  * @param {string|null} filterPerson - Name to filter by, or null to show all.
  */
-// Update loadMovieTable to also respect movie type filter
 function loadMovieTable(filterPerson = null, filterType = null) {
     const tableBody = document.querySelector('#movieTable tbody');
     tableBody.innerHTML = '';
@@ -92,16 +105,16 @@ function loadMovieTable(filterPerson = null, filterType = null) {
         const rankClass = currentRank <= 10 ? `rank-${currentRank}` : "";
         const chosenBy = movie.chosenBy.join(", ");
 
+        const bonusText = rankBonus[currentRank] ? ` (+${rankBonus[currentRank].toFixed(2)})` : "";
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td class="${rankClass}">#${currentRank}</td>
+            <td class="${rankClass}">#${currentRank}${bonusText}</td>
             <td>${movie.title}</td>
             <td>${chosenBy}</td>
             <td>${movie.averageRating.toFixed(3)}</td>
         `;
         tableBody.appendChild(row);
     });
-
 
     // ✅ After table is built, add a bottom border under the last Top 10
     const rows = tableBody.querySelectorAll("tr");
@@ -116,9 +129,8 @@ function loadMovieTable(filterPerson = null, filterType = null) {
         lastTop10Row.style.borderBottom = "5px solid black";
     }
 
-    // Inside loadMovieTable()
-document.getElementById("movieCountLabel").innerText =
-    `Showing ${movieDataWithAverages.length} entr${movieDataWithAverages.length === 1 ? "y" : "ies"}`;
+    document.getElementById("movieCountLabel").innerText =
+        `Showing ${movieDataWithAverages.length} entr${movieDataWithAverages.length === 1 ? "y" : "ies"}`;
 }
 
 function filter() {
@@ -134,8 +146,9 @@ function filter() {
 
 function calculateAveragePickScores() {
     const personScores = {};
-    people.forEach(person => { personScores[person] = { total: 0, count: 0 }; });
+    people.forEach(person => { personScores[person] = { total: 0, count: 0, bonus: 0 }; });
 
+    // Step 1: Base averages
     movieData.forEach(movie => {
         const averageRating = parseFloat(calculateAverage(movie["star-ratings"]));
         movie.chosenBy.forEach(person => {
@@ -146,13 +159,40 @@ function calculateAveragePickScores() {
         });
     });
 
+    // Step 2: Assign bonuses based on Top 10 ranks
+    let rankedMovies = movieData.map(movie => {
+        const averageRating = parseFloat(calculateAverage(movie["star-ratings"]));
+        return { ...movie, averageRating };
+    }).sort((a, b) => b.averageRating - a.averageRating);
+
+    let lastScore = null;
+    let currentRank = 0;
+    rankedMovies.forEach(movie => {
+        if (movie.averageRating !== lastScore) {
+            currentRank++;
+            lastScore = movie.averageRating;
+        }
+        if (currentRank <= 10) {
+            movie.chosenBy.forEach(person => {
+                if (personScores[person]) {
+                    personScores[person].bonus += rankBonus[currentRank] || 0;
+                }
+            });
+        }
+    });
+
+    // Step 3: Return adjusted scores
     return people.map(person => {
-        const { total, count } = personScores[person];
-        const averagePickScore = count === 0 ? 0 : (total / count).toFixed(3);
-        return { name: person, averagePickScore: parseFloat(averagePickScore) };
-    }).sort((a, b) => b.averagePickScore - a.averagePickScore);
+        const { total, count, bonus } = personScores[person];
+        const baseAverage = count === 0 ? 0 : (total / count);
+        const adjusted = baseAverage + bonus;
+        return { name: person, baseAverage, bonus, adjusted };
+    }).sort((a, b) => b.adjusted - a.adjusted);
 }
 
+/**
+ * NEW: Load Best Picks Table
+ */
 function loadBestPicksTable() {
     const tableBody = document.querySelector('#bestPicksTable tbody');
     tableBody.innerHTML = '';
@@ -163,76 +203,55 @@ function loadBestPicksTable() {
     let currentRank = 0;
 
     bestPicks.forEach(person => {
-        if (person.averagePickScore !== lastScore) {
-            currentRank++; // increase rank only when score changes
-            lastScore = person.averagePickScore;
+        if (person.adjusted !== lastScore) {
+            currentRank++;
+            lastScore = person.adjusted;
         }
 
         const rankClass = currentRank <= 10 ? `rank-${currentRank}` : "";
+        const bonusDisplay = ` <b style="color:red">(+${person.bonus.toFixed(2)})</b>`;
 
         const row = `
             <tr>
                 <td class="${rankClass}">#${currentRank}</td>
                 <td>${person.name}</td>
-                <td>${person.averagePickScore.toFixed(3)}</td>
+                <td>${person.adjusted.toFixed(3)}${bonusDisplay}</td>
             </tr>
         `;
         tableBody.innerHTML += row;
     });
 }
 
-// ---------- START: Replace this entire block ----------
+
+// ---------- START: Chart.js & monthly averages ----------
 
 let myLineChart = null; // Chart.js instance (reuse if already created)
 
-// Helper: robustly extract month/year from various date representations
 function extractMonthYear(dateVal) {
     if (!dateVal) return null;
-
-    // If it's already a Date object
     if (dateVal instanceof Date) {
         if (isNaN(dateVal)) return null;
         return { month: dateVal.getMonth() + 1, year: dateVal.getFullYear() };
     }
-
-    // If Supabase returned a plain object with .toISOString (rare), try to handle
     if (typeof dateVal === 'object' && typeof dateVal.toISOString === 'function') {
         const d = new Date(dateVal.toISOString());
         if (!isNaN(d)) return { month: d.getMonth() + 1, year: d.getFullYear() };
     }
-
-    // Trim strings
     if (typeof dateVal === 'string') {
         const s = dateVal.trim();
-
-        // Format: "MM-YYYY" or "M-YYYY" (your previous format)
         let m = s.match(/^(\d{1,2})\s*-\s*(\d{4})$/);
-        if (m) {
-            return { month: parseInt(m[1], 10), year: parseInt(m[2], 10) };
-        }
-
-        // Format: "YYYY-MM-DD" (ISO-ish)
+        if (m) return { month: parseInt(m[1], 10), year: parseInt(m[2], 10) };
         m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-        if (m) {
-            return { month: parseInt(m[2], 10), year: parseInt(m[1], 10) };
-        }
-
-        // Try Date.parse fallback for other string forms
+        if (m) return { month: parseInt(m[2], 10), year: parseInt(m[1], 10) };
         const d = new Date(s);
-        if (!isNaN(d)) {
-            return { month: d.getMonth() + 1, year: d.getFullYear() };
-        }
+        if (!isNaN(d)) return { month: d.getMonth() + 1, year: d.getFullYear() };
     }
-
-    return null; // couldn't parse
+    return null;
 }
 
-// tracked years and containers (kept as before)
 const trackedYears = [2023, 2024, 2025];
 const monthlyTotals = {};
 const monthlyCounts = {};
-
-// initialize storage
 trackedYears.forEach(year => {
     monthlyTotals[year] = {};
     monthlyCounts[year] = {};
@@ -242,9 +261,7 @@ trackedYears.forEach(year => {
     }
 });
 
-// Calculate average ratings per month (safe & idempotent)
 function calculateMonthlyAverages() {
-    // reset totals & counts so repeated calls are safe
     trackedYears.forEach(year => {
         for (let m = 1; m <= 12; m++) {
             monthlyTotals[year][m] = 0;
@@ -252,23 +269,18 @@ function calculateMonthlyAverages() {
         }
     });
 
-    // accumulate
     movieData.forEach(movie => {
         const parsed = extractMonthYear(movie.date);
         if (!parsed) return;
-
         const { month, year } = parsed;
         if (!trackedYears.includes(year)) return;
         if (!month || month < 1 || month > 12) return;
-
         const avg = parseFloat(calculateAverage(movie["star-ratings"]));
         if (isNaN(avg)) return;
-
         monthlyTotals[year][month] += avg;
         monthlyCounts[year][month] += 1;
     });
 
-    // convert totals -> numeric averages (keep as numbers)
     trackedYears.forEach(year => {
         for (let m = 1; m <= 12; m++) {
             const total = monthlyTotals[year][m];
@@ -278,12 +290,11 @@ function calculateMonthlyAverages() {
     });
 }
 
-// Render (or update) Chart.js line chart
 function renderChart() {
     const avgData = trackedYears.map(year =>
         Array.from({ length: 12 }, (_, i) => {
             const val = monthlyTotals[year][i + 1];
-            return val === 0 ? null : val; // replace zeros with null for Chart.js
+            return val === 0 ? null : val;
         })
     );
 
@@ -298,7 +309,7 @@ function renderChart() {
             fill: false,
             tension: 0.2,
             pointBackgroundColor: ['blue', 'red', 'green'][i] || 'gray',
-            spanGaps: false // do not connect null points
+            spanGaps: false
         }));
         myLineChart.update();
         return;
@@ -316,7 +327,7 @@ function renderChart() {
                 fill: false,
                 tension: 0.2,
                 pointBackgroundColor: ['blue', 'red', 'green'][i] || 'gray',
-                spanGaps: false // do not connect null points
+                spanGaps: false
             }))
         },
         options: {
@@ -330,7 +341,6 @@ function renderChart() {
     });
 }
 
-// Determine best month across tracked years (safe even if all zeros)
 function getBestMonth() {
     const allMonths = trackedYears.flatMap(year =>
         Array.from({ length: 12 }, (_, i) => ({
@@ -339,16 +349,11 @@ function getBestMonth() {
             year: year
         }))
     );
-
-    // If no months (edge case), show a fallback
     if (allMonths.length === 0) {
         document.getElementById('bestMonthLabel').innerText = `Best Month: No data`;
         return;
     }
-
-    // pick the highest value (if tie, picks first)
     const best = allMonths.reduce((prev, curr) => (curr.value > prev.value ? curr : prev), allMonths[0]);
-
     const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     document.getElementById('bestMonthLabel').innerText =
         `Best Month: ${monthNames[best.month - 1]} of ${best.year} with a ${best.value}`;
@@ -356,12 +361,10 @@ function getBestMonth() {
 
 // Window load: fetch data, compute, render everything in correct order
 window.onload = async function() {
-    await fetchMovieData(); // load movieData from Supabase (this populates movieData)
-    calculateMonthlyAverages(); // compute monthly averages based on movieData
-    loadMovieTable();          // populate the main table
-    loadBestPicksTable();      // populate the best picks table
-    renderChart();             // render (or update) the chart using computed averages
-    getBestMonth();            // update the best-month label
+    await fetchMovieData();
+    calculateMonthlyAverages();
+    loadMovieTable();
+    loadBestPicksTable();
+    renderChart();
+    getBestMonth();
 };
-
-// ---------- END: Replace this entire block ----------
