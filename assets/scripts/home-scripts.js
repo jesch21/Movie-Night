@@ -144,11 +144,16 @@ async function loadMovies() {
   }
 
   // Find the first movie (in chronological order) whose stars is NULL or "None"
+  // If that movie's title is literally "None", don't include it (cut just before it).
   let cutoffIndex = data.findIndex(m => {
     if (m.stars === null || m.stars === undefined) return true;
     if (typeof m.stars === "string" && m.stars.trim().toLowerCase() === "none") return true;
     return false;
   });
+
+  if (cutoffIndex !== -1 && data[cutoffIndex].title.trim().toLowerCase() === "none") {
+    cutoffIndex = cutoffIndex - 1; // exclude this placeholder movie
+  }
 
   // If no such movie, include all
   if (cutoffIndex === -1) cutoffIndex = data.length - 1;
