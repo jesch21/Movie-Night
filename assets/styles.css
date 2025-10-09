@@ -148,44 +148,82 @@ h2 {
     font-size: 25px;
 }
 
-#gameNav {
-    position: absolute;
-    left: 49.5%;
-    transform: translateX(-50%);
-    background-color:#F2F5EA;
-    font-family: "Bungee Tint", sans-serif;
-    padding: .75em;
-    margin: 15px;
-    border: 2px solid black;
-    border-radius: 15px;
-    text-decoration: none;
-    transition: color .3s, font-weight .3s;
-}
+/* ---------- Game buttons — always centered and stacked ---------- */
+/* Place at the end of your stylesheet to override earlier rules. */
 
+#gameNav,
 #highNav {
-    background-color:#F2F5EA;
-    font-family: "Bungee Tint", sans-serif;
-    padding: .75em;
-    margin: 15px;
-    border: 2px solid black;
-    border-radius: 15px;
-    text-decoration: none;
-    transition: color .3s, font-weight .3s;
-    position: absolute;
-    left: 49.5%;
-    transform: translateX(-50%);
-    top: 575px;
+  /* Put them in normal flow and stack vertically */
+  display: block !important;
+  position: static !important;     /* neutralize any absolute positioning */
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+
+  /* visual styling */
+  width: auto;                     /* natural width up to max-width */
+  max-width: 420px;                /* keep a reasonable max so they don't get huge on large screens */
+  margin: 14px auto;               /* center horizontally and give vertical spacing */
+  padding: .75em 1.25em;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #F2F5EA;
+  color: black;
+  font-family: "Bungee Tint", sans-serif;
+  border: 2px solid black;
+  border-radius: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .08s ease, color .2s ease, font-weight .2s ease;
+  z-index: 20;                      /* make sure they sit above slideshow arrows */
 }
 
-#gameNav:hover {
-    color: #623CEA;
-    font-weight: bold;
-}
+/* stacked order: gameNav first, highNav second (keeps the HTML order) */
+#gameNav { order: 0; }
+#highNav { order: 1; }
 
+/* Hover affordance */
+#gameNav:hover,
 #highNav:hover {
-    color: #623CEA;
-    font-weight: bold;
+  color: #623CEA;
+  font-weight: bold;
+  transform: translateY(-3px);
 }
+
+/* Small screens: make buttons wider for easier tapping */
+@media (max-width: 700px) {
+  #gameNav,
+  #highNav {
+    width: calc(100% - 32px);  /* small side padding */
+    max-width: 520px;
+    font-size: 18px;
+    padding: .9rem 1.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+
+  /* a little less vertical gap between slideshow and buttons */
+  #slideshow {
+    margin-bottom: 8px;
+  }
+
+  #bottom-main {
+    margin-top: 40px;
+  }
+}
+
+/* Extra override in case inline style attributes are applied at runtime */
+#gameNav[style], #highNav[style] {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  display: block !important;
+}
+
 
 #lleft, #lright {
     position: absolute;
