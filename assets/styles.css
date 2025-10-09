@@ -162,7 +162,27 @@ h2 {
     transition: color .3s, font-weight .3s;
 }
 
+#highNav {
+    background-color:#F2F5EA;
+    font-family: "Bungee Tint", sans-serif;
+    padding: .75em;
+    margin: 15px;
+    border: 2px solid black;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: color .3s, font-weight .3s;
+    position: absolute;
+    left: 49.5%;
+    transform: translateX(-50%);
+    top: 575px;
+}
+
 #gameNav:hover {
+    color: #623CEA;
+    font-weight: bold;
+}
+
+#highNav:hover {
     color: #623CEA;
     font-weight: bold;
 }
@@ -199,7 +219,7 @@ h2 {
     justify-self: center;
     align-self: center;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 100px;
 }
 
 #main-dump {
