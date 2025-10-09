@@ -1,5 +1,7 @@
 // high-or-low-scripts.js
-// Title-matching + dedupe of letterboxd pools + buffered image loader + normalized star display
+// Title-matching + dedupe + buffered image loader + guaranteed non-text placeholder
+// Includes fix: when a movie "stays", leftMovie is updated to the entry from the new source's pool
+// Includes fix: fallback poster is a neutral SVG (no "Poster unavailable" text)
 
 // ---------------- Supabase init (keep your keys) ----------------
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
@@ -16,6 +18,7 @@ let leftMovie = null;
 let rightMovie = null;
 let score = 0;
 
+// sources
 const LETTERBOXD_TABLES = [
   "Alex-Letterboxd",
   "Ayub-Letterboxd",
@@ -26,15 +29,7 @@ const LETTERBOXD_TABLES = [
   "Trevor-Letterboxd"
 ];
 const SOURCE_KEYS = ["IMDB", ...LETTERBOXD_TABLES];
-
-const SOURCE_LABELS = Object.assign(
-  { IMDB: "IMDB" },
-  LETTERBOXD_TABLES.reduce((acc, t) => {
-    const owner = t.split('-')[0];
-    acc[t] = `${owner}'s Letterboxd`;
-    return acc;
-  }, {})
-);
+const SOURCE_LABELS = Object.assign({ IMDB: "IMDB" }, LETTERBOXD_TABLES.reduce((acc, t) => { acc[t] = `${t.split('-')[0]}'s Letterboxd`; return acc; }, {}));
 
 // DOM elements
 const startButton = document.getElementById('startButton');
@@ -53,112 +48,86 @@ const btnHigher = document.getElementById('btnHigher');
 const btnLower = document.getElementById('btnLower');
 const finalScoreEl = document.getElementById('finalScore');
 const roundInfo = document.getElementById('roundInfo');
-
 const ratingsActionRow = document.getElementById('ratingsActionRow');
 const leftRatingDisplay = document.getElementById('leftRatingDisplay');
 const rightRatingDisplay = document.getElementById('rightRatingDisplay');
 const nextButton = document.getElementById('nextButton');
-
 const sourceLabelEl = document.getElementById('sourceLabel');
 
-// Placeholder + fallback
-const PLACEHOLDER_SRC = new URL('../assets/images/poster-placeholder.png', window.location.href).href;
+// ---------------- Guaranteed non-text placeholder ----------------
+// Neutral poster (no "unavailable" wording). Always loads (data URI).
 const FALLBACK_SVG_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-     <rect width="100%" height="100%" fill="#222" />
-     <text x="50%" y="50%" fill="#F2F5EA" font-size="20" font-family="sans-serif" dominant-baseline="middle" text-anchor="middle">
-       Poster unavailable
-     </text>
-   </svg>`
+     <defs>
+       <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+         <stop offset="0%" stop-color="#2a2a2a"/>
+         <stop offset="100%" stop-color="#111"/>
+       </linearGradient>
+     </defs>
+     <rect width="100%" height="100%" fill="url(#g)"/>
+     <g transform="translate(20,20)">
+       <rect width="360" height="520" rx="12" ry="12" fill="#1a1a1a" stroke="#2f2f2f" />
+       <!-- subtle film-stripe -->
+       <rect x="12" y="12" width="336" height="80" rx="8" ry="8" fill="#0f0f0f" opacity="0.08"/>
+     </g>
+  </svg>`
 );
+// Use the neutral data-uri as our placeholder (guaranteed to exist)
+const PLACEHOLDER_SRC = FALLBACK_SVG_DATA_URI;
 
-// ---------- Helpers ----------
-function pickRandomFromArray(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-function shuffleArray(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
-function safeString(v) { return typeof v === 'string' ? v.trim() : (v === null || typeof v === 'undefined' ? '' : String(v)); }
-function normalizeTitle(t) { return safeString(t).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
-function parseStarsValue(starsRaw) {
-  if (!starsRaw && starsRaw !== 0) return NaN;
-  const s = safeString(starsRaw).split('/')[0].trim().replace(',', '.');
-  return parseFloat(s);
-}
-function parseImdbRating(v) {
-  if (v === null || typeof v === 'undefined') return NaN;
-  const s = safeString(v).replace(',', '.');
-  return parseFloat(s);
-}
-function normalizeOrderKey(o) {
-  const n = Number(o);
-  if (!Number.isNaN(n)) return Number.isInteger(n) ? String(n) : String(n);
-  return safeString(o);
-}
-function getPublicImageUrl(imagePath) {
-  if (!imagePath || !supabase) return null;
-  try {
-    const normalizedPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-    const res = supabase.storage.from('slideshowImages').getPublicUrl(normalizedPath);
-    if (res && res.data) return res.data.publicUrl || res.data.publicURL || null;
-  } catch (err) { console.warn("Error getting public URL for image:", imagePath, err); }
-  return null;
-}
+// ---------------- Helpers ----------------
+function pickRandomFromArray(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffleArray(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+function safeString(v){ return typeof v==='string' ? v.trim() : (v===null||typeof v==='undefined' ? '' : String(v)); }
+function normalizeTitle(t){ return safeString(t).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+function parseStarsValue(starsRaw){ if(!starsRaw&&starsRaw!==0) return NaN; const s=safeString(starsRaw).split('/')[0].trim().replace(',', '.'); return parseFloat(s); }
+function parseImdbRating(v){ if(v===null||typeof v==='undefined') return NaN; const s=safeString(v).replace(',', '.'); return parseFloat(s); }
+function normalizeOrderKey(o){ const n=Number(o); return !Number.isNaN(n) ? (Number.isInteger(n) ? String(n) : String(n)) : safeString(o); }
+function getPublicImageUrl(imagePath){ if(!imagePath||!supabase) return null; try{ const p = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath; const res = supabase.storage.from('slideshowImages').getPublicUrl(p); if(res&&res.data) return res.data.publicUrl||res.data.publicURL||null; }catch(e){ console.warn('getPublicImageUrl error', e); } return null; }
 
-// ---------- Load moviesList and index by title ----------
-async function loadMoviesListAll() {
-  try {
-    if (!supabase) {
-      console.warn('Supabase client unavailable.');
-      moviesListAll = [];
-      moviesListByOrder = {};
-      moviesListByTitle = {};
-      return false;
-    }
+// ---------------- Load moviesList and indexes ----------------
+async function loadMoviesListAll(){
+  try{
+    if(!supabase){ console.warn('Supabase client unavailable.'); moviesListAll=[]; moviesListByOrder={}; moviesListByTitle={}; return false; }
     const { data, error } = await supabase.from('moviesList').select('*');
-    if (error) { console.error("Supabase error fetching moviesList:", error); return false; }
-    moviesListAll = Array.isArray(data) ? data : [];
+    if(error){ console.error('Supabase moviesList error', error); return false; }
+    moviesListAll = Array.isArray(data)?data:[];
     moviesListByOrder = {};
     moviesListByTitle = {};
-    moviesListAll.forEach(row => {
-      if (!row || typeof row !== 'object') return;
-      if (row['order'] != null) moviesListByOrder[normalizeOrderKey(row['order'])] = row;
-      const t = row.title || row.Movie || '';
+    moviesListAll.forEach(row=>{
+      if(!row||typeof row!=='object') return;
+      if(row['order']!=null) moviesListByOrder[normalizeOrderKey(row['order'])]=row;
+      const t = row.title||row.Movie||'';
       const tk = normalizeTitle(t);
-      if (tk) {
-        if (moviesListByTitle[tk]) {
-          // If duplicates exist in moviesList itself, log them (you may want to fix DB)
-          console.warn('Duplicate moviesList title normalized key:', tk, '-- keeping first entry. Duplicate title:', t);
-        } else {
-          moviesListByTitle[tk] = row;
-        }
+      if(tk){
+        if(!moviesListByTitle[tk]) moviesListByTitle[tk]=row;
+        else console.warn('Duplicate moviesList normalized title (keeping first):', tk, 'title:', t);
       }
     });
     return true;
-  } catch (err) {
-    console.error("Error loading moviesList:", err);
-    return false;
-  }
+  }catch(e){ console.error('loadMoviesListAll error', e); return false; }
 }
 
-// ---------- Build IMDB pool ----------
-function buildImdbPoolFromMoviesList() {
-  const pool = [];
-  for (const row of moviesListAll) {
+// ---------------- Build IMDB pool ----------------
+function buildImdbPoolFromMoviesList(){
+  const pool=[];
+  for(const row of moviesListAll){
     const imdbNum = parseImdbRating(row['imdb-rating']);
-    const hasStars = (row['stars'] !== null && row['stars'] !== undefined && row['stars'] !== '') ||
-                     (row['Stars'] !== null && row['Stars'] !== undefined && row['Stars'] !== '');
-    if (Number.isFinite(imdbNum) && hasStars && row['order'] != null) {
+    const hasStars = (row['stars']!==null && row['stars']!==undefined && row['stars']!=='') || (row['Stars']!==null && row['Stars']!==undefined && row['Stars']!=='');
+    if(Number.isFinite(imdbNum) && hasStars && row['order']!=null){
       const key = normalizeOrderKey(row['order']);
-      const starsRaw = row['stars'] || row['Stars'] || null;
+      const starsRaw = row['stars']||row['Stars']||null;
       const starsValue = parseStarsValue(starsRaw);
-      const imagePath = row.image || null;
+      const imagePath = row.image||null;
       const imageUrl = getPublicImageUrl(imagePath);
       pool.push({
         order: row['order'],
         orderKey: key,
-        title: row.title || row.Movie || '',
+        title: row.title||row.Movie||'',
         imdbRating: imdbNum,
         starsRaw,
         starsValue,
-        starsRawNormalized: starsRaw ? (String(starsRaw).split(',')[0].trim()) : null,
+        starsRawNormalized: starsRaw ? String(starsRaw).split(/\s*[;,|]\s*/)[0].trim() : null,
         imagePath,
         imageUrl,
         sourceKey: 'IMDB'
@@ -168,67 +137,51 @@ function buildImdbPoolFromMoviesList() {
   return pool;
 }
 
-// ---------- Fetch letterboxd pool with dedupe by normalized title ----------
-async function fetchAndBuildLetterboxdPool(tableName) {
-  let data = null;
-  let err1 = null;
-  try {
+// ---------------- Fetch letterboxd pool (dedupe by title) ----------------
+async function fetchAndBuildLetterboxdPool(tableName){
+  let data=null;
+  try{
     const res = await supabase.from(tableName).select('"order", Movie, Stars');
-    if (res.error) throw res.error;
+    if(res.error) throw res.error;
     data = res.data;
-  } catch (e1) {
-    err1 = e1;
-    try {
+  }catch(e1){
+    try{
       const res2 = await supabase.from(`"${tableName}"`).select('"order", Movie, Stars');
-      if (res2.error) throw res2.error;
+      if(res2.error) throw res2.error;
       data = res2.data;
-    } catch (err2) {
-      console.error(`Error fetching letterboxd table ${tableName}:`, err1 || err2);
+    }catch(e2){
+      console.error(`Error fetching ${tableName}`, e1||e2);
       return [];
     }
   }
-  if (!Array.isArray(data)) return [];
-
-  const seen = {}; // map normalizedTitle -> true (dedupe)
+  if(!Array.isArray(data)) return [];
+  const seen = {};
   const pool = [];
-  for (const row of data) {
+  for(const row of data){
     const orderVal = (row && (row['order'] ?? row.order));
     const title = row.Movie || row.movie || '';
     const starsRaw = row.Stars || row.stars || '';
     const starsValue = parseStarsValue(starsRaw);
-    if (!Number.isFinite(starsValue)) continue; // require valid stars
-
+    if(!Number.isFinite(starsValue)) continue;
     const tkey = normalizeTitle(title);
-    if (!tkey) continue;
-
-    if (seen[tkey]) {
-      // Duplicate entry for same title in the letterboxd table — log it and skip
-      console.warn(`Duplicate letterboxd row in ${tableName} for title "${title}" (normalized: ${tkey}) — skipping duplicate.`);
-      continue;
-    }
-    seen[tkey] = true;
-
-    // match to moviesList by normalized title (if present)
+    if(!tkey) continue;
+    if(seen[tkey]) { console.warn(`Duplicate in ${tableName} for "${title}" — skipping duplicate.`); continue; }
+    seen[tkey]=true;
     const mlRow = moviesListByTitle[tkey] || null;
-    const imagePath = mlRow ? (mlRow.image || null) : null;
+    const imagePath = mlRow ? (mlRow.image||null) : null;
     const imageUrl = getPublicImageUrl(imagePath);
-
-    // normalized stars string: prefer exact given format, but pick first sensible text if there are separators
     let starsRawNormalized = null;
-    if (starsRaw) {
-      // if there are commas/semicolons/pipes (often multiple values), take the first segment
+    if(starsRaw){
       starsRawNormalized = String(starsRaw).split(/\s*[;,|]\s*/)[0].trim();
-      // if it's like "4.5/5" keep as-is; otherwise if numeric only, format as "X/5"
-      if (!starsRawNormalized.includes('/')) {
+      if(!starsRawNormalized.includes('/')){
         const v = parseStarsValue(starsRawNormalized);
-        if (Number.isFinite(v)) starsRawNormalized = `${v}/5`;
+        if(Number.isFinite(v)) starsRawNormalized = `${v}/5`;
       }
     }
-
     pool.push({
       order: orderVal,
       orderKey: String(orderVal),
-      title: title || '',
+      title: title||'',
       imdbRating: mlRow ? parseImdbRating(mlRow['imdb-rating']) : NaN,
       starsRaw,
       starsValue,
@@ -239,37 +192,31 @@ async function fetchAndBuildLetterboxdPool(tableName) {
       matchedMovieListTitle: mlRow ? (mlRow.title || mlRow.Movie || '') : null
     });
   }
-
   return pool;
 }
 
-async function ensureSourcePool(sourceKey) {
-  if (sourcePools[sourceKey]) return sourcePools[sourceKey];
-  if (sourceKey === 'IMDB') {
-    const pool = buildImdbPoolFromMoviesList();
-    sourcePools[sourceKey] = pool;
-    return pool;
-  } else {
-    const pool = await fetchAndBuildLetterboxdPool(sourceKey);
-    sourcePools[sourceKey] = pool;
-    return pool;
-  }
+async function ensureSourcePool(sourceKey){
+  if(sourcePools[sourceKey]) return sourcePools[sourceKey];
+  if(sourceKey === 'IMDB'){ const pool = buildImdbPoolFromMoviesList(); sourcePools[sourceKey] = pool; return pool; }
+  const pool = await fetchAndBuildLetterboxdPool(sourceKey);
+  sourcePools[sourceKey] = pool;
+  return pool;
 }
 
-// ---------- Game selection logic ----------
-function pickTwoDistinctFromPool(pool) {
-  if (!Array.isArray(pool) || pool.length < 2) return null;
+// ---------------- Selection logic ----------------
+function pickTwoDistinctFromPool(pool){
+  if(!Array.isArray(pool) || pool.length < 2) return null;
   let leftIndex = Math.floor(Math.random() * pool.length);
   let rightIndex;
-  do { rightIndex = Math.floor(Math.random() * pool.length); } while (rightIndex === leftIndex);
+  do{ rightIndex = Math.floor(Math.random() * pool.length); } while(rightIndex === leftIndex);
   return { left: pool[leftIndex], right: pool[rightIndex] };
 }
 
-async function chooseInitialSourceAndPair() {
+async function chooseInitialSourceAndPair(){
   const keys = shuffleArray(Array.from(SOURCE_KEYS));
-  for (const key of keys) {
+  for(const key of keys){
     const pool = await ensureSourcePool(key);
-    if (Array.isArray(pool) && pool.length >= 2) {
+    if(Array.isArray(pool) && pool.length >= 2){
       currentSourceKey = key;
       const pair = pickTwoDistinctFromPool(pool);
       return { sourceKey: key, pair };
@@ -278,29 +225,32 @@ async function chooseInitialSourceAndPair() {
   return null;
 }
 
-async function pickNewSourceContainingStayingMovie(stayingTitleOrMatchedTitle) {
+// Pick a new source that contains the staying movie (staying identified by title)
+async function pickNewSourceContainingStayingMovie(stayingTitle){
   const otherKeys = shuffleArray(SOURCE_KEYS.filter(k => k !== currentSourceKey));
-  for (const key of otherKeys) {
+  const wantNorm = normalizeTitle(stayingTitle || '');
+  for(const key of otherKeys){
     const pool = await ensureSourcePool(key);
-    if (!Array.isArray(pool) || pool.length === 0) continue;
+    if(!Array.isArray(pool) || pool.length === 0) continue;
     const foundIndex = pool.findIndex(m => {
-      if (m.matchedMovieListTitle && stayingTitleOrMatchedTitle && String(m.matchedMovieListTitle) === String(stayingTitleOrMatchedTitle)) return true;
-      if (m.title && stayingTitleOrMatchedTitle) return normalizeTitle(m.title) === normalizeTitle(stayingTitleOrMatchedTitle);
+      if(m.matchedMovieListTitle && normalizeTitle(m.matchedMovieListTitle) === wantNorm) return true;
+      if(m.title && normalizeTitle(m.title) === wantNorm) return true;
       return false;
     });
-    if (foundIndex >= 0) {
-      const candidates = pool.filter((m, i) => i !== foundIndex);
-      if (candidates.length === 0) continue;
+    if(foundIndex >= 0){
+      const candidates = pool.filter((m,i)=> i !== foundIndex);
+      if(candidates.length === 0) continue;
       currentSourceKey = key;
       const right = pickRandomFromArray(candidates);
       return { sourceKey: key, newRight: right, pool };
     }
   }
-
+  // fallback reuse current source: find same-title entry and pick another
   const currentPool = await ensureSourcePool(currentSourceKey);
-  if (Array.isArray(currentPool) && currentPool.length >= 1) {
-    const candidates = currentPool.filter(m => normalizeTitle(m.title) !== normalizeTitle(stayingTitleOrMatchedTitle));
-    if (candidates.length > 0) {
+  if(Array.isArray(currentPool) && currentPool.length >= 1){
+    const foundIndex = currentPool.findIndex(m => normalizeTitle(m.title) === wantNorm || (m.matchedMovieListTitle && normalizeTitle(m.matchedMovieListTitle) === wantNorm));
+    const candidates = currentPool.filter((m,i) => i !== foundIndex);
+    if(candidates.length > 0){
       const right = pickRandomFromArray(candidates);
       return { sourceKey: currentSourceKey, newRight: right, pool: currentPool };
     }
@@ -308,32 +258,27 @@ async function pickNewSourceContainingStayingMovie(stayingTitleOrMatchedTitle) {
   return null;
 }
 
-// ---------- Buffered safe image assignment ----------
-function makePosterId(sourceKey, title) {
-  return `${String(sourceKey ?? 'unknown')}::${normalizeTitle(title ?? '')}`;
-}
-function applyPlaceholderToImg(imgEl) {
-  if (!imgEl) return;
-  if (imgEl.src !== PLACEHOLDER_SRC) {
-    imgEl.src = PLACEHOLDER_SRC;
-    console.info('Applied placeholder to', imgEl.id);
-  } else {
-    imgEl.src = FALLBACK_SVG_DATA_URI;
-    console.info('Applied fallback SVG to', imgEl.id);
-  }
+// ---------------- Buffered safe image assignment (no-text fallback) ----------------
+function makePosterId(sourceKey, title){ return `${String(sourceKey ?? 'unknown')}::${normalizeTitle(title ?? '')}`; }
+function applyPlaceholderToImg(imgEl){
+  if(!imgEl) return;
+  imgEl.src = PLACEHOLDER_SRC; // guaranteed to exist (data URI)
+  // keep alt as the movie title if present; do not set "unavailable" text
+  if(!imgEl.alt) imgEl.alt = 'Poster';
   imgEl.dataset.currentPosterId = 'placeholder';
 }
-function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle) {
-  if (!imgEl) return;
+function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle){
+  if(!imgEl) return;
   const id = makePosterId(sourceKey, titleForId);
   imgEl.dataset.intendedPosterId = id;
-  if (!url) { applyPlaceholderToImg(imgEl); console.warn('No poster URL for', debugTitle || id); return; }
+  if(!url){ applyPlaceholderToImg(imgEl); console.warn('No poster URL for', debugTitle||id); return; }
   const loader = new Image();
   loader.crossOrigin = 'anonymous';
   loader.onload = () => {
-    if (imgEl.dataset.intendedPosterId === id) {
+    if(imgEl.dataset.intendedPosterId === id){
       imgEl.src = url;
       imgEl.dataset.currentPosterId = id;
+      if(!imgEl.alt) imgEl.alt = debugTitle || 'Poster';
       console.info('Safe image applied ->', imgEl.id, url, 'for id', id, 'title:', debugTitle);
     } else {
       console.warn('Loaded image ignored (id mismatch) ->', url, 'for', id, 'img now intends', imgEl.dataset.intendedPosterId);
@@ -343,193 +288,169 @@ function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle) {
   loader.src = url;
 }
 
-// ---------- Rendering & UI ----------
-function renderMoviesAndSource() {
+// ---------------- Rendering & UI ----------------
+function renderMoviesAndSource(){
   const label = SOURCE_LABELS[currentSourceKey] || currentSourceKey || 'Unknown';
-  if (sourceLabelEl) { sourceLabelEl.textContent = `Source: ${label}`; sourceLabelEl.style.display = 'block'; }
-
+  if(sourceLabelEl){ sourceLabelEl.textContent = `Source: ${label}`; sourceLabelEl.style.display = 'block'; }
   leftTitleEl.textContent = leftMovie ? leftMovie.title : '';
   rightTitleEl.textContent = rightMovie ? rightMovie.title : '';
-
-  if (leftYearEl) leftYearEl.textContent = '';
-  if (rightYearEl) rightYearEl.textContent = '';
-
-  if (leftMovie) {
+  if(leftYearEl) leftYearEl.textContent = '';
+  if(rightYearEl) rightYearEl.textContent = '';
+  if(leftMovie){
     const leftSource = leftMovie.sourceKey || currentSourceKey || 'IMDB';
     const leftTitle = leftMovie.title || leftMovie.matchedMovieListTitle || '';
-    const leftUrl = leftMovie.imageUrl || (leftMovie.imagePath ? getPublicImageUrl(leftMovie.imagePath) : null) || null;
+    const leftUrl = leftMovie.imageUrl || (leftMovie.imagePath? getPublicImageUrl(leftMovie.imagePath) : null) || null;
     setImgSrcSafely(leftImgEl, leftUrl, leftSource, leftTitle, leftMovie.title);
-    if (leftImgEl) leftImgEl.alt = `${leftMovie.title} poster`;
-  } else { applyPlaceholderToImg(leftImgEl); if (leftImgEl) leftImgEl.alt = 'poster placeholder'; }
-
-  if (rightMovie) {
+    if(leftImgEl) leftImgEl.alt = leftMovie.title || 'Poster';
+  } else { applyPlaceholderToImg(leftImgEl); if(leftImgEl) leftImgEl.alt = 'Poster'; }
+  if(rightMovie){
     const rightSource = rightMovie.sourceKey || currentSourceKey || 'IMDB';
     const rightTitle = rightMovie.title || rightMovie.matchedMovieListTitle || '';
-    const rightUrl = rightMovie.imageUrl || (rightMovie.imagePath ? getPublicImageUrl(rightMovie.imagePath) : null) || null;
+    const rightUrl = rightMovie.imageUrl || (rightMovie.imagePath? getPublicImageUrl(rightMovie.imagePath) : null) || null;
     setImgSrcSafely(rightImgEl, rightUrl, rightSource, rightTitle, rightMovie.title);
-    if (rightImgEl) rightImgEl.alt = `${rightMovie.title} poster`;
-  } else { applyPlaceholderToImg(rightImgEl); if (rightImgEl) rightImgEl.alt = 'poster placeholder'; }
-
+    if(rightImgEl) rightImgEl.alt = rightMovie.title || 'Poster';
+  } else { applyPlaceholderToImg(rightImgEl); if(rightImgEl) rightImgEl.alt = 'Poster'; }
   roundInfo.textContent = `Right movie rating vs Left movie rating — guess if RIGHT is higher or lower.`;
 }
 
-// ---------- Compare & evaluate ----------
-function evaluateGuessAgainstCurrentSource(guessHigher) {
+// ---------------- Rating evaluation ----------------
+function evaluateGuessAgainstCurrentSource(guessHigher){
   const leftVal = (currentSourceKey === 'IMDB') ? parseFloat(leftMovie.imdbRating) : Number(leftMovie.starsValue);
   const rightVal = (currentSourceKey === 'IMDB') ? parseFloat(rightMovie.imdbRating) : Number(rightMovie.starsValue);
-  if (!Number.isFinite(leftVal) || !Number.isFinite(rightVal)) return { correct: false, leftVal, rightVal };
-  if (Math.abs(leftVal - rightVal) < 1e-9) return { correct: true, leftVal, rightVal };
+  if(!Number.isFinite(leftVal) || !Number.isFinite(rightVal)) return { correct:false, leftVal, rightVal };
+  if(Math.abs(leftVal-rightVal) < 1e-9) return { correct:true, leftVal, rightVal };
   const rightIsHigher = rightVal > leftVal;
   const correct = (guessHigher && rightIsHigher) || (!guessHigher && !rightIsHigher);
   return { correct, leftVal, rightVal };
 }
 
-// ---------- Ratings UI ----------
-function setChoiceButtonsEnabled(enabled) {
-  btnHigher.disabled = !enabled;
-  btnLower.disabled = !enabled;
-  btnHigher.setAttribute('aria-pressed', String(!enabled));
-  btnLower.setAttribute('aria-pressed', String(!enabled));
-  if (!enabled) { btnHigher.style.opacity = '0.6'; btnLower.style.opacity = '0.6'; btnHigher.style.cursor = 'default'; btnLower.style.cursor = 'default'; }
-  else { btnHigher.style.opacity = ''; btnLower.style.opacity = ''; btnHigher.style.cursor = ''; btnLower.style.cursor = ''; }
+// ---------------- Ratings & UI ----------------
+function setChoiceButtonsEnabled(enabled){
+  btnHigher.disabled = !enabled; btnLower.disabled = !enabled;
+  btnHigher.setAttribute('aria-pressed', String(!enabled)); btnLower.setAttribute('aria-pressed', String(!enabled));
+  if(!enabled){ btnHigher.style.opacity='0.6'; btnLower.style.opacity='0.6'; btnHigher.style.cursor='default'; btnLower.style.cursor='default'; }
+  else { btnHigher.style.opacity=''; btnLower.style.opacity=''; btnHigher.style.cursor=''; btnLower.style.cursor=''; }
 }
-function formatImdb(v) { if (!Number.isFinite(v)) return 'N/A'; return (Math.round(v * 10) / 10).toFixed(1); }
-function showRatingsAndAction({ correct, leftRating, rightRating }) {
-  if (currentSourceKey === 'IMDB') {
+function formatImdb(v){ if(!Number.isFinite(v)) return 'N/A'; return (Math.round(v*10)/10).toFixed(1); }
+function showRatingsAndAction({ correct, leftRating, rightRating }){
+  if(currentSourceKey === 'IMDB'){
     leftRatingDisplay.textContent = (Number.isFinite(leftRating) ? `Rating: ${formatImdb(leftRating)}` : 'Rating: N/A');
     rightRatingDisplay.textContent = (Number.isFinite(rightRating) ? `Rating: ${formatImdb(rightRating)}` : 'Rating: N/A');
   } else {
-    // show normalized single-star string
     leftRatingDisplay.textContent = leftMovie && leftMovie.starsRawNormalized ? `Rating: ${leftMovie.starsRawNormalized}` : (Number.isFinite(leftRating) ? `Rating: ${leftRating}/5` : 'Rating: N/A');
     rightRatingDisplay.textContent = rightMovie && rightMovie.starsRawNormalized ? `Rating: ${rightMovie.starsRawNormalized}` : (Number.isFinite(rightRating) ? `Rating: ${rightRating}/5` : 'Rating: N/A');
   }
-
-  if (correct) { nextButton.textContent = 'Next'; nextButton.onclick = handleNextClick; }
-  else { nextButton.textContent = 'See my Score'; nextButton.onclick = handleSeeScoreClick; }
-
-  if (ratingsActionRow) ratingsActionRow.style.display = 'flex';
-  nextButton.style.display = 'inline-block';
-
-  try {
-    const pool = sourcePools[currentSourceKey] || [];
-    for (let i = 0; i < Math.min(2, pool.length); i++) {
-      const url = pool[i].imageUrl || (pool[i].imagePath ? getPublicImageUrl(pool[i].imagePath) : null);
-      if (url) { const p = new Image(); p.src = url; }
-    }
-  } catch (e) {}
+  if(correct){ nextButton.textContent='Next'; nextButton.onclick = handleNextClick; } else { nextButton.textContent='See my Score'; nextButton.onclick = handleSeeScoreClick; }
+  if(ratingsActionRow) ratingsActionRow.style.display='flex';
+  nextButton.style.display='inline-block';
+  // preload extras
+  try{ const pool = sourcePools[currentSourceKey] || []; for(let i=0;i<Math.min(2,pool.length);i++){ const u = pool[i].imageUrl || (pool[i].imagePath? getPublicImageUrl(pool[i].imagePath):null); if(u){ const p = new Image(); p.src = u; } } }catch(e){}
 }
-function hideRatingsAndAction() {
-  if (ratingsActionRow) ratingsActionRow.style.display = 'none';
-  leftRatingDisplay.textContent = '';
-  rightRatingDisplay.textContent = '';
-  nextButton.style.display = 'none';
-  nextButton.onclick = null;
-}
+function hideRatingsAndAction(){ if(ratingsActionRow) ratingsActionRow.style.display='none'; leftRatingDisplay.textContent=''; rightRatingDisplay.textContent=''; nextButton.style.display='none'; nextButton.onclick = null; }
 
-// ---------- Poster instrumentation ----------
-function attachPosterErrorHandlers() {
-  if (leftImgEl) leftImgEl.addEventListener('error', () => { console.warn('Failed to load left poster ->', leftImgEl.src); if (leftImgEl.src !== PLACEHOLDER_SRC) { leftImgEl.src = PLACEHOLDER_SRC; return; } leftImgEl.src = FALLBACK_SVG_DATA_URI; leftImgEl.alt = 'Poster unavailable'; });
-  if (rightImgEl) rightImgEl.addEventListener('error', () => { console.warn('Failed to load right poster ->', rightImgEl.src); if (rightImgEl.src !== PLACEHOLDER_SRC) { rightImgEl.src = PLACEHOLDER_SRC; return; } rightImgEl.src = FALLBACK_SVG_DATA_URI; rightImgEl.alt = 'Poster unavailable'; });
+// ---------------- Poster handlers ----------------
+function attachPosterErrorHandlers(){
+  if(leftImgEl) leftImgEl.addEventListener('error', ()=>{ console.warn('Left img failed ->', leftImgEl.src); applyPlaceholderToImg(leftImgEl); });
+  if(rightImgEl) rightImgEl.addEventListener('error', ()=>{ console.warn('Right img failed ->', rightImgEl.src); applyPlaceholderToImg(rightImgEl); });
 }
-function instrumentPosterLoads() {
-  [leftImgEl, rightImgEl].forEach(img => {
-    if (!img) return;
-    img.addEventListener('load', () => console.info('Image loaded OK ->', img.id, img.src, 'intendedPosterId:', img.dataset.intendedPosterId, 'currentPosterId:', img.dataset.currentPosterId));
-    img.addEventListener('error', () => console.error('Image load error ->', img.id, img.src));
-  });
-}
+function instrumentPosterLoads(){ [leftImgEl, rightImgEl].forEach(img => { if(!img) return; img.addEventListener('load', ()=> console.info('Image loaded OK ->', img.id, img.src, 'intended:', img.dataset.intendedPosterId, 'current:', img.dataset.currentPosterId)); img.addEventListener('error', ()=> console.error('Image load error ->', img.id, img.src)); }); }
 
-// ---------- Handlers ----------
-async function handleStartClick() {
-  instructionsSection.style.display = 'none';
-  gameOverSection.style.display = 'none';
-  gameContainer.style.display = 'block';
-  if (sourceLabelEl) sourceLabelEl.style.display = 'none';
-  hideRatingsAndAction();
-  setChoiceButtonsEnabled(true);
+// ---------------- Handlers ----------------
+async function handleStartClick(){
+  instructionsSection.style.display='none'; gameOverSection.style.display='none'; gameContainer.style.display='block';
+  if(sourceLabelEl) sourceLabelEl.style.display='none';
+  hideRatingsAndAction(); setChoiceButtonsEnabled(true);
   score = 0; updateScoreDisplay();
-
   const ok = await loadMoviesListAll();
-  if (!ok) { roundInfo.textContent = 'Error loading movies. See console for details.'; return; }
-
+  if(!ok){ roundInfo.textContent='Error loading movies. See console.'; return; }
   sourcePools = {};
   const initial = await chooseInitialSourceAndPair();
-  if (!initial || !initial.pair) { roundInfo.textContent = 'No valid source with enough movies available.'; return; }
+  if(!initial || !initial.pair){ roundInfo.textContent='No valid source with enough movies.'; return; }
   currentSourceKey = initial.sourceKey;
-  leftMovie = initial.pair.left;
-  rightMovie = initial.pair.right;
-
-  // dump pools for debugging
-  try {
-    Object.keys(sourcePools).forEach(k => {
-      const pool = sourcePools[k] || [];
-      console.group(`Pool: ${k}`);
-      console.table(pool.map(x => ({ title: x.title, order: x.order, matchedMovieListTitle: x.matchedMovieListTitle || null, starsRaw: x.starsRaw, starsRawNormalized: x.starsRawNormalized || null, hasImageUrl: !!x.imageUrl })));
-      console.groupEnd();
-    });
-  } catch (e) {}
-
+  leftMovie = initial.pair.left; rightMovie = initial.pair.right;
+  // debug dump to console
+  try{ Object.keys(sourcePools).forEach(k=>{ const pool = sourcePools[k]||[]; console.group(`Pool: ${k}`); console.table(pool.map(x=>({ title:x.title, order:x.order, matched:x.matchedMovieListTitle||null, stars:x.starsRaw, starsNorm:x.starsRawNormalized||null, hasImage:!!x.imageUrl }))); console.groupEnd(); }); }catch(e){}
   renderMoviesAndSource();
 }
-function updateScoreDisplay() { scoreDisplay.textContent = `Score: ${score}`; }
-function showGameOver() { hideRatingsAndAction(); gameContainer.style.display = 'none'; gameOverSection.style.display = 'block'; finalScoreEl.textContent = `You earned ${score} ${score === 1 ? 'point' : 'points'}.`; }
+function updateScoreDisplay(){ scoreDisplay.textContent = `Score: ${score}`; }
+function showGameOver(){ hideRatingsAndAction(); gameContainer.style.display='none'; gameOverSection.style.display='block'; finalScoreEl.textContent = `You earned ${score} ${score===1?'point':'points'}.`; }
 
-function handleHigherClick() {
-  if (!leftMovie || !rightMovie) return;
-  setChoiceButtonsEnabled(false);
-  const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(true);
-  if (correct) { score += 1; updateScoreDisplay(); roundInfo.textContent = 'Correct — the ratings are shown below. Click Next to continue.'; showRatingsAndAction({ correct: true, leftRating: leftVal, rightRating: rightVal }); }
-  else { roundInfo.textContent = 'Incorrect — the ratings are shown below. Click "See my Score" to view your result.'; showRatingsAndAction({ correct: false, leftRating: leftVal, rightRating: rightVal }); }
-}
-function handleLowerClick() {
-  if (!leftMovie || !rightMovie) return;
-  setChoiceButtonsEnabled(false);
-  const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(false);
-  if (correct) { score += 1; updateScoreDisplay(); roundInfo.textContent = 'Correct — the ratings are shown below. Click Next to continue.'; showRatingsAndAction({ correct: true, leftRating: leftVal, rightRating: rightVal }); }
-  else { roundInfo.textContent = 'Incorrect — the ratings are shown below. Click "See my Score" to view your result.'; showRatingsAndAction({ correct: false, leftRating: leftVal, rightRating: rightVal }); }
-}
+function handleHigherClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(true); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
+function handleLowerClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(false); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
 
-async function handleNextClick() {
+async function handleNextClick(){
   hideRatingsAndAction();
-  const staying = rightMovie;
-  leftMovie = staying;
-  const pick = await pickNewSourceContainingStayingMovie(staying.title || staying.matchedMovieListTitle || '');
-  if (!pick) {
+  // RIGHT movie stays — but update leftMovie to the ENTRY representing that movie in the NEW source's pool
+  const stayingOld = rightMovie;
+  // find a new source that contains the staying movie (caller uses title matching)
+  const pick = await pickNewSourceContainingStayingMovie(stayingOld.title || stayingOld.matchedMovieListTitle || '');
+  if(!pick){
+    // fallback: reuse current source pool and pick a new right (and update left from that pool if possible)
     const pool = await ensureSourcePool(currentSourceKey);
-    const candidates = pool ? pool.filter(m => normalizeTitle(m.title) !== normalizeTitle(staying.title || staying.matchedMovieListTitle || '')) : [];
-    if (candidates.length === 0) { showGameOver(); return; }
-    rightMovie = pickRandomFromArray(candidates);
-  } else { currentSourceKey = pick.sourceKey; rightMovie = pick.newRight; }
-  renderMoviesAndSource(); setChoiceButtonsEnabled(true);
-}
-function handleSeeScoreClick() { hideRatingsAndAction(); showGameOver(); }
-function handleRestartClick() {
-  gameOverSection.style.display = 'none';
-  instructionsSection.style.display = '';
-  gameContainer.style.display = 'none';
-  roundInfo.textContent = '';
-  score = 0; updateScoreDisplay();
-  hideRatingsAndAction(); setChoiceButtonsEnabled(true);
-  if (sourceLabelEl) sourceLabelEl.style.display = 'none';
+    // try to find staying entry inside current pool by normalized title
+    const wantNorm = normalizeTitle(stayingOld.title || stayingOld.matchedMovieListTitle || '');
+    const stayingEntry = pool ? pool.find(m => (m.matchedMovieListTitle && normalizeTitle(m.matchedMovieListTitle) === wantNorm) || normalizeTitle(m.title) === wantNorm) : null;
+    if(stayingEntry){
+      leftMovie = stayingEntry; // <-- crucial: update leftMovie to pool entry so its starsValue reflects current source
+      // pick new right
+      const candidates = pool.filter(m => m !== stayingEntry);
+      if(candidates.length === 0){ showGameOver(); return; }
+      rightMovie = pickRandomFromArray(candidates);
+    } else {
+      // worst-case: couldn't find staying in current pool (shouldn't happen), keep prior staying but pick new right
+      leftMovie = stayingOld;
+      const candidates = pool || [];
+      const filtered = candidates.filter(m => normalizeTitle(m.title) !== normalizeTitle(stayingOld.title || ''));
+      if(filtered.length === 0){ showGameOver(); return; }
+      rightMovie = pickRandomFromArray(filtered);
+    }
+  } else {
+    // pick contains { sourceKey, newRight, pool }
+    currentSourceKey = pick.sourceKey;
+    const pool = pick.pool || [];
+    const wantNorm = normalizeTitle(stayingOld.title || stayingOld.matchedMovieListTitle || '');
+    // find the staying movie inside the chosen pool
+    const stayingEntry = pool.find(m => (m.matchedMovieListTitle && normalizeTitle(m.matchedMovieListTitle) === wantNorm) || normalizeTitle(m.title) === wantNorm) || null;
+    if(stayingEntry){
+      leftMovie = stayingEntry; // <-- crucial fix: update left movie's rating to this source's entry
+    } else {
+      // fallback: leftMovie becomes the matchedMovieListTitle entry if available, otherwise use stayingOld
+      leftMovie = stayingEntry || stayingOld;
+    }
+    rightMovie = pick.newRight;
+  }
+
+  renderMoviesAndSource();
+  setChoiceButtonsEnabled(true);
 }
 
-// ---------- Boot & wiring ----------
-document.addEventListener('DOMContentLoaded', () => {
-  if (!startButton || !btnHigher || !btnLower || !restartButton) { console.error("Missing required DOM elements."); return; }
-  if (leftImgEl) { leftImgEl.loading = 'lazy'; leftImgEl.decoding = 'async'; leftImgEl.crossOrigin = 'anonymous'; if (!leftImgEl.src) leftImgEl.src = PLACEHOLDER_SRC; }
-  if (rightImgEl) { rightImgEl.loading = 'lazy'; rightImgEl.decoding = 'async'; rightImgEl.crossOrigin = 'anonymous'; if (!rightImgEl.src) rightImgEl.src = PLACEHOLDER_SRC; }
+function handleSeeScoreClick(){ hideRatingsAndAction(); showGameOver(); }
+function handleRestartClick(){
+  gameOverSection.style.display='none'; instructionsSection.style.display=''; gameContainer.style.display='none';
+  roundInfo.textContent=''; score=0; updateScoreDisplay(); hideRatingsAndAction(); setChoiceButtonsEnabled(true);
+  if(sourceLabelEl) sourceLabelEl.style.display='none';
+}
+
+// ---------------- Wire up events ----------------
+document.addEventListener('DOMContentLoaded', ()=>{
+  if(!startButton || !btnHigher || !btnLower || !restartButton){ console.error('Missing required DOM elements.'); return; }
+  // initial guaranteed placeholder (data URI) so no file:// fallback ever used
+  if(leftImgEl){ leftImgEl.loading='lazy'; leftImgEl.decoding='async'; leftImgEl.crossOrigin='anonymous'; if(!leftImgEl.src) leftImgEl.src = PLACEHOLDER_SRC; }
+  if(rightImgEl){ rightImgEl.loading='lazy'; rightImgEl.decoding='async'; rightImgEl.crossOrigin='anonymous'; if(!rightImgEl.src) rightImgEl.src = PLACEHOLDER_SRC; }
   attachPosterErrorHandlers(); instrumentPosterLoads();
   startButton.addEventListener('click', handleStartClick);
   btnHigher.addEventListener('click', handleHigherClick);
   btnLower.addEventListener('click', handleLowerClick);
   restartButton.addEventListener('click', handleRestartClick);
   hideRatingsAndAction();
-  if (sourceLabelEl) sourceLabelEl.style.display = 'none';
+  if(sourceLabelEl) sourceLabelEl.style.display='none';
+
+  // keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     const active = document.activeElement;
-    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
-    if (e.key.toLowerCase() === 'h' || e.key === 'ArrowUp') if (!btnHigher.disabled) btnHigher.click();
-    else if (e.key.toLowerCase() === 'l' || e.key === 'ArrowDown') if (!btnLower.disabled) btnLower.click();
-    else if (e.key === 'Enter') { if (nextButton && nextButton.style.display !== 'none') nextButton.click(); else if (restartButton && gameOverSection.style.display !== 'none') restartButton.click(); }
+    if(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
+    if(e.key.toLowerCase() === 'h' || e.key === 'ArrowUp'){ if(!btnHigher.disabled) btnHigher.click(); }
+    else if(e.key.toLowerCase() === 'l' || e.key === 'ArrowDown'){ if(!btnLower.disabled) btnLower.click(); }
+    else if(e.key === 'Enter'){ if(nextButton && nextButton.style.display !== 'none') nextButton.click(); else if(restartButton && gameOverSection.style.display !== 'none') restartButton.click(); }
   });
 });
