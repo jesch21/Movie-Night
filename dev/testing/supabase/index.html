@@ -1,17 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Supabase Test</title>
-  <link rel="stylesheet" href="assets/styles.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Insert to highorlow-leaderboard (test)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; padding: 20px; max-width: 640px; margin: auto; }
+    label { display:block; margin-top:12px; }
+    input, select, button { font-size: 1rem; padding:8px; margin-top:6px; width:100%; box-sizing:border-box; }
+    .row { display:flex; gap:8px; }
+    .half { flex:1; }
+    .msg { margin-top:12px; padding:10px; border-radius:6px; }
+    .msg.success { background:#e6ffed; border:1px solid #b7f0c2; color:#036a12; }
+    .msg.error { background:#ffecec; border:1px solid #f1b6b6; color:#8a0b0b; }
+    pre { background:#f6f7f8; padding:8px; border-radius:6px; overflow:auto; }
+  </style>
 </head>
 <body>
-  <h1>Supabase Data Fetch Test</h1>
-  <div id="data-container"></div>
 
-  <!-- Your script -->
-  <script src="assets/script.js"></script>
+  <h1>Test insert — highorlow-leaderboard</h1>
+  <p>Choose a player and a score, then click <em>Submit score</em>. This will insert into the <code>highorlow-leaderboard</code> table.</p>
+
+  <!-- supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <form id="scoreForm">
+    <label for="player">Player</label>
+    <select id="player" required>
+      <option value="">— choose player —</option>
+      <option>Alex</option>
+      <option>Ayub</option>
+      <option>Joe</option>
+      <option>John</option>
+      <option>Caleb</option>
+      <option>Landon</option>
+      <option>Trevor</option>
+      <option>Jayden</option>
+    </select>
+
+    <label for="score">Score (integer)</label>
+    <input id="score" type="number" min="0" step="1" placeholder="e.g. 12345" required />
+
+    <div class="row" style="margin-top:10px">
+      <div class="half">
+        <button id="submitBtn" type="submit">Submit score</button>
+      </div>
+      <div class="half">
+        <button id="refreshBtn" type="button">Refresh recent</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="message" aria-live="polite"></div>
+
+  <h3 style="margin-top:18px">Last 10 entries (most recent)</h3>
+  <div id="recent"></div>
+
+  <script>
+    // --- use the exact values you provided ---
+    const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
+    const supabase = window.supabase && window.supabase.createClient ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    const form = document.getElementById('scoreForm');
+    const playerEl = document.getElementById('player');
+    const scoreEl = document.getElementById('score');
+    const submitBtn = document.getElementById('submitBtn');
+    const messageBox = document.getElementById('message');
+    const recentEl = document.getElementById('recent');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    function showMessage(text, type = 'success') {
+      messageBox.innerHTML = '';
+      const div = document.createElement('div');
+      div.className = `msg ${type === 'error' ? 'error' : 'success'}`;
+      div.textContent = text;
+      messageBox.appendChild(div);
+    }
+
+    function showError(text) { showMessage(text, 'error'); }
+    function showSuccess(text) { showMessage(text, 'success'); }
+
+    if (!supabase) {
+      showError('Supabase client not available. Make sure the CDN loaded correctly.');
+      submitBtn.disabled = true;
+      refreshBtn.disabled = true;
+    }
+
+    async function insertScore(player, score) {
+      // NOTE: column name is "player" (enum type name players)
+      const payload = { player: player, score: score };
+      const { data, error } = await supabase
+        .from('highorlow-leaderboard')
+        .insert([payload])
+        .select();
+
+      return { data, error };
+    }
+
+    async function loadRecent() {
+      if (!supabase) return;
+      recentEl.innerHTML = 'Loading...';
+      const { data, error } = await supabase
+        .from('highorlow-leaderboard')
+        .select('id,player,score,createdAt')
+        .order('createdAt', { ascending: false })
+        .limit(10);
+
+      if (error) {
+        recentEl.innerHTML = `<div class="msg error">Error loading recent: ${error.message}</div>`;
+        return;
+      }
+      if (!data || data.length === 0) {
+        recentEl.innerHTML = '<div>No rows yet.</div>';
+        return;
+      }
+      const rows = data.map(r => `<tr><td>${r.id}</td><td>${r.player}</td><td>${r.score}</td><td>${new Date(r.createdAt).toLocaleString()}</td></tr>`).join('');
+      recentEl.innerHTML = `<table style="width:100%;border-collapse:collapse"><thead><tr><th>ID</th><th>Player</th><th>Score</th><th>createdAt</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (!supabase) return;
+
+      const player = playerEl.value.trim();
+      const scoreRaw = scoreEl.value;
+      if (!player) { showError('Pick a player.'); return; }
+      if (scoreRaw === '' || isNaN(scoreRaw)) { showError('Enter a numeric score.'); return; }
+
+      const score = Math.floor(Number(scoreRaw));
+      if (!Number.isFinite(score) || score < 0) { showError('Score must be a non-negative integer.'); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      try {
+        const { data, error } = await insertScore(player, score);
+        if (error) {
+          console.error(error);
+          showError('Insert failed: ' + (error.message || JSON.stringify(error)));
+        } else {
+          showSuccess('Inserted successfully. ID: ' + (data?.[0]?.id ?? '(unknown)'));
+          scoreEl.value = '';
+          await loadRecent();
+        }
+      } catch (err) {
+        console.error(err);
+        showError('Unexpected error: ' + String(err));
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit score';
+      }
+    });
+
+    refreshBtn.addEventListener('click', () => loadRecent());
+
+    // initial load
+    loadRecent();
+  </script>
 </body>
 </html>
