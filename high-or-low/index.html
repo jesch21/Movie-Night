@@ -1,11 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoronaCinema | High or Low</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Corona Cinema | High or Low </title>
+    <link rel="stylesheet" href="assets/styles.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link rel="icon" href="../assets/images/icon.png" type="image/png"/>
 </head>
 <body>
-    Work in progress
+<header>
+    <a href="../index.html"><img src="../assets/images/logo.jpg" id="logo" alt="Logo"></a>
+    <section id="header">
+        <h1>High or Low</h1>
+        <nav>
+            <ul id="menu">
+                <li><a href="index.html" id="letter" class="page">Letterboxd</a></li>
+                <li><a href="../tier-list/index.html" id="tier" class="page">Tier List</a></li>
+                <li><a href="../movie-lists/index.html" id="unseen" class="page">Movie Lists</a></li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
+<main>
+    <section id="instructions">
+        <h2>Higher or Lower!</h2>
+        <p>
+            Each round, you'll be shown 2 movies we've watched, and you'll be told a source for the ratings. Your job is to decide if
+            that source rated the movie to the right higher or lower than the movie to the left!
+            <br><br>
+            Below are the sources you might encounter:
+        </p>
+        <ul>
+            <li>IMDB rating (decimal out of 10)</li>
+            <li>Alex's Letterboxd Table</li>
+            <li>Ayub's Letterboxd Table</li>
+            <li>Caleb's Letterboxd Table</li>
+            <li>Joe's Letterboxd Table</li>
+            <li>John's Letterboxd Table</li>
+            <li>Landon's Letterboxd Table</li>
+            <li>Trevor's Letterboxd Table</li>
+        </ul>
+        <button class="gameButton" id="startButton">Start the Game!</button>
+        <img src="../assets/images/scale.png" id="gameBottomImg" alt="Bottom of Page Image">
+    </section>
+
+    <!-- GAME CONTAINER (hidden until Start) -->
+    <section id="gameContainer" style="display: none;">
+        <div id="scoreRow" style="width:100%; display:flex; justify-content:center; margin-top:20px;">
+            <div id="scoreDisplay" style="font-family: 'Bungee Tint', sans-serif; font-size: 28px; color: #F2F5EA;">Score: 0</div>
+        </div>
+
+        <div id="gameArea" style="display:flex; flex-direction:column; align-items:center; margin-top:25px; gap: 1.5rem; width:100%;">
+            <div id="moviePair" style="display:flex; gap: 2.5rem; justify-content:center; width:100%; flex-wrap:wrap;">
+                <!-- Left movie card -->
+                <div id="leftCard" class="movie-card" style="min-width:220px; max-width:45%; text-align:center;">
+                    <img id="leftImg" class="movie-poster" src="../assets/images/poster-placeholder.png" alt="Left poster">
+                    <div class="movie-title" id="leftTitle" style="font-size:22px; color: #F2F5EA; margin-top:8px;">Left Movie Title</div>
+                    <div class="movie-year" id="leftYear" style="color:#F2F5EA; margin-top:6px;"></div>
+                </div>
+
+                <!-- Visual vs separator -->
+                <div style="display:flex; align-items:center; justify-content:center; color:#F2F5EA; font-size:20px;">VS</div>
+
+                <!-- Right movie card -->
+                <div id="rightCard" class="movie-card" style="min-width:220px; max-width:45%; text-align:center;">
+                    <img id="rightImg" class="movie-poster" src="../assets/images/poster-placeholder.png" alt="Right poster">
+                    <div class="movie-title" id="rightTitle" style="font-size:22px; color: #F2F5EA; margin-top:8px;">Right Movie Title</div>
+                    <div class="movie-year" id="rightYear" style="color:#F2F5EA; margin-top:6px;"></div>
+                </div>
+            </div>
+
+            <!-- Ratings & action row (hidden until after a guess) -->
+            <div id="ratingsActionRow" style="display: none; width:100%; margin-top: 12px; flex-direction: column; align-items: center;">
+                <div id="ratingsRow" style="display:flex; gap: 2.5rem; justify-content:center; width:100%; flex-wrap:wrap; margin-bottom: 12px;">
+                    <div style="min-width:220px; max-width:45%; text-align:center;">
+                        <div class="rating" id="leftRatingDisplay" style="font-size:18px;"></div>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:center; color:#F2F5EA; font-size:20px;">&nbsp;</div>
+                    <div style="min-width:220px; max-width:45%; text-align:center;">
+                        <div class="rating" id="rightRatingDisplay" style="font-size:18px;"></div>
+                    </div>
+                </div>
+
+                <div id="actionRow" style="display:flex; justify-content:center; gap:1rem; width:100%;">
+                    <button id="nextButton" class="gameButton" style="display:none;">Next</button>
+                </div>
+            </div>
+
+
+            <!-- Controls row (centered) -->
+            <div id="controls" style="display:flex; gap:1rem; justify-content:center; width:100%;">
+                <button class="choiceButton" id="btnHigher">Higher</button>
+                <button class="choiceButton" id="btnLower">Lower</button>
+            </div>
+
+            <!-- Small helper / debug line -->
+            <div id="roundInfo" style="color:#F2F5EA;"></div>
+        </div>
+    </section>
+
+    <!-- GAME OVER (hidden initially) -->
+    <section id="gameOver" style="display:none; text-align:center; width:100%;">
+        <h2 style="font-family: 'Bungee Tint', sans-serif; color:#FF0000;">Game Over</h2>
+        <p id="finalScore" style="color:#F2F5EA; font-size:20px;"></p>
+        <button class="gameButton" id="restartButton">Play Again</button>
+
+        <!-- Centered scale image under the button -->
+        <img id="gameOverScale" src="../assets/images/scale.png" alt="Scale image" />
+    </section>
+</main>
+
+<footer>
+    <section id="streaming">
+        <button id="streaming-button">Streaming</button> <!-- Button for the dropdown -->
+        <div id="stream-links">
+            <a href="https://ww4.fmovies.co/24/"><img src="../assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
+            <a href="https://himovies.sx/"><img src="../assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
+            <a href="https://www.hulu.com/"><img src="../assets/images/hulu.png" id="hulu" class="stream" alt="hulu"></a>
+            <a href="https://play.max.com/"><img src="../assets/images/max.png" id="max" class="stream" alt="max"></a>
+            <a href="https://www.paramountplus.com/"><img src="../assets/images/paramount.png" id="paramount" class="stream" alt="paramount"></a>
+            <a href="https://www.amazon.com/Amazon-Video/b/?ie=UTF8&node=2858778011&ref_=nav_cs_prime_video"><img src="../assets/images/amazon.png" id="amazon" class="stream" alt="amazon"></a>
+        </div>
+    </section>
+    <section id="right-tag">
+        <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
+    </section>
+</footer>
+
+<script src="../assets/scripts/high-or-low-scripts.js"></script>
 </body>
 </html>
