@@ -1,16 +1,40 @@
-// high-or-low-scripts.js (UPDATED)
-// IMDB-only "Higher or Lower" with posters pulled from Supabase storage (slideshowImages bucket)
+// high-or-low-scripts.js
+// Title-matching + dedupe of letterboxd pools + buffered image loader + normalized star display
 
-// ---------------- Supabase init (from your provided keys) ----------------
+// ---------------- Supabase init (keep your keys) ----------------
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = window.supabase && window.supabase.createClient ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 // ---------------- Game state ----------------
-let moviesPool = [];      // array of movie objects with non-null imdb-rating
-let leftMovie = null;     // currently left movie object
-let rightMovie = null;    // currently right movie object
+let moviesListAll = [];
+let moviesListByOrder = {};
+let moviesListByTitle = {};
+let sourcePools = {};
+let currentSourceKey = null;
+let leftMovie = null;
+let rightMovie = null;
 let score = 0;
+
+const LETTERBOXD_TABLES = [
+  "Alex-Letterboxd",
+  "Ayub-Letterboxd",
+  "Caleb-Letterboxd",
+  "Joe-Letterboxd",
+  "John-Letterboxd",
+  "Landon-Letterboxd",
+  "Trevor-Letterboxd"
+];
+const SOURCE_KEYS = ["IMDB", ...LETTERBOXD_TABLES];
+
+const SOURCE_LABELS = Object.assign(
+  { IMDB: "IMDB" },
+  LETTERBOXD_TABLES.reduce((acc, t) => {
+    const owner = t.split('-')[0];
+    acc[t] = `${owner}'s Letterboxd`;
+    return acc;
+  }, {})
+);
 
 // DOM elements
 const startButton = document.getElementById('startButton');
@@ -30,372 +54,482 @@ const btnLower = document.getElementById('btnLower');
 const finalScoreEl = document.getElementById('finalScore');
 const roundInfo = document.getElementById('roundInfo');
 
-// New DOM elements for the feature
-const ratingsActionRow = document.getElementById('ratingsActionRow'); // container for ratings + action
+const ratingsActionRow = document.getElementById('ratingsActionRow');
 const leftRatingDisplay = document.getElementById('leftRatingDisplay');
 const rightRatingDisplay = document.getElementById('rightRatingDisplay');
 const nextButton = document.getElementById('nextButton');
 
-// placeholder image path (used when no image found)
-const PLACEHOLDER_SRC = "../assets/images/poster-placeholder.png";
+const sourceLabelEl = document.getElementById('sourceLabel');
 
-// ---------------- Utility functions ----------------
+// Placeholder + fallback
+const PLACEHOLDER_SRC = new URL('../assets/images/poster-placeholder.png', window.location.href).href;
+const FALLBACK_SVG_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+     <rect width="100%" height="100%" fill="#222" />
+     <text x="50%" y="50%" fill="#F2F5EA" font-size="20" font-family="sans-serif" dominant-baseline="middle" text-anchor="middle">
+       Poster unavailable
+     </text>
+   </svg>`
+);
 
-/**
- * fetchMoviesFromSupabase
- * - Queries the moviesList table (quotes "order" & "imdb-rating")
- * - Filters out rows with null or missing imdb-rating
- */
-async function fetchMoviesFromSupabase() {
-    try {
-        const { data, error } = await supabase
-            .from('moviesList')
-            .select('"order", title, image, "imdb-rating"')
-
-        if (error) {
-            console.error("Supabase error fetching movies:", error);
-            return { success: false, error };
-        }
-        if (!Array.isArray(data)) {
-            return { success: false, error: new Error("Unexpected response from Supabase") };
-        }
-        const filtered = data.filter(row => {
-            const val = row['imdb-rating'];
-            return val !== null && typeof val !== 'undefined' && val !== '';
-        });
-        return { success: true, movies: filtered };
-    } catch (err) {
-        console.error("Error fetching movies:", err);
-        return { success: false, error: err };
-    }
+// ---------- Helpers ----------
+function pickRandomFromArray(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function shuffleArray(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function safeString(v) { return typeof v === 'string' ? v.trim() : (v === null || typeof v === 'undefined' ? '' : String(v)); }
+function normalizeTitle(t) { return safeString(t).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+function parseStarsValue(starsRaw) {
+  if (!starsRaw && starsRaw !== 0) return NaN;
+  const s = safeString(starsRaw).split('/')[0].trim().replace(',', '.');
+  return parseFloat(s);
 }
-
-/**
- * getPublicImageUrl
- * - Given an image path/name (the value stored in moviesList.image), return a public URL
- * - Uses Supabase storage getPublicUrl for the 'slideshowImages' bucket
- * - If the returned URL is empty or not available, returns null
- */
+function parseImdbRating(v) {
+  if (v === null || typeof v === 'undefined') return NaN;
+  const s = safeString(v).replace(',', '.');
+  return parseFloat(s);
+}
+function normalizeOrderKey(o) {
+  const n = Number(o);
+  if (!Number.isNaN(n)) return Number.isInteger(n) ? String(n) : String(n);
+  return safeString(o);
+}
 function getPublicImageUrl(imagePath) {
-    if (!imagePath) return null;
+  if (!imagePath || !supabase) return null;
+  try {
+    const normalizedPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+    const res = supabase.storage.from('slideshowImages').getPublicUrl(normalizedPath);
+    if (res && res.data) return res.data.publicUrl || res.data.publicURL || null;
+  } catch (err) { console.warn("Error getting public URL for image:", imagePath, err); }
+  return null;
+}
 
+// ---------- Load moviesList and index by title ----------
+async function loadMoviesListAll() {
+  try {
+    if (!supabase) {
+      console.warn('Supabase client unavailable.');
+      moviesListAll = [];
+      moviesListByOrder = {};
+      moviesListByTitle = {};
+      return false;
+    }
+    const { data, error } = await supabase.from('moviesList').select('*');
+    if (error) { console.error("Supabase error fetching moviesList:", error); return false; }
+    moviesListAll = Array.isArray(data) ? data : [];
+    moviesListByOrder = {};
+    moviesListByTitle = {};
+    moviesListAll.forEach(row => {
+      if (!row || typeof row !== 'object') return;
+      if (row['order'] != null) moviesListByOrder[normalizeOrderKey(row['order'])] = row;
+      const t = row.title || row.Movie || '';
+      const tk = normalizeTitle(t);
+      if (tk) {
+        if (moviesListByTitle[tk]) {
+          // If duplicates exist in moviesList itself, log them (you may want to fix DB)
+          console.warn('Duplicate moviesList title normalized key:', tk, '-- keeping first entry. Duplicate title:', t);
+        } else {
+          moviesListByTitle[tk] = row;
+        }
+      }
+    });
+    return true;
+  } catch (err) {
+    console.error("Error loading moviesList:", err);
+    return false;
+  }
+}
+
+// ---------- Build IMDB pool ----------
+function buildImdbPoolFromMoviesList() {
+  const pool = [];
+  for (const row of moviesListAll) {
+    const imdbNum = parseImdbRating(row['imdb-rating']);
+    const hasStars = (row['stars'] !== null && row['stars'] !== undefined && row['stars'] !== '') ||
+                     (row['Stars'] !== null && row['Stars'] !== undefined && row['Stars'] !== '');
+    if (Number.isFinite(imdbNum) && hasStars && row['order'] != null) {
+      const key = normalizeOrderKey(row['order']);
+      const starsRaw = row['stars'] || row['Stars'] || null;
+      const starsValue = parseStarsValue(starsRaw);
+      const imagePath = row.image || null;
+      const imageUrl = getPublicImageUrl(imagePath);
+      pool.push({
+        order: row['order'],
+        orderKey: key,
+        title: row.title || row.Movie || '',
+        imdbRating: imdbNum,
+        starsRaw,
+        starsValue,
+        starsRawNormalized: starsRaw ? (String(starsRaw).split(',')[0].trim()) : null,
+        imagePath,
+        imageUrl,
+        sourceKey: 'IMDB'
+      });
+    }
+  }
+  return pool;
+}
+
+// ---------- Fetch letterboxd pool with dedupe by normalized title ----------
+async function fetchAndBuildLetterboxdPool(tableName) {
+  let data = null;
+  let err1 = null;
+  try {
+    const res = await supabase.from(tableName).select('"order", Movie, Stars');
+    if (res.error) throw res.error;
+    data = res.data;
+  } catch (e1) {
+    err1 = e1;
     try {
-        const res = supabase.storage.from('slideshowImages').getPublicUrl(encodeURI(imagePath));
-        if (res && res.data && res.data.publicUrl) {
-            return res.data.publicUrl;
-        }
-    } catch (err) {
-        console.warn("Error getting public URL for image:", imagePath, err);
+      const res2 = await supabase.from(`"${tableName}"`).select('"order", Movie, Stars');
+      if (res2.error) throw res2.error;
+      data = res2.data;
+    } catch (err2) {
+      console.error(`Error fetching letterboxd table ${tableName}:`, err1 || err2);
+      return [];
     }
-    return null;
+  }
+  if (!Array.isArray(data)) return [];
+
+  const seen = {}; // map normalizedTitle -> true (dedupe)
+  const pool = [];
+  for (const row of data) {
+    const orderVal = (row && (row['order'] ?? row.order));
+    const title = row.Movie || row.movie || '';
+    const starsRaw = row.Stars || row.stars || '';
+    const starsValue = parseStarsValue(starsRaw);
+    if (!Number.isFinite(starsValue)) continue; // require valid stars
+
+    const tkey = normalizeTitle(title);
+    if (!tkey) continue;
+
+    if (seen[tkey]) {
+      // Duplicate entry for same title in the letterboxd table — log it and skip
+      console.warn(`Duplicate letterboxd row in ${tableName} for title "${title}" (normalized: ${tkey}) — skipping duplicate.`);
+      continue;
+    }
+    seen[tkey] = true;
+
+    // match to moviesList by normalized title (if present)
+    const mlRow = moviesListByTitle[tkey] || null;
+    const imagePath = mlRow ? (mlRow.image || null) : null;
+    const imageUrl = getPublicImageUrl(imagePath);
+
+    // normalized stars string: prefer exact given format, but pick first sensible text if there are separators
+    let starsRawNormalized = null;
+    if (starsRaw) {
+      // if there are commas/semicolons/pipes (often multiple values), take the first segment
+      starsRawNormalized = String(starsRaw).split(/\s*[;,|]\s*/)[0].trim();
+      // if it's like "4.5/5" keep as-is; otherwise if numeric only, format as "X/5"
+      if (!starsRawNormalized.includes('/')) {
+        const v = parseStarsValue(starsRawNormalized);
+        if (Number.isFinite(v)) starsRawNormalized = `${v}/5`;
+      }
+    }
+
+    pool.push({
+      order: orderVal,
+      orderKey: String(orderVal),
+      title: title || '',
+      imdbRating: mlRow ? parseImdbRating(mlRow['imdb-rating']) : NaN,
+      starsRaw,
+      starsValue,
+      starsRawNormalized,
+      imagePath,
+      imageUrl,
+      sourceKey: tableName,
+      matchedMovieListTitle: mlRow ? (mlRow.title || mlRow.Movie || '') : null
+    });
+  }
+
+  return pool;
 }
 
-/** pickRandomFromArray - returns a random element from an array */
-function pickRandomFromArray(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+async function ensureSourcePool(sourceKey) {
+  if (sourcePools[sourceKey]) return sourcePools[sourceKey];
+  if (sourceKey === 'IMDB') {
+    const pool = buildImdbPoolFromMoviesList();
+    sourcePools[sourceKey] = pool;
+    return pool;
+  } else {
+    const pool = await fetchAndBuildLetterboxdPool(sourceKey);
+    sourcePools[sourceKey] = pool;
+    return pool;
+  }
 }
 
-/** findIndexByOrder - finds index in moviesPool by comparing 'order' */
-function findIndexByOrder(orderValue) {
-    return moviesPool.findIndex(m => String(m['order']) === String(orderValue));
+// ---------- Game selection logic ----------
+function pickTwoDistinctFromPool(pool) {
+  if (!Array.isArray(pool) || pool.length < 2) return null;
+  let leftIndex = Math.floor(Math.random() * pool.length);
+  let rightIndex;
+  do { rightIndex = Math.floor(Math.random() * pool.length); } while (rightIndex === leftIndex);
+  return { left: pool[leftIndex], right: pool[rightIndex] };
 }
 
-/** pickTwoDistinct - choose two different movies from moviesPool */
-function pickTwoDistinct() {
-    if (moviesPool.length < 2) return null;
-    const leftIdx = Math.floor(Math.random() * moviesPool.length);
-    let rightIdx;
-    do {
-        rightIdx = Math.floor(Math.random() * moviesPool.length);
-    } while (rightIdx === leftIdx);
-    return { left: moviesPool[leftIdx], right: moviesPool[rightIdx] };
+async function chooseInitialSourceAndPair() {
+  const keys = shuffleArray(Array.from(SOURCE_KEYS));
+  for (const key of keys) {
+    const pool = await ensureSourcePool(key);
+    if (Array.isArray(pool) && pool.length >= 2) {
+      currentSourceKey = key;
+      const pair = pickTwoDistinctFromPool(pool);
+      return { sourceKey: key, pair };
+    }
+  }
+  return null;
 }
 
-/** setPosterSrc - sets img.src with fallback to placeholder and sets alt text */
-function setPosterSrc(imgEl, imagePathFromRow, title) {
-    if (!imgEl) return;
-    const url = getPublicImageUrl(imagePathFromRow);
-    if (url) {
-        imgEl.src = url;
-        imgEl.alt = `${title} poster`;
+async function pickNewSourceContainingStayingMovie(stayingTitleOrMatchedTitle) {
+  const otherKeys = shuffleArray(SOURCE_KEYS.filter(k => k !== currentSourceKey));
+  for (const key of otherKeys) {
+    const pool = await ensureSourcePool(key);
+    if (!Array.isArray(pool) || pool.length === 0) continue;
+    const foundIndex = pool.findIndex(m => {
+      if (m.matchedMovieListTitle && stayingTitleOrMatchedTitle && String(m.matchedMovieListTitle) === String(stayingTitleOrMatchedTitle)) return true;
+      if (m.title && stayingTitleOrMatchedTitle) return normalizeTitle(m.title) === normalizeTitle(stayingTitleOrMatchedTitle);
+      return false;
+    });
+    if (foundIndex >= 0) {
+      const candidates = pool.filter((m, i) => i !== foundIndex);
+      if (candidates.length === 0) continue;
+      currentSourceKey = key;
+      const right = pickRandomFromArray(candidates);
+      return { sourceKey: key, newRight: right, pool };
+    }
+  }
+
+  const currentPool = await ensureSourcePool(currentSourceKey);
+  if (Array.isArray(currentPool) && currentPool.length >= 1) {
+    const candidates = currentPool.filter(m => normalizeTitle(m.title) !== normalizeTitle(stayingTitleOrMatchedTitle));
+    if (candidates.length > 0) {
+      const right = pickRandomFromArray(candidates);
+      return { sourceKey: currentSourceKey, newRight: right, pool: currentPool };
+    }
+  }
+  return null;
+}
+
+// ---------- Buffered safe image assignment ----------
+function makePosterId(sourceKey, title) {
+  return `${String(sourceKey ?? 'unknown')}::${normalizeTitle(title ?? '')}`;
+}
+function applyPlaceholderToImg(imgEl) {
+  if (!imgEl) return;
+  if (imgEl.src !== PLACEHOLDER_SRC) {
+    imgEl.src = PLACEHOLDER_SRC;
+    console.info('Applied placeholder to', imgEl.id);
+  } else {
+    imgEl.src = FALLBACK_SVG_DATA_URI;
+    console.info('Applied fallback SVG to', imgEl.id);
+  }
+  imgEl.dataset.currentPosterId = 'placeholder';
+}
+function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle) {
+  if (!imgEl) return;
+  const id = makePosterId(sourceKey, titleForId);
+  imgEl.dataset.intendedPosterId = id;
+  if (!url) { applyPlaceholderToImg(imgEl); console.warn('No poster URL for', debugTitle || id); return; }
+  const loader = new Image();
+  loader.crossOrigin = 'anonymous';
+  loader.onload = () => {
+    if (imgEl.dataset.intendedPosterId === id) {
+      imgEl.src = url;
+      imgEl.dataset.currentPosterId = id;
+      console.info('Safe image applied ->', imgEl.id, url, 'for id', id, 'title:', debugTitle);
     } else {
-        imgEl.src = PLACEHOLDER_SRC;
-        imgEl.alt = `${title} poster (placeholder)`;
+      console.warn('Loaded image ignored (id mismatch) ->', url, 'for', id, 'img now intends', imgEl.dataset.intendedPosterId);
     }
+  };
+  loader.onerror = () => { console.warn('Safe loader failed ->', url, 'for', id); applyPlaceholderToImg(imgEl); };
+  loader.src = url;
 }
 
-/** render the current left/right movies (posters above titles) */
-function renderMovies() {
-    // Titles + years
-    leftTitleEl.textContent = leftMovie ? leftMovie.title : '';
-    rightTitleEl.textContent = rightMovie ? rightMovie.title : '';
-    leftYearEl.textContent = leftMovie && leftMovie.year ? `(${leftMovie.year})` : '';
-    rightYearEl.textContent = rightMovie && rightMovie.year ? `(${rightMovie.year})` : '';
+// ---------- Rendering & UI ----------
+function renderMoviesAndSource() {
+  const label = SOURCE_LABELS[currentSourceKey] || currentSourceKey || 'Unknown';
+  if (sourceLabelEl) { sourceLabelEl.textContent = `Source: ${label}`; sourceLabelEl.style.display = 'block'; }
 
-    // Posters
-    setPosterSrc(leftImgEl, leftMovie ? leftMovie.image : null, leftMovie ? leftMovie.title : 'Movie');
-    setPosterSrc(rightImgEl, rightMovie ? rightMovie.image : null, rightMovie ? rightMovie.title : 'Movie');
+  leftTitleEl.textContent = leftMovie ? leftMovie.title : '';
+  rightTitleEl.textContent = rightMovie ? rightMovie.title : '';
 
-    roundInfo.textContent = `Right movie rating vs Left movie rating — guess if RIGHT is higher or lower.`;
+  if (leftYearEl) leftYearEl.textContent = '';
+  if (rightYearEl) rightYearEl.textContent = '';
+
+  if (leftMovie) {
+    const leftSource = leftMovie.sourceKey || currentSourceKey || 'IMDB';
+    const leftTitle = leftMovie.title || leftMovie.matchedMovieListTitle || '';
+    const leftUrl = leftMovie.imageUrl || (leftMovie.imagePath ? getPublicImageUrl(leftMovie.imagePath) : null) || null;
+    setImgSrcSafely(leftImgEl, leftUrl, leftSource, leftTitle, leftMovie.title);
+    if (leftImgEl) leftImgEl.alt = `${leftMovie.title} poster`;
+  } else { applyPlaceholderToImg(leftImgEl); if (leftImgEl) leftImgEl.alt = 'poster placeholder'; }
+
+  if (rightMovie) {
+    const rightSource = rightMovie.sourceKey || currentSourceKey || 'IMDB';
+    const rightTitle = rightMovie.title || rightMovie.matchedMovieListTitle || '';
+    const rightUrl = rightMovie.imageUrl || (rightMovie.imagePath ? getPublicImageUrl(rightMovie.imagePath) : null) || null;
+    setImgSrcSafely(rightImgEl, rightUrl, rightSource, rightTitle, rightMovie.title);
+    if (rightImgEl) rightImgEl.alt = `${rightMovie.title} poster`;
+  } else { applyPlaceholderToImg(rightImgEl); if (rightImgEl) rightImgEl.alt = 'poster placeholder'; }
+
+  roundInfo.textContent = `Right movie rating vs Left movie rating — guess if RIGHT is higher or lower.`;
 }
 
-/** updateScoreDisplay */
-function updateScoreDisplay() {
-    scoreDisplay.textContent = `Score: ${score}`;
+// ---------- Compare & evaluate ----------
+function evaluateGuessAgainstCurrentSource(guessHigher) {
+  const leftVal = (currentSourceKey === 'IMDB') ? parseFloat(leftMovie.imdbRating) : Number(leftMovie.starsValue);
+  const rightVal = (currentSourceKey === 'IMDB') ? parseFloat(rightMovie.imdbRating) : Number(rightMovie.starsValue);
+  if (!Number.isFinite(leftVal) || !Number.isFinite(rightVal)) return { correct: false, leftVal, rightVal };
+  if (Math.abs(leftVal - rightVal) < 1e-9) return { correct: true, leftVal, rightVal };
+  const rightIsHigher = rightVal > leftVal;
+  const correct = (guessHigher && rightIsHigher) || (!guessHigher && !rightIsHigher);
+  return { correct, leftVal, rightVal };
 }
 
-/** showGameOver */
-function showGameOver() {
-    // hide the ratings/action container so it doesn't remain visible on the Game Over screen
-    hideRatingsAndAction();
-    gameContainer.style.display = 'none';
-    gameOverSection.style.display = 'block';
-    finalScoreEl.textContent = `You earned ${score} ${score === 1 ? 'point' : 'points'}.`;
-}
-
-/**
- * chooseNewRight
- * - Picks a new right movie and assigns to rightMovie
- * - Ensures the new right is not the same as leftMovie
- * - When possible, avoids immediately repeating the previous right
- */
-function chooseNewRight() {
-    if (!leftMovie || moviesPool.length < 2) return;
-
-    const leftIndex = findIndexByOrder(leftMovie['order']);
-    const currentRightIndex = rightMovie ? findIndexByOrder(rightMovie['order']) : -1;
-
-    // Candidate indexes exclude leftIndex. If pool > 2, also exclude currentRightIndex to avoid immediate repeat
-    const candidates = [];
-    for (let i = 0; i < moviesPool.length; i++) {
-        if (i === leftIndex) continue;
-        if (moviesPool.length > 2 && i === currentRightIndex) continue;
-        candidates.push(i);
-    }
-
-    let chosenIndex;
-    if (candidates.length === 0) {
-        // fallback: pick any index not equal to leftIndex
-        const fallback = [];
-        for (let i = 0; i < moviesPool.length; i++) {
-            if (i !== leftIndex) fallback.push(i);
-        }
-        chosenIndex = pickRandomFromArray(fallback);
-    } else {
-        chosenIndex = pickRandomFromArray(candidates);
-    }
-
-    if (typeof chosenIndex === 'number' && chosenIndex >= 0) {
-        rightMovie = moviesPool[chosenIndex];
-    }
-}
-
-/** parseRating - robust parse for ratings, returns Number or NaN */
-function parseRating(value) {
-    if (value === null || typeof value === 'undefined') return NaN;
-    // coerce to string, trim, replace commas with dots (in case), then parse
-    const normalized = String(value).trim().replace(',', '.');
-    return parseFloat(normalized);
-}
-
-/** evaluateGuess - guessHigher=true means user guessed RIGHT is higher than LEFT */
-function evaluateGuess(guessHigher) {
-    const leftRating = parseRating(leftMovie['imdb-rating']);
-    const rightRating = parseRating(rightMovie['imdb-rating']);
-
-    if (!Number.isFinite(leftRating) || !Number.isFinite(rightRating)) {
-        return { correct: false, leftRating, rightRating };
-    }
-
-    // equal ratings -> both answers correct
-    if (Math.abs(leftRating - rightRating) < 1e-9) {
-        return { correct: true, leftRating, rightRating };
-    }
-
-    const rightIsHigher = rightRating > leftRating;
-    const correct = (guessHigher && rightIsHigher) || (!guessHigher && !rightIsHigher);
-
-    return { correct, leftRating, rightRating };
-}
-
-/** disable choice buttons to prevent double clicks */
+// ---------- Ratings UI ----------
 function setChoiceButtonsEnabled(enabled) {
-    btnHigher.disabled = !enabled;
-    btnLower.disabled = !enabled;
-
-    // optionally add a visual cue
-    if (!enabled) {
-        btnHigher.style.opacity = '0.6';
-        btnLower.style.opacity = '0.6';
-        btnHigher.style.cursor = 'default';
-        btnLower.style.cursor = 'default';
-    } else {
-        btnHigher.style.opacity = '';
-        btnLower.style.opacity = '';
-        btnHigher.style.cursor = '';
-        btnLower.style.cursor = '';
-    }
+  btnHigher.disabled = !enabled;
+  btnLower.disabled = !enabled;
+  btnHigher.setAttribute('aria-pressed', String(!enabled));
+  btnLower.setAttribute('aria-pressed', String(!enabled));
+  if (!enabled) { btnHigher.style.opacity = '0.6'; btnLower.style.opacity = '0.6'; btnHigher.style.cursor = 'default'; btnLower.style.cursor = 'default'; }
+  else { btnHigher.style.opacity = ''; btnLower.style.opacity = ''; btnHigher.style.cursor = ''; btnLower.style.cursor = ''; }
 }
-
-/** show ratings + action button */
+function formatImdb(v) { if (!Number.isFinite(v)) return 'N/A'; return (Math.round(v * 10) / 10).toFixed(1); }
 function showRatingsAndAction({ correct, leftRating, rightRating }) {
-    // populate ratings
-    leftRatingDisplay.textContent = (Number.isFinite(leftRating) ? `Rating: ${leftRating}` : 'Rating: N/A');
-    rightRatingDisplay.textContent = (Number.isFinite(rightRating) ? `Rating: ${rightRating}` : 'Rating: N/A');
+  if (currentSourceKey === 'IMDB') {
+    leftRatingDisplay.textContent = (Number.isFinite(leftRating) ? `Rating: ${formatImdb(leftRating)}` : 'Rating: N/A');
+    rightRatingDisplay.textContent = (Number.isFinite(rightRating) ? `Rating: ${formatImdb(rightRating)}` : 'Rating: N/A');
+  } else {
+    // show normalized single-star string
+    leftRatingDisplay.textContent = leftMovie && leftMovie.starsRawNormalized ? `Rating: ${leftMovie.starsRawNormalized}` : (Number.isFinite(leftRating) ? `Rating: ${leftRating}/5` : 'Rating: N/A');
+    rightRatingDisplay.textContent = rightMovie && rightMovie.starsRawNormalized ? `Rating: ${rightMovie.starsRawNormalized}` : (Number.isFinite(rightRating) ? `Rating: ${rightRating}/5` : 'Rating: N/A');
+  }
 
-    // decide action button text + handler
-    if (correct) {
-        nextButton.textContent = 'Next';
-        // detach previous handlers by replacing with a new function
-        nextButton.onclick = handleNextClick;
-    } else {
-        nextButton.textContent = 'See my Score';
-        nextButton.onclick = handleSeeScoreClick;
+  if (correct) { nextButton.textContent = 'Next'; nextButton.onclick = handleNextClick; }
+  else { nextButton.textContent = 'See my Score'; nextButton.onclick = handleSeeScoreClick; }
+
+  if (ratingsActionRow) ratingsActionRow.style.display = 'flex';
+  nextButton.style.display = 'inline-block';
+
+  try {
+    const pool = sourcePools[currentSourceKey] || [];
+    for (let i = 0; i < Math.min(2, pool.length); i++) {
+      const url = pool[i].imageUrl || (pool[i].imagePath ? getPublicImageUrl(pool[i].imagePath) : null);
+      if (url) { const p = new Image(); p.src = url; }
     }
-
-    // show container + button
-    ratingsActionRow.style.display = 'flex';
-    nextButton.style.display = 'inline-block';
+  } catch (e) {}
 }
-
-/** hide ratings + action button */
 function hideRatingsAndAction() {
-    leftRatingDisplay.textContent = '';
-    rightRatingDisplay.textContent = '';
-    ratingsActionRow.style.display = 'none';
-    nextButton.style.display = 'none';
-    nextButton.onclick = null;
+  if (ratingsActionRow) ratingsActionRow.style.display = 'none';
+  leftRatingDisplay.textContent = '';
+  rightRatingDisplay.textContent = '';
+  nextButton.style.display = 'none';
+  nextButton.onclick = null;
 }
 
-// ---------------- Event handlers ----------------
+// ---------- Poster instrumentation ----------
+function attachPosterErrorHandlers() {
+  if (leftImgEl) leftImgEl.addEventListener('error', () => { console.warn('Failed to load left poster ->', leftImgEl.src); if (leftImgEl.src !== PLACEHOLDER_SRC) { leftImgEl.src = PLACEHOLDER_SRC; return; } leftImgEl.src = FALLBACK_SVG_DATA_URI; leftImgEl.alt = 'Poster unavailable'; });
+  if (rightImgEl) rightImgEl.addEventListener('error', () => { console.warn('Failed to load right poster ->', rightImgEl.src); if (rightImgEl.src !== PLACEHOLDER_SRC) { rightImgEl.src = PLACEHOLDER_SRC; return; } rightImgEl.src = FALLBACK_SVG_DATA_URI; rightImgEl.alt = 'Poster unavailable'; });
+}
+function instrumentPosterLoads() {
+  [leftImgEl, rightImgEl].forEach(img => {
+    if (!img) return;
+    img.addEventListener('load', () => console.info('Image loaded OK ->', img.id, img.src, 'intendedPosterId:', img.dataset.intendedPosterId, 'currentPosterId:', img.dataset.currentPosterId));
+    img.addEventListener('error', () => console.error('Image load error ->', img.id, img.src));
+  });
+}
 
+// ---------- Handlers ----------
 async function handleStartClick() {
-    // Hide instructions & game over, show game
-    instructionsSection.style.display = 'none';
-    gameOverSection.style.display = 'none';
-    gameContainer.style.display = 'block';
+  instructionsSection.style.display = 'none';
+  gameOverSection.style.display = 'none';
+  gameContainer.style.display = 'block';
+  if (sourceLabelEl) sourceLabelEl.style.display = 'none';
+  hideRatingsAndAction();
+  setChoiceButtonsEnabled(true);
+  score = 0; updateScoreDisplay();
 
-    // Reset score
-    score = 0;
-    updateScoreDisplay();
+  const ok = await loadMoviesListAll();
+  if (!ok) { roundInfo.textContent = 'Error loading movies. See console for details.'; return; }
 
-    // hide ratings/action if any
-    hideRatingsAndAction();
-    setChoiceButtonsEnabled(true);
+  sourcePools = {};
+  const initial = await chooseInitialSourceAndPair();
+  if (!initial || !initial.pair) { roundInfo.textContent = 'No valid source with enough movies available.'; return; }
+  currentSourceKey = initial.sourceKey;
+  leftMovie = initial.pair.left;
+  rightMovie = initial.pair.right;
 
-    // Fetch movies if needed
-    if (moviesPool.length === 0) {
-        roundInfo.textContent = 'Loading movies...';
-        const res = await fetchMoviesFromSupabase();
-        if (!res.success) {
-            roundInfo.textContent = 'Error loading movies. See console for details.';
-            return;
-        }
-        moviesPool = res.movies;
-    }
+  // dump pools for debugging
+  try {
+    Object.keys(sourcePools).forEach(k => {
+      const pool = sourcePools[k] || [];
+      console.group(`Pool: ${k}`);
+      console.table(pool.map(x => ({ title: x.title, order: x.order, matchedMovieListTitle: x.matchedMovieListTitle || null, starsRaw: x.starsRaw, starsRawNormalized: x.starsRawNormalized || null, hasImageUrl: !!x.imageUrl })));
+      console.groupEnd();
+    });
+  } catch (e) {}
 
-    if (moviesPool.length < 2) {
-        roundInfo.textContent = 'Not enough movies with IMDB ratings available to start the game.';
-        return;
-    }
-
-    // Initialize left/right and render
-    const pair = pickTwoDistinct();
-    leftMovie = pair.left;
-    rightMovie = pair.right;
-    renderMovies();
+  renderMoviesAndSource();
 }
+function updateScoreDisplay() { scoreDisplay.textContent = `Score: ${score}`; }
+function showGameOver() { hideRatingsAndAction(); gameContainer.style.display = 'none'; gameOverSection.style.display = 'block'; finalScoreEl.textContent = `You earned ${score} ${score === 1 ? 'point' : 'points'}.`; }
 
 function handleHigherClick() {
-    if (!leftMovie || !rightMovie) return;
-
-    // disable choices while we show feedback
-    setChoiceButtonsEnabled(false);
-
-    const { correct, leftRating, rightRating } = evaluateGuess(true);
-
-    if (correct) {
-        // increment score now (player earned it)
-        score += 1;
-        updateScoreDisplay();
-        roundInfo.textContent = `Correct — the ratings are shown below. Click Next to continue.`;
-        showRatingsAndAction({ correct: true, leftRating, rightRating });
-    } else {
-        roundInfo.textContent = `Incorrect — the ratings are shown below. Click "See my Score" to view your result.`;
-        showRatingsAndAction({ correct: false, leftRating, rightRating });
-    }
+  if (!leftMovie || !rightMovie) return;
+  setChoiceButtonsEnabled(false);
+  const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(true);
+  if (correct) { score += 1; updateScoreDisplay(); roundInfo.textContent = 'Correct — the ratings are shown below. Click Next to continue.'; showRatingsAndAction({ correct: true, leftRating: leftVal, rightRating: rightVal }); }
+  else { roundInfo.textContent = 'Incorrect — the ratings are shown below. Click "See my Score" to view your result.'; showRatingsAndAction({ correct: false, leftRating: leftVal, rightRating: rightVal }); }
 }
-
 function handleLowerClick() {
-    if (!leftMovie || !rightMovie) return;
-
-    // disable choices while we show feedback
-    setChoiceButtonsEnabled(false);
-
-    const { correct, leftRating, rightRating } = evaluateGuess(false);
-
-    if (correct) {
-        // increment score now (player earned it)
-        score += 1;
-        updateScoreDisplay();
-        roundInfo.textContent = `Correct — the ratings are shown below. Click Next to continue.`;
-        showRatingsAndAction({ correct: true, leftRating, rightRating });
-    } else {
-        roundInfo.textContent = `Incorrect — the ratings are shown below. Click "See my Score" to view your result.`;
-        showRatingsAndAction({ correct: false, leftRating, rightRating });
-    }
+  if (!leftMovie || !rightMovie) return;
+  setChoiceButtonsEnabled(false);
+  const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(false);
+  if (correct) { score += 1; updateScoreDisplay(); roundInfo.textContent = 'Correct — the ratings are shown below. Click Next to continue.'; showRatingsAndAction({ correct: true, leftRating: leftVal, rightRating: rightVal }); }
+  else { roundInfo.textContent = 'Incorrect — the ratings are shown below. Click "See my Score" to view your result.'; showRatingsAndAction({ correct: false, leftRating: leftVal, rightRating: rightVal }); }
 }
 
-/** Called when player clicks Next after a correct guess */
-function handleNextClick() {
-    // hide ratings/action first
-    hideRatingsAndAction();
-
-    // SHIFT: right becomes the new left
-    leftMovie = rightMovie;
-
-    // pick a new right (never equal to new left)
-    chooseNewRight();
-
-    // re-enable choice buttons
-    setChoiceButtonsEnabled(true);
-
-    // render for the next round
-    renderMovies();
+async function handleNextClick() {
+  hideRatingsAndAction();
+  const staying = rightMovie;
+  leftMovie = staying;
+  const pick = await pickNewSourceContainingStayingMovie(staying.title || staying.matchedMovieListTitle || '');
+  if (!pick) {
+    const pool = await ensureSourcePool(currentSourceKey);
+    const candidates = pool ? pool.filter(m => normalizeTitle(m.title) !== normalizeTitle(staying.title || staying.matchedMovieListTitle || '')) : [];
+    if (candidates.length === 0) { showGameOver(); return; }
+    rightMovie = pickRandomFromArray(candidates);
+  } else { currentSourceKey = pick.sourceKey; rightMovie = pick.newRight; }
+  renderMoviesAndSource(); setChoiceButtonsEnabled(true);
 }
-
-/** Called when player clicks See my Score after an incorrect guess */
-function handleSeeScoreClick() {
-    // hide ratings/action first
-    hideRatingsAndAction();
-
-    // show game over screen
-    showGameOver();
-}
-
-/** Restart: clear inline display so CSS controls centering */
+function handleSeeScoreClick() { hideRatingsAndAction(); showGameOver(); }
 function handleRestartClick() {
-    gameOverSection.style.display = 'none';
-    instructionsSection.style.display = ''; // let CSS control it
-    gameContainer.style.display = 'none';
-    roundInfo.textContent = '';
-    score = 0;
-    updateScoreDisplay();
-    hideRatingsAndAction();
-    setChoiceButtonsEnabled(true);
+  gameOverSection.style.display = 'none';
+  instructionsSection.style.display = '';
+  gameContainer.style.display = 'none';
+  roundInfo.textContent = '';
+  score = 0; updateScoreDisplay();
+  hideRatingsAndAction(); setChoiceButtonsEnabled(true);
+  if (sourceLabelEl) sourceLabelEl.style.display = 'none';
 }
 
-// ---------------- Wire up events ----------------
+// ---------- Boot & wiring ----------
 document.addEventListener('DOMContentLoaded', () => {
-    if (!startButton || !btnHigher || !btnLower || !restartButton) {
-        console.error("Missing one or more required DOM elements for High-or-Low game.");
-        return;
-    }
-    startButton.addEventListener('click', handleStartClick);
-    btnHigher.addEventListener('click', handleHigherClick);
-    btnLower.addEventListener('click', handleLowerClick);
-    restartButton.addEventListener('click', handleRestartClick);
-
-    // ensure ratings/action hidden on initial load
-    hideRatingsAndAction();
+  if (!startButton || !btnHigher || !btnLower || !restartButton) { console.error("Missing required DOM elements."); return; }
+  if (leftImgEl) { leftImgEl.loading = 'lazy'; leftImgEl.decoding = 'async'; leftImgEl.crossOrigin = 'anonymous'; if (!leftImgEl.src) leftImgEl.src = PLACEHOLDER_SRC; }
+  if (rightImgEl) { rightImgEl.loading = 'lazy'; rightImgEl.decoding = 'async'; rightImgEl.crossOrigin = 'anonymous'; if (!rightImgEl.src) rightImgEl.src = PLACEHOLDER_SRC; }
+  attachPosterErrorHandlers(); instrumentPosterLoads();
+  startButton.addEventListener('click', handleStartClick);
+  btnHigher.addEventListener('click', handleHigherClick);
+  btnLower.addEventListener('click', handleLowerClick);
+  restartButton.addEventListener('click', handleRestartClick);
+  hideRatingsAndAction();
+  if (sourceLabelEl) sourceLabelEl.style.display = 'none';
+  document.addEventListener('keydown', (e) => {
+    const active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
+    if (e.key.toLowerCase() === 'h' || e.key === 'ArrowUp') if (!btnHigher.disabled) btnHigher.click();
+    else if (e.key.toLowerCase() === 'l' || e.key === 'ArrowDown') if (!btnLower.disabled) btnLower.click();
+    else if (e.key === 'Enter') { if (nextButton && nextButton.style.display !== 'none') nextButton.click(); else if (restartButton && gameOverSection.style.display !== 'none') restartButton.click(); }
+  });
 });
