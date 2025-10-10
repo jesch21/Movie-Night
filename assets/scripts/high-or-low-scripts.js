@@ -2,6 +2,7 @@
 // Title-matching + dedupe + buffered image loader + guaranteed non-text placeholder
 // Includes fix: when a movie "stays", leftMovie is updated to the entry from the new source's pool
 // Includes fix: fallback poster is a neutral SVG (no "Poster unavailable" text)
+// Modified: posters act as the choice buttons (click left = left is higher, click right = right is higher)
 
 // ---------------- Supabase init (keep your keys) ----------------
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
@@ -45,8 +46,10 @@ const leftYearEl = document.getElementById('leftYear');
 const rightYearEl = document.getElementById('rightYear');
 const leftImgEl = document.getElementById('leftImg');
 const rightImgEl = document.getElementById('rightImg');
-const btnHigher = document.getElementById('btnHigher');
-const btnLower = document.getElementById('btnLower');
+const leftCardEl = document.getElementById('leftCard');
+const rightCardEl = document.getElementById('rightCard');
+const btnHigher = document.getElementById('btnHigher'); // kept but hidden
+const btnLower = document.getElementById('btnLower');   // kept but hidden
 const finalScoreEl = document.getElementById('finalScore');
 const roundInfo = document.getElementById('roundInfo');
 const ratingsActionRow = document.getElementById('ratingsActionRow');
@@ -56,7 +59,6 @@ const nextButton = document.getElementById('nextButton');
 const sourceLabelEl = document.getElementById('sourceLabel');
 
 // ---------------- Guaranteed non-text placeholder ----------------
-// Neutral poster (no "unavailable" wording). Always loads (data URI).
 const FALLBACK_SVG_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
      <defs>
@@ -68,12 +70,10 @@ const FALLBACK_SVG_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
      <rect width="100%" height="100%" fill="url(#g)"/>
      <g transform="translate(20,20)">
        <rect width="360" height="520" rx="12" ry="12" fill="#1a1a1a" stroke="#2f2f2f" />
-       <!-- subtle film-stripe -->
        <rect x="12" y="12" width="336" height="80" rx="8" ry="8" fill="#0f0f0f" opacity="0.08"/>
      </g>
   </svg>`
 );
-// Use the neutral data-uri as our placeholder (guaranteed to exist)
 const PLACEHOLDER_SRC = FALLBACK_SVG_DATA_URI;
 
 // ---------------- Helpers ----------------
@@ -139,7 +139,6 @@ function buildImdbPoolFromMoviesList(){
 }
 
 // ---------------- Fetch letterboxd pool (dedupe by title) ----------------
-// ---------------- Fetch letterboxd pool (dedupe by title) ----------------
 async function fetchAndBuildLetterboxdPool(tableName){
   let data=null;
   try{
@@ -164,28 +163,14 @@ async function fetchAndBuildLetterboxdPool(tableName){
     const title = row.Movie || row.movie || '';
     const starsRaw = row.Stars || row.stars || '';
     const starsValue = parseStarsValue(starsRaw);
-    // Only include entries that have a valid numeric stars value
     if(!Number.isFinite(starsValue)) continue;
     const tkey = normalizeTitle(title);
     if(!tkey) continue;
-    // Deduplicate same normalized title inside the same letterboxd table
     if(seen[tkey]) { console.warn(`Duplicate in ${tableName} for "${title}" — skipping duplicate.`); continue; }
     seen[tkey]=true;
-
-    // Find matching moviesList row — **only include entries that exist in your moviesList**
     const mlRow = moviesListByTitle[tkey] || null;
-    if(!mlRow) {
-      // No match in moviesList => we haven't "seen" this movie (skip it)
-      continue;
-    }
-    // Require the matched moviesList entry to have an order (be part of the watched list)
-    if(mlRow['order'] == null) {
-      continue;
-    }
-
     const imagePath = mlRow ? (mlRow.image||null) : null;
     const imageUrl = getPublicImageUrl(imagePath);
-
     let starsRawNormalized = null;
     if(starsRaw){
       starsRawNormalized = String(starsRaw).split(/\s*[;,|]\s*/)[0].trim();
@@ -194,7 +179,6 @@ async function fetchAndBuildLetterboxdPool(tableName){
         if(Number.isFinite(v)) starsRawNormalized = `${v}/5`;
       }
     }
-
     pool.push({
       order: orderVal,
       orderKey: String(orderVal),
@@ -279,10 +263,15 @@ async function pickNewSourceContainingStayingMovie(stayingTitle){
 function makePosterId(sourceKey, title){ return `${String(sourceKey ?? 'unknown')}::${normalizeTitle(title ?? '')}`; }
 function applyPlaceholderToImg(imgEl){
   if(!imgEl) return;
-  imgEl.src = PLACEHOLDER_SRC; // guaranteed to exist (data URI)
-  // keep alt as the movie title if present; do not set "unavailable" text
-  if(!imgEl.alt) imgEl.alt = 'Poster';
-  imgEl.dataset.currentPosterId = 'placeholder';
+  if(imgEl.tagName === 'IMG'){
+    imgEl.src = PLACEHOLDER_SRC;
+    if(!imgEl.alt) imgEl.alt = 'Poster';
+    imgEl.dataset.currentPosterId = 'placeholder';
+  } else {
+    // for non-img (e.g. div) use background placeholder
+    imgEl.style.backgroundImage = `url("${PLACEHOLDER_SRC}")`;
+    imgEl.dataset.currentPosterId = 'placeholder';
+  }
 }
 function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle){
   if(!imgEl) return;
@@ -293,9 +282,13 @@ function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle){
   loader.crossOrigin = 'anonymous';
   loader.onload = () => {
     if(imgEl.dataset.intendedPosterId === id){
-      imgEl.src = url;
+      if(imgEl.tagName === 'IMG'){
+        imgEl.src = url;
+      } else {
+        imgEl.style.backgroundImage = `url("${url}")`;
+      }
       imgEl.dataset.currentPosterId = id;
-      if(!imgEl.alt) imgEl.alt = debugTitle || 'Poster';
+      if(!imgEl.alt && imgEl.tagName === 'IMG') imgEl.alt = debugTitle || 'Poster';
       console.info('Safe image applied ->', imgEl.id, url, 'for id', id, 'title:', debugTitle);
     } else {
       console.warn('Loaded image ignored (id mismatch) ->', url, 'for', id, 'img now intends', imgEl.dataset.intendedPosterId);
@@ -306,11 +299,6 @@ function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle){
 }
 
 // ---------------- Leaderboard submission helpers ----------------
-
-/**
- * Submit a final score for `player` to the highorlow-leaderboard table.
- * Uses existing `supabase` client (anon key in browser). Returns { data, error }.
- */
 async function submitScoreToLeaderboard(player, score) {
   if (!supabase) {
     console.warn('Supabase client unavailable — cannot submit score.');
@@ -325,14 +313,13 @@ async function submitScoreToLeaderboard(player, score) {
     const { data, error } = await supabase
       .from('highorlow-leaderboard')
       .insert([payload])
-      .select(); // select to get inserted row back (if allowed)
+      .select();
     return { data, error };
   } catch (err) {
     console.error('submitScoreToLeaderboard unexpected error', err);
     return { data: null, error: err };
   }
 }
-
 
 // ---------------- Rendering & UI ----------------
 function renderMoviesAndSource(){
@@ -342,13 +329,16 @@ function renderMoviesAndSource(){
   rightTitleEl.textContent = rightMovie ? rightMovie.title : '';
   if(leftYearEl) leftYearEl.textContent = '';
   if(rightYearEl) rightYearEl.textContent = '';
+  // left
   if(leftMovie){
     const leftSource = leftMovie.sourceKey || currentSourceKey || 'IMDB';
     const leftTitle = leftMovie.title || leftMovie.matchedMovieListTitle || '';
     const leftUrl = leftMovie.imageUrl || (leftMovie.imagePath? getPublicImageUrl(leftMovie.imagePath) : null) || null;
+    // leftImgEl might be an <img> in DOM — keep using setImgSrcSafely
     setImgSrcSafely(leftImgEl, leftUrl, leftSource, leftTitle, leftMovie.title);
     if(leftImgEl) leftImgEl.alt = leftMovie.title || 'Poster';
   } else { applyPlaceholderToImg(leftImgEl); if(leftImgEl) leftImgEl.alt = 'Poster'; }
+  // right
   if(rightMovie){
     const rightSource = rightMovie.sourceKey || currentSourceKey || 'IMDB';
     const rightTitle = rightMovie.title || rightMovie.matchedMovieListTitle || '';
@@ -356,11 +346,12 @@ function renderMoviesAndSource(){
     setImgSrcSafely(rightImgEl, rightUrl, rightSource, rightTitle, rightMovie.title);
     if(rightImgEl) rightImgEl.alt = rightMovie.title || 'Poster';
   } else { applyPlaceholderToImg(rightImgEl); if(rightImgEl) rightImgEl.alt = 'Poster'; }
-  roundInfo.textContent = `Right movie rating vs Left movie rating — guess if RIGHT is higher or lower.`;
+  roundInfo.textContent = `Click which movie you think has the HIGHER rating (click the poster).`;
 }
 
 // ---------------- Rating evaluation ----------------
 function evaluateGuessAgainstCurrentSource(guessHigher){
+  // guessHigher === true means player guessed RIGHT is higher than LEFT
   const leftVal = (currentSourceKey === 'IMDB') ? parseFloat(leftMovie.imdbRating) : Number(leftMovie.starsValue);
   const rightVal = (currentSourceKey === 'IMDB') ? parseFloat(rightMovie.imdbRating) : Number(rightMovie.starsValue);
   if(!Number.isFinite(leftVal) || !Number.isFinite(rightVal)) return { correct:false, leftVal, rightVal };
@@ -372,10 +363,31 @@ function evaluateGuessAgainstCurrentSource(guessHigher){
 
 // ---------------- Ratings & UI ----------------
 function setChoiceButtonsEnabled(enabled){
-  btnHigher.disabled = !enabled; btnLower.disabled = !enabled;
-  btnHigher.setAttribute('aria-pressed', String(!enabled)); btnLower.setAttribute('aria-pressed', String(!enabled));
-  if(!enabled){ btnHigher.style.opacity='0.6'; btnLower.style.opacity='0.6'; btnHigher.style.cursor='default'; btnLower.style.cursor='default'; }
-  else { btnHigher.style.opacity=''; btnLower.style.opacity=''; btnHigher.style.cursor=''; btnLower.style.cursor=''; }
+  // hide original buttons if present
+  if(btnHigher) btnHigher.style.display = 'none';
+  if(btnLower) btnLower.style.display = 'none';
+
+  // enable/disable clicks on the poster cards
+  const elems = [leftCardEl, rightCardEl, leftImgEl, rightImgEl].filter(Boolean);
+  elems.forEach(el => {
+    if(enabled){
+      el.style.pointerEvents = '';
+      el.style.cursor = 'pointer';
+      el.setAttribute('aria-disabled','false');
+    } else {
+      el.style.pointerEvents = 'none';
+      el.style.cursor = 'default';
+      el.setAttribute('aria-disabled','true');
+    }
+  });
+  // visual cue: reduce opacity when disabled
+  if(!enabled){
+    if(leftCardEl) leftCardEl.style.opacity = '0.85';
+    if(rightCardEl) rightCardEl.style.opacity = '0.85';
+  } else {
+    if(leftCardEl) leftCardEl.style.opacity = '';
+    if(rightCardEl) rightCardEl.style.opacity = '';
+  }
 }
 function formatImdb(v){ if(!Number.isFinite(v)) return 'N/A'; return (Math.round(v*10)/10).toFixed(1); }
 function showRatingsAndAction({ correct, leftRating, rightRating }){
@@ -401,7 +413,25 @@ function attachPosterErrorHandlers(){
 }
 function instrumentPosterLoads(){ [leftImgEl, rightImgEl].forEach(img => { if(!img) return; img.addEventListener('load', ()=> console.info('Image loaded OK ->', img.id, img.src, 'intended:', img.dataset.intendedPosterId, 'current:', img.dataset.currentPosterId)); img.addEventListener('error', ()=> console.error('Image load error ->', img.id, img.src)); }); }
 
-// ---------------- Handlers ----------------
+// ---------------- Click handlers for posters (new interaction) ----------------
+function handlePosterChoice(isRightChosen){
+  if(!leftMovie || !rightMovie) return;
+  // disable further choices immediately
+  setChoiceButtonsEnabled(false);
+  // isRightChosen true => user clicked RIGHT poster (guessed RIGHT is higher)
+  const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(isRightChosen);
+  if(correct){
+    score += 1;
+    updateScoreDisplay();
+    roundInfo.textContent = 'Correct — the ratings are shown below. Click Next.';
+    showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal });
+  } else {
+    roundInfo.textContent = 'Incorrect — the ratings are shown below. Click See my Score.';
+    showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal });
+  }
+}
+
+// ---------------- Handlers (continued) ----------------
 async function handleStartClick(){
   instructionsSection.style.display='none'; gameOverSection.style.display='none'; gameContainer.style.display='block';
   if(sourceLabelEl) sourceLabelEl.style.display='none';
@@ -420,7 +450,7 @@ async function handleStartClick(){
 }
 function updateScoreDisplay(){ scoreDisplay.textContent = `Score: ${score}`; }
 
-// ---------------- Save prompt modal for high-or-low ----------------
+// ---------------- Save prompt modal for high-or-low (unchanged from previous) ----------------
 function removeHLsavePrompt(){
   const overlay = document.getElementById('hlSavePromptOverlay');
   if(overlay) overlay.remove();
@@ -504,10 +534,8 @@ function showHLsavePrompt(playerName, score){
 
   skipBtn.addEventListener('click', () => {
     removeHLsavePrompt();
-    // indicate not saved
     const submitStatusEl = document.getElementById('submitStatus');
     if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#ffd3d3">Score not saved.</span>`;
-    // re-enable player select (same as previous behavior)
     const playerSelectEl = document.getElementById('playerSelect');
     if(playerSelectEl) playerSelectEl.disabled = false;
   });
@@ -528,12 +556,10 @@ function showHLsavePrompt(playerName, score){
       } else {
         const insertedId = (Array.isArray(data) && data[0] && data[0].id) ? data[0].id : null;
         const msg = insertedId ? `Score submitted (id ${insertedId}).` : 'Score submitted.';
-        // show in page submitStatus and close after short delay
         const submitStatusEl = document.getElementById('submitStatus');
         if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#c8ffcf">${msg}</span>`;
         setTimeout(() => {
           removeHLsavePrompt();
-          // re-enable select for next game (original behavior)
           const playerSelectEl = document.getElementById('playerSelect');
           if(playerSelectEl) playerSelectEl.disabled = false;
         }, 900);
@@ -548,9 +574,7 @@ function showHLsavePrompt(playerName, score){
   });
 
   saveBtn.focus();
-};
-
-// ---------------- Ratings & UI ---------------- continued (existing) ----------------
+}
 
 // ---------------- Handlers (continued) ----------------
 function showGameOver(){
@@ -571,30 +595,23 @@ function showGameOver(){
   showHLsavePrompt(playerName, score);
 }
 
-// remaining handlers unchanged
-function handleHigherClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(true); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
-function handleLowerClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(false); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
+function handleHigherClick(){ /* removed — posters are buttons now */ }
+function handleLowerClick(){ /* removed — posters are buttons now */ }
 
 async function handleNextClick(){
   hideRatingsAndAction();
-  // RIGHT movie stays — but update leftMovie to the ENTRY representing that movie in the NEW source's pool
   const stayingOld = rightMovie;
-  // find a new source that contains the staying movie (caller uses title matching)
   const pick = await pickNewSourceContainingStayingMovie(stayingOld.title || stayingOld.matchedMovieListTitle || '');
   if(!pick){
-    // fallback: reuse current source pool and pick a new right (and update left from that pool if possible)
     const pool = await ensureSourcePool(currentSourceKey);
-    // try to find staying entry inside current pool by normalized title
     const wantNorm = normalizeTitle(stayingOld.title || stayingOld.matchedMovieListTitle || '');
     const stayingEntry = pool ? pool.find(m => (m.matchedMovieListTitle && normalizeTitle(m.matchedMovieListTitle) === wantNorm) || normalizeTitle(m.title) === wantNorm) : null;
     if(stayingEntry){
-      leftMovie = stayingEntry; // <-- crucial: update leftMovie to pool entry so its starsValue reflects current source
-      // pick new right
+      leftMovie = stayingEntry;
       const candidates = pool.filter(m => m !== stayingEntry);
       if(candidates.length === 0){ showGameOver(); return; }
       rightMovie = pickRandomFromArray(candidates);
     } else {
-      // worst-case: couldn't find staying in current pool (shouldn't happen), keep prior staying but pick new right
       leftMovie = stayingOld;
       const candidates = pool || [];
       const filtered = candidates.filter(m => normalizeTitle(m.title) !== normalizeTitle(stayingOld.title || ''));
@@ -602,16 +619,13 @@ async function handleNextClick(){
       rightMovie = pickRandomFromArray(filtered);
     }
   } else {
-    // pick contains { sourceKey, newRight, pool }
     currentSourceKey = pick.sourceKey;
     const pool = pick.pool || [];
     const wantNorm = normalizeTitle(stayingOld.title || stayingOld.matchedMovieListTitle || '');
-    // find the staying movie inside the chosen pool
     const stayingEntry = pool.find(m => (m.matchedMovieListTitle && normalizeTitle(m.matchedMovieListTitle) === wantNorm) || normalizeTitle(m.title) === wantNorm) || null;
     if(stayingEntry){
-      leftMovie = stayingEntry; // <-- crucial fix: update left movie's rating to this source's entry
+      leftMovie = stayingEntry;
     } else {
-      // fallback: leftMovie becomes the matchedMovieListTitle entry if available, otherwise use stayingOld
       leftMovie = stayingEntry || stayingOld;
     }
     rightMovie = pick.newRight;
@@ -630,43 +644,63 @@ function handleRestartClick(){
 
 // ---------------- Wire up events ----------------
 document.addEventListener('DOMContentLoaded', ()=>{
-    // --- Player select & leaderboard button wiring ---
+  // --- Player select & leaderboard button wiring ---
   const playerSelectEl = document.getElementById('playerSelect');
   const leaderboardButtonInitEl = document.getElementById('leaderboardButtonInit');
   const leaderboardButtonGameOverEl = document.getElementById('leaderboardButtonGameOver');
 
-  // Enable / disable Start button depending on selection
+  // Ensure start disabled until a valid name chosen (HTML starts disabled)
   if (playerSelectEl && startButton) {
-    // ensure start disabled until a valid name chosen (HTML starts disabled)
     playerSelectEl.addEventListener('change', () => {
       startButton.disabled = !playerSelectEl.value;
     });
   }
 
-  // Navigate to leaderboard page when either button clicked
+  // Nav to leaderboard
   if (leaderboardButtonInitEl) leaderboardButtonInitEl.addEventListener('click', () => { location.href = 'leaderboard.html'; });
   if (leaderboardButtonGameOverEl) leaderboardButtonGameOverEl.addEventListener('click', () => { location.href = 'leaderboard.html'; });
 
   // When the game starts, lock the player selection to prevent mid-game changes
-  startButton.addEventListener('click', () => {
+  if(startButton) startButton.addEventListener('click', () => {
     if (playerSelectEl) playerSelectEl.disabled = true;
   });
 
-  // When restart is clicked, re-enable the select (restart handler already clears state)
-  restartButton.addEventListener('click', () => {
+  // When restart is clicked, re-enable the select
+  if(restartButton) restartButton.addEventListener('click', () => {
     if (playerSelectEl) playerSelectEl.disabled = false;
   });
 
-  
-  if(!startButton || !btnHigher || !btnLower || !restartButton){ console.error('Missing required DOM elements.'); return; }
+  if(!startButton || !leftImgEl || !rightImgEl || !restartButton){ console.error('Missing required DOM elements.'); return; }
+
   // initial guaranteed placeholder (data URI) so no file:// fallback ever used
   if(leftImgEl){ leftImgEl.loading='lazy'; leftImgEl.decoding='async'; leftImgEl.crossOrigin='anonymous'; if(!leftImgEl.src) leftImgEl.src = PLACEHOLDER_SRC; }
   if(rightImgEl){ rightImgEl.loading='lazy'; rightImgEl.decoding='async'; rightImgEl.crossOrigin='anonymous'; if(!rightImgEl.src) rightImgEl.src = PLACEHOLDER_SRC; }
   attachPosterErrorHandlers(); instrumentPosterLoads();
+
+  // Hide the old textual choice buttons (we use posters instead)
+  if(btnHigher) btnHigher.style.display = 'none';
+  if(btnLower) btnLower.style.display = 'none';
+
+  // Set posters/cards as clickable buttons
+  if(leftCardEl){
+    leftCardEl.setAttribute('role','button');
+    leftCardEl.setAttribute('tabindex','0');
+    leftCardEl.addEventListener('click', ()=> handlePosterChoice(false)); // clicking left => left is higher => guessHigher=false
+    leftCardEl.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handlePosterChoice(false); } });
+  }
+  if(rightCardEl){
+    rightCardEl.setAttribute('role','button');
+    rightCardEl.setAttribute('tabindex','0');
+    rightCardEl.addEventListener('click', ()=> handlePosterChoice(true)); // clicking right => right is higher => guessHigher=true
+    rightCardEl.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handlePosterChoice(true); } });
+  }
+
   startButton.addEventListener('click', handleStartClick);
-  btnHigher.addEventListener('click', handleHigherClick);
-  btnLower.addEventListener('click', handleLowerClick);
+  // original buttons still present but hidden — keep them wired in case you want to show them again
+  if(btnHigher) btnHigher.addEventListener('click', ()=> handlePosterChoice(true));
+  if(btnLower) btnLower.addEventListener('click', ()=> handlePosterChoice(false));
   restartButton.addEventListener('click', handleRestartClick);
+
   hideRatingsAndAction();
   if(sourceLabelEl) sourceLabelEl.style.display='none';
 
@@ -674,8 +708,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.addEventListener('keydown', (e) => {
     const active = document.activeElement;
     if(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
-    if(e.key.toLowerCase() === 'h' || e.key === 'ArrowUp'){ if(!btnHigher.disabled) btnHigher.click(); }
-    else if(e.key.toLowerCase() === 'l' || e.key === 'ArrowDown'){ if(!btnLower.disabled) btnLower.click(); }
+    // left arrow or 'h' -> choose LEFT poster (left is higher)
+    if(e.key === 'ArrowLeft' || e.key.toLowerCase() === 'h'){ if(leftCardEl && leftCardEl.style.pointerEvents !== 'none') leftCardEl.click(); }
+    // right arrow or 'l' -> choose RIGHT poster (right is higher)
+    else if(e.key === 'ArrowRight' || e.key.toLowerCase() === 'l'){ if(rightCardEl && rightCardEl.style.pointerEvents !== 'none') rightCardEl.click(); }
     else if(e.key === 'Enter'){ if(nextButton && nextButton.style.display !== 'none') nextButton.click(); else if(restartButton && gameOverSection.style.display !== 'none') restartButton.click(); }
   });
 });
