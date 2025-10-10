@@ -210,9 +210,24 @@ h3 {
     width: 80%;
 }
 
+/* mini preview as a square background crop (keeps existing look) */
 .miniGameImage {
     width: 250px;
+    height: 250px;
+    border-radius: 8px;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; /* overridden inline to set zoom factor */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+    border: 2px solid rgba(242,245,234,0.06);
 }
+
+/* small responsive tweak */
+@media (max-width:700px){
+    .miniGameImage { width: 180px; height: 180px; }
+}
+
 
 .fullGameImage {
     width: 600px;

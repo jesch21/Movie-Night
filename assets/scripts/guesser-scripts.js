@@ -29,13 +29,18 @@ function norm(s){ return (s||'').toString().trim().toLowerCase(); }
 function getPublicImageUrlFromBucket(bucket, imagePath){
     if(!imagePath || !supabase) return null;
     try {
-        const res = supabase.storage.from(bucket).getPublicUrl(imagePath);
-        if(res && res.data) return res.data.publicUrl || res.data.publicURL || null;
-        return res && (res.publicUrl || res.publicURL) ? (res.publicUrl || res.publicURL) : null;
+        // normalize path (remove leading slash if present)
+        const p = typeof imagePath === 'string' && imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+        const res = supabase.storage.from(bucket).getPublicUrl(p);
+        // supabase client sometimes returns { data: { publicUrl } } or { publicUrl } shape — handle both
+        if(res){
+            if(res.data && (res.data.publicUrl || res.data.publicURL)) return res.data.publicUrl || res.data.publicURL;
+            if(res.publicUrl || res.publicURL) return res.publicUrl || res.publicURL;
+        }
     } catch(e){
         console.warn('getPublicImageUrlFromBucket error', bucket, imagePath, e);
-        return null;
     }
+    return null;
 }
 
 // ---------------- Fetch movie list from Supabase ----------------
@@ -99,46 +104,127 @@ function startGame() {
     loadMiniImg();
 }
 
-function loadMiniImg() {
+async function loadMiniImg() {
     // guard
     if (!Array.isArray(movieList) || movieList.length === 0) {
         alert("No movies available to play.");
         return;
     }
 
-    // If all movies used, reset guessed list to allow replay
-    if (guessedMovies.length >= movieList.length) {
-        guessedMovies = [];
-    }
+    // If all movies are used, reset guessed list to allow replay
+    if (guessedMovies.length >= movieList.length) guessedMovies = [];
 
+    // pick a non-used movie (or allow reuse if all used)
     let selectedMovie;
-    // Pick random until we find one not guessed
+    let attempts = 0;
     do {
         const randomIndex = Math.floor(Math.random() * movieList.length);
         selectedMovie = movieList[randomIndex];
+        attempts++;
+        if(attempts > movieList.length + 5) break;
     } while (selectedMovie && guessedMovies.includes(norm(selectedMovie[0])));
 
-    // If still nothing, bail
     if (!selectedMovie) {
         alert("No movie could be selected.");
         return;
     }
 
     currentMovie = selectedMovie;
-    let [title, imageName, duration, year, mainActor, miniPublicUrl] = currentMovie;
+    const [title = '', imageName = '', duration, year, mainActor, miniPublicUrl] = currentMovie;
 
     const gameImageContainer = document.getElementById("gameImageContainer");
     gameImageContainer.innerHTML = "";
 
-    const miniImg = document.createElement("img");
-    const src = miniPublicUrl || `../assets/images/mini-img/${imageName}`;
-    miniImg.src = src;
-    miniImg.className = "miniGameImage";
-    miniImg.alt = `Mini ${title} Image`;
+    // Try to get the full slideshow image public URL (we will crop from this)
+    let fullImageUrl = getPublicImageUrlFromBucket('slideshowImages', imageName) || null;
+    // Fallback to the miniPublicUrl if full not available (some setups store only mini)
+    if(!fullImageUrl && miniPublicUrl) fullImageUrl = miniPublicUrl;
+    // final fallback to local path
+    if(!fullImageUrl) fullImageUrl = `../assets/images/slideshow/${imageName}`;
 
-    guessedMovies.push(norm(currentMovie[0])); // store normalized title
+    // small neutral SVG placeholder (guaranteed to exist)
+    const PLACEHOLDER_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+         <rect width="100%" height="100%" fill="#111"/>
+         <text x="50%" y="50%" fill="#999" font-size="18" font-family="sans-serif" dominant-baseline="middle" text-anchor="middle">Preview</text>
+       </svg>`
+    );
 
-    gameImageContainer.appendChild(miniImg);
+    // We'll attempt to load the image first to ensure URL works. If it loads, create the zoomed DIV.
+    const tester = new Image();
+    tester.crossOrigin = 'anonymous';
+    let gotUrl = null;
+
+    // Use a timeout in case remote request hangs
+    const TIMEOUT_MS = 3000;
+    let timeoutId = setTimeout(() => {
+        tester.src = ''; // abort attempt
+        if(!gotUrl){
+            console.warn('Image tester timed out for', fullImageUrl);
+            // continue with placeholder
+            insertZoomedDiv(PLACEHOLDER_DATA_URI);
+        }
+    }, TIMEOUT_MS);
+
+    tester.onload = () => {
+        clearTimeout(timeoutId);
+        gotUrl = fullImageUrl;
+        // Insert the zoomed preview using the working URL
+        insertZoomedDiv(gotUrl);
+    };
+    tester.onerror = () => {
+        clearTimeout(timeoutId);
+        console.warn('Tester failed to load', fullImageUrl, '— falling back to other options.');
+        // If we tried slideshow path, try miniPublicUrl next (if different)
+        if(fullImageUrl && miniPublicUrl && miniPublicUrl !== fullImageUrl) {
+            const tester2 = new Image();
+            tester2.crossOrigin = 'anonymous';
+            let t2timeout = setTimeout(() => {
+                tester2.src = '';
+                insertZoomedDiv(PLACEHOLDER_DATA_URI);
+            }, TIMEOUT_MS);
+            tester2.onload = () => { clearTimeout(t2timeout); insertZoomedDiv(miniPublicUrl); };
+            tester2.onerror = () => { clearTimeout(t2timeout); insertZoomedDiv(PLACEHOLDER_DATA_URI); };
+            tester2.src = miniPublicUrl;
+            return;
+        }
+        // otherwise show placeholder
+        insertZoomedDiv(PLACEHOLDER_DATA_URI);
+    };
+
+    // start load test
+    try { tester.src = fullImageUrl; } catch(e){ clearTimeout(timeoutId); console.warn('Error setting tester.src', e); insertZoomedDiv(PLACEHOLDER_DATA_URI); }
+
+    // helper that actually inserts the zoomed DIV; keeps it square and sets zoom/position
+    function insertZoomedDiv(imageUrl) {
+        // ----- DYNAMIC ZOOM PARAMETERS -----
+        const MIN_ZOOM = 2.0;   // minimum zoom (2x)
+        const MAX_ZOOM = 4.0;   // maximum zoom (adjustable)
+        const zoom = MIN_ZOOM + Math.random() * (MAX_ZOOM - MIN_ZOOM); // float between MIN_ZOOM..MAX_ZOOM
+
+        // choose background position as percentages but keep clamped so we always show valid content
+        const posX = Math.floor(Math.random() * 101); // 0..100
+        const posY = Math.floor(Math.random() * 101); // 0..100
+
+        const miniDiv = document.createElement('div');
+        miniDiv.className = 'miniGameImage zoomed';
+        miniDiv.style.width = '';  // allow CSS to control size
+        miniDiv.style.height = '';
+        miniDiv.style.backgroundImage = `url("${imageUrl}")`;
+        // background-size: zoom*100% width and 'auto' height to preserve aspect ratio
+        miniDiv.style.backgroundSize = `${zoom * 100}% auto`;
+        miniDiv.style.backgroundPosition = `${posX}% ${posY}%`;
+        miniDiv.style.backgroundRepeat = 'no-repeat';
+        miniDiv.setAttribute('aria-label', `Zoomed preview for ${title}`);
+        miniDiv.title = `${title} — zoom ${zoom.toFixed(2)}x`;
+
+        // Save some metadata for debugging if needed
+        try { miniDiv.dataset.debug = JSON.stringify({ zoom: Number(zoom.toFixed(2)), posX, posY, src: imageUrl }); } catch(e){}
+
+        gameImageContainer.appendChild(miniDiv);
+        // mark used
+        guessedMovies.push(norm(currentMovie[0]));
+    }
 }
 
 // make getHint async so the fourth hint can fetch slideshow image public URL
@@ -168,8 +254,18 @@ async function getHint() {
                 gameImageContainer.innerHTML = "";
                 const fullImg = document.createElement("img");
 
-                const publicUrl = getPublicImageUrlFromBucket('slideshowImages', imageName);
-                fullImg.src = publicUrl || `../assets/images/slideshow/${imageName}`;
+                // Try to fetch public URL from slideshowImages bucket
+                let fullPublicUrl = null;
+                try {
+                    fullPublicUrl = getPublicImageUrlFromBucket('slideshowImages', imageName);
+                } catch (e) {
+                    console.warn('Error getting slideshow public url', e);
+                }
+                if (fullPublicUrl) {
+                    fullImg.src = fullPublicUrl;
+                } else {
+                    fullImg.src = `../assets/images/slideshow/${imageName}`;
+                }
 
                 fullImg.className = "fullGameImage";
                 fullImg.alt = `Full ${imageName.split('.')[0]} Image`;
