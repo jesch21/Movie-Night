@@ -264,6 +264,134 @@ async function submitGuesserScore(player, score) {
     }
 }
 
+// ---------------- Save-prompt modal ----------------
+function removeSavePrompt(){
+    const overlay = document.getElementById('savePromptOverlay');
+    if(overlay) overlay.remove();
+    // Re-enable body scrolling if you changed it (not necessary here but safe)
+    document.body.style.overflow = '';
+}
+
+function showSavePrompt(playerName, score){
+    // Prevent duplicate prompts
+    if(document.getElementById('savePromptOverlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'savePromptOverlay';
+    overlay.style.position = 'fixed';
+    overlay.style.left = '0';
+    overlay.style.top = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.background = 'rgba(0,0,0,0.65)';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.zIndex = '9999';
+
+    const dialog = document.createElement('div');
+    dialog.style.background = '#F2F5EA';
+    dialog.style.color = '#131313';
+    dialog.style.padding = '20px';
+    dialog.style.borderRadius = '12px';
+    dialog.style.width = 'min(560px, 94%)';
+    dialog.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+    dialog.style.textAlign = 'center';
+
+    const title = document.createElement('h2');
+    title.textContent = 'Save your score?';
+    title.style.marginTop = '0';
+    title.style.color = '#4c0606';
+    dialog.appendChild(title);
+
+    const msg = document.createElement('p');
+    msg.style.margin = '8px 0 16px';
+    msg.textContent = `Player: ${playerName || '(no name)'} — Score: ${score}`;
+    dialog.appendChild(msg);
+
+    const btnRow = document.createElement('div');
+    btnRow.style.display = 'flex';
+    btnRow.style.gap = '12px';
+    btnRow.style.justifyContent = 'center';
+    btnRow.style.marginTop = '12px';
+
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'gameButton';
+    saveBtn.textContent = 'Save score';
+    saveBtn.style.minWidth = '120px';
+
+    const skipBtn = document.createElement('button');
+    skipBtn.className = 'gameButton';
+    skipBtn.textContent = "Don't save";
+    skipBtn.style.minWidth = '120px';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.className = 'gameButton';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.style.minWidth = '120px';
+
+    btnRow.appendChild(saveBtn);
+    btnRow.appendChild(skipBtn);
+    btnRow.appendChild(cancelBtn);
+
+    const statusLine = document.createElement('div');
+    statusLine.id = 'savePromptStatus';
+    statusLine.style.marginTop = '10px';
+    statusLine.style.fontSize = '0.95rem';
+    dialog.appendChild(btnRow);
+    dialog.appendChild(statusLine);
+
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+
+    // Button handlers
+    cancelBtn.addEventListener('click', () => {
+        removeSavePrompt();
+        // allow player to review result screen (we remain on same page - we will still show the final score UI)
+    });
+
+    skipBtn.addEventListener('click', () => {
+        // Do not save, just proceed to results page
+        removeSavePrompt();
+        // navigate to results page
+        window.location.href = "results.html";
+    });
+
+    saveBtn.addEventListener('click', async () => {
+        saveBtn.disabled = true;
+        skipBtn.disabled = true;
+        cancelBtn.disabled = true;
+        statusLine.textContent = 'Submitting score...';
+        try {
+            const { data, error } = await submitGuesserScore(playerName, score);
+            if (error) {
+                console.warn('Guesser leaderboard insert error', error);
+                statusLine.textContent = `Failed to submit: ${error.message || String(error)} — you can try again or choose Don't save.`;
+                saveBtn.disabled = false;
+                skipBtn.disabled = false;
+                cancelBtn.disabled = false;
+            } else {
+                statusLine.textContent = 'Score saved!';
+                // small delay so user sees confirmation
+                setTimeout(() => {
+                    removeSavePrompt();
+                    window.location.href = "results.html";
+                }, 900);
+            }
+        } catch (err) {
+            console.error('Unexpected submission error', err);
+            statusLine.textContent = 'Unexpected error while submitting. Check console.';
+            saveBtn.disabled = false;
+            skipBtn.disabled = false;
+            cancelBtn.disabled = false;
+        }
+    });
+
+    // focus first button for accessibility
+    saveBtn.focus();
+}
+
+// ---------------- End-of-round / reset/score flow ----------------
 async function checkAnswer() {
     const submittedAnswer = document.getElementById("answer").value.trim();
     const correctAnswer = currentMovie[0];
@@ -340,26 +468,31 @@ async function resetPage() {
     wrongGuesses = 0;
 
     if(roundNum === 5) {
-        // Before navigating to results, submit the score into guesser-leaderboard
+        // GAME OVER: show the save prompt asking user to submit or not
         // Determine selected player (read from select on page)
         const playerSelectEl = document.getElementById('playerSelect');
         const playerName = playerSelectEl ? (playerSelectEl.value || '') : '';
 
-        // show a quick message in console & await submission
-        try {
-            const { data, error } = await submitGuesserScore(playerName, totalPoints);
-            if(error){
-                console.warn('Guesser leaderboard insert error', error);
-            } else {
-                console.info('Guesser leaderboard insert success', data);
-            }
-        } catch(err) {
-            console.error('Error while submitting guesser score', err);
+        // Show a small final score summary in the page so player sees it before choosing
+        const finalContainer = document.createElement('div');
+        finalContainer.className = 'result';
+        const header = document.createElement('h3');
+        header.textContent = `Game Over — You scored ${totalPoints} ${totalPoints === 1 ? 'point' : 'points'}.`;
+        finalContainer.appendChild(header);
+        const info = document.createElement('p');
+        info.textContent = 'Would you like to save this score to the leaderboard?';
+        finalContainer.appendChild(info);
+
+        // add to DOM (replace any existing)
+        const correctAnswerSection = document.getElementById("correctAnswer");
+        if (correctAnswerSection) {
+            correctAnswerSection.innerHTML = '';
+            correctAnswerSection.appendChild(finalContainer);
         }
 
-        alert("You got a total of " + totalPoints + " points!");
-        // redirect to results page
-        window.location.href = "results.html";
+        // show modal prompt to Save/Don't Save
+        showSavePrompt(playerName, totalPoints);
+
     } else{
         roundNum++;
         // clear timer text
@@ -369,6 +502,7 @@ async function resetPage() {
     }
 }
 
+// ---------------- Misc UI helpers ----------------
 function displayMovieNames() {
     const nameOptions = document.getElementById("nameOptions");
     if (!nameOptions) return;

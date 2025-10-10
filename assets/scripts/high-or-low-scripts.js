@@ -6,10 +6,8 @@
 // ---------------- Supabase init (keep your keys) ----------------
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-const supabase = window.supabase && window.supabase.createClient ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-// expose single client so other scripts (leaderboard) can reuse it and avoid multiple GoTrueClient instances
-window.hlSupabase = window.hlSupabase || supabase;
-
+// reuse or create a single client to avoid multiple GoTrueClient warnings
+const supabase = window.hlSupabase || (window.supabase && window.supabase.createClient ? (window.hlSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)) : null);
 
 // ---------------- Game state ----------------
 let moviesListAll = [];
@@ -405,7 +403,141 @@ async function handleStartClick(){
   renderMoviesAndSource();
 }
 function updateScoreDisplay(){ scoreDisplay.textContent = `Score: ${score}`; }
-async function showGameOver(){
+
+// ---------------- Save prompt modal for high-or-low ----------------
+function removeHLsavePrompt(){
+  const overlay = document.getElementById('hlSavePromptOverlay');
+  if(overlay) overlay.remove();
+  document.body.style.overflow = '';
+}
+
+function showHLsavePrompt(playerName, score){
+  if(document.getElementById('hlSavePromptOverlay')) return;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'hlSavePromptOverlay';
+  overlay.style.position = 'fixed';
+  overlay.style.left = '0';
+  overlay.style.top = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'rgba(0,0,0,0.65)';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.zIndex = '9999';
+
+  const dialog = document.createElement('div');
+  dialog.style.background = '#F2F5EA';
+  dialog.style.color = '#131313';
+  dialog.style.padding = '20px';
+  dialog.style.borderRadius = '12px';
+  dialog.style.width = 'min(560px, 94%)';
+  dialog.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+  dialog.style.textAlign = 'center';
+
+  const title = document.createElement('h2');
+  title.textContent = 'Save your score?';
+  title.style.marginTop = '0';
+  title.style.color = '#4c0606';
+  dialog.appendChild(title);
+
+  const msg = document.createElement('p');
+  msg.style.margin = '8px 0 16px';
+  msg.textContent = `Player: ${playerName || '(no name)'} — Score: ${score}`;
+  dialog.appendChild(msg);
+
+  const btnRow = document.createElement('div');
+  btnRow.style.display = 'flex';
+  btnRow.style.gap = '12px';
+  btnRow.style.justifyContent = 'center';
+  btnRow.style.marginTop = '12px';
+
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'gameButton';
+  saveBtn.textContent = 'Save score';
+  saveBtn.style.minWidth = '120px';
+
+  const skipBtn = document.createElement('button');
+  skipBtn.className = 'gameButton';
+  skipBtn.textContent = "Don't save";
+  skipBtn.style.minWidth = '120px';
+
+  const cancelBtn = document.createElement('button');
+  cancelBtn.className = 'gameButton';
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.style.minWidth = '120px';
+
+  btnRow.appendChild(saveBtn);
+  btnRow.appendChild(skipBtn);
+  btnRow.appendChild(cancelBtn);
+
+  const statusLine = document.createElement('div');
+  statusLine.id = 'hlSavePromptStatus';
+  statusLine.style.marginTop = '10px';
+  statusLine.style.fontSize = '0.95rem';
+  dialog.appendChild(btnRow);
+  dialog.appendChild(statusLine);
+
+  overlay.appendChild(dialog);
+  document.body.appendChild(overlay);
+
+  cancelBtn.addEventListener('click', () => {
+    removeHLsavePrompt();
+  });
+
+  skipBtn.addEventListener('click', () => {
+    removeHLsavePrompt();
+    // indicate not saved
+    const submitStatusEl = document.getElementById('submitStatus');
+    if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#ffd3d3">Score not saved.</span>`;
+    // re-enable player select (same as previous behavior)
+    const playerSelectEl = document.getElementById('playerSelect');
+    if(playerSelectEl) playerSelectEl.disabled = false;
+  });
+
+  saveBtn.addEventListener('click', async () => {
+    saveBtn.disabled = true;
+    skipBtn.disabled = true;
+    cancelBtn.disabled = true;
+    statusLine.textContent = 'Submitting score...';
+    try {
+      const { data, error } = await submitScoreToLeaderboard(playerName, score);
+      if(error){
+        console.warn('Leaderboard insert error', error);
+        statusLine.textContent = `Failed to submit: ${error.message || String(error)} — you can try again or choose Don't save.`;
+        saveBtn.disabled = false;
+        skipBtn.disabled = false;
+        cancelBtn.disabled = false;
+      } else {
+        const insertedId = (Array.isArray(data) && data[0] && data[0].id) ? data[0].id : null;
+        const msg = insertedId ? `Score submitted (id ${insertedId}).` : 'Score submitted.';
+        // show in page submitStatus and close after short delay
+        const submitStatusEl = document.getElementById('submitStatus');
+        if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#c8ffcf">${msg}</span>`;
+        setTimeout(() => {
+          removeHLsavePrompt();
+          // re-enable select for next game (original behavior)
+          const playerSelectEl = document.getElementById('playerSelect');
+          if(playerSelectEl) playerSelectEl.disabled = false;
+        }, 900);
+      }
+    } catch (err) {
+      console.error('Error while submitting score', err);
+      statusLine.textContent = 'Unexpected submission error.';
+      saveBtn.disabled = false;
+      skipBtn.disabled = false;
+      cancelBtn.disabled = false;
+    }
+  });
+
+  saveBtn.focus();
+};
+
+// ---------------- Ratings & UI ---------------- continued (existing) ----------------
+
+// ---------------- Handlers (continued) ----------------
+function showGameOver(){
   hideRatingsAndAction();
   gameContainer.style.display='none';
   gameOverSection.style.display='block';
@@ -413,34 +545,17 @@ async function showGameOver(){
 
   // Clear previous submit status message
   const submitStatusEl = document.getElementById('submitStatus');
-  if(submitStatusEl) submitStatusEl.textContent = 'Submitting score...';
+  if(submitStatusEl) submitStatusEl.textContent = '';
 
   // Determine selected player (read from select on page)
   const playerSelectEl = document.getElementById('playerSelect');
   const playerName = playerSelectEl ? (playerSelectEl.value || '') : '';
 
-  // Submit (do not block UI; await to show result but UI is visible)
-  try {
-    const { data, error } = await submitScoreToLeaderboard(playerName, score);
-    if(error){
-      console.warn('Leaderboard insert error', error);
-      if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#ffb3b3">Failed to submit score: ${error.message || String(error)}</span>`;
-    } else {
-      // success — show a short confirmation with inserted id if available
-      const insertedId = (Array.isArray(data) && data[0] && data[0].id) ? data[0].id : null;
-      const msg = insertedId ? `Score submitted (id ${insertedId}).` : 'Score submitted.';
-      if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#c8ffcf">${msg}</span>`;
-    }
-  } catch (err) {
-    console.error('Error while submitting score', err);
-    if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#ffb3b3">Unexpected submission error.</span>`;
-  }
-
-  // Re-enable player select so a new player can be chosen if they restart
-  if(playerSelectEl) playerSelectEl.disabled = false;
+  // Instead of auto-submitting, prompt user whether to save
+  showHLsavePrompt(playerName, score);
 }
 
-
+// remaining handlers unchanged
 function handleHigherClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(true); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
 function handleLowerClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(false); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
 
