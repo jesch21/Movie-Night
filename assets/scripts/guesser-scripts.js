@@ -1,38 +1,43 @@
-// --- Supabase setup (safe reuse/expose to avoid multiple GoTrue clients) ---
+// guesser-scripts.js
+// Corona-Guesser full script
+// - Supabase client
+// - fetch movie list + public URLs
+// - dynamic zoomed mini previews (3x-6x by default)
+// - smart autocomplete suggestions for answer input
+// - timer, scoring, hints, result flow
+// - prompt to save to 'guesser-leaderboard' after game ends
+// - passes results to results.html via sessionStorage
+
+// ---------------- Supabase setup (replace these values if needed) ----------------
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
+const supabase = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+// ----------------------------------------------------------------------------------
 
-const supabase = window.hlSupabase || (window.supabase && window.supabase.createClient
-  ? (window.hlSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY))
-  : null);
-
-if(!supabase) console.warn('Supabase client unavailable — check that supabase-js loaded correctly.');
-
-// -----------------------------------------------------
-// movieList will be populated from Supabase. Each entry kept in the same format your game expects:
-// [ title, imageName, length, year, starring, miniImagePublicUrl ]
+// Movie data used by the game:
+// Each entry in movieList will be [ title, imageName, length, year, starring, miniPublicUrl, slideshowPublicUrl ]
 let movieList = [];
 
-let guessedMovies = [];
-let currentHint = 0;
-let currentMovie = [];
-let currentTime;
+let guessedMovies = [];          // normalized titles guessed this session
+let currentHint = 0;             // 0..3 (4 hints)
+let currentMovie = [];           // array as above
+let currentTime = 0;             // seconds left when answering
 let wrongGuesses = 0;
 let timerOn = true;
 let roundNum = 1;
 let totalPoints = 0;
-let timerIntervalId = null;
 
-// --- helpers ---
-function norm(s){ return (s||'').toString().trim().toLowerCase(); }
+// DOM helpers
+function $(id){ return document.getElementById(id); }
+function norm(s){ return typeof s==='string' ? s.trim().toLowerCase() : ''; }
 
+// ---------------- Supabase storage helpers ----------------
 function getPublicImageUrlFromBucket(bucket, imagePath){
     if(!imagePath || !supabase) return null;
     try {
-        // normalize path (remove leading slash if present)
-        const p = typeof imagePath === 'string' && imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+        const p = (typeof imagePath === 'string' && imagePath.startsWith('/')) ? imagePath.slice(1) : imagePath;
         const res = supabase.storage.from(bucket).getPublicUrl(p);
-        // supabase client sometimes returns { data: { publicUrl } } or { publicUrl } shape — handle both
+        // handle shapes { data: { publicUrl } } or { publicUrl } etc.
         if(res){
             if(res.data && (res.data.publicUrl || res.data.publicURL)) return res.data.publicUrl || res.data.publicURL;
             if(res.publicUrl || res.publicURL) return res.publicUrl || res.publicURL;
@@ -43,66 +48,182 @@ function getPublicImageUrlFromBucket(bucket, imagePath){
     return null;
 }
 
-// ---------------- Fetch movie list from Supabase ----------------
-async function fetchMovieListFromSupabase() {
+// ---------------- Fetch movie list ----------------
+async function fetchMovieListFromSupabase(){
     try {
-        // Query only movies with stars not NULL and not "None"
+        if(!supabase){
+            console.warn('Supabase client not available; movieList will remain empty.');
+            movieList = [];
+            return;
+        }
+
+        // Query moviesList: we only need title, image, length, releaseYear, starring
         const { data, error } = await supabase
             .from('moviesList')
             .select('title, image, length, releaseYear, starring')
             .not('stars', 'is', null)
             .neq('stars', 'None');
 
-        if (error) {
+        if(error){
             console.error('Error fetching moviesList:', error);
+            movieList = [];
             return;
         }
 
-        const rows = data || [];
+        const rows = Array.isArray(data) ? data : [];
         const built = [];
 
-        for (const row of rows) {
+        for(const row of rows){
             const title = row.title || '';
-            const imageName = row.image || ''; // stored filename in bucket (e.g. truman.jpg)
+            const imageName = row.image || '';
             const length = row.length || '';
             const year = row.releaseYear || '';
             const starring = row.starring || '';
 
-            // Use helper to get mini image public URL
+            // Get mini image public URL from 'miniImages' (if available)
             let miniPublicUrl = null;
             try {
-                miniPublicUrl = getPublicImageUrlFromBucket('miniImages', imageName);
-            } catch (e) {
-                console.warn('Could not get public URL for', imageName, e);
-            }
+                const u = getPublicImageUrlFromBucket('miniImages', imageName);
+                if(u) miniPublicUrl = u;
+            } catch(e){ console.warn('mini public url error', e); }
 
-            built.push([title, imageName, length, year, starring, miniPublicUrl]);
+            // Get slideshow (full) public URL from 'slideshowImages'
+            let slideshowPublicUrl = null;
+            try {
+                const u2 = getPublicImageUrlFromBucket('slideshowImages', imageName);
+                if(u2) slideshowPublicUrl = u2;
+            } catch(e){ console.warn('slideshow public url error', e); }
+
+            built.push([ title, imageName, length, year, starring, miniPublicUrl, slideshowPublicUrl ]);
         }
 
         movieList = built;
     } catch (err) {
         console.error('Unexpected error fetching movie list:', err);
+        movieList = [];
     }
 }
 
-// ---------------- Game functions ----------------
-function startGame() {
-    const gameContainer = document.getElementById("gameContainer");
-    const startButton = document.getElementById("startButton");
-    const playerArea = document.getElementById("playerArea");
-    const playerSelect = document.getElementById("playerSelect");
-
-    // Hide the player selection area so it disappears during play
-    if (playerArea) playerArea.style.display = 'none';
-    // Lock the select in case you need its value later
-    if (playerSelect) playerSelect.disabled = true;
-
-    gameContainer.style.display = "flex";
-    startButton.style.display = "none";
-
-    startTimer();
-    loadMiniImg();
+// ---------------- Autocomplete suggestion utilities ----------------
+function normalizeForSearch(s){
+  if(!s && s !== 0) return '';
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }
+
+function findSuggestions(query, limit = 10){
+  const q = normalizeForSearch(query || '');
+  if(!q) return [];
+  const tokens = q.split(/\s+/).filter(Boolean);
+  if(tokens.length === 0) return [];
+
+  const matches = [];
+  for(const mv of movieList){
+    const title = mv && mv[0] ? mv[0] : '';
+    const titleNorm = normalizeForSearch(title);
+    let ok = true;
+    let score = 0;
+    for(const t of tokens){
+      const idx = titleNorm.indexOf(t);
+      if(idx === -1){ ok = false; break; }
+      score += (idx >= 0 ? idx : 1000);
+    }
+    if(ok) matches.push({ title, titleNorm, score });
+  }
+
+  matches.sort((a,b) => {
+    if(a.score !== b.score) return a.score - b.score;
+    return a.title.localeCompare(b.title);
+  });
+  return matches.slice(0, limit).map(m => m.title);
+}
+
+function renderSuggestions(suggestions){
+  const container = $('answerSuggestions');
+  if(!container) return;
+  container.innerHTML = '';
+  if(!suggestions || suggestions.length === 0){
+    container.style.display = 'none';
+    container.setAttribute('aria-hidden','true');
+    return;
+  }
+  suggestions.forEach((t, i) => {
+    const div = document.createElement('div');
+    div.className = 'suggestion';
+    div.textContent = t;
+    div.setAttribute('role','option');
+    div.setAttribute('data-index', String(i));
+    div.setAttribute('aria-selected','false');
+    div.addEventListener('click', () => {
+      const input = $('answer');
+      if(!input) return;
+      input.value = t;
+      renderSuggestions([]);
+      input.focus();
+    });
+    container.appendChild(div);
+  });
+  container.style.display = 'block';
+  container.setAttribute('aria-hidden','false');
+}
+
+function setupAnswerAutocomplete(){
+  const input = $('answer');
+  const container = $('answerSuggestions');
+  if(!input || !container) return;
+
+  let suggestions = [];
+  let activeIndex = -1;
+  let debounceId = null;
+
+  function updateSuggestionsFromInput(){
+    const q = input.value || '';
+    suggestions = findSuggestions(q, 10);
+    activeIndex = -1;
+    renderSuggestions(suggestions);
+  }
+
+  input.addEventListener('input', () => {
+    if(debounceId) clearTimeout(debounceId);
+    debounceId = setTimeout(() => {
+      updateSuggestionsFromInput();
+      debounceId = null;
+    }, 150);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    const items = Array.from(container.querySelectorAll('.suggestion'));
+    if(items.length === 0) return;
+
+    if(e.key === 'ArrowDown'){
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % items.length;
+      items.forEach((it, idx) => it.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false'));
+      items[activeIndex].scrollIntoView({ block: 'nearest' });
+    } else if(e.key === 'ArrowUp'){
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+      items.forEach((it, idx) => it.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false'));
+      items[activeIndex].scrollIntoView({ block: 'nearest' });
+    } else if(e.key === 'Enter'){
+      if(activeIndex >= 0 && items[activeIndex]){
+        e.preventDefault();
+        items[activeIndex].click();
+      }
+    } else if(e.key === 'Escape'){
+      renderSuggestions([]);
+    }
+  });
+
+  document.addEventListener('click', (ev) => {
+    if(!container || !input) return;
+    if(ev.target === input) return;
+    if(container.contains(ev.target)) return;
+    renderSuggestions([]);
+  });
+}
+
+// ---------------- Mini preview (dynamic zoom) ----------------
+function safeNormalizeTitle(t){ return typeof t==='string' ? t.trim().toLowerCase() : ''; }
 
 async function loadMiniImg() {
     // guard
@@ -114,7 +235,7 @@ async function loadMiniImg() {
     // If all movies are used, reset guessed list to allow replay
     if (guessedMovies.length >= movieList.length) guessedMovies = [];
 
-    // pick a non-used movie (or allow reuse if all used)
+    // pick non-used movie (try a few times then allow reuse)
     let selectedMovie;
     let attempts = 0;
     do {
@@ -122,7 +243,7 @@ async function loadMiniImg() {
         selectedMovie = movieList[randomIndex];
         attempts++;
         if(attempts > movieList.length + 5) break;
-    } while (selectedMovie && guessedMovies.includes(norm(selectedMovie[0])));
+    } while (selectedMovie && guessedMovies.includes(safeNormalizeTitle(selectedMovie[0])));
 
     if (!selectedMovie) {
         alert("No movie could be selected.");
@@ -130,19 +251,17 @@ async function loadMiniImg() {
     }
 
     currentMovie = selectedMovie;
-    const [title = '', imageName = '', duration, year, mainActor, miniPublicUrl] = currentMovie;
+    const [title = '', imageName = '', duration, year, mainActor, miniPublicUrl, slideshowPublicUrl] = currentMovie;
 
-    const gameImageContainer = document.getElementById("gameImageContainer");
+    const gameImageContainer = $('gameImageContainer');
+    if(!gameImageContainer) return;
     gameImageContainer.innerHTML = "";
 
-    // Try to get the full slideshow image public URL (we will crop from this)
-    let fullImageUrl = getPublicImageUrlFromBucket('slideshowImages', imageName) || null;
-    // Fallback to the miniPublicUrl if full not available (some setups store only mini)
-    if(!fullImageUrl && miniPublicUrl) fullImageUrl = miniPublicUrl;
-    // final fallback to local path
-    if(!fullImageUrl) fullImageUrl = `../assets/images/slideshow/${imageName}`;
+    // prefer slideshowPublicUrl (full image) as the source for zooming; fallback to miniPublicUrl or local path
+    let fullImageUrl = slideshowPublicUrl || miniPublicUrl || null;
+    if(!fullImageUrl && imageName) fullImageUrl = `../assets/images/slideshow/${imageName}`;
 
-    // small neutral SVG placeholder (guaranteed to exist)
+    // placeholder data URI (guaranteed)
     const PLACEHOLDER_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
       `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
          <rect width="100%" height="100%" fill="#111"/>
@@ -150,18 +269,14 @@ async function loadMiniImg() {
        </svg>`
     );
 
-    // We'll attempt to load the image first to ensure URL works. If it loads, create the zoomed DIV.
+    // Test that we can load the image URL; fallback gracefully
     const tester = new Image();
     tester.crossOrigin = 'anonymous';
     let gotUrl = null;
-
-    // Use a timeout in case remote request hangs
     const TIMEOUT_MS = 3000;
     let timeoutId = setTimeout(() => {
-        tester.src = ''; // abort attempt
+        tester.src = '';
         if(!gotUrl){
-            console.warn('Image tester timed out for', fullImageUrl);
-            // continue with placeholder
             insertZoomedDiv(PLACEHOLDER_DATA_URI);
         }
     }, TIMEOUT_MS);
@@ -169,108 +284,80 @@ async function loadMiniImg() {
     tester.onload = () => {
         clearTimeout(timeoutId);
         gotUrl = fullImageUrl;
-        // Insert the zoomed preview using the working URL
         insertZoomedDiv(gotUrl);
     };
     tester.onerror = () => {
         clearTimeout(timeoutId);
-        console.warn('Tester failed to load', fullImageUrl, '— falling back to other options.');
-        // If we tried slideshow path, try miniPublicUrl next (if different)
-        if(fullImageUrl && miniPublicUrl && miniPublicUrl !== fullImageUrl) {
+        // try miniPublicUrl if different
+        if(fullImageUrl && miniPublicUrl && miniPublicUrl !== fullImageUrl){
             const tester2 = new Image();
             tester2.crossOrigin = 'anonymous';
-            let t2timeout = setTimeout(() => {
-                tester2.src = '';
-                insertZoomedDiv(PLACEHOLDER_DATA_URI);
-            }, TIMEOUT_MS);
+            let t2timeout = setTimeout(() => { tester2.src = ''; insertZoomedDiv(PLACEHOLDER_DATA_URI); }, TIMEOUT_MS);
             tester2.onload = () => { clearTimeout(t2timeout); insertZoomedDiv(miniPublicUrl); };
             tester2.onerror = () => { clearTimeout(t2timeout); insertZoomedDiv(PLACEHOLDER_DATA_URI); };
             tester2.src = miniPublicUrl;
             return;
         }
-        // otherwise show placeholder
         insertZoomedDiv(PLACEHOLDER_DATA_URI);
     };
 
-    // start load test
-    try { tester.src = fullImageUrl; } catch(e){ clearTimeout(timeoutId); console.warn('Error setting tester.src', e); insertZoomedDiv(PLACEHOLDER_DATA_URI); }
+    try { tester.src = fullImageUrl; } catch(e){ clearTimeout(timeoutId); console.warn('Tester error', e); insertZoomedDiv(PLACEHOLDER_DATA_URI); }
 
-    // helper that actually inserts the zoomed DIV; keeps it square and sets zoom/position
-    function insertZoomedDiv(imageUrl) {
-        // ----- DYNAMIC ZOOM PARAMETERS -----
-        // increase the default zoom range so previews are more heavily zoomed
-        const MIN_ZOOM = 3.0;   // previously 2.0 — now at least 3×
-        const MAX_ZOOM = 6.0;   // previously 4.0 — can go up to 6×
-        const zoom = MIN_ZOOM + Math.random() * (MAX_ZOOM - MIN_ZOOM); // float between MIN_ZOOM..MAX_ZOOM
+    // helper inserts the zoomed DIV with random crop
+    function insertZoomedDiv(imageUrl){
+        const MIN_ZOOM = 3.0;   // 3x minimum
+        const MAX_ZOOM = 6.0;   // 6x maximum
+        const zoom = MIN_ZOOM + Math.random() * (MAX_ZOOM - MIN_ZOOM);
 
-        // choose background position as percentages but keep clamped so we always show valid content
+        // choose centered percentages but keep wide range
         const posX = Math.floor(Math.random() * 101); // 0..100
         const posY = Math.floor(Math.random() * 101); // 0..100
 
         const miniDiv = document.createElement('div');
         miniDiv.className = 'miniGameImage zoomed';
-        miniDiv.style.width = '';  // allow CSS to control size
-        miniDiv.style.height = '';
         miniDiv.style.backgroundImage = `url("${imageUrl}")`;
-        // background-size: zoom*100% width and 'auto' height to preserve aspect ratio
         miniDiv.style.backgroundSize = `${zoom * 100}% auto`;
         miniDiv.style.backgroundPosition = `${posX}% ${posY}%`;
         miniDiv.style.backgroundRepeat = 'no-repeat';
         miniDiv.setAttribute('aria-label', `Zoomed preview for ${title}`);
         miniDiv.title = `${title} — zoom ${zoom.toFixed(2)}x`;
-
-        // Save some metadata for debugging if needed
         try { miniDiv.dataset.debug = JSON.stringify({ zoom: Number(zoom.toFixed(2)), posX, posY, src: imageUrl }); } catch(e){}
 
         gameImageContainer.appendChild(miniDiv);
-        // mark used
-        guessedMovies.push(norm(currentMovie[0]));
+        guessedMovies.push(safeNormalizeTitle(currentMovie[0]));
     }
 }
 
-// make getHint async so the fourth hint can fetch slideshow image public URL
+// ---------------- Hints logic ----------------
 async function getHint() {
     if (currentHint < 4) {
         switch(currentHint) {
             case 0:
-                document.getElementById("hint1").style.display = "block";
-                let hint1Text = currentMovie[2];
-                document.querySelector("#hint1 p").textContent = hint1Text;
+                $('hint1').style.display = "block";
+                document.querySelector("#hint1 p").textContent = currentMovie[2] || '';
                 break;
             case 1:
-                document.getElementById("hint2").style.display = "block";
-                let hint2Text = currentMovie[3];
-                document.querySelector("#hint2 p").textContent = hint2Text;
+                $('hint2').style.display = "block";
+                document.querySelector("#hint2 p").textContent = currentMovie[3] || '';
                 break;
             case 2:
-                document.getElementById("hint3").style.display = "block";
-                let hint3Text = currentMovie[4];
-                document.querySelector("#hint3 p").textContent = hint3Text;
+                $('hint3').style.display = "block";
+                document.querySelector("#hint3 p").textContent = currentMovie[4] || '';
                 break;
             case 3:
-                document.getElementById("hint4").style.display = "block";
-                const gameImageContainer = document.getElementById("gameImageContainer");
-                let imageName = currentMovie[1];
-
+                $('hint4').style.display = "block";
+                const gameImageContainer = $('gameImageContainer');
                 gameImageContainer.innerHTML = "";
                 const fullImg = document.createElement("img");
-
-                // Try to fetch public URL from slideshowImages bucket
-                let fullPublicUrl = null;
-                try {
-                    fullPublicUrl = getPublicImageUrlFromBucket('slideshowImages', imageName);
-                } catch (e) {
-                    console.warn('Error getting slideshow public url', e);
-                }
-                if (fullPublicUrl) {
-                    fullImg.src = fullPublicUrl;
-                } else {
-                    fullImg.src = `../assets/images/slideshow/${imageName}`;
-                }
-
+                const imageName = currentMovie[1] || '';
+                // try slideshowPublicUrl first
+                let fullPublicUrl = currentMovie[6] || null;
+                if(!fullPublicUrl && currentMovie[5]) fullPublicUrl = currentMovie[5]; // fall back to miniPublicUrl
+                if(!fullPublicUrl && imageName) fullPublicUrl = `../assets/images/slideshow/${imageName}`;
                 fullImg.className = "fullGameImage";
-                fullImg.alt = `Full ${imageName.split('.')[0]} Image`;
-
+                fullImg.alt = `Full ${imageName.split('.')[0] || 'image'} Image`;
+                fullImg.crossOrigin = 'anonymous';
+                fullImg.src = fullPublicUrl;
                 gameImageContainer.appendChild(fullImg);
                 break;
         }
@@ -280,71 +367,143 @@ async function getHint() {
     }
 }
 
+// ---------------- Timer & scoring ----------------
 function startTimer() {
-    let timerElement = document.getElementById("timer").querySelector("p");
-    let timeRemaining = 120;  // Initial time in seconds
+    const timerElement = document.getElementById("timer") && document.getElementById("timer").querySelector("p");
+    if(!timerElement) return;
+    let timeRemaining = 120;
+    currentTime = timeRemaining;
+    timerOn = true;
 
-    currentTime = timeRemaining;  // Store the initial time in the global variable
-
-    if (timerIntervalId) {
-        clearInterval(timerIntervalId);
-        timerIntervalId = null;
-    }
-
-    timerIntervalId = setInterval(() => {
+    const timerInterval = setInterval(() => {
         let minutes = Math.floor(timeRemaining / 60);
         let seconds = timeRemaining % 60;
-
         seconds = seconds < 10 ? "0" + seconds : seconds;
         timerElement.textContent = `${minutes}:${seconds} left`;
 
         if (timeRemaining <= 0) {
-            clearInterval(timerIntervalId);
-            timerIntervalId = null;
+            clearInterval(timerInterval);
             timerElement.textContent = "Time's up!";
             alert("You ran out of time! The answer was " + currentMovie[0] + "! Click OK to move on to the next round!");
             currentTime = 0;
-
-            // move to next round immediately
+            timerOn = false;
             resetPage();
         } else if (timerOn === false) {
-            clearInterval(timerIntervalId);
-            timerIntervalId = null;
-            timerElement.textContent = ``;
+            clearInterval(timerInterval);
+            if(timerElement) timerElement.textContent = ``;
         }
-
-        currentTime = timeRemaining;  // Update the global currentTime with the remaining time
+        currentTime = timeRemaining;
         timeRemaining--;
     }, 1000);
 }
 
 function calculatePoints(){
-    if(currentTime === 0){return 0;}
-
+    if(currentTime === 0){ return 0; }
     let hintPoints = 4 - currentHint;
     let wrongPoints = 20 * wrongGuesses;
-    if(wrongPoints > 100){wrongPoints = 100;}
+    if(wrongPoints > 100){ wrongPoints = 100; }
     if(hintPoints > 0) {
-        hintPoints = ((hintPoints*120)/4)
+        hintPoints = ((hintPoints*120)/4);
     }
-
-    return (currentTime+hintPoints - wrongPoints);
+    return Math.max(0, Math.floor(currentTime + hintPoints - wrongPoints));
 }
 
-function clearTimerImmediately(){
-    if(timerIntervalId){
-        clearInterval(timerIntervalId);
-        timerIntervalId = null;
+// ---------------- Answer checking ----------------
+function checkAnswer(){
+    const inputEl = $('answer');
+    if(!inputEl) return;
+    const submittedAnswer = inputEl.value.trim();
+    const correctAnswer = currentMovie[0] || '';
+    const correctAnswerSection = $('correctAnswer');
+
+    // remove previous
+    const previousResult = correctAnswerSection.querySelector('.result');
+    if(previousResult) previousResult.remove();
+
+    if (submittedAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
+        const points = calculatePoints();
+        totalPoints += points;
+
+        const resultContainer = document.createElement('div');
+        resultContainer.className = 'result';
+
+        timerOn = false;
+
+        const successMessage = document.createElement('h3');
+        successMessage.textContent = `Correct! You earned ${points} points!`;
+        resultContainer.appendChild(successMessage);
+
+        const nextButton = document.createElement('button');
+        nextButton.textContent = "Next";
+        nextButton.className = 'gameButton';
+        nextButton.onclick = resetPage;
+        resultContainer.appendChild(nextButton);
+
+        correctAnswerSection.appendChild(resultContainer);
+    } else {
+        wrongGuesses++;
+        alert("Incorrect! Check your spelling & try again!");
     }
 }
 
-// submit score to guesser-leaderboard
-async function submitGuesserScore(player, score) {
-    if (!supabase) {
+// ---------------- Reset / Next round / Endgame ----------------
+function resetPage() {
+    // hide hints
+    for (let i = 1; i <= 4; i++) {
+        const hint = $('hint' + i);
+        if(hint) { hint.style.display = "none"; if(hint.querySelector("p")) hint.querySelector("p").textContent = ""; }
+    }
+
+    const correctAnswerSection = $('correctAnswer');
+    if(correctAnswerSection) correctAnswerSection.innerHTML = '';
+
+    const gameImageContainer = $('gameImageContainer');
+    if(gameImageContainer) gameImageContainer.innerHTML = '';
+
+    const answerInput = $('answer');
+    if(answerInput) answerInput.value = '';
+
+    currentHint = 0;
+    timerOn = true;
+    wrongGuesses = 0;
+
+    if(roundNum === 5) {
+        // End of session: ask to save score then go to results
+        // Determine selected player if present
+        const playerSelectEl = $('playerSelect');
+        const playerName = playerSelectEl ? (playerSelectEl.value || '') : (sessionStorage.getItem('guesserPlayerName') || '');
+
+        // show save prompt then redirect to results
+        showGuesserSavePrompt(playerName, totalPoints).then(() => {
+            // after user chooses (saved or not), pass results to results page via sessionStorage and navigate
+            sessionStorage.setItem('guesser_last_score', String(totalPoints));
+            sessionStorage.setItem('guesser_last_player', playerName || '');
+            // also add a flag so results.html can show the game-bottom image if desired
+            sessionStorage.setItem('guesser_show_game_bottom', '1');
+            window.location.href = "results.html";
+        }).catch((err) => {
+            console.error('Save prompt flow error', err);
+            // still go to results
+            sessionStorage.setItem('guesser_last_score', String(totalPoints));
+            sessionStorage.setItem('guesser_last_player', playerName || '');
+            sessionStorage.setItem('guesser_show_game_bottom', '1');
+            window.location.href = "results.html";
+        });
+    } else {
+        roundNum++;
+        // start next round
+        loadMiniImg();
+        startTimer();
+    }
+}
+
+// ---------------- Leaderboard submission helper (guesser) ----------------
+async function submitScoreToGuesserLeaderboard(player, score){
+    if(!supabase){
         console.warn('Supabase client unavailable — cannot submit score.');
         return { data: null, error: new Error('Supabase client unavailable') };
     }
-    if (!player) {
+    if(!player){
         console.warn('No player selected — skipping submit.');
         return { data: null, error: new Error('No player selected') };
     }
@@ -356,328 +515,303 @@ async function submitGuesserScore(player, score) {
             .select();
         return { data, error };
     } catch (err) {
-        console.error('submitGuesserScore unexpected error', err);
+        console.error('submitScoreToGuesserLeaderboard unexpected error', err);
         return { data: null, error: err };
     }
 }
 
-// ---------------- Save-prompt modal ----------------
-function removeSavePrompt(){
-    const overlay = document.getElementById('savePromptOverlay');
-    if(overlay) overlay.remove();
-    // Re-enable body scrolling if you changed it (not necessary here but safe)
-    document.body.style.overflow = '';
-}
-
-function showSavePrompt(playerName, score){
-    // Prevent duplicate prompts
-    if(document.getElementById('savePromptOverlay')) return;
-
-    const overlay = document.createElement('div');
-    overlay.id = 'savePromptOverlay';
-    overlay.style.position = 'fixed';
-    overlay.style.left = '0';
-    overlay.style.top = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.background = 'rgba(0,0,0,0.65)';
-    overlay.style.display = 'flex';
-    overlay.style.alignItems = 'center';
-    overlay.style.justifyContent = 'center';
-    overlay.style.zIndex = '9999';
-
-    const dialog = document.createElement('div');
-    dialog.style.background = '#F2F5EA';
-    dialog.style.color = '#131313';
-    dialog.style.padding = '20px';
-    dialog.style.borderRadius = '12px';
-    dialog.style.width = 'min(560px, 94%)';
-    dialog.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
-    dialog.style.textAlign = 'center';
-
-    const title = document.createElement('h2');
-    title.textContent = 'Save your score?';
-    title.style.marginTop = '0';
-    title.style.color = '#4c0606';
-    dialog.appendChild(title);
-
-    const msg = document.createElement('p');
-    msg.style.margin = '8px 0 16px';
-    msg.textContent = `Player: ${playerName || '(no name)'} — Score: ${score}`;
-    dialog.appendChild(msg);
-
-    const btnRow = document.createElement('div');
-    btnRow.style.display = 'flex';
-    btnRow.style.gap = '12px';
-    btnRow.style.justifyContent = 'center';
-    btnRow.style.marginTop = '12px';
-
-    const saveBtn = document.createElement('button');
-    saveBtn.className = 'gameButton';
-    saveBtn.textContent = 'Save score';
-    saveBtn.style.minWidth = '120px';
-
-    const skipBtn = document.createElement('button');
-    skipBtn.className = 'gameButton';
-    skipBtn.textContent = "Don't save";
-    skipBtn.style.minWidth = '120px';
-
-    const cancelBtn = document.createElement('button');
-    cancelBtn.className = 'gameButton';
-    cancelBtn.textContent = 'Cancel';
-    cancelBtn.style.minWidth = '120px';
-
-    btnRow.appendChild(saveBtn);
-    btnRow.appendChild(skipBtn);
-    btnRow.appendChild(cancelBtn);
-
-    const statusLine = document.createElement('div');
-    statusLine.id = 'savePromptStatus';
-    statusLine.style.marginTop = '10px';
-    statusLine.style.fontSize = '0.95rem';
-    dialog.appendChild(btnRow);
-    dialog.appendChild(statusLine);
-
-    overlay.appendChild(dialog);
-    document.body.appendChild(overlay);
-
-    // Button handlers
-    cancelBtn.addEventListener('click', () => {
-        removeSavePrompt();
-        // allow player to review result screen (we remain on same page - we will still show the final score UI)
-    });
-
-    skipBtn.addEventListener('click', () => {
-        // Do not save, just proceed to results page
-        removeSavePrompt();
-        // navigate to results page
-        window.location.href = "results.html";
-    });
-
-    saveBtn.addEventListener('click', async () => {
-        saveBtn.disabled = true;
-        skipBtn.disabled = true;
-        cancelBtn.disabled = true;
-        statusLine.textContent = 'Submitting score...';
-        try {
-            const { data, error } = await submitGuesserScore(playerName, score);
-            if (error) {
-                console.warn('Guesser leaderboard insert error', error);
-                statusLine.textContent = `Failed to submit: ${error.message || String(error)} — you can try again or choose Don't save.`;
-                saveBtn.disabled = false;
-                skipBtn.disabled = false;
-                cancelBtn.disabled = false;
-            } else {
-                statusLine.textContent = 'Score saved!';
-                // small delay so user sees confirmation
-                setTimeout(() => {
-                    removeSavePrompt();
-                    window.location.href = "results.html";
-                }, 900);
-            }
-        } catch (err) {
-            console.error('Unexpected submission error', err);
-            statusLine.textContent = 'Unexpected error while submitting. Check console.';
-            saveBtn.disabled = false;
-            skipBtn.disabled = false;
-            cancelBtn.disabled = false;
+// ---------------- Save prompt modal for guesser ----------------
+function showGuesserSavePrompt(playerName, score){
+    // returns a Promise that resolves when the user finishes the flow (save or don't save or cancel)
+    return new Promise((resolve, reject) => {
+        // don't create duplicate overlay
+        if(document.getElementById('guesserSavePromptOverlay')) {
+            resolve();
+            return;
         }
-    });
 
-    // focus first button for accessibility
-    saveBtn.focus();
-}
+        const overlay = document.createElement('div');
+        overlay.id = 'guesserSavePromptOverlay';
+        overlay.style.position = 'fixed';
+        overlay.style.left = '0';
+        overlay.style.top = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.7)';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.zIndex = '9999';
 
-// ---------------- End-of-round / reset/score flow ----------------
-async function checkAnswer() {
-    const submittedAnswer = document.getElementById("answer").value.trim();
-    const correctAnswer = currentMovie[0];
-    const correctAnswerSection = document.getElementById("correctAnswer");
+        const dialog = document.createElement('div');
+        dialog.style.background = '#F2F5EA';
+        dialog.style.color = '#131313';
+        dialog.style.padding = '20px';
+        dialog.style.borderRadius = '12px';
+        dialog.style.width = 'min(580px, 94%)';
+        dialog.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+        dialog.style.textAlign = 'center';
 
-    // Clear previous results if any
-    const previousResult = document.querySelector("#correctAnswer .result");
-    if (previousResult) {
-        previousResult.remove();
-    }
+        const title = document.createElement('h2');
+        title.textContent = 'Save your score?';
+        title.style.marginTop = '0';
+        title.style.color = '#4c0606';
+        dialog.appendChild(title);
 
-    if (submittedAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
-        // Calculate Points
-        let points = calculatePoints();
-        totalPoints += points;
+        const msg = document.createElement('p');
+        msg.style.margin = '8px 0 16px';
+        msg.textContent = `Player: ${playerName || '(no name)'} — Score: ${score}`;
+        dialog.appendChild(msg);
 
-        // Create a container for the result
-        const resultContainer = document.createElement("div");
-        resultContainer.className = "result";
+        const btnRow = document.createElement('div');
+        btnRow.style.display = 'flex';
+        btnRow.style.gap = '12px';
+        btnRow.style.justifyContent = 'center';
+        btnRow.style.marginTop = '12px';
 
-        // Turn off timer
-        timerOn = false;
-        clearTimerImmediately();
+        const saveBtn = document.createElement('button');
+        saveBtn.className = 'gameButton';
+        saveBtn.textContent = 'Save score';
+        saveBtn.style.minWidth = '120px';
 
-        // Create the success message
-        const successMessage = document.createElement("h3");
-        successMessage.textContent = `Correct! You earned ${points} points!`;
-        resultContainer.appendChild(successMessage);
+        const skipBtn = document.createElement('button');
+        skipBtn.className = 'gameButton';
+        skipBtn.textContent = "Don't save";
+        skipBtn.style.minWidth = '120px';
 
-        // Create the button
-        const nextButton = document.createElement("button");
-        nextButton.textContent = "Next";
-        nextButton.onclick = resetPage; // Call resetPage to reset the game (resetPage is async)
-        resultContainer.appendChild(nextButton);
+        const cancelBtn = document.createElement('button');
+        cancelBtn.className = 'gameButton';
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.style.minWidth = '120px';
 
-        // Append the result to the correctAnswer section
-        correctAnswerSection.appendChild(resultContainer);
-    } else {
-        wrongGuesses++;
-        alert("Incorrect! Check your spelling & try again!");
-    }
-}
+        btnRow.appendChild(saveBtn);
+        btnRow.appendChild(skipBtn);
+        btnRow.appendChild(cancelBtn);
 
-async function resetPage() {
-    // Remove all displayed hints
-    for (let i = 1; i <= 4; i++) {
-        const hint = document.getElementById(`hint${i}`);
-        if (hint) {
-            hint.style.display = "none";
-            if (hint.querySelector("p")) {
-                hint.querySelector("p").textContent = "";
+        const statusLine = document.createElement('div');
+        statusLine.id = 'guesserSavePromptStatus';
+        statusLine.style.marginTop = '10px';
+        statusLine.style.fontSize = '0.95rem';
+        dialog.appendChild(btnRow);
+        dialog.appendChild(statusLine);
+
+        overlay.appendChild(dialog);
+        document.body.appendChild(overlay);
+
+        cancelBtn.addEventListener('click', () => {
+            overlay.remove();
+            resolve(); // resolve (no save) and continue to results
+        });
+
+        skipBtn.addEventListener('click', () => {
+            overlay.remove();
+            // mark in-page status
+            const statusEl = $('submitStatus');
+            if(statusEl) statusEl.innerHTML = `<span style="color:#ffd3d3">Score not saved.</span>`;
+            resolve();
+        });
+
+        saveBtn.addEventListener('click', async () => {
+            saveBtn.disabled = true; skipBtn.disabled = true; cancelBtn.disabled = true;
+            statusLine.textContent = 'Submitting score...';
+            try {
+                const { data, error } = await submitScoreToGuesserLeaderboard(playerName, score);
+                if(error){
+                    console.warn('Leaderboard insert error', error);
+                    statusLine.textContent = `Failed to submit: ${error.message || String(error)} — try again or choose Don't save.`;
+                    saveBtn.disabled = false; skipBtn.disabled = false; cancelBtn.disabled = false;
+                } else {
+                    const insertedId = (Array.isArray(data) && data[0] && data[0].id) ? data[0].id : null;
+                    const msg = insertedId ? `Score submitted (id ${insertedId}).` : 'Score submitted.';
+                    const statusEl = $('submitStatus');
+                    if(statusEl) statusEl.innerHTML = `<span style="color:#c8ffcf">${msg}</span>`;
+                    setTimeout(() => { overlay.remove(); resolve(); }, 700);
+                }
+            } catch (err) {
+                console.error('Error while submitting score', err);
+                statusLine.textContent = 'Unexpected submission error.';
+                saveBtn.disabled = false; skipBtn.disabled = false; cancelBtn.disabled = false;
             }
-        }
+        });
+
+        saveBtn.focus();
+    });
+}
+
+// ---------------- UI helpers ----------------
+function addLeaderboardLinksIfNeeded(){
+    // add a small "View Leaderboard" anchor to instructions and results sections if present
+    const instructions = $('instructions');
+    if(instructions && !$('guesserLeaderboardLink')) {
+        const a = document.createElement('a');
+        a.id = 'guesserLeaderboardLink';
+        a.href = 'leaderboard.html';
+        a.textContent = 'View Leaderboard';
+        a.className = 'gameButton';
+        a.style.display = 'inline-block';
+        a.style.marginTop = '8px';
+        instructions.appendChild(a);
+    }
+    const results = $('results');
+    if(results && !$('guesserLeaderboardLinkResults')){
+        const a2 = document.createElement('a');
+        a2.id = 'guesserLeaderboardLinkResults';
+        a2.href = 'leaderboard.html';
+        a2.textContent = 'View Leaderboard';
+        a2.className = 'gameButton';
+        a2.style.display = 'inline-block';
+        a2.style.marginTop = '8px';
+        results.appendChild(a2);
+    }
+}
+
+// ---------------- Start / Restart handlers ----------------
+function startGame(){
+    const gameContainer = $('gameContainer');
+    const startBtn = $('startButton');
+    const instructions = $('instructions');
+    const playerSelectEl = $('playerSelect');
+    // require selection if playerSelect exists
+    if(playerSelectEl && !playerSelectEl.value){
+        alert('Please select your name before starting the game.');
+        return;
+    }
+    // hide instructions & name selection to prevent mid-game changes
+    if(instructions) instructions.style.display = 'none';
+    // if there is a container that holds playerSelect (id playerSelectContainer) hide it too
+    const playerContainer = $('playerSelectContainer');
+    if(playerContainer) playerContainer.style.display = 'none';
+
+    if(gameContainer) gameContainer.style.display = 'flex';
+    if(startBtn) startBtn.style.display = 'none';
+
+    // persist selected player name to sessionStorage so results page can read it later
+    if(playerSelectEl && playerSelectEl.value){
+        sessionStorage.setItem('guesserPlayerName', playerSelectEl.value);
     }
 
-    // Clear the correctAnswer section
-    const correctAnswerSection = document.getElementById("correctAnswer");
-    if (correctAnswerSection) correctAnswerSection.innerHTML = "";
+    // start game
+    startTimer();
+    loadMiniImg();
+}
 
-    // Clear the gameImageContainer
-    const gameImageContainer = document.getElementById("gameImageContainer");
-    if (gameImageContainer) gameImageContainer.innerHTML = "";
-
-    // Reset the input field in the gameAnswer section
-    const answerInput = document.getElementById("answer");
-    if (answerInput) answerInput.value = "";
-
-    // Reset the hint counter
+function handleRestart(){
+    // re-enable UI
+    const gameContainer = $('gameContainer');
+    const instructions = $('instructions');
+    const startBtn = $('startButton');
+    if(gameContainer) gameContainer.style.display = 'none';
+    if(instructions) instructions.style.display = '';
+    if(startBtn) startBtn.style.display = '';
+    // re-enable select container
+    const playerContainer = $('playerSelectContainer');
+    if(playerContainer) playerContainer.style.display = '';
+    // reset state
+    guessedMovies = [];
     currentHint = 0;
-
-    // Reset Timer Boolean
-    timerOn = true;
-
+    currentMovie = [];
+    currentTime = 0;
     wrongGuesses = 0;
+    timerOn = true;
+    roundNum = 1;
+    totalPoints = 0;
+    // clear UI spots
+    const gameImageContainer = $('gameImageContainer');
+    if(gameImageContainer) gameImageContainer.innerHTML = '';
+    const correctAnswerSection = $('correctAnswer');
+    if(correctAnswerSection) correctAnswerSection.innerHTML = '';
+    // re-enable startButton depending on playerSelect value (if it exists)
+    const playerSelectEl = $('playerSelect');
+    if(playerSelectEl && startButton) startButton.disabled = !playerSelectEl.value;
+}
 
-    if(roundNum === 5) {
-        // GAME OVER: show the save prompt asking user to submit or not
-        // Determine selected player (read from select on page)
-        const playerSelectEl = document.getElementById('playerSelect');
-        const playerName = playerSelectEl ? (playerSelectEl.value || '') : '';
-
-        // Show a small final score summary in the page so player sees it before choosing
-        const finalContainer = document.createElement('div');
-        finalContainer.className = 'result';
-        const header = document.createElement('h3');
-        header.textContent = `Game Over — You scored ${totalPoints} ${totalPoints === 1 ? 'point' : 'points'}.`;
-        finalContainer.appendChild(header);
-        const info = document.createElement('p');
-        info.textContent = 'Would you like to save this score to the leaderboard?';
-        finalContainer.appendChild(info);
-
-        // add to DOM (replace any existing)
-        const correctAnswerSection = document.getElementById("correctAnswer");
-        if (correctAnswerSection) {
-            correctAnswerSection.innerHTML = '';
-            correctAnswerSection.appendChild(finalContainer);
-        }
-
-        // show modal prompt to Save/Don't Save
-        showSavePrompt(playerName, totalPoints);
-
-    } else{
-        roundNum++;
-        // clear timer text
-        const timerEl = document.getElementById("timer").querySelector("p");
-        if(timerEl) timerEl.textContent = '';
-        startGame();
+// ---------------- Results page population ----------------
+function populateResultsPageIfPresent(){
+    const resultsSection = $('results');
+    if(!resultsSection) return;
+    const lastScore = sessionStorage.getItem('guesser_last_score') || '';
+    const lastPlayer = sessionStorage.getItem('guesser_last_player') || '';
+    const showBottom = sessionStorage.getItem('guesser_show_game_bottom') === '1';
+    // display message
+    resultsSection.innerHTML = `<h2>You Did It!</h2>
+      <p>Game Done!</p>
+      <p style="color:#F2F5EA; font-size:20px;">${lastPlayer ? (lastPlayer + ' — ') : ''}Score: ${lastScore}</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:10px; flex-wrap:wrap;">
+         <a href="index.html" class="gameButton">Play Again</a>
+         <a href="leaderboard.html" class="gameButton">View Leaderboard</a>
+      </div>
+    `;
+    if(showBottom){
+        const img = document.createElement('img');
+        img.src = '../assets/images/game-bottom.png';
+        img.id = 'gameBottomImg';
+        img.alt = 'Bottom of Page Image';
+        img.style.marginTop = '18px';
+        img.style.width = '80%';
+        resultsSection.appendChild(img);
     }
 }
 
-// ---------------- Misc UI helpers ----------------
-function displayMovieNames() {
-    const nameOptions = document.getElementById("nameOptions");
-    if (!nameOptions) return;
-    nameOptions.innerHTML = ""; // Clear any existing content
+// ---------------- Initialization ----------------
+(async function init(){
+    // fetch movies first
+    await fetchMovieListFromSupabase();
 
-    // Add the H3 heading
-    const heading = document.createElement("h3");
-    heading.textContent = "All Available Answers";
-    nameOptions.appendChild(heading);
+    // Add leaderboard links to start/results if possible
+    addLeaderboardLinksIfNeeded();
 
-    // Add the movie names
-    movieList.forEach(movie => {
-        const movieName = movie[0]; // Get the movie name from the list
-        const movieElement = document.createElement("p"); // Create a paragraph element
-        movieElement.textContent = movieName; // Set the text content to the movie name
-        nameOptions.appendChild(movieElement); // Append the element to the nameOptions section
-    });
+    // Setup autocomplete (will use movieList)
+    setupAnswerAutocomplete();
 
-    toggleMovieList();
-}
-
-function toggleMovieList() {
-    const nameOptions = document.getElementById("nameOptions");
-    if (!nameOptions) return;
-    if (nameOptions.style.display === "none") {
-        nameOptions.style.display = "block"; // Show the list
-    } else {
-        nameOptions.style.display = "none"; // Hide the list
-    }
-}
-
-// Add the toggle button
-function addToggleButton() {
-    const button = document.createElement("button");
-    button.textContent = "Toggle Movie List";
-    button.onclick = toggleMovieList;
-    button.style.cursor = "pointer";
-
-    const nameOptions = document.getElementById("nameOptions");
-    if (nameOptions) nameOptions.before(button); // Add the button before the nameOptions section
-}
-
-// ---------------- Wire UI events for start/submit/hints and enable logic ----------------
-document.addEventListener('DOMContentLoaded', () => {
-    const playerSelectEl = document.getElementById('playerSelect');
-    const startBtn = document.getElementById('startButton');
-    const hintBtn = document.getElementById('hintBtn');
-    const submitBtn = document.getElementById('submit');
-
-    function updateStartEnabled(){
-        if (!startBtn) return;
-        const nameChosen = playerSelectEl && playerSelectEl.value;
-        startBtn.disabled = !nameChosen;
-    }
-
-    if (playerSelectEl) playerSelectEl.addEventListener('change', updateStartEnabled);
-
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            // Lock name selection during gameplay and hide the player area
-            const playerArea = document.getElementById('playerArea');
-            if (playerArea) playerArea.style.display = 'none';
-            if (playerSelectEl) playerSelectEl.disabled = true;
-            startGame();
+    // Wire up buttons & inputs
+    const startBtn = $('startButton');
+    const hintBtn = document.querySelector('#instructions button[onclick*="startGame"]') || null;
+    // playerSelect behavior: enable/disable start button if playerSelect present
+    const playerSelectEl = $('playerSelect');
+    if(playerSelectEl && startBtn){
+        // ensure start disabled until a valid name chosen
+        startBtn.disabled = !playerSelectEl.value;
+        playerSelectEl.addEventListener('change', () => {
+            startBtn.disabled = !playerSelectEl.value;
         });
     }
 
-    if (hintBtn) hintBtn.addEventListener('click', getHint);
-    if (submitBtn) submitBtn.addEventListener('click', checkAnswer);
+    if(startBtn) {
+        startBtn.addEventListener('click', startGame);
+    }
+    // wire hint button
+    const hintButton = document.querySelector('button[onclick="getHint();"]') || null;
+    if(hintButton) hintButton.addEventListener('click', getHint);
 
-    // initialize UI state
-    updateStartEnabled();
-});
+    // submit button
+    const submitBtn = $('submit');
+    if(submitBtn) submitBtn.addEventListener('click', (e) => { e.preventDefault(); checkAnswer(); });
 
-// --- Initialize: fetch movie list from Supabase, then initialize UI that depends on movieList ---
-(async function init() {
-    await fetchMovieListFromSupabase();
-    // after fetching, populate the movie list UI and add the toggle button
-    displayMovieNames();
-    addToggleButton();
+    // results page population if loaded
+    populateResultsPageIfPresent();
+
+    // add toggle button for list if still present previously (hide old displayMovieNames)
+    const toggleBtn = document.createElement('button');
+    toggleBtn.textContent = 'Toggle Movie List';
+    toggleBtn.style.cursor = 'pointer';
+    toggleBtn.className = 'gameButton';
+    toggleBtn.style.display = 'none'; // hide by default (user didn't want the list shown)
+    // if the old nameOptions exist, insert toggle to allow dev to show if desired (kept hidden)
+    const nameOptions = $('nameOptions');
+    if(nameOptions) {
+        nameOptions.before(toggleBtn);
+        toggleBtn.addEventListener('click', () => {
+            if(nameOptions.style.display === 'none' || nameOptions.style.display === '') {
+                // show as block
+                nameOptions.style.display = 'block';
+            } else {
+                nameOptions.style.display = 'none';
+            }
+        });
+    }
+
+    // Restart button wiring (if results page has a Play Again button it links back to index.html)
+    const restartBtn = $('startButton'); // reuse
+    // nothing more needed here
+
 })();

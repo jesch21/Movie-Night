@@ -807,3 +807,46 @@ footer {
         font-size: 17px;
     }
   }
+
+  /* ========== Autocomplete suggestions for answer input ========== */
+.suggestions {
+  margin: 6px auto 0;
+  width: min(720px, 90%);
+  max-width: 720px;
+  background: rgba(242,245,234,0.98); /* off-white-ish card */
+  color: #131313;
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  overflow: hidden;
+  border: 2px solid #000;
+  display: none; /* shown by JS when populated */
+  z-index: 1000;
+  position: relative;
+  padding: 0;
+}
+
+/* Each suggestion row */
+.suggestions .suggestion {
+  padding: 10px 14px;
+  font-family: 'Lucida Sans', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  user-select: none;
+}
+
+/* Hover and focus style */
+.suggestions .suggestion:hover,
+.suggestions .suggestion[aria-selected="true"] {
+  background: #ffefdd; /* subtle peach highlight */
+  color: #000;
+}
+
+/* final item doesn't need bottom-border */
+.suggestions .suggestion:last-child { border-bottom: none; }
+
+/* small-screen adjustments */
+@media (max-width:700px) {
+  .suggestions { width: 92%; }
+  .suggestions .suggestion { font-size: 15px; padding: 8px 12px; }
+}

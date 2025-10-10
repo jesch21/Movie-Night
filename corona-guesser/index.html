@@ -75,8 +75,11 @@
         </section>
         <section id="gameAnswer">
             <h3>Answer here!</h3>
-            <input type="text" id="answer" name="answer" placeholder="Type your guess here..." required>
-            <button id="submit" class="gameButton">Submit</button>
+            <input type="text" id="answer" name="answer" placeholder="Type your guess here..." autocomplete="off" required>
+            <button id="submit" onclick="checkAnswer();">Submit</button>
+
+            <!-- Autocomplete suggestions (dynamically populated) -->
+            <div id="answerSuggestions" class="suggestions" role="listbox" aria-label="Answer suggestions" aria-hidden="true"></div>
         </section>
         <section id="correctAnswer"></section>
     </section>
