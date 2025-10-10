@@ -1,8 +1,5 @@
 // high-or-low-scripts.js
-// Title-matching + dedupe + buffered image loader + guaranteed non-text placeholder
-// Includes fix: when a movie "stays", leftMovie is updated to the entry from the new source's pool
-// Includes fix: fallback poster is a neutral SVG (no "Poster unavailable" text)
-// Modified: posters act as the choice buttons (click left = left is higher, click right = right is higher)
+// High-or-Low game (updated: added LETTERBOXD_POP source and stricter movie selection by date + stars)
 
 // ---------------- Supabase init (keep your keys) ----------------
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
@@ -20,7 +17,7 @@ let leftMovie = null;
 let rightMovie = null;
 let score = 0;
 
-// sources
+// sources (added LETTERBOXD_POP for populace LB rating)
 const LETTERBOXD_TABLES = [
   "Alex-Letterboxd",
   "Ayub-Letterboxd",
@@ -30,8 +27,11 @@ const LETTERBOXD_TABLES = [
   "Landon-Letterboxd",
   "Trevor-Letterboxd"
 ];
-const SOURCE_KEYS = ["IMDB", ...LETTERBOXD_TABLES];
-const SOURCE_LABELS = Object.assign({ IMDB: "IMDB" }, LETTERBOXD_TABLES.reduce((acc, t) => { acc[t] = `${t.split('-')[0]}'s Letterboxd`; return acc; }, {}));
+const SOURCE_KEYS = ["IMDB", "LETTERBOXD_POP", ...LETTERBOXD_TABLES];
+const SOURCE_LABELS = Object.assign(
+  { IMDB: "IMDB", LETTERBOXD_POP: "Letterboxd (populace)" },
+  LETTERBOXD_TABLES.reduce((acc, t) => { acc[t] = `${t.split('-')[0]}'s Letterboxd`; return acc; }, {})
+);
 
 // DOM elements
 const startButton = document.getElementById('startButton');
@@ -58,15 +58,12 @@ const rightRatingDisplay = document.getElementById('rightRatingDisplay');
 const nextButton = document.getElementById('nextButton');
 const sourceLabelEl = document.getElementById('sourceLabel');
 
-// ---------------- Guaranteed non-text placeholder ----------------
+// ---------------- Placeholder & helpers ----------------
 const FALLBACK_SVG_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-     <defs>
-       <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-         <stop offset="0%" stop-color="#2a2a2a"/>
-         <stop offset="100%" stop-color="#111"/>
-       </linearGradient>
-     </defs>
+     <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+       <stop offset="0%" stop-color="#2a2a2a"/><stop offset="100%" stop-color="#111"/>
+     </linearGradient></defs>
      <rect width="100%" height="100%" fill="url(#g)"/>
      <g transform="translate(20,20)">
        <rect width="360" height="520" rx="12" ry="12" fill="#1a1a1a" stroke="#2f2f2f" />
@@ -76,15 +73,47 @@ const FALLBACK_SVG_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
 );
 const PLACEHOLDER_SRC = FALLBACK_SVG_DATA_URI;
 
-// ---------------- Helpers ----------------
 function pickRandomFromArray(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 function shuffleArray(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
 function safeString(v){ return typeof v==='string' ? v.trim() : (v===null||typeof v==='undefined' ? '' : String(v)); }
 function normalizeTitle(t){ return safeString(t).toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
 function parseStarsValue(starsRaw){ if(!starsRaw&&starsRaw!==0) return NaN; const s=safeString(starsRaw).split('/')[0].trim().replace(',', '.'); return parseFloat(s); }
 function parseImdbRating(v){ if(v===null||typeof v==='undefined') return NaN; const s=safeString(v).replace(',', '.'); return parseFloat(s); }
+function parseLetterboxdPopRating(v){ if(v===null||typeof v==='undefined') return NaN; const s=safeString(v).replace(',', '.'); return parseFloat(s); }
 function normalizeOrderKey(o){ const n=Number(o); return !Number.isNaN(n) ? (Number.isInteger(n) ? String(n) : String(n)) : safeString(o); }
 function getPublicImageUrl(imagePath){ if(!imagePath||!supabase) return null; try{ const p = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath; const res = supabase.storage.from('slideshowImages').getPublicUrl(p); if(res&&res.data) return res.data.publicUrl||res.data.publicURL||null; }catch(e){ console.warn('getPublicImageUrl error', e); } return null; }
+
+// ---------------- Date helper: robustly extract a Date from a row ----------------
+function getDateFromRow(row){
+  if(!row || typeof row !== 'object') return null;
+  // check several common date field names (user said there is a "date" variable)
+  const candidates = ['date','releaseDate','release_date','released','released_at','releaseAt','releaseYear','year'];
+  for(const key of candidates){
+    if(key in row && row[key] != null){
+      const val = row[key];
+      if(typeof val === 'string' || typeof val === 'number'){
+        // If it's a 4-digit year, treat as Jan 1 of that year
+        const s = String(val).trim();
+        if(/^\d{4}$/.test(s)){
+          return new Date(Number(s), 0, 1);
+        }
+        // Try parsing ISO-ish date or timestamp
+        const t = Date.parse(s);
+        if(!Number.isNaN(t)) return new Date(t);
+        // try numeric timestamp
+        const n = Number(val);
+        if(!Number.isNaN(n)){
+          // treat as ms if large, otherwise as year handled above
+          if(n > 1e10) return new Date(n); // probably ms since epoch
+          // fallback: try as days? not worth guessing — skip
+        }
+      } else if(val instanceof Date) {
+        return val;
+      }
+    }
+  }
+  return null;
+}
 
 // ---------------- Load moviesList and indexes ----------------
 async function loadMoviesListAll(){
@@ -109,36 +138,102 @@ async function loadMoviesListAll(){
   }catch(e){ console.error('loadMoviesListAll error', e); return false; }
 }
 
+// ---------------- Determine the 'next upcoming' movie (closest date > now) ----------------
+function findNextUpcomingMovie(){
+  const now = new Date();
+  let best = null;
+  let bestTime = Infinity;
+  for(const r of moviesListAll){
+    const d = getDateFromRow(r);
+    if(!d) continue;
+    const t = d.getTime();
+    if(t > now.getTime() && t < bestTime){
+      bestTime = t; best = r;
+    }
+  }
+  if(best) {
+    try { console.info('Next upcoming movie chosen for inclusion:', best.title || best.Movie || best); } catch(e){}
+  }
+  return best;
+}
+
 // ---------------- Build IMDB pool ----------------
 function buildImdbPoolFromMoviesList(){
   const pool=[];
+  const nextUpcoming = findNextUpcomingMovie();
   for(const row of moviesListAll){
     const imdbNum = parseImdbRating(row['imdb-rating']);
     const hasStars = (row['stars']!==null && row['stars']!==undefined && row['stars']!=='') || (row['Stars']!==null && row['Stars']!==undefined && row['Stars']!=='');
-    if(Number.isFinite(imdbNum) && hasStars && row['order']!=null){
-      const key = normalizeOrderKey(row['order']);
-      const starsRaw = row['stars']||row['Stars']||null;
-      const starsValue = parseStarsValue(starsRaw);
-      const imagePath = row.image||null;
-      const imageUrl = getPublicImageUrl(imagePath);
-      pool.push({
-        order: row['order'],
-        orderKey: key,
-        title: row.title||row.Movie||'',
-        imdbRating: imdbNum,
-        starsRaw,
-        starsValue,
-        starsRawNormalized: starsRaw ? String(starsRaw).split(/\s*[;,|]\s*/)[0].trim() : null,
-        imagePath,
-        imageUrl,
-        sourceKey: 'IMDB'
-      });
-    }
+    // require stars and a finite imdb rating
+    if(!hasStars || !Number.isFinite(imdbNum)) continue;
+    // date check: either watched (date <= now) or it's the single next upcoming
+    const d = getDateFromRow(row);
+    const now = new Date();
+    const isWatched = d ? (d.getTime() <= now.getTime()) : false;
+    const isNext = (nextUpcoming && ( (nextUpcoming.title && row.title && nextUpcoming.title === row.title) || (nextUpcoming.Movie && row.Movie && nextUpcoming.Movie === row.Movie) || (nextUpcoming.image && row.image && nextUpcoming.image === row.image) )) || (nextUpcoming && nextUpcoming === row);
+    if(!isWatched && !isNext) continue;
+    // require order non-null (prefer existing order) OR allow next upcoming even if no order
+    if(row['order'] == null && !isNext) continue;
+
+    const key = normalizeOrderKey(row['order']);
+    const starsRaw = row['stars']||row['Stars']||null;
+    const starsValue = parseStarsValue(starsRaw);
+    const imagePath = row.image||null;
+    const imageUrl = getPublicImageUrl(imagePath);
+    pool.push({
+      order: row['order'],
+      orderKey: key,
+      title: row.title||row.Movie||'',
+      imdbRating: imdbNum,
+      starsRaw,
+      starsValue,
+      starsRawNormalized: starsRaw ? String(starsRaw).split(/\s*[;,|]\s*/)[0].trim() : null,
+      imagePath,
+      imageUrl,
+      sourceKey: 'IMDB'
+    });
   }
   return pool;
 }
 
-// ---------------- Fetch letterboxd pool (dedupe by title) ----------------
+// ---------------- Build Letterboxd-pop (populace) pool (same logic as IMDB) ----------------
+function buildLetterboxdPopPoolFromMoviesList(){
+  const pool=[];
+  const nextUpcoming = findNextUpcomingMovie();
+  for(const row of moviesListAll){
+    const lbNum = parseLetterboxdPopRating(row['letterboxd-rating']);
+    const hasStars = (row['stars']!==null && row['stars']!==undefined && row['stars']!=='') || (row['Stars']!==null && row['Stars']!==undefined && row['Stars']!=='');
+    if(!hasStars || !Number.isFinite(lbNum)) continue;
+    // date check
+    const d = getDateFromRow(row);
+    const now = new Date();
+    const isWatched = d ? (d.getTime() <= now.getTime()) : false;
+    const isNext = (nextUpcoming && ( (nextUpcoming.title && row.title && nextUpcoming.title === row.title) || (nextUpcoming.Movie && row.Movie && nextUpcoming.Movie === row.Movie) || (nextUpcoming.image && row.image && nextUpcoming.image === row.image) )) || (nextUpcoming && nextUpcoming === row);
+    if(!isWatched && !isNext) continue;
+    if(row['order'] == null && !isNext) continue;
+
+    const key = normalizeOrderKey(row['order']);
+    const starsRaw = row['stars']||row['Stars']||null;
+    const starsValue = parseStarsValue(starsRaw);
+    const imagePath = row.image||null;
+    const imageUrl = getPublicImageUrl(imagePath);
+    pool.push({
+      order: row['order'],
+      orderKey: key,
+      title: row.title||row.Movie||'',
+      letterboxdRating: lbNum,
+      starsRaw,
+      starsValue,
+      starsRawNormalized: starsRaw ? String(starsRaw).split(/\s*[;,|]\s*/)[0].trim() : null,
+      imagePath,
+      imageUrl,
+      sourceKey: 'LETTERBOXD_POP'
+    });
+  }
+  return pool;
+}
+
+// ---------------- Fetch letterboxd personal pool (dedupe by title) ----------------
 async function fetchAndBuildLetterboxdPool(tableName){
   let data=null;
   try{
@@ -168,7 +263,11 @@ async function fetchAndBuildLetterboxdPool(tableName){
     if(!tkey) continue;
     if(seen[tkey]) { console.warn(`Duplicate in ${tableName} for "${title}" — skipping duplicate.`); continue; }
     seen[tkey]=true;
+    // Only include entries that exist in your moviesList (we only want seen/watched movies for personal tables)
     const mlRow = moviesListByTitle[tkey] || null;
+    if(!mlRow) { continue; }
+    // require matched moviesList entry to have an order (be watched)
+    if(mlRow['order'] == null) { continue; }
     const imagePath = mlRow ? (mlRow.image||null) : null;
     const imageUrl = getPublicImageUrl(imagePath);
     let starsRawNormalized = null;
@@ -199,6 +298,7 @@ async function fetchAndBuildLetterboxdPool(tableName){
 async function ensureSourcePool(sourceKey){
   if(sourcePools[sourceKey]) return sourcePools[sourceKey];
   if(sourceKey === 'IMDB'){ const pool = buildImdbPoolFromMoviesList(); sourcePools[sourceKey] = pool; return pool; }
+  if(sourceKey === 'LETTERBOXD_POP'){ const pool = buildLetterboxdPopPoolFromMoviesList(); sourcePools[sourceKey] = pool; return pool; }
   const pool = await fetchAndBuildLetterboxdPool(sourceKey);
   sourcePools[sourceKey] = pool;
   return pool;
@@ -321,6 +421,7 @@ async function submitScoreToLeaderboard(player, score) {
   }
 }
 
+
 // ---------------- Rendering & UI ----------------
 function renderMoviesAndSource(){
   const label = SOURCE_LABELS[currentSourceKey] || currentSourceKey || 'Unknown';
@@ -334,7 +435,6 @@ function renderMoviesAndSource(){
     const leftSource = leftMovie.sourceKey || currentSourceKey || 'IMDB';
     const leftTitle = leftMovie.title || leftMovie.matchedMovieListTitle || '';
     const leftUrl = leftMovie.imageUrl || (leftMovie.imagePath? getPublicImageUrl(leftMovie.imagePath) : null) || null;
-    // leftImgEl might be an <img> in DOM — keep using setImgSrcSafely
     setImgSrcSafely(leftImgEl, leftUrl, leftSource, leftTitle, leftMovie.title);
     if(leftImgEl) leftImgEl.alt = leftMovie.title || 'Poster';
   } else { applyPlaceholderToImg(leftImgEl); if(leftImgEl) leftImgEl.alt = 'Poster'; }
@@ -352,8 +452,8 @@ function renderMoviesAndSource(){
 // ---------------- Rating evaluation ----------------
 function evaluateGuessAgainstCurrentSource(guessHigher){
   // guessHigher === true means player guessed RIGHT is higher than LEFT
-  const leftVal = (currentSourceKey === 'IMDB') ? parseFloat(leftMovie.imdbRating) : Number(leftMovie.starsValue);
-  const rightVal = (currentSourceKey === 'IMDB') ? parseFloat(rightMovie.imdbRating) : Number(rightMovie.starsValue);
+  const leftVal = (currentSourceKey === 'IMDB') ? parseFloat(leftMovie.imdbRating) : (currentSourceKey === 'LETTERBOXD_POP' ? Number(leftMovie.letterboxdRating) : Number(leftMovie.starsValue));
+  const rightVal = (currentSourceKey === 'IMDB') ? parseFloat(rightMovie.imdbRating) : (currentSourceKey === 'LETTERBOXD_POP' ? Number(rightMovie.letterboxdRating) : Number(rightMovie.starsValue));
   if(!Number.isFinite(leftVal) || !Number.isFinite(rightVal)) return { correct:false, leftVal, rightVal };
   if(Math.abs(leftVal-rightVal) < 1e-9) return { correct:true, leftVal, rightVal };
   const rightIsHigher = rightVal > leftVal;
@@ -380,20 +480,18 @@ function setChoiceButtonsEnabled(enabled){
       el.setAttribute('aria-disabled','true');
     }
   });
-  // visual cue: reduce opacity when disabled
-  if(!enabled){
-    if(leftCardEl) leftCardEl.style.opacity = '0.85';
-    if(rightCardEl) rightCardEl.style.opacity = '0.85';
-  } else {
-    if(leftCardEl) leftCardEl.style.opacity = '';
-    if(rightCardEl) rightCardEl.style.opacity = '';
-  }
+  if(!enabled){ if(leftCardEl) leftCardEl.style.opacity = '0.85'; if(rightCardEl) rightCardEl.style.opacity = '0.85'; }
+  else { if(leftCardEl) leftCardEl.style.opacity = ''; if(rightCardEl) rightCardEl.style.opacity = ''; }
 }
 function formatImdb(v){ if(!Number.isFinite(v)) return 'N/A'; return (Math.round(v*10)/10).toFixed(1); }
+function formatLetterboxdPop(v){ if(!Number.isFinite(v)) return 'N/A'; return (Math.round(v*10)/10).toFixed(1); }
 function showRatingsAndAction({ correct, leftRating, rightRating }){
   if(currentSourceKey === 'IMDB'){
     leftRatingDisplay.textContent = (Number.isFinite(leftRating) ? `Rating: ${formatImdb(leftRating)}` : 'Rating: N/A');
     rightRatingDisplay.textContent = (Number.isFinite(rightRating) ? `Rating: ${formatImdb(rightRating)}` : 'Rating: N/A');
+  } else if(currentSourceKey === 'LETTERBOXD_POP'){
+    leftRatingDisplay.textContent = (Number.isFinite(leftRating) ? `Rating: ${formatLetterboxdPop(leftRating)}` : 'Rating: N/A');
+    rightRatingDisplay.textContent = (Number.isFinite(rightRating) ? `Rating: ${formatLetterboxdPop(rightRating)}` : 'Rating: N/A');
   } else {
     leftRatingDisplay.textContent = leftMovie && leftMovie.starsRawNormalized ? `Rating: ${leftMovie.starsRawNormalized}` : (Number.isFinite(leftRating) ? `Rating: ${leftRating}/5` : 'Rating: N/A');
     rightRatingDisplay.textContent = rightMovie && rightMovie.starsRawNormalized ? `Rating: ${rightMovie.starsRawNormalized}` : (Number.isFinite(rightRating) ? `Rating: ${rightRating}/5` : 'Rating: N/A');
@@ -416,9 +514,7 @@ function instrumentPosterLoads(){ [leftImgEl, rightImgEl].forEach(img => { if(!i
 // ---------------- Click handlers for posters (new interaction) ----------------
 function handlePosterChoice(isRightChosen){
   if(!leftMovie || !rightMovie) return;
-  // disable further choices immediately
   setChoiceButtonsEnabled(false);
-  // isRightChosen true => user clicked RIGHT poster (guessed RIGHT is higher)
   const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(isRightChosen);
   if(correct){
     score += 1;
@@ -431,7 +527,7 @@ function handlePosterChoice(isRightChosen){
   }
 }
 
-// ---------------- Handlers (continued) ----------------
+// ---------------- Handlers ----------------
 async function handleStartClick(){
   instructionsSection.style.display='none'; gameOverSection.style.display='none'; gameContainer.style.display='block';
   if(sourceLabelEl) sourceLabelEl.style.display='none';
