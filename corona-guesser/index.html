@@ -26,15 +26,36 @@
     <section id="instructions">
         <h2>Guess the Movie!</h2>
         <p>Using the information provided, guess the movie! Earn points for faster answers with less hints used!</p>
-        <button class="gameButton" id="startButton" onclick="startGame();">Start the Game!</button>
+
+        <!-- PLAYER AREA: will be hidden once the game starts -->
+        <div id="playerArea" style="display:flex; flex-direction:column; align-items:center;">
+          <label for="playerSelect" style="margin-top:12px; color:#F2F5EA;">Choose name</label>
+          <select id="playerSelect" required style="font-size:1rem; padding:8px; width:240px;">
+              <option value="">name</option>
+              <option value="Alex">Alex</option>
+              <option value="Ayub">Ayub</option>
+              <option value="Joe">Joe</option>
+              <option value="John">John</option>
+              <option value="Caleb">Caleb</option>
+              <option value="Landon">Landon</option>
+              <option value="Trevor">Trevor</option>
+              <option value="Jayden">Jayden</option>
+          </select>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+            <button class="gameButton" id="startButton" disabled>Start the Game!</button>
+            <a class="gameButton" href="leaderboard.html" id="viewLeaderboardStart" style="text-decoration:none;">View Leaderboard</a>
+          </div>
+        </div>
     </section>
+
     <section id="gameContainer">
         <section id="gameImageContainer">
         </section>
         <div id="timer">
             <p></p>
         </div>
-        <button class="gameButton" onclick="getHint();">Get a Hint!</button>
+        <button class="gameButton" id="hintBtn">Get a Hint!</button>
         <section id="hints">
             <div class="hint" id="hint1">
                 <h3>Length:</h3>
@@ -55,10 +76,11 @@
         <section id="gameAnswer">
             <h3>Answer here!</h3>
             <input type="text" id="answer" name="answer" placeholder="Type your guess here..." required>
-            <button id="submit" onclick="checkAnswer();">Submit</button>
+            <button id="submit" class="gameButton">Submit</button>
         </section>
         <section id="correctAnswer"></section>
     </section>
+
     <section id="nameOptions"></section>
     <img src="../assets/images/game-bottom.png" id="gameBottomImg" alt="Bottom of Page Image">
 </main>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Corona Cinema | Guesser Leaderboard</title>
+    <link rel="stylesheet" href="../corona-guesser/assets/styles.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link rel="icon" href="../assets/images/icon.png" type="image/png"/>
+
+    <style>
+      html, body { height: 100%; margin: 0; background-color: #131313; }
+      main { width: 100%; max-width: 1000px; margin: 28px auto; padding: 0 16px; box-sizing: border-box; }
+      .board-card { background: rgba(242,245,234,0.03); border: 1px solid rgba(242,245,234,0.06); border-radius: 12px; padding: 18px; }
+      .board-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+      .board-title { font-family:"Bungee Tint", sans-serif; color:#FF0000; font-size:28px; margin:0; }
+      .board-sub { color:#F2F5EA; font-size:14px; margin:0; opacity:0.9; }
+      table.leaderboard { width:100%; border-collapse:collapse; margin-top:12px; color:#131313; }
+      table.leaderboard th, table.leaderboard td { padding:10px 12px; text-align:left; border-bottom:1px solid rgba(0,0,0,0.06); font-family: 'Lucida Sans', sans-serif; font-size:16px; }
+      table.leaderboard thead th { background: #FFFFFF; color: #131313; font-weight:700; }
+      table.leaderboard tbody td { background: #F2F5EA; color: #131313; }
+      table.leaderboard tbody tr:nth-child(even) td { background: #eef1ec; }
+      table.leaderboard th.rank, table.leaderboard td.rank { width:72px; text-align:center; }
+      .muted { color:#cfcfcf; font-size:14px; }
+      #loadingMsg, #errorMsg { color:#F2F5EA; margin-top:12px; }
+      #gameOverScale { width:auto; max-width:60%; max-height:calc(100vh-260px); display:block; margin:16px auto 0; border-radius:10px; }
+      .gameButton { color:#131313; }
+      @media (max-width:700px){ .board-title{font-size:22px;} table.leaderboard th, td{font-size:14px; padding:8px 10px;} #gameOverScale{max-width:95%;} }
+    </style>
+</head>
+<body>
+<header>
+    <a href="../index.html"><img src="../assets/images/logo.jpg" id="logo" alt="Logo"></a>
+    <section id="header">
+        <h1>Leaderboard</h1>
+        <nav>
+            <ul id="menu">
+                <li><a href="../letterboxd/index.html" id="letter" class="page">Letterboxd</a></li>
+                <li><a href="../tier-list/index.html" id="tier" class="page">Tier List</a></li>
+                <li><a href="../movie-lists/index.html" id="unseen" class="page">Movie Lists</a></li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
+<main>
+  <div class="board-card">
+    <div class="board-header">
+      <div>
+        <h2 class="board-title">Guesser — Top 20</h2>
+        <p class="board-sub">Top 20 leaderboard entries (guesser).</p>
+      </div>
+      <div class="muted">Showing up to 20 rows — sorted by score (desc) then time</div>
+    </div>
+
+    <div id="loadingMsg" aria-live="polite">Loading leaderboard…</div>
+    <div id="errorMsg" role="alert" style="display:none;"></div>
+
+    <div id="tableWrapper" style="display:none; margin-top:8px;">
+      <table class="leaderboard" id="leaderboardTable" aria-label="Guesser leaderboard">
+        <thead>
+          <tr>
+            <th class="rank">Rank</th>
+            <th>Player</th>
+            <th style="width:120px;">Score</th>
+            <th style="width:240px;">Timestamp</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+      </table>
+    </div>
+
+    <div style="display:flex; gap:8px; margin-top:12px; justify-content:flex-end;">
+      <button class="gameButton" id="refreshBtn">Refresh</button>
+      <a class="gameButton" href="index.html" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">Back to Game</a>
+    </div>
+
+    <img id="gameOverScale" src="../assets/images/scale.png" alt="Scale image" />
+  </div>
+</main>
+
+<footer>
+    <section id="streaming">
+        <button id="streaming-button">Streaming</button>
+        <div id="stream-links">
+            <a href="https://ww4.fmovies.co/24/"><img src="../assets/images/fmovies.png" id="fmovies" class="stream" alt="fmovies"></a>
+            <a href="https://himovies.sx/"><img src="../assets/images/himovies.png" id="himovies" class="stream" alt="himovies"></a>
+            <a href="https://www.hulu.com/"><img src="../assets/images/hulu.png" id="hulu" class="stream" alt="hulu"></a>
+            <a href="https://play.max.com/"><img src="../assets/images/max.png" id="max" class="stream" alt="max"></a>
+            <a href="https://www.paramountplus.com/"><img src="../assets/images/paramount.png" id="paramount" class="stream" alt="paramount"></a>
+            <a href="https://www.amazon.com/Amazon-Video/b/?ie=UTF8&node=2858778011&ref_=nav_cs_prime_video"><img src="../assets/images/amazon.png" id="amazon" class="stream" alt="amazon"></a>
+        </div>
+    </section>
+    <section id="right-tag">
+        <h4 id="copyright"><i>&copy Johnathan Eschbacher. All rights reserved</i></h4>
+    </section>
+</footer>
+
+<script src="../assets/scripts/guesser-scripts.js"></script>
+
+<script>
+(async function(){
+  // Reuse same hlSupabase if present
+  const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
+  const sb = window.hlSupabase || (window.supabase && window.supabase.createClient ? (window.hlSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)) : null);
+
+  const loadingEl = document.getElementById('loadingMsg');
+  const errorEl = document.getElementById('errorMsg');
+  const wrapper = document.getElementById('tableWrapper');
+  const tbody = document.getElementById('leaderboardBody');
+  const refreshBtn = document.getElementById('refreshBtn');
+
+  function safeTextNode(cell, s){
+    cell.textContent = (s === null || typeof s === 'undefined') ? '' : String(s);
+  }
+
+  function getTimestampFromRow(row){
+    const candidates = ['createdAt','created_at','inserted_at','timestamp','time'];
+    for(const k of candidates){
+      if(row[k]) return row[k];
+    }
+    if(row && typeof row === 'object'){
+      for(const [k,v] of Object.entries(row)){
+        if(typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(v)) return v;
+      }
+    }
+    return null;
+  }
+
+  function formatTimestamp(raw){
+    if(!raw) return '';
+    const d = (raw instanceof Date) ? raw : new Date(raw);
+    if(Number.isNaN(d.getTime())) return String(raw);
+    return d.toLocaleString(undefined, { year:'numeric', month:'short', day:'numeric', hour:'numeric', minute:'2-digit' });
+  }
+
+  async function fetchAndRender(){
+    if(!sb){ loadingEl.style.display='none'; errorEl.style.display='block'; errorEl.textContent = 'Supabase client unavailable. Check your keys.'; return; }
+
+    loadingEl.style.display='block';
+    errorEl.style.display='none';
+    wrapper.style.display='none';
+    tbody.innerHTML = '';
+
+    try{
+      let res = await sb
+        .from('guesser-leaderboard')
+        .select('*')
+        .order('score', { ascending: false })
+        .order('createdAt', { ascending: true })
+        .limit(20);
+
+      if(res.error && res.error.code === '42703'){
+        console.warn('createdAt ordering failed; retrying without createdAt ordering and sorting client-side.');
+        res = await sb
+          .from('guesser-leaderboard')
+          .select('*')
+          .order('score', { ascending: false })
+          .limit(100);
+        if(res.error) throw res.error;
+        const arr = Array.isArray(res.data) ? res.data.slice() : [];
+        arr.sort((a,b) => {
+          if((b.score ?? 0) !== (a.score ?? 0)) return (b.score ?? 0) - (a.score ?? 0);
+          const ta = getTimestampFromRow(a);
+          const tb = getTimestampFromRow(b);
+          const da = ta ? new Date(ta).getTime() : 0;
+          const db = tb ? new Date(tb).getTime() : 0;
+          return (da || 0) - (db || 0);
+        });
+        renderRows(arr.slice(0,20));
+      } else {
+        if(res.error) throw res.error;
+        renderRows(res.data || []);
+      }
+
+      loadingEl.style.display='none';
+      errorEl.style.display='none';
+      wrapper.style.display='block';
+    }catch(err){
+      console.error('Error fetching leaderboard', err);
+      loadingEl.style.display='none';
+      wrapper.style.display='none';
+      errorEl.style.display='block';
+      errorEl.textContent = 'Failed loading leaderboard. See console for details.';
+    }
+  }
+
+  function renderRows(data){
+    tbody.innerHTML = '';
+    if(!Array.isArray(data) || data.length === 0){
+      errorEl.style.display='block';
+      errorEl.textContent = 'No entries found.';
+      return;
+    }
+    data.forEach((row, idx) => {
+      const tr = document.createElement('tr');
+
+      const tdRank = document.createElement('td');
+      tdRank.className = 'rank';
+      safeTextNode(tdRank, '#' + (idx + 1));
+      tr.appendChild(tdRank);
+
+      const tdPlayer = document.createElement('td');
+      safeTextNode(tdPlayer, row.player ?? row.name ?? row.user ?? '');
+      tr.appendChild(tdPlayer);
+
+      const tdScore = document.createElement('td');
+      safeTextNode(tdScore, row.score ?? '');
+      tr.appendChild(tdScore);
+
+      const tdTime = document.createElement('td');
+      const raw = getTimestampFromRow(row);
+      safeTextNode(tdTime, formatTimestamp(raw));
+      tr.appendChild(tdTime);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  if(refreshBtn) refreshBtn.addEventListener('click', fetchAndRender);
+  fetchAndRender();
+
+})();
+</script>
+</body>
+</html>
