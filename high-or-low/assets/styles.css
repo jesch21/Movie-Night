@@ -974,3 +974,84 @@ footer {
     font-size: 1rem;
     cursor: pointer;
 }
+
+/* --------- Default non-header font (match initial description text) --------- */
+/* Apply the description font as the default for everything except headers */
+body {
+  /* keep any existing body styles but make this the default text font */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  /* preserve earlier rules */
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Ensure headers keep their Bungee Tint styling (these rules already exist,
+   but reaffirm them so the body font doesn't override header font) */
+h1, h2 {
+  font-family: "Bungee Tint", sans-serif;
+}
+
+/* --------- Movie-pair layout: force side-by-side until tablet (900px) --------- */
+/* ensure moviePair stays side-by-side on wide screens */
+#moviePair {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    flex-wrap: nowrap;  /* keep them on one row until the media query triggers */
+    box-sizing: border-box;
+}
+
+/* Cards should try to sit side-by-side */
+#leftCard, #rightCard {
+    flex: 1 1 46% !important;
+    max-width: 46% !important;
+    min-width: 320px !important;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* At tablet/narrow widths stack vertically */
+@media only screen and (max-width: 900px) {
+    #moviePair {
+        flex-wrap: wrap;      /* allow stacking on tablet and smaller */
+    }
+    #leftCard, #rightCard {
+        flex-basis: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+    /* reduce poster height for stacked layout */
+    .movie-poster {
+        height: 300px;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+/* Force side-by-side (no wrap) on wide screens; allow stacking only at tablet or smaller */
+@media only screen and (min-width: 901px) {
+  #moviePair {
+    flex-wrap: nowrap !important; /* override any inline or earlier rules */
+    align-items: stretch;
+  }
+  /* ensure cards can shrink a bit on narrow desktops but still sit side-by-side */
+  #leftCard, #rightCard {
+    min-width: 280px !important;
+    max-width: 46% !important;
+    flex-basis: 46% !important;
+  }
+}
+
+/* Tablet and smaller: allow stacking */
+@media only screen and (max-width: 900px) {
+  #moviePair {
+    flex-wrap: wrap !important;
+  }
+  #leftCard, #rightCard {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+}
