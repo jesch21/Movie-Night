@@ -7,6 +7,9 @@
 const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
 const supabase = window.supabase && window.supabase.createClient ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+// expose single client so other scripts (leaderboard) can reuse it and avoid multiple GoTrueClient instances
+window.hlSupabase = window.hlSupabase || supabase;
+
 
 // ---------------- Game state ----------------
 let moviesListAll = [];
@@ -288,6 +291,35 @@ function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle){
   loader.src = url;
 }
 
+// ---------------- Leaderboard submission helpers ----------------
+
+/**
+ * Submit a final score for `player` to the highorlow-leaderboard table.
+ * Uses existing `supabase` client (anon key in browser). Returns { data, error }.
+ */
+async function submitScoreToLeaderboard(player, score) {
+  if (!supabase) {
+    console.warn('Supabase client unavailable — cannot submit score.');
+    return { data: null, error: new Error('Supabase client unavailable') };
+  }
+  if (!player) {
+    console.warn('No player selected — skipping submit.');
+    return { data: null, error: new Error('No player selected') };
+  }
+  try {
+    const payload = { player: player, score: Math.floor(Number(score) || 0) };
+    const { data, error } = await supabase
+      .from('highorlow-leaderboard')
+      .insert([payload])
+      .select(); // select to get inserted row back (if allowed)
+    return { data, error };
+  } catch (err) {
+    console.error('submitScoreToLeaderboard unexpected error', err);
+    return { data: null, error: err };
+  }
+}
+
+
 // ---------------- Rendering & UI ----------------
 function renderMoviesAndSource(){
   const label = SOURCE_LABELS[currentSourceKey] || currentSourceKey || 'Unknown';
@@ -373,7 +405,41 @@ async function handleStartClick(){
   renderMoviesAndSource();
 }
 function updateScoreDisplay(){ scoreDisplay.textContent = `Score: ${score}`; }
-function showGameOver(){ hideRatingsAndAction(); gameContainer.style.display='none'; gameOverSection.style.display='block'; finalScoreEl.textContent = `You earned ${score} ${score===1?'point':'points'}.`; }
+async function showGameOver(){
+  hideRatingsAndAction();
+  gameContainer.style.display='none';
+  gameOverSection.style.display='block';
+  finalScoreEl.textContent = `You earned ${score} ${score===1?'point':'points'}.`;
+
+  // Clear previous submit status message
+  const submitStatusEl = document.getElementById('submitStatus');
+  if(submitStatusEl) submitStatusEl.textContent = 'Submitting score...';
+
+  // Determine selected player (read from select on page)
+  const playerSelectEl = document.getElementById('playerSelect');
+  const playerName = playerSelectEl ? (playerSelectEl.value || '') : '';
+
+  // Submit (do not block UI; await to show result but UI is visible)
+  try {
+    const { data, error } = await submitScoreToLeaderboard(playerName, score);
+    if(error){
+      console.warn('Leaderboard insert error', error);
+      if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#ffb3b3">Failed to submit score: ${error.message || String(error)}</span>`;
+    } else {
+      // success — show a short confirmation with inserted id if available
+      const insertedId = (Array.isArray(data) && data[0] && data[0].id) ? data[0].id : null;
+      const msg = insertedId ? `Score submitted (id ${insertedId}).` : 'Score submitted.';
+      if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#c8ffcf">${msg}</span>`;
+    }
+  } catch (err) {
+    console.error('Error while submitting score', err);
+    if(submitStatusEl) submitStatusEl.innerHTML = `<span style="color:#ffb3b3">Unexpected submission error.</span>`;
+  }
+
+  // Re-enable player select so a new player can be chosen if they restart
+  if(playerSelectEl) playerSelectEl.disabled = false;
+}
+
 
 function handleHigherClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(true); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
 function handleLowerClick(){ if(!leftMovie || !rightMovie) return; setChoiceButtonsEnabled(false); const { correct, leftVal, rightVal } = evaluateGuessAgainstCurrentSource(false); if(correct){ score+=1; updateScoreDisplay(); roundInfo.textContent='Correct — the ratings are shown below. Click Next.'; showRatingsAndAction({ correct:true, leftRating:leftVal, rightRating:rightVal }); } else { roundInfo.textContent='Incorrect — the ratings are shown below. Click See my Score.'; showRatingsAndAction({ correct:false, leftRating:leftVal, rightRating:rightVal }); } }
@@ -433,6 +499,34 @@ function handleRestartClick(){
 
 // ---------------- Wire up events ----------------
 document.addEventListener('DOMContentLoaded', ()=>{
+    // --- Player select & leaderboard button wiring ---
+  const playerSelectEl = document.getElementById('playerSelect');
+  const leaderboardButtonInitEl = document.getElementById('leaderboardButtonInit');
+  const leaderboardButtonGameOverEl = document.getElementById('leaderboardButtonGameOver');
+
+  // Enable / disable Start button depending on selection
+  if (playerSelectEl && startButton) {
+    // ensure start disabled until a valid name chosen (HTML starts disabled)
+    playerSelectEl.addEventListener('change', () => {
+      startButton.disabled = !playerSelectEl.value;
+    });
+  }
+
+  // Navigate to leaderboard page when either button clicked
+  if (leaderboardButtonInitEl) leaderboardButtonInitEl.addEventListener('click', () => { location.href = 'leaderboard.html'; });
+  if (leaderboardButtonGameOverEl) leaderboardButtonGameOverEl.addEventListener('click', () => { location.href = 'leaderboard.html'; });
+
+  // When the game starts, lock the player selection to prevent mid-game changes
+  startButton.addEventListener('click', () => {
+    if (playerSelectEl) playerSelectEl.disabled = true;
+  });
+
+  // When restart is clicked, re-enable the select (restart handler already clears state)
+  restartButton.addEventListener('click', () => {
+    if (playerSelectEl) playerSelectEl.disabled = false;
+  });
+
+  
   if(!startButton || !btnHigher || !btnLower || !restartButton){ console.error('Missing required DOM elements.'); return; }
   // initial guaranteed placeholder (data URI) so no file:// fallback ever used
   if(leftImgEl){ leftImgEl.loading='lazy'; leftImgEl.decoding='async'; leftImgEl.crossOrigin='anonymous'; if(!leftImgEl.src) leftImgEl.src = PLACEHOLDER_SRC; }

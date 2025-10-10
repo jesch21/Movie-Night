@@ -15,7 +15,7 @@
         <h1>High or Low</h1>
         <nav>
             <ul id="menu">
-                <li><a href="index.html" id="letter" class="page">Letterboxd</a></li>
+                <li><a href="../letterboxd/index.html" id="letter" class="page">Letterboxd</a></li>
                 <li><a href="../tier-list/index.html" id="tier" class="page">Tier List</a></li>
                 <li><a href="../movie-lists/index.html" id="unseen" class="page">Movie Lists</a></li>
             </ul>
@@ -42,7 +42,24 @@
             <li>Landon's Letterboxd Table</li>
             <li>Trevor's Letterboxd Table</li>
         </ul>
-        <button class="gameButton" id="startButton">Start the Game!</button>
+        <!-- replace the existing Start button block in #instructions with this -->
+        <label for="playerSelect" style="margin-top:12px; color:#F2F5EA;">Choose name</label>
+        <select id="playerSelect" required style="font-size:1rem; padding:8px; width:240px;">
+        <option value="">name</option>
+        <option value="Alex">Alex</option>
+        <option value="Ayub">Ayub</option>
+        <option value="Joe">Joe</option>
+        <option value="John">John</option>
+        <option value="Caleb">Caleb</option>
+        <option value="Landon">Landon</option>
+        <option value="Trevor">Trevor</option>
+        <option value="Jayden">Jayden</option>
+        </select>
+
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+        <button class="gameButton" id="startButton" disabled>Start the Game!</button>
+        <button class="gameButton" id="leaderboardButtonInit" type="button">View Leaderboard</button>
+        </div>
         <img src="../assets/images/scale.png" id="gameBottomImg" alt="Bottom of Page Image">
     </section>
 
@@ -103,14 +120,22 @@
         </div>
     </section>
 
-    <!-- GAME OVER (hidden initially) -->
+    <!-- replace the existing contents of <section id="gameOver"> with this -->
     <section id="gameOver" style="display:none; text-align:center; width:100%;">
-        <h2 style="font-family: 'Bungee Tint', sans-serif; color:#FF0000;">Game Over</h2>
-        <p id="finalScore" style="color:#F2F5EA; font-size:20px;"></p>
-        <button class="gameButton" id="restartButton">Play Again</button>
+    <h2 style="font-family: 'Bungee Tint', sans-serif; color:#FF0000;">Game Over</h2>
 
-        <!-- Centered scale image under the button -->
-        <img id="gameOverScale" src="../assets/images/scale.png" alt="Scale image" />
+    <p id="finalScore" style="color:#F2F5EA; font-size:20px;"></p>
+
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:10px; flex-wrap:wrap;">
+        <button class="gameButton" id="restartButton">Play Again</button>
+        <button class="gameButton" id="leaderboardButtonGameOver" type="button">View Leaderboard</button>
+    </div>
+
+    <!-- Submission feedback (populated by JS) -->
+    <div id="submitStatus" style="margin-top:12px; color:#F2F5EA;"></div>
+
+    <!-- Centered scale image under the button -->
+    <img id="gameOverScale" src="../assets/images/scale.png" alt="Scale image" />
     </section>
 </main>
 
