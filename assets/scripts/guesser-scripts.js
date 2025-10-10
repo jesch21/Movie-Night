@@ -640,30 +640,38 @@ function showGuesserSavePrompt(playerName, score){
 
 // ---------------- UI helpers ----------------
 function addLeaderboardLinksIfNeeded(){
-    // add a small "View Leaderboard" anchor to instructions and results sections if present
-    const instructions = $('instructions');
-    if(instructions && !$('guesserLeaderboardLink')) {
-        const a = document.createElement('a');
-        a.id = 'guesserLeaderboardLink';
-        a.href = 'leaderboard.html';
-        a.textContent = 'View Leaderboard';
-        a.className = 'gameButton';
-        a.style.display = 'inline-block';
-        a.style.marginTop = '8px';
-        instructions.appendChild(a);
+  // instructions container
+  const instructions = document.getElementById('instructions');
+  if(instructions){
+    // don't add if any leaderboard link already exists inside this container
+    if(!instructions.querySelector('a[href="leaderboard.html"]')){
+      const a = document.createElement('a');
+      a.id = 'guesserLeaderboardLink';
+      a.href = 'leaderboard.html';
+      a.textContent = 'View Leaderboard';
+      a.className = 'gameButton';
+      a.style.display = 'inline-block';
+      a.style.marginTop = '8px';
+      instructions.appendChild(a);
     }
-    const results = $('results');
-    if(results && !$('guesserLeaderboardLinkResults')){
-        const a2 = document.createElement('a');
-        a2.id = 'guesserLeaderboardLinkResults';
-        a2.href = 'leaderboard.html';
-        a2.textContent = 'View Leaderboard';
-        a2.className = 'gameButton';
-        a2.style.display = 'inline-block';
-        a2.style.marginTop = '8px';
-        results.appendChild(a2);
+  }
+
+  // results container
+  const results = document.getElementById('results');
+  if(results){
+    if(!results.querySelector('a[href="leaderboard.html"]')){
+      const a2 = document.createElement('a');
+      a2.id = 'guesserLeaderboardLinkResults';
+      a2.href = 'leaderboard.html';
+      a2.textContent = 'View Leaderboard';
+      a2.className = 'gameButton';
+      a2.style.display = 'inline-block';
+      a2.style.marginTop = '8px';
+      results.appendChild(a2);
     }
+  }
 }
+
 
 // ---------------- Start / Restart handlers ----------------
 function startGame(){
