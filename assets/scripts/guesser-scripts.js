@@ -198,8 +198,9 @@ async function loadMiniImg() {
     // helper that actually inserts the zoomed DIV; keeps it square and sets zoom/position
     function insertZoomedDiv(imageUrl) {
         // ----- DYNAMIC ZOOM PARAMETERS -----
-        const MIN_ZOOM = 2.0;   // minimum zoom (2x)
-        const MAX_ZOOM = 4.0;   // maximum zoom (adjustable)
+        // increase the default zoom range so previews are more heavily zoomed
+        const MIN_ZOOM = 3.0;   // previously 2.0 — now at least 3×
+        const MAX_ZOOM = 6.0;   // previously 4.0 — can go up to 6×
         const zoom = MIN_ZOOM + Math.random() * (MAX_ZOOM - MIN_ZOOM); // float between MIN_ZOOM..MAX_ZOOM
 
         // choose background position as percentages but keep clamped so we always show valid content

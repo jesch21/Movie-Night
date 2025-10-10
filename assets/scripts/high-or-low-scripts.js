@@ -139,6 +139,7 @@ function buildImdbPoolFromMoviesList(){
 }
 
 // ---------------- Fetch letterboxd pool (dedupe by title) ----------------
+// ---------------- Fetch letterboxd pool (dedupe by title) ----------------
 async function fetchAndBuildLetterboxdPool(tableName){
   let data=null;
   try{
@@ -163,14 +164,28 @@ async function fetchAndBuildLetterboxdPool(tableName){
     const title = row.Movie || row.movie || '';
     const starsRaw = row.Stars || row.stars || '';
     const starsValue = parseStarsValue(starsRaw);
+    // Only include entries that have a valid numeric stars value
     if(!Number.isFinite(starsValue)) continue;
     const tkey = normalizeTitle(title);
     if(!tkey) continue;
+    // Deduplicate same normalized title inside the same letterboxd table
     if(seen[tkey]) { console.warn(`Duplicate in ${tableName} for "${title}" — skipping duplicate.`); continue; }
     seen[tkey]=true;
+
+    // Find matching moviesList row — **only include entries that exist in your moviesList**
     const mlRow = moviesListByTitle[tkey] || null;
+    if(!mlRow) {
+      // No match in moviesList => we haven't "seen" this movie (skip it)
+      continue;
+    }
+    // Require the matched moviesList entry to have an order (be part of the watched list)
+    if(mlRow['order'] == null) {
+      continue;
+    }
+
     const imagePath = mlRow ? (mlRow.image||null) : null;
     const imageUrl = getPublicImageUrl(imagePath);
+
     let starsRawNormalized = null;
     if(starsRaw){
       starsRawNormalized = String(starsRaw).split(/\s*[;,|]\s*/)[0].trim();
@@ -179,6 +194,7 @@ async function fetchAndBuildLetterboxdPool(tableName){
         if(Number.isFinite(v)) starsRawNormalized = `${v}/5`;
       }
     }
+
     pool.push({
       order: orderVal,
       orderKey: String(orderVal),
