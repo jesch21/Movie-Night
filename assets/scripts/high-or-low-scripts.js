@@ -83,6 +83,15 @@ function parseLetterboxdPopRating(v){ if(v===null||typeof v==='undefined') retur
 function normalizeOrderKey(o){ const n=Number(o); return !Number.isNaN(n) ? (Number.isInteger(n) ? String(n) : String(n)) : safeString(o); }
 function getPublicImageUrl(imagePath){ if(!imagePath||!supabase) return null; try{ const p = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath; const res = supabase.storage.from('slideshowImages').getPublicUrl(p); if(res&&res.data) return res.data.publicUrl||res.data.publicURL||null; }catch(e){ console.warn('getPublicImageUrl error', e); } return null; }
 
+// NEW helper: get first image value out of array-or-string
+function getFirstImageValue(imgField){
+  if(Array.isArray(imgField)){
+    return imgField.length > 0 ? imgField[0] : null;
+  }
+  if(typeof imgField === 'string' && imgField.trim().length > 0) return imgField.trim();
+  return null;
+}
+
 // ---------------- Date helper: robustly extract a Date from a row ----------------
 function getDateFromRow(row){
   if(!row || typeof row !== 'object') return null;
@@ -170,7 +179,7 @@ function buildImdbPoolFromMoviesList(){
     const d = getDateFromRow(row);
     const now = new Date();
     const isWatched = d ? (d.getTime() <= now.getTime()) : false;
-    const isNext = (nextUpcoming && ( (nextUpcoming.title && row.title && nextUpcoming.title === row.title) || (nextUpcoming.Movie && row.Movie && nextUpcoming.Movie === row.Movie) || (nextUpcoming.image && row.image && nextUpcoming.image === row.image) )) || (nextUpcoming && nextUpcoming === row);
+    const isNext = (nextUpcoming && ( (nextUpcoming.title && row.title && nextUpcoming.title === row.title) || (nextUpcoming.Movie && row.Movie && nextUpcoming.Movie === row.Movie) || (getFirstImageValue(nextUpcoming.image) && getFirstImageValue(row.image) && getFirstImageValue(nextUpcoming.image) === getFirstImageValue(row.image)) )) || (nextUpcoming && nextUpcoming === row);
     if(!isWatched && !isNext) continue;
     // require order non-null (prefer existing order) OR allow next upcoming even if no order
     if(row['order'] == null && !isNext) continue;
@@ -178,7 +187,7 @@ function buildImdbPoolFromMoviesList(){
     const key = normalizeOrderKey(row['order']);
     const starsRaw = row['stars']||row['Stars']||null;
     const starsValue = parseStarsValue(starsRaw);
-    const imagePath = row.image||null;
+    const imagePath = getFirstImageValue(row.image) || null;
     const imageUrl = getPublicImageUrl(imagePath);
     pool.push({
       order: row['order'],
@@ -208,14 +217,14 @@ function buildLetterboxdPopPoolFromMoviesList(){
     const d = getDateFromRow(row);
     const now = new Date();
     const isWatched = d ? (d.getTime() <= now.getTime()) : false;
-    const isNext = (nextUpcoming && ( (nextUpcoming.title && row.title && nextUpcoming.title === row.title) || (nextUpcoming.Movie && row.Movie && nextUpcoming.Movie === row.Movie) || (nextUpcoming.image && row.image && nextUpcoming.image === row.image) )) || (nextUpcoming && nextUpcoming === row);
+    const isNext = (nextUpcoming && ( (nextUpcoming.title && row.title && nextUpcoming.title === row.title) || (nextUpcoming.Movie && row.Movie && nextUpcoming.Movie === row.Movie) || (getFirstImageValue(nextUpcoming.image) && getFirstImageValue(row.image) && getFirstImageValue(nextUpcoming.image) === getFirstImageValue(row.image)) )) || (nextUpcoming && nextUpcoming === row);
     if(!isWatched && !isNext) continue;
     if(row['order'] == null && !isNext) continue;
 
     const key = normalizeOrderKey(row['order']);
     const starsRaw = row['stars']||row['Stars']||null;
     const starsValue = parseStarsValue(starsRaw);
-    const imagePath = row.image||null;
+    const imagePath = getFirstImageValue(row.image) || null;
     const imageUrl = getPublicImageUrl(imagePath);
     pool.push({
       order: row['order'],
@@ -268,7 +277,7 @@ async function fetchAndBuildLetterboxdPool(tableName){
     if(!mlRow) { continue; }
     // require matched moviesList entry to have an order (be watched)
     if(mlRow['order'] == null) { continue; }
-    const imagePath = mlRow ? (mlRow.image||null) : null;
+    const imagePath = mlRow ? (getFirstImageValue(mlRow.image) || null) : null;
     const imageUrl = getPublicImageUrl(imagePath);
     let starsRawNormalized = null;
     if(starsRaw){

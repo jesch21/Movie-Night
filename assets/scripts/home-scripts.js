@@ -151,7 +151,7 @@ async function loadMovies() {
     return false;
   });
 
-  if (cutoffIndex !== -1 && data[cutoffIndex].title.trim().toLowerCase() === "none") {
+  if (cutoffIndex !== -1 && data[cutoffIndex].title && data[cutoffIndex].title.trim().toLowerCase() === "none") {
     cutoffIndex = cutoffIndex - 1; // exclude this placeholder movie
   }
 
@@ -174,13 +174,34 @@ async function loadMovies() {
     return;
   }
 
+  // tiny transparent gif as fallback if there's no image
+  const TRANSPARENT_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+
   movies.forEach((movie) => {
     const slideDiv = document.createElement("div");
     slideDiv.classList.add("slide");
 
     const img = document.createElement("img");
-    img.src = `${SUPABASE_URL}/storage/v1/object/public/slideshowImages/${movie.image}`;
-    img.alt = movie.title;
+
+    // movie.image is now expected to be an array of strings — grab the first entry (index 0)
+    // be defensive: check it's an array and has at least one element
+    let imageKey = null;
+    if (Array.isArray(movie.image) && movie.image.length > 0) {
+      imageKey = movie.image[0];
+    } else if (typeof movie.image === "string" && movie.image.length > 0) {
+      // in case some rows still have strings (during migration), handle that too
+      imageKey = movie.image;
+    }
+
+    if (imageKey) {
+      img.src = `${SUPABASE_URL}/storage/v1/object/public/slideshowImages/${encodeURIComponent(imageKey)}`;
+      img.alt = movie.title || "movie image";
+    } else {
+      // no image available — use transparent placeholder and warn in console
+      img.src = TRANSPARENT_GIF;
+      img.alt = movie.title || "no image available";
+      console.warn(`No image found for movie '${movie.title}'. Using placeholder.`);
+    }
 
     // Maintain original size / fill container
     img.style.width = "100%";

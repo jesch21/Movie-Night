@@ -31,6 +31,15 @@ let totalPoints = 0;
 function $(id){ return document.getElementById(id); }
 function norm(s){ return typeof s==='string' ? s.trim().toLowerCase() : ''; }
 
+// ---------------- Helper: get first image value from array-or-string ----------------
+function getFirstImageValue(imgField){
+    if(Array.isArray(imgField)){
+        return imgField.length > 0 ? (typeof imgField[0] === 'string' ? imgField[0].trim() : String(imgField[0])) : '';
+    }
+    if(typeof imgField === 'string') return imgField.trim();
+    return '';
+}
+
 // ---------------- Supabase storage helpers ----------------
 function getPublicImageUrlFromBucket(bucket, imagePath){
     if(!imagePath || !supabase) return null;
@@ -75,7 +84,8 @@ async function fetchMovieListFromSupabase(){
 
         for(const row of rows){
             const title = row.title || '';
-            const imageName = row.image || '';
+            // image may now be an array — grab the first element safely
+            const imageName = getFirstImageValue(row.image) || '';
             const length = row.length || '';
             const year = row.releaseYear || '';
             const starring = row.starring || '';
