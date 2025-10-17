@@ -83,10 +83,21 @@ function parseLetterboxdPopRating(v){ if(v===null||typeof v==='undefined') retur
 function normalizeOrderKey(o){ const n=Number(o); return !Number.isNaN(n) ? (Number.isInteger(n) ? String(n) : String(n)) : safeString(o); }
 function getPublicImageUrl(imagePath){ if(!imagePath||!supabase) return null; try{ const p = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath; const res = supabase.storage.from('slideshowImages').getPublicUrl(p); if(res&&res.data) return res.data.publicUrl||res.data.publicURL||null; }catch(e){ console.warn('getPublicImageUrl error', e); } return null; }
 
-// NEW helper: get first image value out of array-or-string
+// NEW helper: get first image value out of array-or-string (kept for stable comparisons)
 function getFirstImageValue(imgField){
   if(Array.isArray(imgField)){
     return imgField.length > 0 ? imgField[0] : null;
+  }
+  if(typeof imgField === 'string' && imgField.trim().length > 0) return imgField.trim();
+  return null;
+}
+
+// NEW helper: pick a random image value from array-or-string (used when actually selecting which image to use)
+function getRandomImageValue(imgField){
+  if(Array.isArray(imgField) && imgField.length > 0){
+    const idx = Math.floor(Math.random() * imgField.length);
+    const v = imgField[idx];
+    return (typeof v === 'string') ? v.trim() : (v === null || typeof v === 'undefined' ? null : String(v));
   }
   if(typeof imgField === 'string' && imgField.trim().length > 0) return imgField.trim();
   return null;
@@ -187,7 +198,8 @@ function buildImdbPoolFromMoviesList(){
     const key = normalizeOrderKey(row['order']);
     const starsRaw = row['stars']||row['Stars']||null;
     const starsValue = parseStarsValue(starsRaw);
-    const imagePath = getFirstImageValue(row.image) || null;
+    // pick a random image entry when selecting the image for display
+    const imagePath = getRandomImageValue(row.image) || null;
     const imageUrl = getPublicImageUrl(imagePath);
     pool.push({
       order: row['order'],
@@ -224,7 +236,8 @@ function buildLetterboxdPopPoolFromMoviesList(){
     const key = normalizeOrderKey(row['order']);
     const starsRaw = row['stars']||row['Stars']||null;
     const starsValue = parseStarsValue(starsRaw);
-    const imagePath = getFirstImageValue(row.image) || null;
+    // pick a random image entry when selecting the image for display
+    const imagePath = getRandomImageValue(row.image) || null;
     const imageUrl = getPublicImageUrl(imagePath);
     pool.push({
       order: row['order'],
@@ -277,7 +290,8 @@ async function fetchAndBuildLetterboxdPool(tableName){
     if(!mlRow) { continue; }
     // require matched moviesList entry to have an order (be watched)
     if(mlRow['order'] == null) { continue; }
-    const imagePath = mlRow ? (getFirstImageValue(mlRow.image) || null) : null;
+    // pick a random image entry when selecting the image for display (from the moviesList match)
+    const imagePath = mlRow ? (getRandomImageValue(mlRow.image) || null) : null;
     const imageUrl = getPublicImageUrl(imagePath);
     let starsRawNormalized = null;
     if(starsRaw){

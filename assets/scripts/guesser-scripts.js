@@ -40,6 +40,17 @@ function getFirstImageValue(imgField){
     return '';
 }
 
+// ---------------- Helper: get random image value from array-or-string ----------------
+function getRandomImageValue(imgField){
+    if(Array.isArray(imgField) && imgField.length > 0){
+        const idx = Math.floor(Math.random() * imgField.length);
+        const v = imgField[idx];
+        return (typeof v === 'string') ? v.trim() : (v === null || typeof v === 'undefined' ? '' : String(v));
+    }
+    if(typeof imgField === 'string') return imgField.trim();
+    return '';
+}
+
 // ---------------- Supabase storage helpers ----------------
 function getPublicImageUrlFromBucket(bucket, imagePath){
     if(!imagePath || !supabase) return null;
@@ -84,8 +95,8 @@ async function fetchMovieListFromSupabase(){
 
         for(const row of rows){
             const title = row.title || '';
-            // image may now be an array — grab the first element safely
-            const imageName = getFirstImageValue(row.image) || '';
+            // image may now be an array — grab a random element safely
+            const imageName = getRandomImageValue(row.image) || '';
             const length = row.length || '';
             const year = row.releaseYear || '';
             const starring = row.starring || '';
