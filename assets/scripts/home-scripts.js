@@ -120,6 +120,19 @@ function resetSlideInterval() {
 }
 
 // ---------------------------
+// Helper: pick random image value from array-or-string
+// ---------------------------
+function getRandomImageValue(imgField) {
+  if (Array.isArray(imgField) && imgField.length > 0) {
+    const idx = Math.floor(Math.random() * imgField.length);
+    const v = imgField[idx];
+    return (typeof v === "string") ? v.trim() : (v == null ? "" : String(v));
+  }
+  if (typeof imgField === "string") return imgField.trim();
+  return null;
+}
+
+// ---------------------------
 // Fetch Movies from Supabase
 // ---------------------------
 // Notes per requirements:
@@ -183,15 +196,8 @@ async function loadMovies() {
 
     const img = document.createElement("img");
 
-    // movie.image is now expected to be an array of strings — grab the first entry (index 0)
-    // be defensive: check it's an array and has at least one element
-    let imageKey = null;
-    if (Array.isArray(movie.image) && movie.image.length > 0) {
-      imageKey = movie.image[0];
-    } else if (typeof movie.image === "string" && movie.image.length > 0) {
-      // in case some rows still have strings (during migration), handle that too
-      imageKey = movie.image;
-    }
+    // movie.image may be an array — pick a random entry (or fall back to string)
+    let imageKey = getRandomImageValue(movie.image);
 
     if (imageKey) {
       img.src = `${SUPABASE_URL}/storage/v1/object/public/slideshowImages/${encodeURIComponent(imageKey)}`;
