@@ -340,8 +340,10 @@ async function loadMiniImg() {
         miniDiv.style.backgroundSize = `${zoom * 100}% auto`;
         miniDiv.style.backgroundPosition = `${posX}% ${posY}%`;
         miniDiv.style.backgroundRepeat = 'no-repeat';
-        miniDiv.setAttribute('aria-label', `Zoomed preview for ${title}`);
-        miniDiv.title = `${title} — zoom ${zoom.toFixed(2)}x`;
+        // keep aria-label for accessibility but DO NOT set title (that creates tooltip on hover)
+        miniDiv.setAttribute('aria-label', `Zoomed preview`);
+        miniDiv.removeAttribute('title');
+
         try { miniDiv.dataset.debug = JSON.stringify({ zoom: Number(zoom.toFixed(2)), posX, posY, src: imageUrl }); } catch(e){}
 
         gameImageContainer.appendChild(miniDiv);
@@ -354,32 +356,43 @@ async function getHint() {
     if (currentHint < 4) {
         switch(currentHint) {
             case 0:
-                $('hint1').style.display = "block";
-                document.querySelector("#hint1 p").textContent = currentMovie[2] || '';
+                const h1 = $('hint1');
+                if(h1) h1.style.display = "block";
+                const h1p = document.querySelector("#hint1 p");
+                if(h1p) h1p.textContent = currentMovie[2] || '';
                 break;
             case 1:
-                $('hint2').style.display = "block";
-                document.querySelector("#hint2 p").textContent = currentMovie[3] || '';
+                const h2 = $('hint2');
+                if(h2) h2.style.display = "block";
+                const h2p = document.querySelector("#hint2 p");
+                if(h2p) h2p.textContent = currentMovie[3] || '';
                 break;
             case 2:
-                $('hint3').style.display = "block";
-                document.querySelector("#hint3 p").textContent = currentMovie[4] || '';
+                const h3 = $('hint3');
+                if(h3) h3.style.display = "block";
+                const h3p = document.querySelector("#hint3 p");
+                if(h3p) h3p.textContent = currentMovie[4] || '';
                 break;
             case 3:
-                $('hint4').style.display = "block";
+                const h4 = $('hint4');
+                if(h4) h4.style.display = "block";
                 const gameImageContainer = $('gameImageContainer');
-                gameImageContainer.innerHTML = "";
-                const fullImg = document.createElement("img");
-                const imageName = currentMovie[1] || '';
-                // try slideshowPublicUrl first
-                let fullPublicUrl = currentMovie[6] || null;
-                if(!fullPublicUrl && currentMovie[5]) fullPublicUrl = currentMovie[5]; // fall back to miniPublicUrl
-                if(!fullPublicUrl && imageName) fullPublicUrl = `../assets/images/slideshow/${imageName}`;
-                fullImg.className = "fullGameImage";
-                fullImg.alt = `Full ${imageName.split('.')[0] || 'image'} Image`;
-                fullImg.crossOrigin = 'anonymous';
-                fullImg.src = fullPublicUrl;
-                gameImageContainer.appendChild(fullImg);
+                if(gameImageContainer){
+                    gameImageContainer.innerHTML = "";
+                    const fullImg = document.createElement("img");
+                    const imageName = currentMovie[1] || '';
+                    // try slideshowPublicUrl first
+                    let fullPublicUrl = currentMovie[6] || null;
+                    if(!fullPublicUrl && currentMovie[5]) fullPublicUrl = currentMovie[5]; // fall back to miniPublicUrl
+                    if(!fullPublicUrl && imageName) fullPublicUrl = `../assets/images/slideshow/${imageName}`;
+                    fullImg.className = "fullGameImage";
+                    fullImg.alt = `Full ${imageName.split('.')[0] || 'image'} Image`;
+                    // ensure no tooltip appears on hover
+                    fullImg.title = '';
+                    fullImg.crossOrigin = 'anonymous';
+                    fullImg.src = fullPublicUrl;
+                    gameImageContainer.appendChild(fullImg);
+                }
                 break;
         }
         currentHint++;
@@ -436,6 +449,7 @@ function checkAnswer(){
     const submittedAnswer = inputEl.value.trim();
     const correctAnswer = currentMovie[0] || '';
     const correctAnswerSection = $('correctAnswer');
+    if(!correctAnswerSection) return;
 
     // remove previous
     const previousResult = correctAnswerSection.querySelector('.result');
@@ -686,8 +700,6 @@ function addLeaderboardLinksIfNeeded() {
   ensureLink('results', 'guesserLeaderboardLinkResults');
 }
 
-
-
 // ---------------- Start / Restart handlers ----------------
 function startGame(){
     const gameContainer = $('gameContainer');
@@ -788,7 +800,27 @@ function populateResultsPageIfPresent(){
 
     // Wire up buttons & inputs
     const startBtn = $('startButton');
-    const hintBtn = document.querySelector('#instructions button[onclick*="startGame"]') || null;
+
+    // ---- HINT BUTTON: try multiple selectors so we actually find the hint button ----
+    const hintButton = $('hintButton') // prefer explicit id
+        || document.querySelector('#instructions button[data-action="hint"]')
+        || document.querySelector('#instructions button[data-action="getHint"]')
+        || document.querySelector('#instructions button[onclick*="getHint"]')
+        || document.querySelector('button[data-action="getHint"]')
+        || document.querySelector('button[id*="hint"]')
+        || document.querySelector('button[class*="hint"]')
+        || null;
+
+    if (hintButton) {
+      hintButton.addEventListener('click', (e) => {
+        if(e && typeof e.preventDefault === 'function') e.preventDefault();
+        try { getHint(); } catch (err) { console.error('getHint error', err); }
+      });
+    } else {
+      // helpful debug info for you if button not found
+      console.warn('Hint button not found during init. Add id="hintButton" or data-action="hint" to your hint button in the DOM.');
+    }
+
     // playerSelect behavior: enable/disable start button if playerSelect present
     const playerSelectEl = $('playerSelect');
     if(playerSelectEl && startBtn){
@@ -802,9 +834,6 @@ function populateResultsPageIfPresent(){
     if(startBtn) {
         startBtn.addEventListener('click', startGame);
     }
-    // wire hint button
-    const hintButton = document.querySelector('button[onclick="getHint();"]') || null;
-    if(hintButton) hintButton.addEventListener('click', getHint);
 
     // submit button
     const submitBtn = $('submit');
