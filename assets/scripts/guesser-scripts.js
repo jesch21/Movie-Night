@@ -26,6 +26,7 @@ let wrongGuesses = 0;
 let timerOn = true;
 let roundNum = 1;
 let totalPoints = 0;
+let timerIntervalId = null;      // global interval id so we can clear it immediately
 
 // DOM helpers
 function $(id){ return document.getElementById(id); }
@@ -402,28 +403,41 @@ async function getHint() {
 }
 
 // ---------------- Timer & scoring ----------------
+// 3 minute time limit (180 seconds)
 function startTimer() {
     const timerElement = document.getElementById("timer") && document.getElementById("timer").querySelector("p");
     if(!timerElement) return;
-    let timeRemaining = 120;
+
+    // clear any existing interval
+    if (timerIntervalId) {
+        clearInterval(timerIntervalId);
+        timerIntervalId = null;
+    }
+
+    let timeRemaining = 180; // 3 minutes
     currentTime = timeRemaining;
     timerOn = true;
 
-    const timerInterval = setInterval(() => {
+    timerElement.textContent = `${Math.floor(timeRemaining/60)}:${String(timeRemaining%60).padStart(2,'0')} left`;
+
+    timerIntervalId = setInterval(() => {
         let minutes = Math.floor(timeRemaining / 60);
         let seconds = timeRemaining % 60;
         seconds = seconds < 10 ? "0" + seconds : seconds;
         timerElement.textContent = `${minutes}:${seconds} left`;
 
         if (timeRemaining <= 0) {
-            clearInterval(timerInterval);
+            clearInterval(timerIntervalId);
+            timerIntervalId = null;
             timerElement.textContent = "Time's up!";
-            alert("You ran out of time! The answer was " + currentMovie[0] + "! Click OK to move on to the next round!");
+            alert("You ran out of time! The answer was " + (currentMovie[0] || 'unknown') + "! Click OK to move on to the next round!");
             currentTime = 0;
             timerOn = false;
+            // proceed to reset for next round
             resetPage();
         } else if (timerOn === false) {
-            clearInterval(timerInterval);
+            clearInterval(timerIntervalId);
+            timerIntervalId = null;
             if(timerElement) timerElement.textContent = ``;
         }
         currentTime = timeRemaining;
@@ -431,15 +445,31 @@ function startTimer() {
     }, 1000);
 }
 
+// Reworked scoring:
+// - base points scale with remaining time (scaled to a maximum around 135)
+// - hint penalty: SMALLER penalty per hint (so it's harder to reach 0)
+// - wrong guess penalty: SMALLER penalty per wrong guess (so it's harder to reach 0)
+// - final points never negative
+
 function calculatePoints(){
-    if(currentTime === 0){ return 0; }
-    let hintPoints = 4 - currentHint;
-    let wrongPoints = 20 * wrongGuesses;
-    if(wrongPoints > 100){ wrongPoints = 100; }
-    if(hintPoints > 0) {
-        hintPoints = ((hintPoints*120)/4);
-    }
-    return Math.max(0, Math.floor(currentTime + hintPoints - wrongPoints));
+    // If no time left, zero points
+    if(currentTime <= 0) return 0;
+
+    // Base scaled: map currentTime (0..180) to approx 0..135
+    const BASE_SCALE = 0.75; // 180 * 0.75 = 135 max
+    const basePoints = Math.round(currentTime * BASE_SCALE);
+
+    // ====== ADJUSTED PENALTIES (reduced so players rarely hit 0) ======
+    const hintPenaltyPer = 12;    // previously 30 -> reduced to 12
+    const wrongPenaltyPer = 12;   // previously 40 -> reduced to 12
+    const wrongPenaltyCap = 72;   // previously 120 -> reduced cap
+    // =================================================================
+
+    const hintPenalty = currentHint * hintPenaltyPer;
+    const wrongPenalty = Math.min(wrongGuesses * wrongPenaltyPer, wrongPenaltyCap);
+
+    const raw = basePoints - hintPenalty - wrongPenalty;
+    return Math.max(0, Math.floor(raw));
 }
 
 // ---------------- Answer checking ----------------
@@ -456,13 +486,18 @@ function checkAnswer(){
     if(previousResult) previousResult.remove();
 
     if (submittedAnswer.toUpperCase() === correctAnswer.toUpperCase()) {
+        // stop timer immediately
+        timerOn = false;
+        if (timerIntervalId) {
+            clearInterval(timerIntervalId);
+            timerIntervalId = null;
+        }
+
         const points = calculatePoints();
         totalPoints += points;
 
         const resultContainer = document.createElement('div');
         resultContainer.className = 'result';
-
-        timerOn = false;
 
         const successMessage = document.createElement('h3');
         successMessage.textContent = `Correct! You earned ${points} points!`;
@@ -483,6 +518,12 @@ function checkAnswer(){
 
 // ---------------- Reset / Next round / Endgame ----------------
 function resetPage() {
+    // clear interval if still running
+    if (timerIntervalId) {
+        clearInterval(timerIntervalId);
+        timerIntervalId = null;
+    }
+
     // hide hints
     for (let i = 1; i <= 4; i++) {
         const hint = $('hint' + i);
