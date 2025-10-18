@@ -1,5 +1,5 @@
 // guesser-scripts.js
-// Corona-Guesser full script
+// Corona-Guesser full script (with DB-backed claim/reset for guesser_used)
 // - Supabase client
 // - fetch movie list + public URLs
 // - dynamic zoomed mini previews (3x-6x by default)
@@ -31,6 +31,9 @@ let timerIntervalId = null;      // global interval id so we can clear it immedi
 // DOM helpers
 function $(id){ return document.getElementById(id); }
 function norm(s){ return typeof s==='string' ? s.trim().toLowerCase() : ''; }
+
+// ---------------- Helper: pick random item from array ----------------
+function pickRandomFromArray(arr){ return arr && arr.length ? arr[Math.floor(Math.random() * arr.length)] : null; }
 
 // ---------------- Helper: get first image value from array-or-string ----------------
 function getFirstImageValue(imgField){
@@ -78,7 +81,7 @@ async function fetchMovieListFromSupabase(){
             return;
         }
 
-        // Query moviesList: we only need title, image, length, releaseYear, starring
+        // Query moviesList: we only need title, image, length, releaseYear, starring (and we filter by stars presence)
         const { data, error } = await supabase
             .from('moviesList')
             .select('title, image, length, releaseYear, starring')
@@ -96,7 +99,7 @@ async function fetchMovieListFromSupabase(){
 
         for(const row of rows){
             const title = row.title || '';
-            // image may now be an array — grab a random element safely
+            // image may be an array — grab a random element safely
             const imageName = getRandomImageValue(row.image) || '';
             const length = row.length || '';
             const year = row.releaseYear || '';
@@ -123,6 +126,156 @@ async function fetchMovieListFromSupabase(){
     } catch (err) {
         console.error('Unexpected error fetching movie list:', err);
         movieList = [];
+    }
+}
+
+// ---------------- Supabase claim/reset helpers ----------------
+
+// Query candidate rows where guesser_used = false (and stars present)
+async function queryUnusedCandidates(){
+    if(!supabase) return { data: [], error: new Error('Supabase unavailable') };
+    try {
+        const { data, error } = await supabase
+            .from('moviesList')
+            .select('*')
+            .eq('guesser_used', false)
+            .not('stars', 'is', null)
+            .neq('stars', 'None');
+        if(error) {
+            console.warn('queryUnusedCandidates error', error);
+            return { data: [], error };
+        }
+        return { data: Array.isArray(data) ? data : [], error: null };
+    } catch(e){
+        console.error('queryUnusedCandidates unexpected', e);
+        return { data: [], error: e };
+    }
+}
+
+// Reset guesser_used = false for eligible rows
+async function resetAllGuesserUsed(){
+    if(!supabase) return { data: null, error: new Error('Supabase unavailable') };
+    try {
+        const { data, error } = await supabase
+            .from('moviesList')
+            .update({ guesser_used: false })
+            .not('stars', 'is', null)
+            .neq('stars', 'None');
+        if(error){
+            console.warn('resetAllGuesserUsed error', error);
+            return { data: null, error };
+        }
+        return { data, error: null };
+    } catch(e){
+        console.error('resetAllGuesserUsed unexpected', e);
+        return { data: null, error: e };
+    }
+}
+
+// Pick a random unused candidate and attempt to atomically mark it as used (guesser_used = true).
+// Returns the DB row (authoritative) when marking succeeds, otherwise returns a best-effort row or null.
+async function pickAndClaimUnusedMovie(){
+    if(!supabase) return null;
+
+    try {
+        // 1) Query unused candidates
+        let q = await queryUnusedCandidates();
+        if(q.error){
+            console.error('Error querying unused candidates', q.error);
+            return null;
+        }
+        let candidates = q.data || [];
+
+        // 2) If none found, reset all then requery
+        if(!candidates || candidates.length === 0){
+            console.info('No unused candidates found — resetting guesser_used flags and retrying.');
+            const resetRes = await resetAllGuesserUsed();
+            if(resetRes && resetRes.error){
+                console.error('Failed to reset guesser_used flags — aborting pick.', resetRes.error);
+                return null;
+            }
+            q = await queryUnusedCandidates();
+            if(q.error){
+                console.error('Error querying unused candidates after reset', q.error);
+                return null;
+            }
+            candidates = q.data || [];
+            if(!candidates || candidates.length === 0){
+                console.warn('Still no candidates after reset — nothing to pick.');
+                return null;
+            }
+        }
+
+        // Choose a random candidate
+        const candidate = pickRandomFromArray(candidates);
+        if(!candidate) return null;
+
+        // Prepare image-first string (safe whether candidate.image is array or string)
+        const imageFirst = getFirstImageValue(candidate.image) || null;
+
+        console.debug('Attempting to claim candidate', {
+            title: candidate.title,
+            order: candidate.order,
+            imageFirst,
+            isArrayImage: Array.isArray(candidate.image)
+        });
+
+        // Try to update the chosen row to set guesser_used = true.
+        // Prefer title + .contains('image',[imageFirst]) (works for text[] image column),
+        // fall back to title-only .eq('title', ...) if needed.
+        try {
+            let updated = null;
+
+            if(imageFirst){
+                // try contains (array) first
+                try {
+                    const { data: udata, error: uerr } = await supabase
+                        .from('moviesList')
+                        .update({ guesser_used: true })
+                        .eq('title', candidate.title)
+                        .contains('image', [imageFirst])
+                        .select('*')
+                        .limit(1);
+                    if(uerr) throw uerr;
+                    if(Array.isArray(udata) && udata.length > 0){
+                        updated = udata[0];
+                        console.debug('Claim succeeded via title + image contains', updated);
+                        return updated;
+                    }
+                } catch (errContain) {
+                    // contains may fail if schema differs — swallow and try fallback
+                    console.debug('contains() update failed, will try title-only update. Err:', errContain && errContain.message ? errContain.message : errContain);
+                }
+            }
+
+            // Fallback: update by title only
+            try {
+                const { data: udata2, error: uerr2 } = await supabase
+                    .from('moviesList')
+                    .update({ guesser_used: true })
+                    .eq('title', candidate.title)
+                    .select('*')
+                    .limit(1);
+                if(uerr2) throw uerr2;
+                if(Array.isArray(udata2) && udata2.length > 0){
+                    updated = udata2[0];
+                    console.debug('Claim succeeded via title-only', updated);
+                    return updated;
+                }
+            } catch (errTitle) {
+                console.warn('title-only update failed', errTitle);
+            }
+
+            // If update didn’t return an authoritative row (race condition?), return the candidate as best-effort (unmarked)
+            console.warn('Unable to claim (no updated row returned). Returning candidate without DB mark.', { title: candidate.title });
+            return candidate;
+        } catch(e){
+            console.error('pickAndClaimUnusedMovie: update attempt unexpected error', e);
+            return candidate;
+        }
+    } catch(e){
+        console.error('pickAndClaimUnusedMovie unexpected error', e);
+        return null;
     }
 }
 
@@ -248,40 +401,142 @@ function setupAnswerAutocomplete(){
 function safeNormalizeTitle(t){ return typeof t==='string' ? t.trim().toLowerCase() : ''; }
 
 async function loadMiniImg() {
-    // guard
-    if (!Array.isArray(movieList) || movieList.length === 0) {
+    // guard: ensure we have either supabase or a local movieList
+    if ((!supabase) && (!Array.isArray(movieList) || movieList.length === 0)) {
         alert("No movies available to play.");
         return;
     }
 
-    // If all movies are used, reset guessed list to allow replay
-    if (guessedMovies.length >= movieList.length) guessedMovies = [];
+    // Try DB-backed claim first (if supabase available)
+    let selectedMovieRow = null;
+    if(supabase){
+        try {
+            const claimedRow = await pickAndClaimUnusedMovie();
+            if(claimedRow){
+                // claimedRow is a DB object (may be fully authoritative)
+                selectedMovieRow = claimedRow;
+                console.debug('Using DB-claimed row for game:', {
+                    title: selectedMovieRow.title,
+                    imagePreviewType: Array.isArray(selectedMovieRow.image) ? 'array' : typeof selectedMovieRow.image
+                });
+            } else {
+                console.debug('No claimed DB row (none available or error). Falling back to local movieList.');
+            }
+        } catch(e){
+            console.warn('Error attempting DB claim; falling back to local list', e);
+            selectedMovieRow = null;
+        }
+    }
 
-    // pick non-used movie (try a few times then allow reuse)
-    let selectedMovie;
-    let attempts = 0;
-    do {
-        const randomIndex = Math.floor(Math.random() * movieList.length);
-        selectedMovie = movieList[randomIndex];
-        attempts++;
-        if(attempts > movieList.length + 5) break;
-    } while (selectedMovie && guessedMovies.includes(safeNormalizeTitle(selectedMovie[0])));
+    // Fallback: pick local random row from previously loaded movieList array (ensure not reused same session)
+    if(!selectedMovieRow){
+        if (!Array.isArray(movieList) || movieList.length === 0) {
+            await fetchMovieListFromSupabase(); // try again to populate local list
+        }
 
-    if (!selectedMovie) {
+        // If all movies are used, reset guessed list to allow replay locally
+        if (Array.isArray(movieList) && guessedMovies.length >= movieList.length) guessedMovies = [];
+
+        let attempts = 0;
+        let found = null;
+        if(Array.isArray(movieList) && movieList.length > 0){
+            do {
+                const idx = Math.floor(Math.random() * movieList.length);
+                const m = movieList[idx];
+                if(!m) break;
+                const title = m[0] || '';
+                if(!guessedMovies.includes(safeNormalizeTitle(title))){
+                    // build a pseudo-row similar to DB row so the rest of the logic can treat uniformly
+                    found = {
+                        title: title,
+                        image: m[1] || '',
+                        length: m[2] || '',
+                        releaseYear: m[3] || '',
+                        starring: m[4] || '',
+                        miniPublicUrl: m[5] || null,
+                        slideshowPublicUrl: m[6] || null
+                    };
+                    break;
+                }
+                attempts++;
+                if(attempts > movieList.length + 5) break;
+            } while(true);
+        }
+
+        if(found){
+            selectedMovieRow = found;
+            console.debug('Using local fallback selectedMovieRow:', { title: found.title });
+        } else {
+            // final fallback: pick first in movieList if nothing else
+            if(Array.isArray(movieList) && movieList.length > 0){
+                const m = movieList[0];
+                selectedMovieRow = { title: m[0] || '', image: m[1] || '', length: m[2] || '', releaseYear: m[3] || '', starring: m[4] || '', miniPublicUrl: m[5] || null, slideshowPublicUrl: m[6] || null };
+                console.debug('Fallback to first movieList entry', { title: selectedMovieRow.title });
+            }
+        }
+    }
+
+    if(!selectedMovieRow){
         alert("No movie could be selected.");
         return;
     }
 
-    currentMovie = selectedMovie;
-    const [title = '', imageName = '', duration, year, mainActor, miniPublicUrl, slideshowPublicUrl] = currentMovie;
+    // Normalize fields from either DB row object or local pseudo-row
+    const title = selectedMovieRow.title || '';
+    const rawImageField = selectedMovieRow.image || selectedMovieRow.imagePath || selectedMovieRow.image_name || selectedMovieRow.imageName || selectedMovieRow.image || '';
+    // choose a random image entry from the array (or string)
+    const imageName = getRandomImageValue(rawImageField) || '';
+    // compute mini/slideshow public URLs if row didn't already provide them
+    let miniPublicUrl = selectedMovieRow.miniPublicUrl || selectedMovieRow.mini_public_url || null;
+    let slideshowPublicUrl = selectedMovieRow.slideshowPublicUrl || selectedMovieRow.slideshow_public_url || null;
+
+    // If the row doesn't include public URLs, build them from the chosen imageName using bucket helper
+    if(!miniPublicUrl && imageName){
+        try {
+            const u = getPublicImageUrlFromBucket('miniImages', imageName);
+            if(u) miniPublicUrl = u;
+        } catch(e){ console.debug('mini public url build error', e); }
+    }
+    if(!slideshowPublicUrl && imageName){
+        try {
+            const u2 = getPublicImageUrlFromBucket('slideshowImages', imageName);
+            if(u2) slideshowPublicUrl = u2;
+        } catch(e){ console.debug('slideshow public url build error', e); }
+    }
+
+    // Keep a copy for answer checking & hints
+    // Format currentMovie the same as earlier: [ title, imageName, length, year, starring, miniPublicUrl, slideshowPublicUrl ]
+    currentMovie = [
+        title,
+        imageName,
+        selectedMovieRow.length || '',
+        selectedMovieRow.releaseYear || selectedMovieRow.release_year || '',
+        selectedMovieRow.starring || '',
+        miniPublicUrl,
+        slideshowPublicUrl
+    ];
 
     const gameImageContainer = $('gameImageContainer');
     if(!gameImageContainer) return;
     gameImageContainer.innerHTML = "";
 
-    // prefer slideshowPublicUrl (full image) as the source for zooming; fallback to miniPublicUrl or local path
+    // prefer slideshowPublicUrl (full image) as the source for zooming; fallback to miniPublicUrl or site-root path
     let fullImageUrl = slideshowPublicUrl || miniPublicUrl || null;
-    if(!fullImageUrl && imageName) fullImageUrl = `../assets/images/slideshow/${imageName}`;
+
+    // If still no public URL, fall back to a site-root path (avoid fragile relative paths)
+    if(!fullImageUrl && imageName){
+        fullImageUrl = `/assets/images/slideshow/${encodeURIComponent(imageName)}`;
+    }
+
+    // Debug: show what we're about to try loading
+    console.debug('Selected movie debug', {
+        title,
+        imageName,
+        rawImageFieldPreview: (Array.isArray(rawImageField) ? `Array(${rawImageField.length})` : typeof rawImageField),
+        miniPublicUrl,
+        slideshowPublicUrl,
+        fullImageUrl
+    });
 
     // placeholder data URI (guaranteed)
     const PLACEHOLDER_DATA_URI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
@@ -297,8 +552,9 @@ async function loadMiniImg() {
     let gotUrl = null;
     const TIMEOUT_MS = 3000;
     let timeoutId = setTimeout(() => {
-        tester.src = '';
+        try { tester.src = ''; } catch(e) {}
         if(!gotUrl){
+            console.warn('Image load timed out for', fullImageUrl);
             insertZoomedDiv(PLACEHOLDER_DATA_URI);
         }
     }, TIMEOUT_MS);
@@ -306,24 +562,26 @@ async function loadMiniImg() {
     tester.onload = () => {
         clearTimeout(timeoutId);
         gotUrl = fullImageUrl;
+        console.debug('Image loaded OK:', fullImageUrl);
         insertZoomedDiv(gotUrl);
     };
-    tester.onerror = () => {
+    tester.onerror = (ev) => {
         clearTimeout(timeoutId);
+        console.warn('Image loader error for', fullImageUrl, ev);
         // try miniPublicUrl if different
         if(fullImageUrl && miniPublicUrl && miniPublicUrl !== fullImageUrl){
             const tester2 = new Image();
             tester2.crossOrigin = 'anonymous';
-            let t2timeout = setTimeout(() => { tester2.src = ''; insertZoomedDiv(PLACEHOLDER_DATA_URI); }, TIMEOUT_MS);
+            let t2timeout = setTimeout(() => { try { tester2.src = ''; } catch(e){} insertZoomedDiv(PLACEHOLDER_DATA_URI); }, TIMEOUT_MS);
             tester2.onload = () => { clearTimeout(t2timeout); insertZoomedDiv(miniPublicUrl); };
             tester2.onerror = () => { clearTimeout(t2timeout); insertZoomedDiv(PLACEHOLDER_DATA_URI); };
-            tester2.src = miniPublicUrl;
+            try { tester2.src = miniPublicUrl; } catch(e){ clearTimeout(t2timeout); insertZoomedDiv(PLACEHOLDER_DATA_URI); }
             return;
         }
         insertZoomedDiv(PLACEHOLDER_DATA_URI);
     };
 
-    try { tester.src = fullImageUrl; } catch(e){ clearTimeout(timeoutId); console.warn('Tester error', e); insertZoomedDiv(PLACEHOLDER_DATA_URI); }
+    try { if(fullImageUrl) tester.src = fullImageUrl; else { clearTimeout(timeoutId); insertZoomedDiv(PLACEHOLDER_DATA_URI); } } catch(e){ clearTimeout(timeoutId); console.warn('Tester error', e); insertZoomedDiv(PLACEHOLDER_DATA_URI); }
 
     // helper inserts the zoomed DIV with random crop
     function insertZoomedDiv(imageUrl){
@@ -348,6 +606,8 @@ async function loadMiniImg() {
         try { miniDiv.dataset.debug = JSON.stringify({ zoom: Number(zoom.toFixed(2)), posX, posY, src: imageUrl }); } catch(e){}
 
         gameImageContainer.appendChild(miniDiv);
+
+        // record as used in this session to avoid immediate repeats locally
         guessedMovies.push(safeNormalizeTitle(currentMovie[0]));
     }
 }
@@ -385,7 +645,7 @@ async function getHint() {
                     // try slideshowPublicUrl first
                     let fullPublicUrl = currentMovie[6] || null;
                     if(!fullPublicUrl && currentMovie[5]) fullPublicUrl = currentMovie[5]; // fall back to miniPublicUrl
-                    if(!fullPublicUrl && imageName) fullPublicUrl = `../assets/images/slideshow/${imageName}`;
+                    if(!fullPublicUrl && imageName) fullPublicUrl = `/assets/images/slideshow/${encodeURIComponent(imageName)}`;
                     fullImg.className = "fullGameImage";
                     fullImg.alt = `Full ${imageName.split('.')[0] || 'image'} Image`;
                     // ensure no tooltip appears on hover
@@ -819,7 +1079,7 @@ function populateResultsPageIfPresent(){
     `;
     if(showBottom){
         const img = document.createElement('img');
-        img.src = '../assets/images/game-bottom.png';
+        img.src = '/assets/images/game-bottom.png';
         img.id = 'gameBottomImg';
         img.alt = 'Bottom of Page Image';
         img.style.marginTop = '18px';
