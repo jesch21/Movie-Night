@@ -21,7 +21,7 @@ const rankBonus = {
 let movieData = [];
 
 // List of all people
-const people = ["Ayub", "Caleb", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Landon"];
+const people = ["Ayub", "Bliss", "Caleb", "John", "Joe", "Trevor", "Garrett", "Alex", "Jayden", "Landon"];
 
 /**
  * Fetch movie data from Supabase and format it to match previous structure

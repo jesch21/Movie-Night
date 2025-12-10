@@ -54,6 +54,9 @@ window.onload = async function() {
     const ayubData = await fetchLetterboxdData('Ayub-Letterboxd');
     populateTable('ayub-table', ayubData);
 
+    const blissData = await fetchLetterboxdData('Bliss-Letterboxd');
+    populateTable('bliss-table', blissData);
+
     const calebData = await fetchLetterboxdData('Caleb-Letterboxd');
     populateTable('caleb-table', calebData);
 

@@ -21,6 +21,7 @@ let score = 0;
 const LETTERBOXD_TABLES = [
   "Alex-Letterboxd",
   "Ayub-Letterboxd",
+  "Bliss-Letterboxd",
   "Caleb-Letterboxd",
   "Joe-Letterboxd",
   "John-Letterboxd",
