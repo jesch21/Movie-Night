@@ -2,10 +2,10 @@
 
 const firstTable = 2025;  // Set this to the default year you want to load
 
-// --- Supabase setup (uses the values you provided earlier) ---
-const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ---------------- Supabase Setup ----------------
+const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // --- Replace hardcoded data with Supabase-backed data structures ---
 let movieData = {}; // will become { "2023": [...], "2024": [...], ... }
@@ -87,7 +87,7 @@ function formatDateShort(raw) {
 /** Build movieData from moviesList table (date, pickedBy, title) */
 async function buildMovieDataFromSupabase() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('moviesList')
       .select('date, pickedBy, title, movieType');
 
@@ -134,7 +134,7 @@ async function buildMovieDataFromSupabase() {
 async function buildUnseenMovieDataFromSupabase() {
   try {
     // unseenList -> unseen (now includes order)
-    const { data: unseenRows, error: unseenErr } = await supabase
+    const { data: unseenRows, error: unseenErr } = await supabaseClient
       .from('unseenList')
       .select('pickedBy, title, order');
 
@@ -143,7 +143,7 @@ async function buildUnseenMovieDataFromSupabase() {
     }
 
     // moviesList -> seen & bonus
-    const { data: movieRows, error: movieErr } = await supabase
+    const { data: movieRows, error: movieErr } = await supabaseClient
       .from('moviesList')
       .select('pickedBy, title, movieType, stars, date');
 

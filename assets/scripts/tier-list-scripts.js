@@ -1,7 +1,7 @@
-// Supabase setup
-const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ---------------- Supabase Setup ----------------
+const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Bonus points per rank (1 → 0.1, 2 → 0.09, …, 10 → 0.01)
 const rankBonus = {
@@ -27,7 +27,7 @@ const people = ["Ayub", "Bliss", "Caleb", "John", "Joe", "Trevor", "Garrett", "A
  * Fetch movie data from Supabase and format it to match previous structure
  */
 async function fetchMovieData() {
-    const { data, error } = await supabase
+  const { data, error } = await supabaseClient
         .from('moviesList')
         .select('*')
         .not('stars', 'is', null)

@@ -1,10 +1,9 @@
 // ---------------------------
 // Supabase Setup
 // ---------------------------
-const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";   // replace with your project URL
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
+const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ---------------------------
 // Slideshow variables
@@ -141,7 +140,7 @@ function getRandomImageValue(imgField) {
 //   The slideshow should include movies up to and including that movie, and exclude any later (future) movies.
 // - Finally, display the resulting list in reverse order so the most recent appears first and the oldest (e.g. Truman) ends up last.
 async function loadMovies() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("moviesList")
     .select("title, image, specialFont, stars, date")
     .order("date", { ascending: true });

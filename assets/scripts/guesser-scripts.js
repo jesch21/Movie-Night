@@ -8,10 +8,10 @@
 // - prompt to save to 'guesser-leaderboard' after game ends
 // - passes results to results.html via sessionStorage
 
-// ---------------- Supabase setup (replace these values if needed) ----------------
-const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-const supabase = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+// ---------------- Supabase Setup ----------------
+const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 // ----------------------------------------------------------------------------------
 
 // Movie data used by the game:
@@ -82,7 +82,8 @@ async function fetchMovieListFromSupabase(){
         }
 
         // Query moviesList: we only need title, image, length, releaseYear, starring (and we filter by stars presence)
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
+
             .from('moviesList')
             .select('title, image, length, releaseYear, starring')
             .not('stars', 'is', null)
@@ -135,7 +136,7 @@ async function fetchMovieListFromSupabase(){
 async function queryUnusedCandidates(){
     if(!supabase) return { data: [], error: new Error('Supabase unavailable') };
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('moviesList')
             .select('*')
             .eq('guesser_used', false)
@@ -156,7 +157,7 @@ async function queryUnusedCandidates(){
 async function resetAllGuesserUsed(){
     if(!supabase) return { data: null, error: new Error('Supabase unavailable') };
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('moviesList')
             .update({ guesser_used: false })
             .not('stars', 'is', null)
@@ -845,7 +846,7 @@ async function submitScoreToGuesserLeaderboard(player, score){
     }
     try {
         const payload = { player: player, score: Math.floor(Number(score) || 0) };
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('guesser-leaderboard')
             .insert([payload])
             .select();

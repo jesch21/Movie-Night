@@ -1,11 +1,10 @@
 // high-or-low-scripts.js
 // High-or-Low game (updated: added LETTERBOXD_POP source and stricter movie selection by date + stars)
 
-// ---------------- Supabase init (keep your keys) ----------------
-const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-// reuse or create a single client to avoid multiple GoTrueClient warnings
-const supabase = window.hlSupabase || (window.supabase && window.supabase.createClient ? (window.hlSupabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)) : null);
+// ---------------- Supabase Setup ----------------
+const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ---------------- Game state ----------------
 let moviesListAll = [];
@@ -140,7 +139,7 @@ function getDateFromRow(row){
 async function loadMoviesListAll(){
   try{
     if(!supabase){ console.warn('Supabase client unavailable.'); moviesListAll=[]; moviesListByOrder={}; moviesListByTitle={}; return false; }
-    const { data, error } = await supabase.from('moviesList').select('*');
+    const { data, error } = await supabaseClient.from('moviesList').select('*');
     if(error){ console.error('Supabase moviesList error', error); return false; }
     moviesListAll = Array.isArray(data)?data:[];
     moviesListByOrder = {};
@@ -434,7 +433,7 @@ async function submitScoreToLeaderboard(player, score) {
   }
   try {
     const payload = { player: player, score: Math.floor(Number(score) || 0) };
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
       .from('highorlow-leaderboard')
       .insert([payload])
       .select();

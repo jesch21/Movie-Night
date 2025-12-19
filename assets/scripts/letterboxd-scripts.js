@@ -1,7 +1,7 @@
-// Initialize Supabase
-const SUPABASE_URL = "https://vvknjdudbteivvqzglcv.supabase.co";   // replace with your project URL
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2a25qZHVkYnRlaXZ2cXpnbGN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MjEwODAsImV4cCI6MjA3MjM5NzA4MH0.RUabonop6t3H_KhXkm0UuvO_VlGJvCeNPSCYJ5KUNRU";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ---------------- Supabase Setup ----------------
+const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Function to populate a table with data
 function populateTable(tableId, data) {
@@ -34,7 +34,7 @@ function toggleTable(tableId) {
 
 // Fetch data from Supabase
 async function fetchLetterboxdData(tableName) {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseClient
         .from(tableName)
         .select('*')
         .order('order', { ascending: true }); // keep ordering by order
