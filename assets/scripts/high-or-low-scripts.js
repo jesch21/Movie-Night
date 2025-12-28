@@ -81,7 +81,7 @@ function parseStarsValue(starsRaw){ if(!starsRaw&&starsRaw!==0) return NaN; cons
 function parseImdbRating(v){ if(v===null||typeof v==='undefined') return NaN; const s=safeString(v).replace(',', '.'); return parseFloat(s); }
 function parseLetterboxdPopRating(v){ if(v===null||typeof v==='undefined') return NaN; const s=safeString(v).replace(',', '.'); return parseFloat(s); }
 function normalizeOrderKey(o){ const n=Number(o); return !Number.isNaN(n) ? (Number.isInteger(n) ? String(n) : String(n)) : safeString(o); }
-function getPublicImageUrl(imagePath){ if(!imagePath||!supabase) return null; try{ const p = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath; const res = supabase.storage.from('slideshowImages').getPublicUrl(p); if(res&&res.data) return res.data.publicUrl||res.data.publicURL||null; }catch(e){ console.warn('getPublicImageUrl error', e); } return null; }
+function getPublicImageUrl(imagePath){ if(!imagePath||!supabaseClient) return null; try{ const p = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath; const res = supabaseClient.storage.from('slideshowImages').getPublicUrl(p); if(res&&res.data) return res.data.publicUrl||res.data.publicURL||null; }catch(e){ console.warn('getPublicImageUrl error', e); } return null; }
 
 // NEW helper: get first image value out of array-or-string (kept for stable comparisons)
 function getFirstImageValue(imgField){
@@ -138,7 +138,7 @@ function getDateFromRow(row){
 // ---------------- Load moviesList and indexes ----------------
 async function loadMoviesListAll(){
   try{
-    if(!supabase){ console.warn('Supabase client unavailable.'); moviesListAll=[]; moviesListByOrder={}; moviesListByTitle={}; return false; }
+    if(!supabaseClient){ console.warn('Supabase client unavailable.'); moviesListAll=[]; moviesListByOrder={}; moviesListByTitle={}; return false; }
     const { data, error } = await supabaseClient.from('moviesList').select('*');
     if(error){ console.error('Supabase moviesList error', error); return false; }
     moviesListAll = Array.isArray(data)?data:[];
@@ -259,12 +259,12 @@ function buildLetterboxdPopPoolFromMoviesList(){
 async function fetchAndBuildLetterboxdPool(tableName){
   let data=null;
   try{
-    const res = await supabase.from(tableName).select('"order", Movie, Stars');
+    const res = await supabaseClient.from(tableName).select('"order", Movie, Stars');
     if(res.error) throw res.error;
     data = res.data;
   }catch(e1){
     try{
-      const res2 = await supabase.from(`"${tableName}"`).select('"order", Movie, Stars');
+      const res2 = await supabaseClient.from(`"${tableName}"`).select('"order", Movie, Stars');
       if(res2.error) throw res2.error;
       data = res2.data;
     }catch(e2){
@@ -423,7 +423,7 @@ function setImgSrcSafely(imgEl, url, sourceKey, titleForId, debugTitle){
 
 // ---------------- Leaderboard submission helpers ----------------
 async function submitScoreToLeaderboard(player, score) {
-  if (!supabase) {
+  if (!supabaseClient) {
     console.warn('Supabase client unavailable — cannot submit score.');
     return { data: null, error: new Error('Supabase client unavailable') };
   }
