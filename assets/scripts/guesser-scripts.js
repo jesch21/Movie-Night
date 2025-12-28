@@ -57,10 +57,10 @@ function getRandomImageValue(imgField){
 
 // ---------------- Supabase storage helpers ----------------
 function getPublicImageUrlFromBucket(bucket, imagePath){
-    if(!imagePath || !supabase) return null;
+    if(!imagePath || !supabaseClient) return null;
     try {
         const p = (typeof imagePath === 'string' && imagePath.startsWith('/')) ? imagePath.slice(1) : imagePath;
-        const res = supabase.storage.from(bucket).getPublicUrl(p);
+        const res = supabaseClient.storage.from(bucket).getPublicUrl(p);
         // handle shapes { data: { publicUrl } } or { publicUrl } etc.
         if(res){
             if(res.data && (res.data.publicUrl || res.data.publicURL)) return res.data.publicUrl || res.data.publicURL;
@@ -75,7 +75,7 @@ function getPublicImageUrlFromBucket(bucket, imagePath){
 // ---------------- Fetch movie list ----------------
 async function fetchMovieListFromSupabase(){
     try {
-        if(!supabase){
+        if(!supabaseClient){
             console.warn('Supabase client not available; movieList will remain empty.');
             movieList = [];
             return;
@@ -134,7 +134,7 @@ async function fetchMovieListFromSupabase(){
 
 // Query candidate rows where guesser_used = false (and stars present)
 async function queryUnusedCandidates(){
-    if(!supabase) return { data: [], error: new Error('Supabase unavailable') };
+    if(!supabaseClient) return { data: [], error: new Error('Supabase unavailable') };
     try {
         const { data, error } = await supabaseClient
             .from('moviesList')
@@ -155,7 +155,7 @@ async function queryUnusedCandidates(){
 
 // Reset guesser_used = false for eligible rows
 async function resetAllGuesserUsed(){
-    if(!supabase) return { data: null, error: new Error('Supabase unavailable') };
+    if(!supabaseClient) return { data: null, error: new Error('Supabase unavailable') };
     try {
         const { data, error } = await supabaseClient
             .from('moviesList')
@@ -176,7 +176,7 @@ async function resetAllGuesserUsed(){
 // Pick a random unused candidate and attempt to atomically mark it as used (guesser_used = true).
 // Returns the DB row (authoritative) when marking succeeds, otherwise returns a best-effort row or null.
 async function pickAndClaimUnusedMovie(){
-    if(!supabase) return null;
+    if(!supabaseClient) return null;
 
     try {
         // 1) Query unused candidates
@@ -230,7 +230,7 @@ async function pickAndClaimUnusedMovie(){
             if(imageFirst){
                 // try contains (array) first
                 try {
-                    const { data: udata, error: uerr } = await supabase
+                    const { data: udata, error: uerr } = await supabaseClient
                         .from('moviesList')
                         .update({ guesser_used: true })
                         .eq('title', candidate.title)
@@ -251,7 +251,7 @@ async function pickAndClaimUnusedMovie(){
 
             // Fallback: update by title only
             try {
-                const { data: udata2, error: uerr2 } = await supabase
+                const { data: udata2, error: uerr2 } = await supabaseClient
                     .from('moviesList')
                     .update({ guesser_used: true })
                     .eq('title', candidate.title)
@@ -403,14 +403,14 @@ function safeNormalizeTitle(t){ return typeof t==='string' ? t.trim().toLowerCas
 
 async function loadMiniImg() {
     // guard: ensure we have either supabase or a local movieList
-    if ((!supabase) && (!Array.isArray(movieList) || movieList.length === 0)) {
+    if ((!supabaseClient) && (!Array.isArray(movieList) || movieList.length === 0)) {
         alert("No movies available to play.");
         return;
     }
 
     // Try DB-backed claim first (if supabase available)
     let selectedMovieRow = null;
-    if(supabase){
+    if(supabaseClient){
         try {
             const claimedRow = await pickAndClaimUnusedMovie();
             if(claimedRow){
@@ -836,7 +836,7 @@ function resetPage() {
 
 // ---------------- Leaderboard submission helper (guesser) ----------------
 async function submitScoreToGuesserLeaderboard(player, score){
-    if(!supabase){
+    if(!supabaseClient){
         console.warn('Supabase client unavailable — cannot submit score.');
         return { data: null, error: new Error('Supabase client unavailable') };
     }
