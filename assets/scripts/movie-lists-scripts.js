@@ -1,6 +1,6 @@
 // movie-lists
 
-const firstTable = 2025;  // Set this to the default year you want to load
+const firstTable = 2026;  // Set this to the default year you want to load
 
 // ---------------- Supabase Setup ----------------
 const { SUPABASE_URL, SUPABASE_KEY } = window.APP_CONFIG;

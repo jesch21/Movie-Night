@@ -270,7 +270,7 @@ function extractMonthYear(dateVal) {
     return null;
 }
 
-const trackedYears = [2023, 2024, 2025];
+const trackedYears = [2023, 2024, 2025, 2026];
 const monthlyTotals = {};
 const monthlyCounts = {};
 trackedYears.forEach(year => {
@@ -325,11 +325,11 @@ function renderChart() {
         myLineChart.data.datasets = trackedYears.map((year, i) => ({
             label: String(year),
             data: avgData[i],
-            borderColor: ['blue', 'red', 'green'][i] || 'gray',
+            borderColor: ['blue', 'red', 'green', 'orange'][i] || 'gray',
             borderWidth: 2,
             fill: false,
             tension: 0.2,
-            pointBackgroundColor: ['blue', 'red', 'green'][i] || 'gray',
+            pointBackgroundColor: ['blue', 'red', 'green', 'orange'][i] || 'gray',
             spanGaps: false
         }));
         myLineChart.update();
@@ -343,11 +343,11 @@ function renderChart() {
             datasets: trackedYears.map((year, i) => ({
                 label: String(year),
                 data: avgData[i],
-                borderColor: ['blue', 'red', 'green'][i] || 'gray',
+                borderColor: ['blue', 'red', 'green', 'orange'][i] || 'gray',
                 borderWidth: 2,
                 fill: false,
                 tension: 0.2,
-                pointBackgroundColor: ['blue', 'red', 'green'][i] || 'gray',
+                pointBackgroundColor: ['blue', 'red', 'green', 'orange'][i] || 'gray',
                 spanGaps: false
             }))
         },
