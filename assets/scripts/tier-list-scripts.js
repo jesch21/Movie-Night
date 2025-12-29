@@ -38,13 +38,21 @@ async function fetchMovieData() {
         return;
     }
 
-    movieData = data.map(movie => ({
-        title: movie.title || "",
-        chosenBy: movie.pickedBy ? movie.pickedBy.split(',').map(n => n.trim()) : [],
-        "star-ratings": movie.stars ? movie.stars.split(',').map(r => r.trim()) : [],
-        date: movie.date || "",
-        movieType: movie.movieType || ""   // <-- add movieType here so we can filter by it
-    }));
+    movieData = data
+        .map(movie => ({
+            title: movie.title || "",
+            chosenBy: movie.pickedBy ? movie.pickedBy.split(',').map(n => n.trim()) : [],
+            "star-ratings": movie.stars
+                ? movie.stars
+                    .split(',')
+                    .map(r => r.trim())
+                    .filter(r => r.toUpperCase() !== "SKIP")
+                : [],
+            date: movie.date || "",
+            movieType: movie.movieType || ""
+        }))
+        // ⬇️ completely ignore movies with no valid ratings
+        .filter(movie => movie["star-ratings"].length > 0);
 }
 
 
