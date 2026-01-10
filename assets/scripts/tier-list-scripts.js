@@ -278,7 +278,7 @@ function extractMonthYear(dateVal) {
     return null;
 }
 
-const trackedYears = [2023, 2024, 2025, 2026];
+const trackedYears = [2023, 2024, 2025, 2026, 2027];
 const monthlyTotals = {};
 const monthlyCounts = {};
 trackedYears.forEach(year => {
